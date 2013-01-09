@@ -1,0 +1,920 @@
+%% LyX 2.0.4 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[twoside,english]{sig-alternate}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage{color}
+\usepackage{verbatim}
+\usepackage{prettyref}
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[authoryear]{natbib}
+
+\makeatletter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
+\floatstyle{ruled}
+\newfloat{algorithm}{tbp}{loa}
+\providecommand{\algorithmname}{Algorithm}
+\floatname{algorithm}{\protect\algorithmname}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Textclass specific LaTeX commands.
+\floatstyle{ruled}
+\newfloat{algorithm}{tbp}{loa}
+\floatname{algorithm}{Algorithm}
+\usepackage{algorithmic}
+\newcommand{\forbody}[1]{ #1 \ENDFOR }
+\newcommand{\ifbody}[1]{ #1  \ENDIF}
+\newcommand{\whilebody}[1]{ #1  \ENDWHILE}
+\renewcommand{\algorithmicprint}{\textbf{draw}}
+\renewcommand{\algorithmicrequire}{\textbf{Input:}}
+\renewcommand{\algorithmicensure}{\textbf{Output:}}
+
+ \newtheorem{thm}{Theorem}[section]
+ \newtheorem{lem}[thm]{Lemma}
+ \newtheorem{defn}[thm]{Definition}
+ \newtheorem{cor}[thm]{Corollary}
+ \newtheorem{rem}[thm]{Remark}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+%\usepackage{yjsco}\journal{JournalofSymbolicComputation}
+
+\renewcommand{\algorithmicrequire}{\textbf{Input:}}\renewcommand{\algorithmicensure}{\textbf{Output:}}
+%\renewcommand{\algorithmicensure}{\textbf{if}}\renewcommand{\algorithmicensure}{\textbf{Uses:}}
+
+\def\diag{\mbox{diag}}\def\cdeg{\qopname\relax n{cdeg}}
+\def\MM{\qopname\relax n{MM}}\def\M{\qopname\relax n{M}}\def\ord{\qopname\relax n{ord}}
+
+\def\StorjohannTransform{\qopname\relax n{StorjohannTransform}}\def\TransformUnbalanced{\qopname\relax n{TransformUnbalanced}}\def\rowDimension{\qopname\relax n{rowDimension}}\def\columnDimension{\qopname\relax n{columnDimension}}\DeclareMathOperator{\re}{rem}\DeclareMathOperator{\coeff}{coeff}\DeclareMathOperator{\lcoeff}{lcoeff}\def\mab{\qopname\relax n{orderBasis}}\def\mmab{\qopname\relax n{FastBasis}}\def\umab{\qopname\relax n{UnbalancedFastBasis}}\newcommand{\bb}{\\}
+\def\mnb{\qopname\relax n{MinimalNullspaceBasis ~ }}
+\DeclareMathOperator{\mnbr}{minimaKernelBasisReversed}
+\def\rdeg{\qopname\relax n{rdeg}}
+\DeclareMathOperator{\colBasis}{colBasis}
+
+
+\makeatother
+\newcommand{\arne}[1]{{\color{blue}\it {\bf Arne:} #1 }}
+\newcommand{\wei}[1]{{\color{red}\it {\bf Wei:} #1}}
+\newcommand{\george}[1]{{\color{green}\it {\bf George:} #1}}
+\def\newblock{\hskip .11em plus .33em minus .07em}
+
+\makeatother
+
+\usepackage{babel}
+\begin{document}
+% --- Author Metadata here ---
+
+
+%\conferenceinfo{ISSAC'09,} {July 28--31, 2009, Seoul, Republic of Korea.} 
+%\CopyrightYear{2009}
+%\crdata{978-1-60558-609-0/09/07} 
+
+\numberofauthors{1}
+
+
+\author{\alignauthor Wei Zhou and George Labahn\\
+ \affaddr{Cheriton School of Computer Science}\\
+ \affaddr{University of Waterloo}, \\
+ \affaddr{Waterloo, Ontario, Canada}\\
+ \email{\{w2zhou,glabahn\}@uwaterloo.ca} }
+
+
+\date{{\normalsize \today \quad{}:: \timeofday}}
+
+
+\title{Computing Column Bases}
+\maketitle
+\begin{abstract}
+Given a matrix of univariate polynomials over a field $\mathbb{K}$,
+its columns generates a $\mathbb{K}\left[x\right]$-module consisting
+of all $\mathbb{K}\left[x\right]$-linear combination of these columns.
+We call any basis of this module a column basis of the given matrix.
+In this paper we present a deterministic algorithm for the computation
+of a column basis of an $m\times n$ input matrix with $m\le n$.
+If $s$ is the average column degree of the input matrix, this algorithm
+computes a column basis of with a cost of $O^{\sim}\left(n^{\omega}s\right)$
+field operations in $\mathbb{K}$. Here the soft-$O$ notation is
+Big-$O$ with log factors removed while $\omega$ is the exponent
+of matrix multiplication. Note that the average column degree $s$
+is bounded by the commonly used matrix degree that is also the maximum
+column degree of the input matrix.
+\end{abstract}
+% A category with the (minimum) three required fields
+%\category{I.1.2}{Symbolic and Algebraic Manipulation}{Algorithms}%[Algebraic algorithms]
+%A category including the fourth, optional field follows...
+%\category{F.2.2}{Analysis of Algorithms and }{Nonnumerical Algorithms and Problems}%[Computations on discrete structures]
+
+%\terms{Algorithms, Theory}
+
+%\keywords{Order basis, Complexity}
+
+\vspace{1mm} \noindent {\bf Categories and Subject Descriptors:} I.1.2 {[{Symbolic and Algebraic Manipulation}]}: {Algorithms}; F.2.2 {[{Analysis of Algorithms and Problem Complexity}]}: {Nonnumerical Algorithms and Problems}
+
+\vspace{1mm} \noindent {\bf General Terms:} Algorithms, Theory
+
+\vspace{1mm} \noindent {\bf Keywords:} Nullspace basis, Complexity
+
+
+\section{Introduction}
+
+Let $\mathbf{F}\in\mathbb{K}\left[x\right]^{m\times n}$ be a matrix
+of polynomials over a field $\mathbb{K}$. The set 
+\[
+\left\{ \mathbf{p}\in\mathbb{K}\left[x\right]^{n}~|~\mathbf{F}\mathbf{p}=0\right\} 
+\]
+forms a $\mathbb{K}[x]$-module. We call any basis of this module
+a column basis of $\mathbf{F}$. When the row dimension $m=1$, a
+column basis becomes the standard polynomial GCD. We represent column
+bases using matrices, with columns being the basis elements.
+
+GCD is one of the most fundamental subject in algebra and computer
+algebra and has been extensively studied. As a generalization of polynomial
+GCD and matrix GCD, column bases are also fundamental in polynomial
+matrix computations. Column basis computation provides a deterministic
+alternative to randomized lattice compression \citep{li:2006,storjohann-villard:2005}.
+It also helps us to deterministically compute matrix determinants
+and Hermite normal forms, and to deterministically compute column
+reduced forms and Popov normal forms for matrices of any dimension
+and any rank\citep{zhou:phd2012}. 
+
+Note that column bases are not unique. A column basis multiplied by
+any unimodular matrix gives another column basis. As a result, a column
+basis can have arbitrary high degree. In this paper, we compute a
+column basis with column degrees bounded by the largest column degrees
+of the input matrix. In fact, the nonzero columns of column reduced
+forms, Popov normal forms, and Hermite normal forms are all column
+bases satisfying additional degree constraints. A column reduced form
+gives a special column basis whose column degrees are the smallest
+possible. The Popov form is a special unique column reduced form satisfying
+additional conditions. The Hermite normal form provides another special
+unique column basis that is triangular and has a different type of
+minimal column degrees.
+
+
+\section{Preliminaries}
+
+The computational cost in this paper is analyzed by bounding the number
+of arithmetic operations in the coefficient field $\mathbb{K}$ on
+an algebraic random access machine. We assume the cost of multiplying
+two polynomial matrices with dimension $n$ and degree $d$ is $O^{\sim}(n^{\omega}d)$
+field operations, where the multiplication exponent $\omega$ is assumed
+to satisfy $2<\omega\le3$. We refer to the book by \citet{vonzurgathen}
+for more details and reference about the cost of polynomial multiplication
+and matrix multiplication.
+
+In this paper, we consider the problem of computing a column basis
+of an input matrix $\mathbf{F}\in\mathbb{K}\left[x\right]^{m\times n}$,
+assuming its row dimension is no more than its column dimension and
+its column degrees are bounded by the entries of a list $\vec{s}\in\mathbb{Z}^{n}$.
+A column basis $\mathbf{T}\in\mathbb{K}\left[x\right]^{m\times r}$
+of $\mathbf{F}$ has the same rank as $\mathbf{F}$ and has full column
+rank, since the basis elements are linearly independent.
+
+Any matrix $\mathbf{F}$ in $\mathbb{K}\left[x\right]^{m\times n}$
+can be unimodularly transformed to $\left[\mathbf{T},0\right]$ with
+a full column rank $\mathbf{T}$ that is also a column basis of $\mathbf{F}$,
+as we know $\mathbf{F}$ can be unimodularly transformed to a column
+reduced form. One way to do so is to compute a column reduced form
+by repeatedly working with the leading column coefficient matrices.
+More specifically, if the nonzero columns of the leading column coefficient
+matrix $F$ of $\mathbf{F}$ is not full rank, then let $\mathbf{f}$
+be the highest degree column from $\mathbf{F}$ such that its leading
+column coefficient vector $f$ is not linearly independent from the
+remaining columns. Therefore, we can eliminate $f$ against other
+columns by a column operation, or equivalently, a unimodular transformation.
+It follows that the same column operation on $\mathbf{F}$ lowers
+the degree of $\mathbf{f}$.
+
+But computing a column basis this way can be expensive, as we need
+to work with up to $\xi=\sum\vec{s}$ such coefficient matrices, which
+would involve up to $\xi$ polynomial matrix multiplications.  To
+efficiently compute a column basis, we make use of order basis computations
+and kernel basis computations. Efficient algorithms for these have
+been developed in \citep{ZL2012,za2012,zhou:phd2012}. As in the computation
+of order bases and kernel bases, we also make extensive use of shifted
+degrees. 
+
+
+\subsection{Shifted Degrees}
+
+For a column vector $\mathbf{p}=\left[p_{1},\dots,p_{n}\right]^{T}$
+of univariate polynomials over a field $\mathbb{K}$, its column degree,
+denoted by $\cdeg\mathbf{p}$, is just the maximum of the degrees
+of the entries of $\mathbf{p}$, that is, 
+\[
+\cdeg\mathbf{p}=\max_{1\le i\le n}\deg p_{i}.
+\]
+The \emph{shifted column degree} generalizes this standard column
+degree by taking the maximum after shifting the degrees by a given
+integer vector that is known as a \emph{shift}. More specifically,
+the shifted column degree of $\mathbf{p}$ with respect to a shift
+$\vec{s}=\left[s_{1},\dots,s_{n}\right]\in\mathbb{Z}^{n}$, or the
+\emph{$\vec{s}$-column degree} of $\mathbf{p}$ is
+
+\[
+\cdeg_{\vec{s}}\mathbf{p}=\max_{1\le i\le n}[\deg p_{i}+s_{i}]=\deg(x^{\vec{s}}\cdot\mathbf{p}),
+\]
+ where 
+\[
+x^{\vec{s}}=\diag\left(\left[x^{s_{1}},x^{s_{2}},\dots,x^{s_{n}}\right]\right)=\begin{bmatrix}x^{s_{1}}\\
+ & x^{s_{2}}\\
+ &  & \ddots\\
+ &  &  & x^{s_{1}}
+\end{bmatrix}.
+\]
+For a matrix $\mathbf{P}$, we use $\cdeg\mathbf{P}$ and $\cdeg_{\vec{s}}\mathbf{P}$
+to denote respectively the list of its column degrees and the list
+of its shifted $\vec{s}$-column degrees. When $\vec{s}=\left[0,\dots,0\right]$,
+the shifted column degree specializes to the standard column degree.
+The shifted row degree of a row vector \textbf{$\mathbf{q}$ }is defined
+in the same way.
+\[
+\rdeg_{\vec{s}}\mathbf{q}=\max_{1\le i\le n}[\deg q_{i}+s_{i}]=\deg(\mathbf{q}\cdot x^{\vec{s}}).
+\]
+
+
+The shifted degrees have been used previously in polynomial matrix
+computations and to generalize matrix normal forms \citep{BLV:jsc06}.
+The shifted column degree is equivalent to the notion of \emph{defect}
+commonly used in the literature.
+
+The usefulness of the shifted degrees can be seen from their applications
+in polynomial matrix computation problems \citep{za2012,zhou:phd2012,ZL2012}.
+One of its uses is illustrated by the following lemma from Chapter
+2 in \citep{zhou:phd2012}, which can be viewed as a stronger version
+of the predictable-degree property \citep{kailath:1980}.
+\begin{lem}
+\label{lem:predictableDegree}If a matrix $\mathbf{A}\in\mathbb{K}\left[x\right]^{m\times n}$
+is a $\vec{u}$-column reduced matrix with no zero columns and with
+$\cdeg_{\vec{u}}\mathbf{A}=\vec{v}$, then a matrix $\mathbf{B}\in\mathbb{K}\left[x\right]^{n\times k}$
+has $\vec{v}$-column degrees $\cdeg_{\vec{v}}\mathbf{B}=\vec{w}$
+if and only if $\cdeg_{\vec{u}}\left(\mathbf{A}\mathbf{B}\right)=\vec{w}$.
+\end{lem}
+Another essential tool needed in our computation is the efficient
+multiplication of matrices with unbalanced degrees \citep{za2012,zhou:phd2012}.
+\begin{thm}
+\label{thm:multiplyUnbalancedMatrices} Let $\mathbf{A}\in\mathbb{K}\left[x\right]^{m\times n}$,
+$\vec{s}$ a shift with entries bounding the column degrees of $\mathbf{A}$
+and $\xi$, a bound on the sum of the entries of $\vec{s}$. Let $\mathbf{B}\in\mathbb{K}\left[x\right]^{n\times k}$
+with $k\in O\left(m\right)$ and the sum $\theta$ of its $\vec{s}$-column
+degrees satisfying $\theta\in O\left(\xi\right)$. Then we can multiply
+$\mathbf{A}$ and $\mathbf{B}$ with a cost of $O^{\sim}(nm^{\omega-2}\xi)$.
+\end{thm}
+
+\subsection{Order Basis}
+
+Let $\mathbb{K}$ be a field, $\mathbf{F}\in\mathbb{K}\left[\left[x\right]\right]^{m\times n}$
+a matrix of power series and $\vec{\sigma}=\left[\sigma_{1},\dots,\sigma_{m}\right]$
+a vector of non-negative integers. 
+\begin{defn}
+We say a vector of polynomials $\mathbf{p}\in\mathbb{K}\left[x\right]^{n\times1}$
+has \emph{order} $\left(\mathbf{F},\vec{\sigma}\right)$ (or \emph{order}
+$\vec{\sigma}$ with respect to $\mathbf{F}$) if $\mathbf{F}\cdot\mathbf{p}\equiv\mathbf{0}\mod x^{\vec{\sigma}}$,
+that is, 
+\[
+\mathbf{F}\cdot\mathbf{p}=x^{\vec{\sigma}}\mathbf{r}=\begin{bmatrix}x^{\sigma_{1}}\\
+ & \ddots\\
+ &  & x^{\sigma_{m}}
+\end{bmatrix}\mathbf{r}
+\]
+ for some $\mathbf{r}\in\mathbb{K}\left[\left[x\right]\right]^{m\times1}$.
+If $\vec{\sigma}=\left[\sigma,\dots,\sigma\right]$ is uniform, then
+we say that $\mathbf{p}$ has order $\left(\mathbf{F},\sigma\right).$
+\begin{comment}
+The vector of power series $\mathbf{r}$ is called the order $\left(\mathbf{F},\sigma\right)$-residual
+of \textbf{$\mathbf{p}$}. 
+\end{comment}
+{} The set of all order $\left(\mathbf{F},\vec{\sigma}\right)$ vectors
+is a free $\mathbb{K}\left[x\right]$-module denoted by $\left\langle \left(\mathbf{F},\vec{\sigma}\right)\right\rangle $. 
+\end{defn}
+An order basis for $\mathbf{F}$ and $\vec{\sigma}$ is simply a basis
+for the $\mathbb{K}\left[x\right]$-module $\left\langle \left(\mathbf{F},\vec{\sigma}\right)\right\rangle $.
+We only work with those order bases having minimal or shifted minimal
+degrees (also referred to as a reduced order basis in \citep{BL1997}).
+
+
+
+An \emph{order basis} \citep{BeLa94,BL1997} $\mathbf{P}$ of $\mathbf{F}$
+with order $\vec{\sigma}$ and shift $\vec{s}$, or simply an $\left(\mathbf{F},\vec{\sigma},\vec{s}\right)$-basis,
+is a basis for the module $\left\langle \left(\mathbf{F},\vec{\sigma}\right)\right\rangle $
+\begin{comment}
+\[
+\left\langle \left(\mathbf{F},\vec{\sigma}\right)\right\rangle =\{\mathbf{p}\in\mathbb{K}\left[x\right]^{n\times1}\|\mathbf{F}\cdot\mathbf{p}=x^{\vec{\sigma}}\mathbf{r},\mathbf{r}\in\mathbb{K}[[x]]^{m\times1}\}
+\]
+\end{comment}
+{} having minimal $\vec{s}$-column degrees. If $\vec{\sigma}=\left[\sigma,\dots,\sigma\right]$
+are constant vectors then we simply write $\left(\mathbf{F},\sigma,\vec{s}\right)$-basis.
+The precise definition of an $\left(\mathbf{F},\vec{\sigma},\vec{s}\right)$-basis
+is as follows.
+\begin{defn}
+\label{def:orderBasis}A polynomial matrix $\mathbf{P}$ is an order
+basis of $\mathbf{F}$ of order $\vec{\sigma}$ and shift $\vec{s}$,
+denoted by $\left(\mathbf{F},\vec{\sigma},\vec{s}\right)$-basis,
+if the following properties hold: 
+\begin{enumerate}
+\item $\mathbf{P}$ is a nonsingular matrix of dimension $n$ and is $\vec{s}$-column
+reduced. 
+\item $\mathbf{P}$ has order $\left(\mathbf{F},\vec{\sigma}\right)$ (or
+equivalently, each column of $\mathbf{P}$ is in $\left\langle (\mathbf{F},\vec{\sigma})\right\rangle $). 
+\item Any $\mathbf{q}\in\left\langle \left(\mathbf{F},\vec{\sigma}\right)\right\rangle $
+can be expressed as a linear combination of the columns of $\mathbf{P}$,
+given by $\mathbf{P}^{-1}\mathbf{q}$. 
+\end{enumerate}
+\end{defn}
+\begin{comment}
+Note that the module $\left\langle \left(\mathbf{F},\vec{\sigma}\right)\right\rangle $
+does not depend on the shift $\vec{s}$. 
+\end{comment}
+
+
+
+
+Note that any pair of $\left(\mathbf{F},\vec{\sigma},\vec{s}\right)$-bases
+$\mathbf{P}$ and $\mathbf{Q}$ are column bases of each other and
+are unimodularly equivalent.
+
+
+\subsection{Kernel Bases}
+
+Recall that the kernel of $\mathbf{F}\in\mathbb{K}\left[x\right]^{m\times n}$
+is the $\mathbb{F}\left[x\right]$-module 
+\[
+\left\{ \mathbf{p}\in\mathbb{K}\left[x\right]^{n}~|~\mathbf{F}\mathbf{p}=0\right\} .
+\]
+ A kernel basis of $\mathbf{F}$ is just a basis of this module. Kernel
+bases are closely related to order bases, as can be seen from the
+following definitions. 
+\begin{defn}
+\label{def:kernelBasis}Given $\mathbf{F}\in\mathbb{K}\left[x\right]^{m\times n}$,
+a polynomial matrix $\mathbf{N}\in\mathbb{K}\left[x\right]^{n\times*}$
+is a (right) kernel basis of $\mathbf{F}$ if the following properties
+hold: 
+\begin{enumerate}
+\item $\mathbf{N}$ is full-rank. 
+\item $\mathbf{N}$ satisfies $\mathbf{F}\cdot\mathbf{N}=0$. 
+\item Any $\mathbf{q}\in\mathbb{K}\left[x\right]^{n}$ satisfying $\mathbf{F}\mathbf{q}=0$
+can be expressed as a linear combination of the columns of $\mathbf{N}$,
+that is, there exists some polynomial vector $\mathbf{p}$ such that
+$\mathbf{q}=\mathbf{N}\mathbf{p}$. 
+\end{enumerate}
+\end{defn}
+Again, note that any pair of kernel bases $\mathbf{N}$ and $\mathbf{M}$
+of $\mathbf{F}$ are column bases of each other and are unimodularly
+equivalent.
+
+An $\vec{s}$-minimal kernel basis of $\mathbf{F}$ is just a kernel
+basis that is $\vec{s}$-column reduced.
+\begin{defn}
+Given $\mathbf{F}\in\mathbb{K}\left[x\right]^{m\times n}$, a polynomial
+matrix $\mathbf{N}\in\mathbb{K}\left[x\right]^{n\times*}$ is a $\vec{s}$-minimal
+(right) kernel basis of $\mathbf{F}$ if\textbf{ $\mathbf{N}$} is
+a kernel basis of $\mathbf{F}$ and $\mathbf{N}$ is $\vec{s}$-column
+reduced. We also call a $\vec{s}$-minimal (right) kernel basis of
+$\mathbf{F}$ a $\left(\mathbf{F},\vec{s}\right)$-kernel basis.
+\end{defn}
+We will need the following result from \citep{za2012,zhou:phd2012}
+to compute kernel bases by rows.
+\begin{thm}
+\label{thm:continueComputingNullspaceBasisByRows}Let $\mathbf{G}=\left[\mathbf{G}_{1}^{T},\mathbf{G}_{2}^{T}\right]^{T}\in\mathbb{K}\left[x\right]^{m\times n}$
+and $\vec{t}$ a shift vector. If $\mathbf{N}_{1}$ is a $\left(\mathbf{G}_{1},\vec{t}\right)$-kernel
+basis with $\vec{t}$-column degrees $\vec{u}$, and $\mathbf{N}_{2}$
+is a $\left(\mathbf{G}_{2}\mathbf{N}_{1},\vec{u}\right)$-kernel basis
+with $\vec{u}$-column degrees $\vec{v}$, then $\mathbf{N}_{1}\mathbf{N}_{2}$
+is a $\left(\mathbf{G},\vec{t}\right)$-kernel basis $\vec{t}$-column
+degrees $\vec{v}$.
+\end{thm}
+
+\section{Computing Column Bases}
+
+Before discussing the efficient computation of column basis, it is
+useful to look at following relationship between column basis, kernel
+basis, and unimodular matrix.
+\begin{lem}
+\label{lem:unimodular_kernel_columnBasis}Given $\mathbf{F}\in\mathbb{K}\left[x\right]^{m\times n}$.
+If $\mathbf{U}$ is a unimodular matrix such that $\mathbf{F}\mathbf{U}=\left[0,\mathbf{T}\right]$
+gives a full column rank $\mathbf{T}$, then $\mathbf{U}$ can be
+separated into two submatrices $\mathbf{U}=\left[\mathbf{U}_{L},\mathbf{U}_{R}\right]$,
+where $\mathbf{U}_{L}$ is a kernel basis of $\mathbf{F}$ and $\mathbf{F}\mathbf{U}_{R}=\mathbf{T}$
+is a column basis of $\mathbf{F}$. In addition, the kernel basis
+$\mathbf{U}_{L}$ can be replaced by any other kernel basis $\mathbf{N}$
+of $\mathbf{F}$ and still gives a unimodular matrix $\left[\mathbf{N},\mathbf{U}_{R}\right]$,
+which can also be used to unimodularly transform $\mathbf{F}$ to
+$\left[0,\mathbf{T}\right]$. \end{lem}
+\begin{proof}
+The fact that $\mathbf{T}$ is a column basis of $\mathbf{F}$ follows
+directly from the unimodular equivalence between $\mathbf{F}$ and
+$\left[0,\mathbf{T}\right]$ and the fact that $\mathbf{T}$ is full
+rank. It remains to show that $\mathbf{U}_{L}$ is a kernel basis
+of $\mathbf{F}$. Since $\mathbf{F}\mathbf{U}_{L}=0$, $\mathbf{U}_{L}$
+is generated by any kernel basis $\mathbf{N}$, that is, $\mathbf{U}_{L}=\mathbf{N}\mathbf{C}$
+for some polynomial matrix $\mathbf{C}$. Let $r$ be the rank of
+$\mathbf{F}$, which is also the column dimension of $\mathbf{T}$
+and $\mathbf{U}_{R}$. Then both $\mathbf{N}$ and $\mathbf{U}_{L}$
+have column dimension $n-r$. Hence $\mathbf{C}$ is a square $(n-r)\times(n-r)$
+matrix. Now the unimodular matrix $\mathbf{U}$ can be factored as
+\[
+\mathbf{U}=\left[\mathbf{N}\mathbf{C},\mathbf{U}_{R}\right]=\left[\mathbf{N},\mathbf{U}_{R}\right]\begin{bmatrix}\mathbf{C}\\
+ & I
+\end{bmatrix},
+\]
+ implying that both factors $\left[\mathbf{N},\mathbf{U}_{R}\right]$
+and $\begin{bmatrix}\mathbf{C}\\
+ & I
+\end{bmatrix}$ are unimodular. Therefore, $\mathbf{C}$ is unimodular and $\mathbf{U}_{L}=\mathbf{N}\mathbf{C}$
+is also a kernel basis. Notice that the unimodular matrix $\left[\mathbf{N},\mathbf{U}_{R}\right]$
+also transforms $\mathbf{F}$ to $\left[0,\mathbf{T}\right]$.
+\end{proof}
+\prettyref{lem:unimodular_kernel_columnBasis} gives the following
+result for a unimodular matrix and its inverse.
+\begin{cor}
+\label{cor:unimodular_kernel_columnBasis2}Let $\mathbf{U}=\left[\mathbf{U}_{L},\mathbf{U}_{R}\right]$
+be any unimodular matrix with columns separated arbitrarily to $\mathbf{U}_{L}$
+and $\mathbf{U}_{R}$. Let its inverse $\mathbf{V}=\begin{bmatrix}\mathbf{V}_{U}\\
+\mathbf{V}_{D}
+\end{bmatrix}$, where the row dimension of $\mathbf{V}_{U}$ matches the column
+dimension of $\mathbf{U}_{L}$. So we have 
+\[
+\mathbf{V}\mathbf{U}=\begin{bmatrix}\mathbf{V}_{U}\\
+\mathbf{V}_{D}
+\end{bmatrix}\begin{bmatrix}\mathbf{U}_{L},\mathbf{U}_{R}\end{bmatrix}=\begin{bmatrix}\mathbf{V}_{U}\mathbf{U}_{L} & \mathbf{V}_{U}\mathbf{U}_{R}\\
+\mathbf{V}_{D}\mathbf{U}_{L} & \mathbf{V}_{D}\mathbf{U}_{R}
+\end{bmatrix}=\begin{bmatrix}I & 0\\
+0 & I
+\end{bmatrix}.
+\]
+Then $\mathbf{V}_{U}\mathbf{U}_{L}=I$ is a column basis of $\mathbf{V}_{U}$
+and a row basis of $\mathbf{U}_{L}$, while $\mathbf{V}_{D}\mathbf{U}_{R}=I$
+is a column basis of $\mathbf{V}_{D}$ and a row basis of of $\mathbf{U}_{R}$.
+In addition, $\mathbf{V}_{D}$ and $\mathbf{U}_{L}$ are kernel bases
+of each other, while $\mathbf{V}_{U}$ and $\mathbf{U}_{R}$ are kernel
+bases of each other.\end{cor}
+\begin{proof}
+This follows directly from \prettyref{lem:unimodular_kernel_columnBasis},
+by taking $\mathbf{F}$ from \prettyref{lem:unimodular_kernel_columnBasis}
+to be $\mathbf{V}_{U}$, $\mathbf{V}_{D}$, $\mathbf{U}_{L}^{T}$,
+and $\mathbf{U}_{R}^{T}$ here.
+\end{proof}
+To compute a column basis of $\mathbf{F}$, we use the following procedure.
+We first compute a right  kernel basis $\mathbf{N}$ of $\mathbf{F}$.
+Then we compute a left  kernel basis $\mathbf{G}$ of $\mathbf{N}$.
+This matrix $\mathbf{G}$ is a right factor of $\mathbf{F}$, that
+is, $\mathbf{F}=\mathbf{T}\mathbf{G}$ for some $\mathbf{T}\in\mathbb{K}\left[x\right]^{m\times r}$.
+Then we can compute the left factor $\mathbf{T}$, which is in fact
+a column basis of $\mathbf{F}$.
+\begin{lem}
+\label{lem:matrixGCD}Given $\mathbf{F}\in\mathbb{K}\left[x\right]^{m\times n}$%
+\begin{comment}
+ and has full row rank
+\end{comment}
+. Let $\mathbf{N}\in\mathbb{K}\left[x\right]^{n\times(n-r)}$ be any
+right kernel basis of $\mathbf{F}$, and $\mathbf{G}\in\mathbb{K}\left[x\right]^{r\times n}$
+be any left kernel basis of $\mathbf{N}$, where $r$ is the rank
+of $\mathbf{F}$. Then $\mathbf{F}=\mathbf{T}\mathbf{G}$ for some
+$\mathbf{T}\in\mathbb{K}\left[x\right]^{m\times r}$ and $\mathbf{T}$
+is a column basis of $\mathbf{F}$.\end{lem}
+\begin{proof}
+Let the matrix $\mathbf{U}=\begin{bmatrix}\mathbf{U}_{L},\mathbf{U}_{R}\end{bmatrix}$
+from \prettyref{cor:unimodular_kernel_columnBasis2} be a unimodular
+matrix that transforms $\mathbf{F}$ to a column basis $\mathbf{B}\in\mathbb{K}\left[x\right]^{m\times r}$
+of $\mathbf{F}$, where $\mathbf{U}_{L}$ is any right kernel basis
+$\mathbf{F}$. From $\mathbf{F}\mathbf{U}=\left[0,\mathbf{B}\right]$,
+we get\textbf{ $\mathbf{F}=\left[0,\mathbf{B}\right]\mathbf{U}^{-1}=\mathbf{B}\left[0,I\right]\mathbf{V}=\mathbf{B}\mathbf{V}_{D}$}.
+Since $\mathbf{V}_{D}$ is a left kernel basis of\textbf{ $\mathbf{U}_{L}$},
+any other left kernel basis $\mathbf{G}$ of $\mathbf{U}_{L}$ is
+unimodularly equivalent to $\mathbf{V}_{D}$, that is, $\mathbf{V}_{D}=\mathbf{W}\mathbf{G}$
+for some unimodular matrix $\mathbf{W}$. Now $\mathbf{F}=\mathbf{B}\mathbf{W}\mathbf{G}$,
+where $\mathbf{BW}=\mathbf{T}$ a column basis of $\mathbf{F}$ since
+it is unimodularly equivalent to the column basis $\mathbf{B}$.
+\end{proof}
+
+
+\prettyref{lem:matrixGCD} outlines a procedure for computing a column
+basis of $\mathbf{F}$ with three main steps. The first step is to
+compute a $\left(\mathbf{F},\vec{s}\right)$-kernel basis $\mathbf{N}$,
+which can be efficiently done using the kernel basis computation algorithm
+from \citep{za2012,zhou:phd2012}. However, we still need to work
+on the second step of computing a $\left(\mathbf{N}^{T},-\vec{s}\right)$-kernel
+basis $\mathbf{G}^{T}$ and the third step of computing the column
+basis $\mathbf{T}$ from $\mathbf{F}$ and $\mathbf{G}$. Note that
+while \prettyref{lem:matrixGCD} does not require the bases computed
+to be minimal, working with minimal bases keeps the degrees well-managed
+and helps to make the computation efficient.
+
+
+\section{\label{sec:computeRightFactor}Computing a Right Factor}
+
+Let us now look at the computation of a $\left(\mathbf{N}^{T},-\vec{s}\right)$-kernel
+basis $\mathbf{G}^{T}$. For this problem, the kernel basis computation
+algorithm from \citep{za2012} does not work well directly, since
+the input matrix $\mathbf{N}^{T}$ has nonuniform row degrees and
+negative shift. Comparing to the earlier problem of computing a $\left(\mathbf{F},\vec{s}\right)$-kernel
+basis $\mathbf{N}$, it is interesting to note that the old output
+$\mathbf{N}$ now becomes the new input matrix $\mathbf{N}^{T}$,
+while the new output matrix $\mathbf{G}$ has size bounded by $\mathbf{F}$.
+In other words, the new input has degrees that matches the old output,
+while the new output has degrees bounded by the old input. It is
+therefore reasonable to expect that the new problem can be computed
+efficiently. However, we need to find some way to work with the more
+complicated input degree structure. On the other hand, the simpler
+output degree structure makes it easier to apply order basis computation
+to compute a $\left(\mathbf{N}^{T},-\vec{s}\right)$-kernel basis. 
+
+To see how order basis computations can be applied here, let us first
+extend Lemma 3.3 from \citep{za2012}, which provides a relationship
+between order bases and kernel bases, to accommodate our situation
+here.
+\begin{lem}
+\label{lem:orderbasisContainsNullspacebasisGeneralized}Given a matrix
+$\mathbf{A}\in\mathbb{K}\left[x\right]^{m\times n}$ and a degree
+shift $\vec{u}$ with $\rdeg_{\vec{u}}\mathbf{A}\le\vec{v}$, or equivalently,
+$\cdeg_{-\vec{v}}\mathbf{A}\le-\vec{u}$. Let $\mathbf{P}=\left[\mathbf{P}_{1},\mathbf{P}_{2}\right]$
+be any $\left(\mathbf{A},\vec{v}+1,-\vec{u}\right)$-basis and $\mathbf{Q}=\left[\mathbf{Q}_{1},\mathbf{Q}_{2}\right]$
+be any $(\mathbf{A},-\vec{u})$-kernel basis, where $\mathbf{P}_{1}$
+and $\mathbf{Q}_{1}$ contain all columns from $\mathbf{P}$ and $\mathbf{Q}$,
+respectively, whose $-\vec{u}$-column degrees are no more than $0$.
+Then $\left[\mathbf{P}_{1},\mathbf{Q}_{2}\right]$ is an $(\mathbf{A},-\vec{u})$-kernel
+basis, and $\left[\mathbf{Q}_{1},\mathbf{P}_{2}\right]$ is an $\left(\mathbf{A},\vec{v}+\left[1,\dots,1\right],-\vec{u}\right)$-basis.\end{lem}
+\begin{proof}
+We know $\cdeg_{-\vec{v}}\mathbf{A}\mathbf{P}_{1}\le\cdeg_{-\vec{u}}\mathbf{P}_{1}\le0$,
+or equivalently, $\rdeg\mathbf{A}\mathbf{P}_{1}\le\vec{v}$, but it
+has order greater than $\vec{v}$, hence $\mathbf{A}\mathbf{P}_{1}=0$.
+The result then follows the same reasoning as in the proof of Lemma
+3.3 from \citep{za2012}.%
+\begin{comment}
+We know $\cdeg\mathbf{P}_{1}^{T}\le\vec{u}$ from $\cdeg_{-\vec{u}}\mathbf{P}_{1}\le0$,
+hence $\cdeg\mathbf{P}_{1}^{T}\mathbf{A}^{T}\le\cdeg_{\vec{u}}\mathbf{A}^{T}$
+by \prettyref{lem:boundOnDegreesOfFA}. Now for each row $\mathbf{a}_{i}$
+in $\mathbf{A}$ and its $\vec{u}$-column degree $v_{i}$, we have
+\[
+\rdeg\mathbf{a}_{i}\mathbf{P}_{1}=\cdeg\mathbf{P}_{1}^{T}\mathbf{a}_{i}^{T}\le\cdeg_{\vec{u}}\mathbf{a}_{i}^{T}=v_{i},
+\]
+ and $\mathbf{a}_{i}\mathbf{P}_{1}\equiv0\mod x^{v_{i}+1}$, hence
+$\mathbf{A}\mathbf{P}_{1}=0$. The result then follows the same reasoning
+as in the proof of \prettyref{lem:orderBasisContainsNullspaceBasis}.
+\end{comment}
+
+\end{proof}
+Now with the help of \prettyref{lem:orderbasisContainsNullspacebasisGeneralized},
+let us get back to our problem of computing a $(\mathbf{F},\vec{s})$-kernel
+basis.  In fact, we just need to use a special case of \prettyref{lem:orderbasisContainsNullspacebasisGeneralized},
+where all the elements of the kernel basis have shifted degrees bounded
+by $0$, making the partial kernel basis a complete kernel basis%
+\begin{comment}
+, which follows from our requirement of using a shift $\vec{s}\ge\cdeg\mathbf{F}$
+\end{comment}
+.
+\begin{lem}
+\label{lem:nullspaceBasisInOrderBasis}Let $\mathbf{N}$ be a $(\mathbf{F},\vec{s})$-kernel
+basis with $\cdeg_{\vec{s}}\mathbf{N}=\vec{b}$. Let $\mathbf{P}=\left[\mathbf{P}_{1},\mathbf{P}_{2}\right]$
+be a $\left(\mathbf{N}^{T},\vec{b}+1,-\vec{s}\right)$-basis, where
+$\mathbf{P}_{1}$ consists of all columns $\mathbf{p}$ with $\cdeg_{-\vec{s}}\mathbf{p}\le0$.
+\begin{comment}
+of $\mathbf{P}$ satisfying $\mathbf{N}^{T}\mathbf{p}=0$. 
+\end{comment}
+Then $\mathbf{P}_{1}$ is a $(\mathbf{N}^{T},-\vec{s})$-kernel basis. \end{lem}
+\begin{proof}
+Let the rank of $\mathbf{F}$ be $r$, which is also the column dimension
+of any $(\mathbf{N}^{T},-\vec{s})$-kernel basis $\mathbf{G}^{T}$.
+Since both $\mathbf{F}$ and $\mathbf{G}$ are in the left kernel
+of $\mathbf{N}$, we know $\mathbf{F}$ is generated by $\mathbf{G}$,
+and the $-\vec{s}$-row degrees of $\mathbf{G}$ are bounded by the
+corresponding $r$ largest $-\vec{s}$-row degrees of $\mathbf{F}$,
+which are in turn bounded by $0$ since $\cdeg\mathbf{F}\le\vec{s}$.
+Therefore, any $(\mathbf{N}^{T},-\vec{s})$-kernel basis $\mathbf{G}^{T}$
+satisfies $\cdeg_{-\vec{s}}\mathbf{G}^{T}\le0$. The result now follows
+from \prettyref{lem:orderbasisContainsNullspacebasisGeneralized}.
+\end{proof}
+We can use \prettyref{thm:continueComputingNullspaceBasisByRows}
+to compute a $\left(\mathbf{N}^{T},-\vec{s}\right)$-kernel basis
+by rows. If we separate $\mathbf{N}$ to $\mathbf{N}=\left[\mathbf{N}_{1},\mathbf{N}_{2}\right]$
+with $\vec{s}$-column degrees $\vec{b}_{1}$, $\vec{b}_{2}$ respectively,
+and first compute a $\left(\mathbf{N}_{1}^{T},-\vec{s}\right)$-kernel
+basis $\mathbf{Q}_{1}$ with $-\vec{s}$-column degrees $-\vec{s}_{2}$,
+and then compute a $\left(\mathbf{N}_{2}^{T}\mathbf{Q}_{1},-\vec{s}_{2}\right)$-kernel
+basis $\mathbf{Q}_{2}$, then $\mathbf{Q}_{1}\mathbf{Q}_{2}$ is a
+$\left(\mathbf{N}^{T},-\vec{s}\right)$-kernel basis. To compute kernel
+bases $\mathbf{Q}_{1}$ and $\mathbf{Q}_{2}$, we can use order basis
+computation. However, we need to make sure that the order bases we
+compute do contain these kernel bases.
+\begin{lem}
+\label{lem:nullspaceBasisOfSubsetOfRowsContainedInOrderBasis}Let
+$\mathbf{N}=\left[\mathbf{N}_{1},\mathbf{N}_{2}\right]$, with $\vec{s}$-column
+degrees $\vec{b}_{1}$, $\vec{b}_{2}$ respectively. Then a $\left(\mathbf{N}_{1}^{T},\vec{b}_{1}+1,-\vec{s}\right)$-basis
+contains a $\left(\mathbf{N}_{1}^{T},-\vec{s}\right)$-kernel basis
+whose $-\vec{s}$-row degrees are bounded by 0. Let $\mathbf{Q}_{1}$
+be this kernel basis, and $-\vec{s}_{2}=\cdeg_{-\vec{s}}\mathbf{Q}_{1}$.
+Then a $\left(\mathbf{N}_{2}^{T}\mathbf{Q}_{1},\vec{b}_{2}+1,-\vec{s}_{2}\right)$-basis
+contains a $\left(\mathbf{N}_{2}^{T}\mathbf{Q}_{1},-\vec{s}_{2}\right)$-kernel
+basis $\mathbf{Q}_{2}$ whose $-\vec{s}$-row degrees are bounded
+by 0. The product $\mathbf{Q}_{1}\mathbf{Q}_{2}$ is then a $\left(\mathbf{N}^{T},-\vec{s}\right)$-kernel
+basis.\end{lem}
+\begin{proof}
+To see that a $\left(\mathbf{N}_{1}^{T},\vec{b}_{1}+1,-\vec{s}\right)$-basis
+contains a $\left(\mathbf{N}_{1}^{T},-\vec{s}\right)$-kernel basis
+whose $-\vec{s}$-row degrees are bounded by 0, we just need to show
+that $\rdeg_{-\vec{s}}\mathbf{\bar{Q}}_{1}\le0$ for any $\left(\mathbf{N}_{1}^{T},-\vec{s}\right)$-kernel
+basis $\mathbf{\bar{Q}}_{1}$ and then apply \prettyref{lem:orderbasisContainsNullspacebasisGeneralized}.
+Note that there exists a polynomial matrix $\bar{\mathbf{Q}}_{2}$
+such that $\mathbf{\bar{Q}}_{1}\mathbf{\bar{Q}}_{2}=\bar{\mathbf{G}}$
+for any $\left(\mathbf{N}^{T},-\vec{s}\right)$-kernel basis $\bar{\mathbf{G}}$,
+as $\bar{\mathbf{G}}$ satisfies $\mathbf{N}_{1}^{T}\bar{\mathbf{G}}=0$
+and is therefore generated by the $\left(\mathbf{N}_{1}^{T},-\vec{s}\right)$-kernel
+basis $\bar{\mathbf{Q}}_{1}$. If $\rdeg_{-\vec{s}}\mathbf{\bar{Q}}_{1}\nleq0$,
+then \prettyref{lem:predictableDegree} forces $\rdeg_{-\vec{s}}\left(\bar{\mathbf{Q}}_{1}\bar{\mathbf{Q}}_{2}\right)=\rdeg_{-\vec{s}}\bar{\mathbf{G}}\nleq0$,
+a contradiction. 
+
+As before, to see that a $\left(\mathbf{N}_{2}^{T}\mathbf{Q}_{1},\vec{b}_{2}+1,-\vec{s}_{2}\right)$-basis
+contains a $\left(\mathbf{N}_{2}^{T}\mathbf{Q}_{1},-\vec{s}_{2}\right)$-kernel
+basis whose $-\vec{s}$-row degrees are no more than 0, we can just
+show $\rdeg_{-\vec{s}_{2}}\hat{\mathbf{Q}}_{2}\le0$ for any $\left(\mathbf{N}_{2}^{T}\mathbf{Q}_{1},-\vec{s}_{2}\right)$-kernel
+basis $\hat{\mathbf{Q}}_{2}$ and then apply \prettyref{lem:orderbasisContainsNullspacebasisGeneralized}.
+Note that $\rdeg_{-\vec{b}_{2}}\mathbf{N}_{2}^{T}\mathbf{Q}_{1}\le-\vec{s}_{2}$.
+Let $\hat{\mathbf{G}}=\mathbf{Q}_{1}\hat{\mathbf{Q}}_{2}$, a $\left(\mathbf{N}^{T},-\vec{s}\right)$-kernel
+basis. Note that $\rdeg_{-\vec{s}_{2}}\hat{\mathbf{Q}}_{2}=\rdeg_{-\vec{s}}\mathbf{Q}_{1}\hat{\mathbf{Q}}_{2}=\rdeg_{-\vec{s}}\hat{\mathbf{G}}\le0$. 
+\end{proof}
+Now that we can correctly compute a $\left(\mathbf{N}^{T},-\vec{s}\right)$-kernel
+basis by rows with the help of order basis computation, we need to
+look at how to do it efficiently. One major difficulty is that the
+order, or equivalently, the $\vec{s}$-row degrees are nonuniform
+and can have degree as large as $\xi=\sum\vec{s}$. To overcome this,
+we separate the rows of $\mathbf{N}^{T}$ into blocks according to
+their $\vec{s}$-row degrees, and then work with these blocks one
+by one successively based on \prettyref{thm:continueComputingNullspaceBasisByRows}. 
+
+\input{algorithmNullspaceBasisReverse.tex}
+
+Let $k$ be the column dimension of $\mathbf{N}$. Since $\sum\cdeg_{\vec{s}}\mathbf{N}=\sum\vec{b}\le\sum\vec{s}\le\xi$,
+at most $k/c$ columns of $\mathbf{N}$ have $\vec{s}$-column degrees
+greater than or equal to $c\xi/k$ for any $c\ge1$. We assume without
+loss of generality that the rows of $\mathbf{N}^{T}$ are arranged
+in decreasing $\vec{s}$-row degrees. We divide $\mathbf{N}^{T}$
+into $\log k$ row blocks according to the $\vec{s}$-row degrees
+of its rows, or equivalently, divide $\mathbf{N}$ to blocks of columns
+according to the $\vec{s}$-column degrees. Let 
+\[
+\mathbf{N}=\left[\mathbf{N}_{1},\mathbf{N}_{2},\cdots,\mathbf{N}_{\log k-1},\mathbf{N}_{\log k}\right]
+\]
+with $\mathbf{N}_{\log k},\mathbf{N}_{\log k-1},\dots,\mathbf{N}_{2},\mathbf{N}_{1}$
+having $\vec{s}$-column degrees in the range $\left[0,2\xi/k\right]$,
+$(2\xi/k,4\xi/k],$ $(4\xi/k,8\xi/k],\ ...,$ $(\xi/4,\xi/2],$ $(\xi/2,\xi].$
+Let $\vec{\sigma}_{i}=\left[\xi/2^{i-1}+1,\dots,\xi/2^{i-1}+1\right]$
+with the same dimension as the row dimension of $\mathbf{N}_{i}$.
+Let $\vec{\sigma}=\left[\vec{\sigma}_{\log k},\vec{\sigma}_{\log k-1},\dots,\vec{\sigma}_{1}\right]$
+be the order in the order basis computation.
+
+To further simply our task, we also make the order of our problem
+in each block uniform. Rather than of using $\mathbf{N}^{T}$ as the
+input matrix, we use 
+\begin{eqnarray*}
+\hat{\mathbf{N}} & =\begin{bmatrix}\hat{\mathbf{N}}_{1}\\
+\vdots\\
+\hat{\mathbf{N}}_{\log k}
+\end{bmatrix}= & x^{\vec{\sigma}-\vec{b}-1}\begin{bmatrix}\mathbf{N}_{1}^{T}\\
+\vdots\\
+\mathbf{N}_{\log k}^{T}
+\end{bmatrix}=x^{\vec{\sigma}-\vec{b}-1}\mathbf{N}^{T}
+\end{eqnarray*}
+ instead, so that a $\left(\hat{\mathbf{N}},\vec{\sigma},-\vec{s}\right)$-basis
+is a $\left(\mathbf{N}^{T},\vec{b}+1,-\vec{s}\right)$-basis.
+
+We are now ready to compute a $\left(\mathbf{N}^{T},-\vec{s}\right)$-kernel
+basis, which is done by a series of order basis computations that
+computes a series of kernel bases as follows.
+
+Let $\vec{s}_{1}=\vec{s}$. First we compute an $\left(\hat{\mathbf{N}}_{1},\vec{\sigma}_{1},-\vec{s}_{1}\right)$-basis
+$\mathbf{P}_{1}=\left[\mathbf{G}_{1},\mathbf{Q}_{1}\right]$, where
+$\mathbf{G}_{1}$ is a $\left(\hat{\mathbf{N}}_{1},-\vec{s}_{1}\right)$-kernel
+basis%
+\begin{comment}
+ with $\cdeg_{-\vec{s}_{1}}\mathbf{N}_{1}\le0$
+\end{comment}
+.
+
+Let $\tilde{\mathbf{G}}_{1}=\mathbf{G}_{1}$. Let $\vec{s}_{2}=-\cdeg_{-\vec{s}}\mathbf{G}_{1}$.
+\begin{comment}
+Note that $-\vec{s}_{1}\le-[\vec{s}_{2},\vec{t}_{2}]\le\left[0,\dots,0,1,\dots1\right]$
+component-wise, since $\mathbf{P}_{1}$ has lower order than any $\left(\mathbf{M}^{T},\vec{b}+\left[1,\dots,1\right],-\vec{s}\right)$-basis
+$\mathbf{P}$ hence generates $\mathbf{P}$. Therefore, $\cdeg_{-\vec{s}}\mathbf{P}_{1}\le\cdeg_{-\vec{s}}\mathbf{P}\le\left[0,\dots,0,1,\dots1\right]$. 
+\end{comment}
+{} We then compute an $\left(\hat{\mathbf{N}}_{2}\tilde{\mathbf{G}}_{1},\vec{\sigma}_{2},-\vec{s}_{2}\right)$-basis
+$\mathbf{P}_{2}=\left[\mathbf{G}_{2},\mathbf{Q}_{2}\right]$ with
+$\vec{s}_{3}=-\cdeg_{-\vec{s}_{2}}\mathbf{G}_{2}$. Let $\tilde{\mathbf{G}}_{2}=\tilde{\mathbf{G}}_{1}\mathbf{G}_{2}$.
+ %
+\begin{comment}
+Let $\mathbf{R}_{1}=\left[\mathbf{N}_{1}\mathbf{Q}_{2},\mathbf{Q}_{1}\right]$
+and $\mathbf{R}_{1}^{r}=\revCol\left(\mathbf{R}_{1},-\vec{s},\cdeg_{-\vec{s}}\mathbf{R}_{1}\right)$.
+Then from \prettyref{lem:unimodularComputationByRows} we know $\left[\mathbf{F}^{T},\mathbf{R}_{1}^{r}\right]$
+is a unimodular matrix.
+\end{comment}
+
+
+Continuing this process, at step $i$ we compute an $\left(\hat{\mathbf{N}}_{i}\tilde{\mathbf{G}}_{i-1},\vec{\sigma}_{i},-\vec{s}_{i}\right)$-basis
+$\mathbf{P}_{i}=\left[\mathbf{G}_{i},\mathbf{Q}_{i}\right]$. Let
+$\tilde{\mathbf{G}}_{i}=\prod_{j=1}^{i}\mathbf{G}_{i}=\tilde{\mathbf{G}}_{i-1}\mathbf{G}_{i}$.
+Note that $\tilde{\mathbf{G}}_{\log k}$ is a $\left(\mathbf{N}^{T},-\vec{s}\right)$-kernel
+basis. 
+
+This process of computing a $\left(\mathbf{N}^{T},-\vec{s}\right)$-kernel
+basis gives \prettyref{alg:minimalNullspaceBasisReverse}.
+
+Now let us check the cost of this algorithm. The cost is dominated
+by the order basis computation and the multiplications $\hat{\mathbf{N}}_{i}\tilde{\mathbf{G}}_{i-1}$
+and $\tilde{\mathbf{G}}_{i-1}\mathbf{G}_{i}$.
+\begin{lem}
+An $\left(\hat{\mathbf{N}}_{i}\tilde{\mathbf{G}}_{i-1},\vec{\sigma}_{i},-\vec{s}_{i}\right)$-basis
+can be computed at a cost of $O^{\sim}\left(n^{\omega}d\right)$,
+where $d=\xi/n$.\end{lem}
+\begin{proof}
+Note that $\mathbf{N}_{i}$ has less than $2^{i}$ columns. Otherwise,
+$\sum\cdeg_{\vec{s}}\mathbf{N}_{i}>2^{i}\xi/2^{i}=\xi$, contradicting
+with $\sum\cdeg_{\vec{s}}\mathbf{N}=\sum\vec{b}\le\sum\vec{s}\le\xi$.
+It follows that $\hat{\mathbf{N}}_{i}$, and therefore $\hat{\mathbf{N}}_{i}\tilde{\mathbf{G}}_{i-1}$,
+also have less than $2^{i}$ rows. We also have $\vec{\sigma}_{i}=\left[\xi/2^{i-1}+1,\dots,\xi/2^{i-1}+1\right]=\Theta\left(\xi/2^{i}\right)$.
+Therefore, Algorithm 2 from \citep{za2012} for order basis computation
+with unbalanced shift can be used with a cost of $O^{\sim}\left(n^{\omega}d\right)$.\end{proof}
+\begin{lem}
+The multiplications $\hat{\mathbf{N}}_{i}\tilde{\mathbf{G}}_{i-1}$
+can be done with a cost of $O^{\sim}\left(n^{\omega}d\right)$.\end{lem}
+\begin{proof}
+The dimension of $\hat{\mathbf{N}}_{i}$ is bounded by $2^{i-1}\times n$
+and $\sum\rdeg_{\vec{s}}\hat{\mathbf{N}}_{i}\le2^{i-1}\cdot\xi/2^{i-1}=\xi$.
+We also have $\cdeg_{-\vec{s}}\tilde{\mathbf{G}}_{i-1}\le0$, or equivalently,
+$\rdeg\tilde{\mathbf{G}}_{i-1}\le\vec{s}$. We can now use \prettyref{thm:multiplyUnbalancedMatrices}
+to multiply $\tilde{\mathbf{G}}_{i-1}^{T}$ and $\hat{\mathbf{N}}_{i}^{T}$
+with a cost of $O^{\sim}\left(n^{\omega-1}\xi\right)=O^{\sim}\left(n^{\omega}d\right)$.\end{proof}
+\begin{lem}
+The multiplication $\tilde{\mathbf{G}}_{i-1}\mathbf{G}_{i}$ can be
+done with a cost of $O^{\sim}\left(n^{\omega}d\right)$.\end{lem}
+\begin{proof}
+We know $\cdeg_{-\vec{s}}\tilde{\mathbf{G}}_{i-1}=-\vec{s}_{i}$,
+and $\cdeg_{-\vec{s}_{i}}\mathbf{G}_{i}=-\vec{s}_{i+1}\le0.$ In other
+words, $\rdeg\mathbf{G}_{i}\le\vec{s}_{i}$, and $\rdeg_{\vec{s}_{i}}\tilde{\mathbf{G}}_{i-1}\le\vec{s}$,
+hence we can again use \prettyref{thm:multiplyUnbalancedMatrices}
+to multiply $\mathbf{G}_{i}^{T}$ and $\tilde{\mathbf{G}}_{i-1}^{T}$
+with a cost of $O^{\sim}\left(n^{\omega}d\right)$.\end{proof}
+\begin{thm}
+A right factor $\mathbf{G}$ satisfying $\mathbf{TG}=\mathbf{F}$
+for a column basis $\mathbf{T}$ can be computed with a cost of $O^{\sim}\left(n^{\omega-1}\xi\right)=O^{\sim}\left(n^{\omega}d\right)$.
+\end{thm}
+
+\section{Computing a Column Basis}
+
+With a right factor $\mathbf{G}$ of $\mathbf{F}$ computed, we are
+now ready to compute a column basis $\mathbf{T}$, where $\mathbf{F}=\mathbf{T}\mathbf{G}$.
+To do so efficiently, the degree of $\mathbf{T}$ cannot be too big,
+which is indeed the case as shown by the following lemmas.
+\begin{lem}
+\label{lem:colBasisdegreeBoundByRdegOfRightFactor}The column degrees
+of $\mathbf{T}$ are bounded by the corresponding entries of $\vec{t}=-\rdeg_{-\vec{s}}\mathbf{G}$.\end{lem}
+\begin{proof}
+Since $\mathbf{G}$ is $-\vec{s}$-row reduced, and $\rdeg_{-\vec{s}}\mathbf{F}\le0$,
+by \prettyref{lem:predictableDegree} $\rdeg_{-\vec{t}}\mathbf{T}\le0$,
+or equivalently, $\mathbf{T}$ has column degrees bounded by $\vec{t}$.\end{proof}
+\begin{lem}
+\label{lem:colBasisDegreeBoundByInputDegrees}Let $\vec{t}=-\rdeg_{-\vec{s}}\mathbf{G}$,
+a vector with $r$ entries and bounds $\cdeg\mathbf{T}$ from \prettyref{lem:colBasisdegreeBoundByRdegOfRightFactor}.
+Let $\vec{s}'$ be the list of the $r$ largest entries of $\vec{s}$.
+Then $\vec{t}\le\vec{s}'$.\end{lem}
+\begin{proof}
+Let $\mathbf{G}'$ be the $-\vec{s}$-row Popov form of $\mathbf{G}$,
+and the square matrix $\mathbf{G}"$ consists of only the columns
+of $\mathbf{G}'$ that contains pivot entries, and has the rows permuted
+so the pivots are in the diagonal. Let $\vec{s}"$ be the list of
+the entries in $\vec{s}$ that correspond to the columns of $\mathbf{G}"$
+in $\mathbf{G}'$. Note that $\rdeg_{-\vec{s}"}\mathbf{G}"=-\vec{t}"$
+is just a permutation of $-\vec{t}$ with the same entries. By the
+definition of shifted row degree, $-\vec{t}"$ is the sum of $-\vec{s}"$
+and the list of the diagonal pivot degrees, which are nonnegative.
+Therefore, $-\vec{t}"\ge-\vec{s}"$. The result then follows as $\vec{t}$
+is a permutation of $\vec{t}"$ and $\vec{s}'$ has the largest entries
+of $\vec{s}$.
+\end{proof}
+With the bound on the column degrees of $\mathbf{T}$ determined,
+we are now ready to compute $\mathbf{T}$. This is done again using
+an order basis computation.
+\begin{lem}
+Let $\vec{t}'=\left[0,\dots,0,\vec{t}\right]\in\mathbb{Z}^{m+r}$.
+Any $\left(\left[\mathbf{F}^{T},\mathbf{G}^{T}\right],-\vec{t}'\right)$-kernel
+basis has the form $\begin{bmatrix}V\\
+\bar{\mathbf{T}}
+\end{bmatrix}$, where $V\in\mathbb{K}^{m\times m}$ is a unimodular matrix and $\left(\bar{\mathbf{T}}V^{-1}\right)^{T}$
+is a column basis of $\mathbf{F}$.\end{lem}
+\begin{proof}
+First, the matrix $\begin{bmatrix}I\\
+\mathbf{T}^{T}
+\end{bmatrix}$ is a kernel basis of $\left[\mathbf{F}^{T},\mathbf{G}^{T}\right]$
+and is unimodularly equivalent to any other kernel basis. Hence we
+must have $\begin{bmatrix}V\\
+\bar{\mathbf{T}}
+\end{bmatrix}=\begin{bmatrix}I\\
+\mathbf{T}^{T}
+\end{bmatrix}V$, which gives $\mathbf{T}=\left(\bar{\mathbf{T}}V^{-1}\right)^{T}$.
+Also note that the $-\vec{t}'$-minimality forces the unimodular matrix
+$V$ in any $\left(\left[\mathbf{F}^{T},\mathbf{G}^{T}\right],-\vec{t}'\right)$-kernel
+basis to be the same degree as $I$.
+\end{proof}
+To compute a $\left(\left[\mathbf{F}^{T},\mathbf{G}^{T}\right],-\vec{t}'\right)$-kernel
+basis, we can again use order basis computation.
+\begin{lem}
+Any $\left(\left[\mathbf{F}^{T},\mathbf{G}^{T}\right],\vec{s}+\left[1,\dots,1\right],-\vec{t}'\right)$-basis
+contain a $\left(\left[\mathbf{F}^{T},\mathbf{G}^{T}\right],-\vec{t}'\right)$-kernel
+basis whose $-\vec{t}'$-row degrees are bounded by 0.\end{lem}
+\begin{proof}
+As before, \prettyref{lem:orderbasisContainsNullspacebasisGeneralized}
+can be used here. We just need to show that a $\left(\left[\mathbf{F}^{T},\mathbf{G}^{T}\right],-\vec{t}'\right)$-kernel
+basis has $-\vec{t}'$-row degrees no more than 0, which is true since
+$\rdeg_{-\vec{t}'}\begin{bmatrix}I\\
+\mathbf{T}^{T}
+\end{bmatrix}\le0$.
+\end{proof}
+Now to compute a $\left(\left[\mathbf{F}^{T},\mathbf{G}^{T}\right],-\vec{t}'\right)$-kernel
+basis efficiently, notice we have the same type of problem as in \prettyref{sec:computeRightFactor},
+and so \prettyref{alg:minimalNullspaceBasisReverse} works here as
+well. With a $\left(\left[\mathbf{F}^{T},\mathbf{G}^{T}\right],-\vec{t}'\right)$-kernel
+basis $\begin{bmatrix}V\\
+\bar{\mathbf{T}}
+\end{bmatrix}$ computed, a column basis can now be easily computed by $\mathbf{T}=\left(\bar{\mathbf{T}}V^{-1}\right)^{T}$.
+
+We now have a complete algorithm for computing a column basis, given
+in \prettyref{alg:colBasis}.
+
+\input{algorithmColumnBasis.tex}
+\begin{thm}
+\label{thm:columnBasisCost1}A column basis $\mathbf{T}$ of $\mathbf{F}$
+can be computed with a cost of $O^{\sim}\left(n^{\omega-1}\xi\right)$.
+\end{thm}
+\begin{comment}
+This can be done by computing a left $\left[0,\dots,0,d,\dots,d\right]$-minimal
+kernel basis $\left[\mathbf{T}',V\right]$ of $\left[\mathbf{G}^{T},\mathbf{F}^{T}\right]^{T}$,
+where $d$ is the degree of $\mathbf{F},$ $V$ is a unimodular matrix
+and $\mathbf{T}'$ is a $m\times m$ matrix. Note that $\left[\mathbf{T}',V\right]$
+has $m$ rows since the rank of $\left[\mathbf{G}^{T},\mathbf{F}^{T}\right]^{T}$
+is $m$. Also note that since $\left[\mathbf{T},I\right]$ is a left
+kernel basis with $\left[0,\dots,0,d,\dots,d\right]$-row degrees
+bounded by $d$, the $\left[0,\dots,0,d,\dots,d\right]$-minimal kernel
+basis $\left[\mathbf{T}',V\right]$ must also has its $\left[0,\dots,0,d,\dots,d\right]$-row
+degrees bounded by $d$, hence the degree of $V$ must be 0. We can
+then easily compute $\mathbf{T}=\mathbf{T}'V^{-1}$. 
+\end{comment}
+
+
+
+\section{\label{sec:successiveColBasisComputation}A Simple Improvement}
+
+When the input matrix $\mathbf{F}$ has column dimension much larger
+$n$ than the row dimension $m$, we can separate $\mathbf{F}=\left[\mathbf{F}_{1},\mathbf{F}_{2},\dots,\mathbf{F}_{n/m}\right]$
+to $n/m$ blocks, each with dimension $m\times m$, assuming without
+loss of generality $n$ is a multiple of $m$, and the columns are
+arranged in increasing degrees. We then do a series of column basis
+computations. First we compute a column basis $\mathbf{T}_{1}$ of
+$\left[\mathbf{F}_{1},\mathbf{F}_{2}\right]$. Then compute a column
+basis $\mathbf{T}_{2}$ of $\left[\mathbf{T}_{1},\mathbf{F}_{3}\right]$.
+Repeating this process, at step $i$, we compute a column basis $\mathbf{T}_{i}$
+of $\left[\mathbf{T}_{i-1},\mathbf{F}_{i+1}\right]$, until $i=n/m-1$,
+when a column basis of $\mathbf{F}$ is computed.
+\begin{lem}
+At step $i$, computing a column basis $\mathbf{T}_{i}$ of $\left[\mathbf{T}_{i-1},\mathbf{F}_{i+1}\right]$
+can be done with a cost of $O^{\sim}\left(m^{\omega-1}\left(\sum\cdeg\mathbf{F}_{i}+\sum\cdeg\mathbf{F}_{i+1}\right)\right)$
+field operations.\end{lem}
+\begin{proof}
+From \prettyref{lem:colBasisDegreeBoundByInputDegrees}, the column
+basis $\mathbf{T}_{i-1}$ of $\left[\mathbf{F}_{1},\dots,\mathbf{F}_{i}\right]$
+has column degrees bounded by the largest column degrees of $\mathbf{F}_{i}$,
+hence $\sum\cdeg\mathbf{T}_{i-1}\le\sum\cdeg\mathbf{F}_{i}$. The
+lemma then follows by combining this with the result that a column
+basis $\mathbf{T}_{i}$ of $\left[\mathbf{T}_{i-1},\mathbf{F}_{i+1}\right]$
+can be computed with a cost of $O^{\sim}\left(m^{\omega-1}\left(\sum\cdeg\mathbf{T}_{i-1}+\sum\cdeg\mathbf{F}_{i+1}\right)\right)$
+from \prettyref{thm:columnBasisCost1}.\end{proof}
+\begin{thm}
+\label{thm:finalCollBasisCost}A column basis of $\mathbf{F}$ can
+be computed with a cost of $O^{\sim}\left(m^{\omega-1}\xi\right)$.\end{thm}
+\begin{proof}
+Summing up the cost of all the column basis computations, 
+\begin{eqnarray*}
+ &  & \sum_{i=1}^{n/m-1}O^{\sim}\left(m^{\omega-1}\left(\sum\cdeg\mathbf{F}_{i}+\sum\cdeg\mathbf{F}_{i+1}\right)\right)\\
+ & \subset & O^{\sim}\left(m^{\omega-1}\left(2\sum\cdeg\mathbf{F}\right)\right)\\
+ & = & O^{\sim}\left(m^{\omega-1}\xi\right)
+\end{eqnarray*}
+\end{proof}
+\begin{rem}
+In this section, the computational efficiency is improved by reducing
+the original problem to about $n/m$ subproblems whose column dimensions
+are close to the row dimension $m$. This is done by successive column
+basis computations. Note that we can also reduce the column dimension
+by using successive order basis computations, and only do a column
+basis computation at the very last step. The computational complexity
+of using order basis computation to reduce the column dimension would
+remain the same, but in practice it maybe more efficient since order
+basis computations are simpler.
+\end{rem}
+
+\section{Conclusion\label{sec:Future-Research}}
+
+In this paper we have presented a fast, deterministic procedure for
+computing a column basis of a polynomial matrix. 
+
+\bibliographystyle{plainnat}
+\bibliography{paper}
+
+\end{document}

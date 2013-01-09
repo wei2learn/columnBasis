@@ -1,0 +1,7212 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass sig-alternate
+\begin_preamble
+%\usepackage{yjsco}\journal{JournalofSymbolicComputation}
+
+\renewcommand{\algorithmicrequire}{\textbf{Input:}}\renewcommand{\algorithmicensure}{\textbf{Output:}}
+%\renewcommand{\algorithmicensure}{\textbf{if}}\renewcommand{\algorithmicensure}{\textbf{Uses:}}
+
+\def\diag{\mbox{diag}}\def\cdeg{\qopname\relax n{cdeg}}
+\def\MM{\qopname\relax n{MM}}\def\M{\qopname\relax n{M}}\def\ord{\qopname\relax n{ord}}
+
+\def\StorjohannTransform{\qopname\relax n{StorjohannTransform}}\def\TransformUnbalanced{\qopname\relax n{TransformUnbalanced}}\def\rowDimension{\qopname\relax n{rowDimension}}\def\columnDimension{\qopname\relax n{columnDimension}}\DeclareMathOperator{\re}{rem}\DeclareMathOperator{\coeff}{coeff}\DeclareMathOperator{\lcoeff}{lcoeff}\def\mab{\qopname\relax n{orderBasis}}\def\mmab{\qopname\relax n{FastBasis}}\def\umab{\qopname\relax n{UnbalancedFastBasis}}\newcommand{\bb}{\\}
+\def\mnb{\qopname\relax n{MinimalNullspaceBasis ~ }}
+\DeclareMathOperator{\mnbr}{minimaKernelBasisReversed}
+\def\rdeg{\qopname\relax n{rdeg}}
+\DeclareMathOperator{\colBasis}{colBasis}
+
+
+\makeatother
+\newcommand{\arne}[1]{{\color{blue}\it {\bf Arne:} #1 }}
+\newcommand{\wei}[1]{{\color{red}\it {\bf Wei:} #1}}
+\newcommand{\george}[1]{{\color{green}\it {\bf George:} #1}}
+\def\newblock{\hskip .11em plus .33em minus .07em}
+\end_preamble
+\use_default_options false
+\begin_modules
+algorithmics
+\end_modules
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding latin9
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine natbib_authoryear
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 2
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+% --- Author Metadata here ---
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%
+\backslash
+conferenceinfo{ISSAC'09,} {July 28--31, 2009, Seoul, Republic of Korea.}
+ 
+\end_layout
+
+\begin_layout Plain Layout
+
+%
+\backslash
+CopyrightYear{2009}
+\end_layout
+
+\begin_layout Plain Layout
+
+%
+\backslash
+crdata{978-1-60558-609-0/09/07} 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+numberofauthors
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\end_inset
+
+1
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Author
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+alignauthor
+\end_layout
+
+\end_inset
+
+ Wei Zhou and George Labahn
+\begin_inset Newline newline
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+affaddr
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\end_inset
+
+Cheriton School of Computer Science
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+affaddr
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\end_inset
+
+University of Waterloo
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset Newline newline
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+affaddr
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\end_inset
+
+Waterloo, Ontario, Canada
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+email
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\end_inset
+
+{w2zhou,glabahn}@uwaterloo.ca
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Date
+
+\size normal
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+today
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset space \quad{}
+\end_inset
+
+:: 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+timeofday
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Title
+Computing Column Bases
+\end_layout
+
+\begin_layout Abstract
+Given a matrix of univariate polynomials over a field 
+\begin_inset Formula $\mathbb{K}$
+\end_inset
+
+, its columns generates a 
+\begin_inset Formula $\mathbb{K}\left[x\right]$
+\end_inset
+
+-module consisting of all 
+\begin_inset Formula $\mathbb{K}\left[x\right]$
+\end_inset
+
+-linear combination of these columns.
+ We call any basis of this module a column basis of the given matrix.
+ In this paper we present a deterministic algorithm for the computation
+ of a column basis of an 
+\begin_inset Formula $m\times n$
+\end_inset
+
+ input matrix with 
+\begin_inset Formula $m\le n$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $s$
+\end_inset
+
+ is the average column degree of the input matrix, this algorithm computes
+ a column basis of with a cost of 
+\begin_inset Formula $O^{\sim}\left(n^{\omega}s\right)$
+\end_inset
+
+ field operations in 
+\begin_inset Formula $\mathbb{K}$
+\end_inset
+
+.
+ Here the soft-
+\begin_inset Formula $O$
+\end_inset
+
+ notation is Big-
+\begin_inset Formula $O$
+\end_inset
+
+ with log factors removed while 
+\begin_inset Formula $\omega$
+\end_inset
+
+ is the exponent of matrix multiplication.
+ Note that the average column degree 
+\begin_inset Formula $s$
+\end_inset
+
+ is bounded by the commonly used matrix degree that is also the maximum
+ column degree of the input matrix.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+% A category with the (minimum) three required fields
+\end_layout
+
+\begin_layout Plain Layout
+
+%
+\backslash
+category{I.1.2}{Symbolic and Algebraic Manipulation}{Algorithms}%[Algebraic
+ algorithms]
+\end_layout
+
+\begin_layout Plain Layout
+
+%A category including the fourth, optional field follows...
+\end_layout
+
+\begin_layout Plain Layout
+
+%
+\backslash
+category{F.2.2}{Analysis of Algorithms and }{Nonnumerical Algorithms and Problems}
+%[Computations on discrete structures]
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+%
+\backslash
+terms{Algorithms, Theory}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+%
+\backslash
+keywords{Order basis, Complexity}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{1mm} 
+\backslash
+noindent {
+\backslash
+bf Categories and Subject Descriptors:} I.1.2 {[{Symbolic and Algebraic Manipulati
+on}]}: {Algorithms}; F.2.2 {[{Analysis of Algorithms and Problem Complexity}]}:
+ {Nonnumerical Algorithms and Problems}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{1mm} 
+\backslash
+noindent {
+\backslash
+bf General Terms:} Algorithms, Theory
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{1mm} 
+\backslash
+noindent {
+\backslash
+bf Keywords:} Nullspace basis, Complexity
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Introduction
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $\mathbf{F}\in\mathbb{K}\left[x\right]^{m\times n}$
+\end_inset
+
+ be a matrix of polynomials over a field 
+\begin_inset Formula $\mathbb{K}$
+\end_inset
+
+.
+ The set 
+\begin_inset Formula 
+\[
+\left\{ \mathbf{p}\in\mathbb{K}\left[x\right]^{n}~|~\mathbf{F}\mathbf{p}=0\right\} 
+\]
+
+\end_inset
+
+forms a 
+\begin_inset Formula $\mathbb{K}[x]$
+\end_inset
+
+-module.
+ We call any basis of this module a column basis of 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+.
+ When the row dimension 
+\begin_inset Formula $m=1$
+\end_inset
+
+, a column basis becomes the standard polynomial GCD.
+ We represent column bases using matrices, with columns being the basis
+ elements.
+\end_layout
+
+\begin_layout Standard
+GCD is one of the most fundamental subject in algebra and computer algebra
+ and has been extensively studied.
+ As a generalization of polynomial GCD and matrix GCD, column bases are
+ also fundamental in polynomial matrix computations.
+ Column basis computation provides a deterministic alternative to randomized
+ lattice compression 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "li:2006,storjohann-villard:2005"
+
+\end_inset
+
+.
+ It also helps us to deterministically compute matrix determinants and Hermite
+ normal forms, and to deterministically compute column reduced forms and
+ Popov normal forms for matrices of any dimension and any rank
+\begin_inset CommandInset citation
+LatexCommand citep
+key "zhou:phd2012"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Note that column bases are not unique.
+ A column basis multiplied by any unimodular matrix gives another column
+ basis.
+ As a result, a column basis can have arbitrary high degree.
+ In this paper, we compute a column basis with column degrees bounded by
+ the largest column degrees of the input matrix.
+ In fact, the nonzero columns of column reduced forms, Popov normal forms,
+ and Hermite normal forms are all column bases satisfying additional degree
+ constraints.
+ A column reduced form gives a special column basis whose column degrees
+ are the smallest possible.
+ The Popov form is a special unique column reduced form satisfying additional
+ conditions.
+ The Hermite normal form provides another special unique column basis that
+ is triangular and has a different type of minimal column degrees.
+\end_layout
+
+\begin_layout Section
+Preliminaries
+\end_layout
+
+\begin_layout Standard
+The computational cost in this paper is analyzed by bounding the number
+ of arithmetic operations in the coefficient field 
+\begin_inset Formula $\mathbb{K}$
+\end_inset
+
+ on an algebraic random access machine.
+ We assume the cost of multiplying two polynomial matrices with dimension
+ 
+\begin_inset Formula $n$
+\end_inset
+
+ and degree 
+\begin_inset Formula $d$
+\end_inset
+
+ is 
+\begin_inset Formula $O^{\sim}(n^{\omega}d)$
+\end_inset
+
+ field operations, where the multiplication exponent 
+\begin_inset Formula $\omega$
+\end_inset
+
+ is assumed to satisfy 
+\begin_inset Formula $2<\omega\le3$
+\end_inset
+
+.
+ We refer to the book by 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "vonzurgathen"
+
+\end_inset
+
+ for more details and reference about the cost of polynomial multiplication
+ and matrix multiplication.
+\end_layout
+
+\begin_layout Standard
+In this paper, we consider the problem of computing a column basis of an
+ input matrix 
+\begin_inset Formula $\mathbf{F}\in\mathbb{K}\left[x\right]^{m\times n}$
+\end_inset
+
+, assuming its row dimension is no more than its column dimension and its
+ column degrees are bounded by the entries of a list 
+\begin_inset Formula $\vec{s}\in\mathbb{Z}^{n}$
+\end_inset
+
+.
+ A column basis 
+\begin_inset Formula $\mathbf{T}\in\mathbb{K}\left[x\right]^{m\times r}$
+\end_inset
+
+ of 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+ has the same rank as 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+ and has full column rank, since the basis elements are linearly independent.
+\end_layout
+
+\begin_layout Standard
+Any matrix 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+ in 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\mathbb{K}\left[x\right]^{m\times n}$
+\end_inset
+
+ can be unimodularly transformed to 
+\begin_inset Formula $\left[\mathbf{T},0\right]$
+\end_inset
+
+ with a full column rank 
+\begin_inset Formula $\mathbf{T}$
+\end_inset
+
+ that is also a column basis of 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+, as we know 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+ can be unimodularly transformed to a column reduced form.
+ One way to do so is to compute a column reduced form by repeatedly
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ working with the leading column coefficient matrices.
+ More specifically, if the nonzero columns of the leading column coefficient
+ matrix 
+\begin_inset Formula $F$
+\end_inset
+
+ of 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+ is not full rank, then let 
+\begin_inset Formula $\mathbf{f}$
+\end_inset
+
+ be the highest degree column from 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+ such that its leading column coefficient vector 
+\begin_inset Formula $f$
+\end_inset
+
+ is not linearly independent from the remaining columns.
+ Therefore, we can eliminate 
+\begin_inset Formula $f$
+\end_inset
+
+ against other columns by a column operation, or equivalently, a unimodular
+ transformation.
+ It follows that the same column operation on 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+ lowers the degree of 
+\begin_inset Formula $\mathbf{f}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+But computing a column basis this way can be expensive, as we need to work
+ with up to 
+\begin_inset Formula $\xi=\sum\vec{s}$
+\end_inset
+
+ such coefficient matrices, which would involve up to 
+\begin_inset Formula $\xi$
+\end_inset
+
+ polynomial matrix multiplications.
+ 
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+
+\emph on
+greatest
+\emph default
+ common left divisor of the input matrix 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+, with 
+\begin_inset Formula $\mathbf{T}$
+\end_inset
+
+ having full column rank.
+ As in the dimension 1 polynomial case, it is the greatest in the sense
+ that the remaining factor 
+\begin_inset Formula $\mathbf{G}\in\mathbb{K}\left[x\right]^{r\times n}$
+\end_inset
+
+ satisfying 
+\series bold
+
+\begin_inset Formula $\mathbf{F}=\mathbf{T}\mathbf{G}$
+\end_inset
+
+ 
+\series default
+has no other full column rank left factors except for the unimodular ones,
+ and this just requires 
+\begin_inset Formula $\mathbf{T}$
+\end_inset
+
+ to be a column basis that generates the columns of 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Definition
+Given 
+\begin_inset Formula $\mathbf{F}\in\mathbb{K}\left[x\right]^{m\times n}$
+\end_inset
+
+.
+ A 
+\emph on
+GCLD 
+\emph default
+(also called 
+\emph on
+column GCD
+\emph default
+ or a
+\emph on
+ left GCD
+\emph default
+) of 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+ is any full column rank 
+\begin_inset Formula $\mathbf{T}\in\mathbb{K}\left[x\right]^{m\times r}$
+\end_inset
+
+ satisfying 
+\begin_inset Formula 
+\[
+\mathbf{F}\mathbf{U}=\left[0,\mathbf{T}\right]
+\]
+
+\end_inset
+
+ with a unimodular matrix 
+\begin_inset Formula $\mathbf{U}\in\mathbb{K}\left[x\right]^{n\times n}$
+\end_inset
+
+.
+ 
+\begin_inset Note Comment
+status collapsed
+
+\begin_layout Plain Layout
+If 
+\begin_inset Formula $\mathbf{T}$
+\end_inset
+
+ is unimodular, we say 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+ is 
+\emph on
+relatively column prime
+\emph default
+.
+ 
+\end_layout
+
+\end_inset
+
+The 
+\emph on
+GCRD 
+\emph default
+(also called 
+\emph on
+right GCD 
+\emph default
+or row 
+\emph on
+GCD)
+\emph default
+ or 
+\begin_inset Note Comment
+status collapsed
+
+\begin_layout Plain Layout
+, and 
+\emph on
+relatively row prime
+\emph default
+ are
+\end_layout
+
+\end_inset
+
+ is defined in the same way.
+\end_layout
+
+\begin_layout Plain Layout
+Note that the term column GCD means that the GCD is a factor of the columns,
+ while left GCD means that the GCD is a left factor.
+ Also note that this specializes to polynomial GCD when 
+\begin_inset Formula $m=1$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Plain Layout
+GCLDs is closely related to column reduced form.
+ The non-zero columns of a column reduced form is also a GCLD, but a GCLD
+ does not need to be column reduced and can have degree arbitrarily large.
+\end_layout
+
+\begin_layout Remark
+A matrix GCLD is commonly defined using two polynomial matrices 
+\begin_inset Formula $\mathbf{F}_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbf{F}_{2}$
+\end_inset
+
+, with 
+\begin_inset Formula $\mathbf{F}_{1}$
+\end_inset
+
+ required to be square nonsingular.
+ A GCLD of 
+\begin_inset Formula $\mathbf{F}_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbf{F}_{2}$
+\end_inset
+
+ in this definition is then the same as a GCLD of 
+\begin_inset Formula $\mathbf{F}=\left[\mathbf{F}_{1},\mathbf{F}_{2}\right]$
+\end_inset
+
+ in our definition.
+ We believe that this commonly used definition is unnecessarily complicated
+ with the separation of two matrices and unnecessarily restrictive with
+ the requirement of a square nonsingular matrix.
+ Our definition is simpler, more general and works for matrices of any dimension
+s.
+ 
+\end_layout
+
+\end_inset
+
+ To efficiently compute a column basis, we make use of order basis computations
+ and kernel basis computations.
+ Efficient algorithms for these have been developed in 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "ZL2012,za2012,zhou:phd2012"
+
+\end_inset
+
+.
+ As in the computation of order bases and kernel bases, we also make extensive
+ use of shifted degrees.
+ 
+\end_layout
+
+\begin_layout Subsection
+Shifted Degrees
+\end_layout
+
+\begin_layout Standard
+For a column vector 
+\begin_inset Formula $\mathbf{p}=\left[p_{1},\dots,p_{n}\right]^{T}$
+\end_inset
+
+ of univariate polynomials over a field 
+\begin_inset Formula $\mathbb{K}$
+\end_inset
+
+, its column degree, denoted by 
+\begin_inset Formula $\cdeg\mathbf{p}$
+\end_inset
+
+, is just the maximum of the degrees of the entries of 
+\begin_inset Formula $\mathbf{p}$
+\end_inset
+
+, that is, 
+\begin_inset Formula 
+\[
+\cdeg\mathbf{p}=\max_{1\le i\le n}\deg p_{i}.
+\]
+
+\end_inset
+
+The 
+\emph on
+shifted column degree
+\emph default
+ generalizes this standard column degree by taking the maximum after shifting
+ the degrees by a given integer vector that is known as a 
+\emph on
+shift
+\emph default
+.
+ More specifically, the shifted column degree of 
+\begin_inset Formula $\mathbf{p}$
+\end_inset
+
+ with respect to a shift 
+\begin_inset Formula $\vec{s}=\left[s_{1},\dots,s_{n}\right]\in\mathbb{Z}^{n}$
+\end_inset
+
+, or the 
+\emph on
+
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+-column degree
+\emph default
+ of 
+\begin_inset Formula $\mathbf{p}$
+\end_inset
+
+ is
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\cdeg_{\vec{s}}\mathbf{p}=\max_{1\le i\le n}[\deg p_{i}+s_{i}]=\deg(x^{\vec{s}}\cdot\mathbf{p}),
+\]
+
+\end_inset
+
+ where 
+\begin_inset Formula 
+\[
+x^{\vec{s}}=\diag\left(\left[x^{s_{1}},x^{s_{2}},\dots,x^{s_{n}}\right]\right)=\begin{bmatrix}x^{s_{1}}\\
+ & x^{s_{2}}\\
+ &  & \ddots\\
+ &  &  & x^{s_{1}}
+\end{bmatrix}.
+\]
+
+\end_inset
+
+For a matrix 
+\begin_inset Formula $\mathbf{P}$
+\end_inset
+
+, we use 
+\begin_inset Formula $\cdeg\mathbf{P}$
+\end_inset
+
+ and 
+\begin_inset Formula $\cdeg_{\vec{s}}\mathbf{P}$
+\end_inset
+
+ to denote respectively the list of its column degrees and the list of its
+ shifted 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+-column degrees.
+ When 
+\begin_inset Formula $\vec{s}=\left[0,\dots,0\right]$
+\end_inset
+
+, the shifted column degree specializes to the standard column degree.
+ The shifted row degree of a row vector 
+\series bold
+
+\begin_inset Formula $\mathbf{q}$
+\end_inset
+
+ 
+\series default
+is defined in the same way.
+\begin_inset Formula 
+\[
+\rdeg_{\vec{s}}\mathbf{q}=\max_{1\le i\le n}[\deg q_{i}+s_{i}]=\deg(\mathbf{q}\cdot x^{\vec{s}}).
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The shifted degrees have been used previously in polynomial matrix computations
+ and to generalize matrix normal forms 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "BLV:jsc06"
+
+\end_inset
+
+.
+ The shifted column degree is equivalent to the notion of 
+\emph on
+defect
+\emph default
+ commonly used in the literature.
+\end_layout
+
+\begin_layout Standard
+The usefulness of the shifted degrees can be seen from their applications
+ in polynomial matrix computation problems 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "za2012,zhou:phd2012,ZL2012"
+
+\end_inset
+
+.
+ One of its uses is illustrated by the following lemma from Chapter 2 in
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "zhou:phd2012"
+
+\end_inset
+
+, which can be viewed as a stronger version of the predictable-degree property
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "kailath:1980"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Lemma
+\begin_inset CommandInset label
+LatexCommand label
+name "lem:predictableDegree"
+
+\end_inset
+
+If a matrix 
+\begin_inset Formula $\mathbf{A}\in\mathbb{K}\left[x\right]^{m\times n}$
+\end_inset
+
+ is a 
+\begin_inset Formula $\vec{u}$
+\end_inset
+
+-column reduced matrix with no zero columns and with 
+\begin_inset Formula $\cdeg_{\vec{u}}\mathbf{A}=\vec{v}$
+\end_inset
+
+, then a matrix 
+\begin_inset Formula $\mathbf{B}\in\mathbb{K}\left[x\right]^{n\times k}$
+\end_inset
+
+ has 
+\begin_inset Formula $\vec{v}$
+\end_inset
+
+-column degrees 
+\begin_inset Formula $\cdeg_{\vec{v}}\mathbf{B}=\vec{w}$
+\end_inset
+
+ if and only if 
+\begin_inset Formula $\cdeg_{\vec{u}}\left(\mathbf{A}\mathbf{B}\right)=\vec{w}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Another essential tool needed in our computation is the efficient multiplication
+ of matrices with unbalanced degrees 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "za2012,zhou:phd2012"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Theorem
+\begin_inset CommandInset label
+LatexCommand label
+name "thm:multiplyUnbalancedMatrices"
+
+\end_inset
+
+ Let 
+\begin_inset Formula $\mathbf{A}\in\mathbb{K}\left[x\right]^{m\times n}$
+\end_inset
+
+, 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+ a shift with entries bounding the column degrees of 
+\begin_inset Formula $\mathbf{A}$
+\end_inset
+
+ and 
+\begin_inset Formula $\xi$
+\end_inset
+
+, a bound on the sum of the entries of 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $\mathbf{B}\in\mathbb{K}\left[x\right]^{n\times k}$
+\end_inset
+
+ with 
+\begin_inset Formula $k\in O\left(m\right)$
+\end_inset
+
+ and the sum 
+\begin_inset Formula $\theta$
+\end_inset
+
+ of its 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+-column degrees satisfying 
+\begin_inset Formula $\theta\in O\left(\xi\right)$
+\end_inset
+
+.
+ Then we can multiply 
+\begin_inset Formula $\mathbf{A}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbf{B}$
+\end_inset
+
+ with a cost of 
+\begin_inset Formula $O^{\sim}(nm^{\omega-2}\xi)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Order Basis
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $\mathbb{K}$
+\end_inset
+
+ be a field, 
+\begin_inset Formula $\mathbf{F}\in\mathbb{K}\left[\left[x\right]\right]^{m\times n}$
+\end_inset
+
+ a matrix of power series and 
+\begin_inset Formula $\vec{\sigma}=\left[\sigma_{1},\dots,\sigma_{m}\right]$
+\end_inset
+
+ a vector of non-negative integers.
+ 
+\end_layout
+
+\begin_layout Definition
+We say a vector of polynomials 
+\begin_inset Formula $\mathbf{p}\in\mathbb{K}\left[x\right]^{n\times1}$
+\end_inset
+
+ has 
+\emph on
+order
+\emph default
+ 
+\begin_inset Formula $\left(\mathbf{F},\vec{\sigma}\right)$
+\end_inset
+
+ (or 
+\emph on
+order
+\emph default
+ 
+\begin_inset Formula $\vec{\sigma}$
+\end_inset
+
+ with respect to 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+) if 
+\begin_inset Formula $\mathbf{F}\cdot\mathbf{p}\equiv\mathbf{0}\mod x^{\vec{\sigma}}$
+\end_inset
+
+, that is, 
+\begin_inset Formula 
+\[
+\mathbf{F}\cdot\mathbf{p}=x^{\vec{\sigma}}\mathbf{r}=\begin{bmatrix}x^{\sigma_{1}}\\
+ & \ddots\\
+ &  & x^{\sigma_{m}}
+\end{bmatrix}\mathbf{r}
+\]
+
+\end_inset
+
+ for some 
+\begin_inset Formula $\mathbf{r}\in\mathbb{K}\left[\left[x\right]\right]^{m\times1}$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $\vec{\sigma}=\left[\sigma,\dots,\sigma\right]$
+\end_inset
+
+ is uniform, then we say that 
+\begin_inset Formula $\mathbf{p}$
+\end_inset
+
+ has order 
+\begin_inset Formula $\left(\mathbf{F},\sigma\right).$
+\end_inset
+
+ 
+\begin_inset Note Comment
+status collapsed
+
+\begin_layout Plain Layout
+The vector of power series 
+\begin_inset Formula $\mathbf{r}$
+\end_inset
+
+ is called the order 
+\begin_inset Formula $\left(\mathbf{F},\sigma\right)$
+\end_inset
+
+-residual of 
+\series bold
+
+\begin_inset Formula $\mathbf{p}$
+\end_inset
+
+
+\series default
+.
+ 
+\end_layout
+
+\end_inset
+
+ The set of all order 
+\begin_inset Formula $\left(\mathbf{F},\vec{\sigma}\right)$
+\end_inset
+
+ vectors is a free 
+\begin_inset Formula $\mathbb{K}\left[x\right]$
+\end_inset
+
+-module denoted by 
+\begin_inset Formula $\left\langle \left(\mathbf{F},\vec{\sigma}\right)\right\rangle $
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+An order basis for 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+ and 
+\begin_inset Formula $\vec{\sigma}$
+\end_inset
+
+ is simply a basis for the 
+\begin_inset Formula $\mathbb{K}\left[x\right]$
+\end_inset
+
+-module 
+\begin_inset Formula $\left\langle \left(\mathbf{F},\vec{\sigma}\right)\right\rangle $
+\end_inset
+
+.
+ We only work with those order bases having 
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+a type of minimality degree condition
+\end_layout
+
+\end_inset
+
+minimal or shifted minimal degrees (also referred to as a reduced order
+ basis in 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "BL1997"
+
+\end_inset
+
+).
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+ While minimality is often given in terms of the degrees alone it is sometimes
+ important to consider this in terms of shifted degrees 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "BLV:jsc06"
+
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+The shifted column degree of a column polynomial vector 
+\begin_inset Formula $\mathbf{p}$
+\end_inset
+
+ with shift 
+\begin_inset Formula $\vec{s}=\left[s_{1},\dots,s_{n}\right]\in\mathbb{Z}^{n}$
+\end_inset
+
+ is given by 
+\begin_inset Formula 
+\[
+\deg_{\vec{s}}\mathbf{p}=\max_{1\le i\le n}[\deg p^{\left(i\right)}+s_{i}]=\deg(x^{\vec{s}}\cdot\mathbf{p}).
+\]
+
+\end_inset
+
+ We call this the 
+\emph on
+
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+-column degree
+\emph default
+, or simply the 
+\emph on
+
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+-degree
+\emph default
+ of 
+\begin_inset Formula $\mathbf{p}$
+\end_inset
+
+.
+ A shifted column degree defined this way is equivalent to the notion of
+ 
+\emph on
+defect
+\emph default
+ commonly used in the literature.
+ Our definition of 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+-degree is a special case of the 
+\begin_inset Formula $\mathbf{H}$
+\end_inset
+
+-degree from 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "BL1997"
+
+\end_inset
+
+, where in this case 
+\begin_inset Formula $\mathbf{H}=x^{\vec{s}}$
+\end_inset
+
+.
+ As in the uniform shift case, we say a matrix is 
+\emph on
+
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+-column reduced
+\emph default
+ or 
+\emph on
+
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+-reduced
+\emph default
+ if its 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+-degrees cannot be decreased by unimodular column operations.
+ More precisely, if 
+\begin_inset Formula $\mathbf{P}$
+\end_inset
+
+ is a 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+-column reduced and 
+\begin_inset Formula $[d_{1},\dots,d_{n}]$
+\end_inset
+
+ are the 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+-degrees of columns of 
+\begin_inset Formula $\mathbf{P}$
+\end_inset
+
+ sorted in nondecreasing order, then 
+\begin_inset Formula $[d_{1},\dots,d_{n}]$
+\end_inset
+
+ is lexicographically minimal among all matrices right equivalent to 
+\begin_inset Formula $\mathbf{P}$
+\end_inset
+
+.
+ Note that a matrix 
+\begin_inset Formula $\mathbf{P}$
+\end_inset
+
+ is 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+-column reduced if and only if 
+\begin_inset Formula $x^{\vec{s}}\cdot\mathbf{P}$
+\end_inset
+
+ is column reduced 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "BLV:1999,BLV:jsc06"
+
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+An 
+\emph on
+order basis
+\emph default
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "BeLa94,BL1997"
+
+\end_inset
+
+ 
+\begin_inset Formula $\mathbf{P}$
+\end_inset
+
+ of 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+ with order 
+\begin_inset Formula $\vec{\sigma}$
+\end_inset
+
+ and shift 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+, or simply an 
+\begin_inset Formula $\left(\mathbf{F},\vec{\sigma},\vec{s}\right)$
+\end_inset
+
+-basis, is a basis for the module 
+\begin_inset Formula $\left\langle \left(\mathbf{F},\vec{\sigma}\right)\right\rangle $
+\end_inset
+
+ 
+\begin_inset Note Comment
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\[
+\left\langle \left(\mathbf{F},\vec{\sigma}\right)\right\rangle =\{\mathbf{p}\in\mathbb{K}\left[x\right]^{n\times1}\|\mathbf{F}\cdot\mathbf{p}=x^{\vec{\sigma}}\mathbf{r},\mathbf{r}\in\mathbb{K}[[x]]^{m\times1}\}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ having minimal 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+-column degrees.
+ If 
+\begin_inset Formula $\vec{\sigma}=\left[\sigma,\dots,\sigma\right]$
+\end_inset
+
+ are constant vectors then we simply write 
+\begin_inset Formula $\left(\mathbf{F},\sigma,\vec{s}\right)$
+\end_inset
+
+-basis.
+ The precise definition of an 
+\begin_inset Formula $\left(\mathbf{F},\vec{\sigma},\vec{s}\right)$
+\end_inset
+
+-basis is as follows.
+\end_layout
+
+\begin_layout Definition
+\begin_inset CommandInset label
+LatexCommand label
+name "def:orderBasis"
+
+\end_inset
+
+A polynomial matrix 
+\begin_inset Formula $\mathbf{P}$
+\end_inset
+
+ is an order basis of 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+ of order 
+\begin_inset Formula $\vec{\sigma}$
+\end_inset
+
+ and shift 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+, denoted by 
+\begin_inset Formula $\left(\mathbf{F},\vec{\sigma},\vec{s}\right)$
+\end_inset
+
+-basis, if the following properties hold: 
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+\begin_inset Formula $\mathbf{P}$
+\end_inset
+
+ is a nonsingular matrix of dimension 
+\begin_inset Formula $n$
+\end_inset
+
+ and is 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+-column reduced.
+ 
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\mathbf{P}$
+\end_inset
+
+ has order 
+\begin_inset Formula $\left(\mathbf{F},\vec{\sigma}\right)$
+\end_inset
+
+ (or equivalently, each column of 
+\begin_inset Formula $\mathbf{P}$
+\end_inset
+
+ is in 
+\begin_inset Formula $\left\langle (\mathbf{F},\vec{\sigma})\right\rangle $
+\end_inset
+
+).
+ 
+\end_layout
+
+\begin_layout Enumerate
+Any 
+\begin_inset Formula $\mathbf{q}\in\left\langle \left(\mathbf{F},\vec{\sigma}\right)\right\rangle $
+\end_inset
+
+ can be expressed as a linear combination of the columns of 
+\begin_inset Formula $\mathbf{P}$
+\end_inset
+
+, given by 
+\begin_inset Formula $\mathbf{P}^{-1}\mathbf{q}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Note Comment
+status collapsed
+
+\begin_layout Plain Layout
+Note that the module 
+\begin_inset Formula $\left\langle \left(\mathbf{F},\vec{\sigma}\right)\right\rangle $
+\end_inset
+
+ does not depend on the shift 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+Although we allow different orders for each row in this definition, we focus
+ on order basis computation problems having uniform order.
+ However special cases of non-uniform order problems are still needed in
+ our analysis.
+ We also assume 
+\begin_inset Formula $m\le n$
+\end_inset
+
+ for simplicity.
+ The case of 
+\begin_inset Formula $m>n$
+\end_inset
+
+ can be transformed to the case of 
+\begin_inset Formula $m\le n$
+\end_inset
+
+ by compression 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "storjohann-villard:2005"
+
+\end_inset
+
+.
+ We further assume, without any loss of generality, that 
+\begin_inset Formula $n/m$
+\end_inset
+
+ and 
+\begin_inset Formula $\sigma$
+\end_inset
+
+ are powers of two.
+ This can be achieved by padding zero rows to the input matrix and multiplying
+ it by some power of 
+\begin_inset Formula $x$
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Note that any pair of 
+\begin_inset Formula $\left(\mathbf{F},\vec{\sigma},\vec{s}\right)$
+\end_inset
+
+-bases 
+\begin_inset Formula $\mathbf{P}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbf{Q}$
+\end_inset
+
+ are column bases of each other and are unimodularly equivalent.
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+each generates the columns of the other basis by 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "def:orderBasis"
+
+\end_inset
+
+, hence each of them is a column basis of the other matrix, and are unimodularly
+ equivalent from 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "lem:basisEquivalence"
+
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Kernel Bases
+\end_layout
+
+\begin_layout Standard
+Recall that the kernel of 
+\begin_inset Formula $\mathbf{F}\in\mathbb{K}\left[x\right]^{m\times n}$
+\end_inset
+
+ is the 
+\begin_inset Formula $\mathbb{F}\left[x\right]$
+\end_inset
+
+-module 
+\begin_inset Formula 
+\[
+\left\{ \mathbf{p}\in\mathbb{K}\left[x\right]^{n}~|~\mathbf{F}\mathbf{p}=0\right\} .
+\]
+
+\end_inset
+
+ A kernel basis of 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+ is just a basis of this module.
+ Kernel bases are closely related to order bases, as can be seen from the
+ following definitions.
+ 
+\end_layout
+
+\begin_layout Definition
+\begin_inset CommandInset label
+LatexCommand label
+name "def:kernelBasis"
+
+\end_inset
+
+Given 
+\begin_inset Formula $\mathbf{F}\in\mathbb{K}\left[x\right]^{m\times n}$
+\end_inset
+
+, a polynomial matrix 
+\begin_inset Formula $\mathbf{N}\in\mathbb{K}\left[x\right]^{n\times*}$
+\end_inset
+
+ is a (right) kernel basis of 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+ if the following properties hold: 
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+\begin_inset Formula $\mathbf{N}$
+\end_inset
+
+ is full-rank.
+ 
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\mathbf{N}$
+\end_inset
+
+ satisfies 
+\begin_inset Formula $\mathbf{F}\cdot\mathbf{N}=0$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Any 
+\begin_inset Formula $\mathbf{q}\in\mathbb{K}\left[x\right]^{n}$
+\end_inset
+
+ satisfying 
+\begin_inset Formula $\mathbf{F}\mathbf{q}=0$
+\end_inset
+
+ can be expressed as a linear combination of the columns of 
+\begin_inset Formula $\mathbf{N}$
+\end_inset
+
+, that is, there exists some polynomial vector 
+\begin_inset Formula $\mathbf{p}$
+\end_inset
+
+ such that 
+\begin_inset Formula $\mathbf{q}=\mathbf{N}\mathbf{p}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+Again, note that any pair of kernel bases 
+\begin_inset Formula $\mathbf{N}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbf{M}$
+\end_inset
+
+ of 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+ are column bases of each other and are unimodularly equivalent.
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+each generates the columns of the other basis by 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "def:orderBasis"
+
+\end_inset
+
+, hence each of them is a column basis of the other matrix, and are unimodularly
+ equivalent from 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "lem:basisEquivalence"
+
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+An 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+-minimal kernel basis of 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+ is just a kernel basis that is 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+-column reduced.
+\end_layout
+
+\begin_layout Definition
+Given 
+\begin_inset Formula $\mathbf{F}\in\mathbb{K}\left[x\right]^{m\times n}$
+\end_inset
+
+, a polynomial matrix 
+\begin_inset Formula $\mathbf{N}\in\mathbb{K}\left[x\right]^{n\times*}$
+\end_inset
+
+ is a 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+-minimal (right) kernel basis of 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+ if
+\series bold
+ 
+\begin_inset Formula $\mathbf{N}$
+\end_inset
+
+
+\series default
+ is a kernel basis of 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbf{N}$
+\end_inset
+
+ is 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+-column reduced.
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Definition
+the following properties hold: 
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\mathbf{N}$
+\end_inset
+
+ is full-rank and 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+-column reduced (or equivalently, the leading column coefficient matrix
+ of 
+\begin_inset Formula $x^{\vec{s}}\mathbf{N}$
+\end_inset
+
+ is full-rank).
+ 
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+\begin_inset Formula $\mathbf{N}$
+\end_inset
+
+ satisfies 
+\begin_inset Formula $\mathbf{F}\cdot\mathbf{N}=0$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Any 
+\begin_inset Formula $\mathbf{q}\in\mathbb{K}\left[x\right]^{n}$
+\end_inset
+
+ satisfying 
+\begin_inset Formula $\mathbf{F}\mathbf{q}=0$
+\end_inset
+
+ can be expressed as a linear combination of the columns of 
+\begin_inset Formula $\mathbf{N}$
+\end_inset
+
+, that is, there exists some polynomial vector 
+\begin_inset Formula $\mathbf{p}$
+\end_inset
+
+ such that 
+\begin_inset Formula $\mathbf{q}=\mathbf{N}\mathbf{p}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\end_deeper
+\end_inset
+
+ We also call a 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+-minimal (right) kernel basis of 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+ a 
+\begin_inset Formula $\left(\mathbf{F},\vec{s}\right)$
+\end_inset
+
+-kernel basis.
+\end_layout
+
+\begin_layout Standard
+We will need the following result from 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "za2012,zhou:phd2012"
+
+\end_inset
+
+ to compute kernel bases by rows.
+\end_layout
+
+\begin_layout Theorem
+\begin_inset CommandInset label
+LatexCommand label
+name "thm:continueComputingNullspaceBasisByRows"
+
+\end_inset
+
+Let 
+\begin_inset Formula $\mathbf{G}=\left[\mathbf{G}_{1}^{T},\mathbf{G}_{2}^{T}\right]^{T}\in\mathbb{K}\left[x\right]^{m\times n}$
+\end_inset
+
+ and 
+\begin_inset Formula $\vec{t}$
+\end_inset
+
+ a shift vector.
+ If 
+\begin_inset Formula $\mathbf{N}_{1}$
+\end_inset
+
+ is a 
+\begin_inset Formula $\left(\mathbf{G}_{1},\vec{t}\right)$
+\end_inset
+
+-kernel basis with 
+\begin_inset Formula $\vec{t}$
+\end_inset
+
+-column degrees 
+\begin_inset Formula $\vec{u}$
+\end_inset
+
+, and 
+\begin_inset Formula $\mathbf{N}_{2}$
+\end_inset
+
+ is a 
+\begin_inset Formula $\left(\mathbf{G}_{2}\mathbf{N}_{1},\vec{u}\right)$
+\end_inset
+
+-kernel basis with 
+\begin_inset Formula $\vec{u}$
+\end_inset
+
+-column degrees 
+\begin_inset Formula $\vec{v}$
+\end_inset
+
+, then 
+\begin_inset Formula $\mathbf{N}_{1}\mathbf{N}_{2}$
+\end_inset
+
+ is a 
+\begin_inset Formula $\left(\mathbf{G},\vec{t}\right)$
+\end_inset
+
+-kernel basis 
+\begin_inset Formula $\vec{t}$
+\end_inset
+
+-column degrees 
+\begin_inset Formula $\vec{v}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section
+Computing Column Bases
+\end_layout
+
+\begin_layout Standard
+Before discussing the efficient computation of column basis, it is useful
+ to look at following relationship between column basis, kernel basis, and
+ unimodular matrix.
+\end_layout
+
+\begin_layout Lemma
+\begin_inset CommandInset label
+LatexCommand label
+name "lem:unimodular_kernel_columnBasis"
+
+\end_inset
+
+Given 
+\begin_inset Formula $\mathbf{F}\in\mathbb{K}\left[x\right]^{m\times n}$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $\mathbf{U}$
+\end_inset
+
+ is a unimodular matrix such that 
+\begin_inset Formula $\mathbf{F}\mathbf{U}=\left[0,\mathbf{T}\right]$
+\end_inset
+
+ gives a full column rank 
+\begin_inset Formula $\mathbf{T}$
+\end_inset
+
+, then 
+\begin_inset Formula $\mathbf{U}$
+\end_inset
+
+ can be separated into two submatrices 
+\begin_inset Formula $\mathbf{U}=\left[\mathbf{U}_{L},\mathbf{U}_{R}\right]$
+\end_inset
+
+, where 
+\begin_inset Formula $\mathbf{U}_{L}$
+\end_inset
+
+ is a kernel basis of 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbf{F}\mathbf{U}_{R}=\mathbf{T}$
+\end_inset
+
+ is a column basis of 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+.
+ In addition, the kernel basis 
+\begin_inset Formula $\mathbf{U}_{L}$
+\end_inset
+
+ can be replaced by any other kernel basis 
+\begin_inset Formula $\mathbf{N}$
+\end_inset
+
+ of 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+ and still gives a unimodular matrix 
+\begin_inset Formula $\left[\mathbf{N},\mathbf{U}_{R}\right]$
+\end_inset
+
+, which can also be used to unimodularly transform 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+ to 
+\begin_inset Formula $\left[0,\mathbf{T}\right]$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Proof
+The fact that 
+\begin_inset Formula $\mathbf{T}$
+\end_inset
+
+ is a column basis of 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+ follows directly from the unimodular equivalence between 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+ and 
+\begin_inset Formula $\left[0,\mathbf{T}\right]$
+\end_inset
+
+ and the fact that 
+\begin_inset Formula $\mathbf{T}$
+\end_inset
+
+ is full rank.
+ It remains to show that 
+\begin_inset Formula $\mathbf{U}_{L}$
+\end_inset
+
+ is a kernel basis of 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $\mathbf{F}\mathbf{U}_{L}=0$
+\end_inset
+
+, 
+\begin_inset Formula $\mathbf{U}_{L}$
+\end_inset
+
+ is generated by any kernel basis 
+\begin_inset Formula $\mathbf{N}$
+\end_inset
+
+, that is, 
+\begin_inset Formula $\mathbf{U}_{L}=\mathbf{N}\mathbf{C}$
+\end_inset
+
+ for some polynomial matrix 
+\begin_inset Formula $\mathbf{C}$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $r$
+\end_inset
+
+ be the rank of 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+, which is also the column dimension of 
+\begin_inset Formula $\mathbf{T}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbf{U}_{R}$
+\end_inset
+
+.
+ Then both 
+\begin_inset Formula $\mathbf{N}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbf{U}_{L}$
+\end_inset
+
+ have column dimension 
+\begin_inset Formula $n-r$
+\end_inset
+
+.
+ Hence 
+\begin_inset Formula $\mathbf{C}$
+\end_inset
+
+ is a square 
+\begin_inset Formula $(n-r)\times(n-r)$
+\end_inset
+
+ matrix.
+ Now the unimodular matrix 
+\begin_inset Formula $\mathbf{U}$
+\end_inset
+
+ can be factored as 
+\begin_inset Formula 
+\[
+\mathbf{U}=\left[\mathbf{N}\mathbf{C},\mathbf{U}_{R}\right]=\left[\mathbf{N},\mathbf{U}_{R}\right]\begin{bmatrix}\mathbf{C}\\
+ & I
+\end{bmatrix},
+\]
+
+\end_inset
+
+ implying that both factors 
+\begin_inset Formula $\left[\mathbf{N},\mathbf{U}_{R}\right]$
+\end_inset
+
+ and 
+\begin_inset Formula $\begin{bmatrix}\mathbf{C}\\
+ & I
+\end{bmatrix}$
+\end_inset
+
+ are unimodular.
+ Therefore, 
+\begin_inset Formula $\mathbf{C}$
+\end_inset
+
+ is unimodular and 
+\begin_inset Formula $\mathbf{U}_{L}=\mathbf{N}\mathbf{C}$
+\end_inset
+
+ is also a kernel basis.
+ Notice that the unimodular matrix 
+\begin_inset Formula $\left[\mathbf{N},\mathbf{U}_{R}\right]$
+\end_inset
+
+ also transforms 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+ to 
+\begin_inset Formula $\left[0,\mathbf{T}\right]$
+\end_inset
+
+.
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+Note that the column dimension of 
+\begin_inset Formula $\mathbf{M}$
+\end_inset
+
+ matches that of 
+\begin_inset Formula $\mathbf{T}$
+\end_inset
+
+.
+ The right submatrix of 
+\begin_inset Formula $\mathbf{U}$
+\end_inset
+
+ gives 
+\begin_inset Formula $\mathbf{FM}=\mathbf{T}$
+\end_inset
+
+ by definition.
+ To see that 
+\begin_inset Formula $\mathbf{N}$
+\end_inset
+
+ is a kernel basis of 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+, we need to show that
+\series bold
+ 
+\series default
+
+\begin_inset Formula $\mathbf{N}$
+\end_inset
+
+ generates any vector 
+\begin_inset Formula $\mathbf{q}\in\mathbb{K}\left[x\right]^{n}$
+\end_inset
+
+ satisfying 
+\begin_inset Formula $\mathbf{F}\mathbf{q}=0$
+\end_inset
+
+.
+ Note that 
+\begin_inset Formula $\mathbf{F}\mathbf{q}=\left[0,\mathbf{T}\right]\mathbf{U}^{-1}\mathbf{q}=0$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $\mathbf{a}=\begin{bmatrix}\mathbf{a}_{1}\\
+\mathbf{a}_{2}
+\end{bmatrix}=\mathbf{U}^{-1}\mathbf{q}\in\mathbb{K}\left[x\right]^{n}$
+\end_inset
+
+, with the dimensions of 
+\begin_inset Formula $\mathbf{a}_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbf{a}_{2}$
+\end_inset
+
+ matches the column dimensions of the blocks in 
+\begin_inset Formula $\left[0,\mathbf{T}\right]$
+\end_inset
+
+, so 
+\begin_inset Formula $\left[0,\mathbf{T}\right]\mathbf{a}=\left[0,\mathbf{T}\right]\begin{bmatrix}\mathbf{a}_{1}\\
+\mathbf{a}_{2}
+\end{bmatrix}=\begin{bmatrix}0\\
+\mathbf{T}\mathbf{a}_{2}
+\end{bmatrix}=\mathbf{F}\mathbf{q}=0$
+\end_inset
+
+.
+ Note that 
+\begin_inset Formula $\mathbf{a}_{2}$
+\end_inset
+
+ must be 0 since 
+\begin_inset Formula $\mathbf{T}\mathbf{a}_{2}=0$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbf{T}$
+\end_inset
+
+ has full column rank.
+ So now we have 
+\begin_inset Formula $\mathbf{q}=\mathbf{U}\mathbf{a}=\mathbf{N}\mathbf{a}_{1}$
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "lem:unimodular_kernel_columnBasis"
+
+\end_inset
+
+ gives the following result for a unimodular matrix and its inverse.
+\end_layout
+
+\begin_layout Corollary
+\begin_inset CommandInset label
+LatexCommand label
+name "cor:unimodular_kernel_columnBasis2"
+
+\end_inset
+
+Let 
+\begin_inset Formula $\mathbf{U}=\left[\mathbf{U}_{L},\mathbf{U}_{R}\right]$
+\end_inset
+
+ be any unimodular matrix with columns separated arbitrarily to 
+\begin_inset Formula $\mathbf{U}_{L}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbf{U}_{R}$
+\end_inset
+
+.
+ Let its inverse 
+\begin_inset Formula $\mathbf{V}=\begin{bmatrix}\mathbf{V}_{U}\\
+\mathbf{V}_{D}
+\end{bmatrix}$
+\end_inset
+
+, where the row dimension of 
+\begin_inset Formula $\mathbf{V}_{U}$
+\end_inset
+
+ matches the column dimension of 
+\begin_inset Formula $\mathbf{U}_{L}$
+\end_inset
+
+.
+ So we have 
+\begin_inset Formula 
+\[
+\mathbf{V}\mathbf{U}=\begin{bmatrix}\mathbf{V}_{U}\\
+\mathbf{V}_{D}
+\end{bmatrix}\begin{bmatrix}\mathbf{U}_{L},\mathbf{U}_{R}\end{bmatrix}=\begin{bmatrix}\mathbf{V}_{U}\mathbf{U}_{L} & \mathbf{V}_{U}\mathbf{U}_{R}\\
+\mathbf{V}_{D}\mathbf{U}_{L} & \mathbf{V}_{D}\mathbf{U}_{R}
+\end{bmatrix}=\begin{bmatrix}I & 0\\
+0 & I
+\end{bmatrix}.
+\]
+
+\end_inset
+
+Then 
+\begin_inset Formula $\mathbf{V}_{U}\mathbf{U}_{L}=I$
+\end_inset
+
+ is a column basis of 
+\begin_inset Formula $\mathbf{V}_{U}$
+\end_inset
+
+ and a row basis of 
+\begin_inset Formula $\mathbf{U}_{L}$
+\end_inset
+
+, while 
+\begin_inset Formula $\mathbf{V}_{D}\mathbf{U}_{R}=I$
+\end_inset
+
+ is a column basis of 
+\begin_inset Formula $\mathbf{V}_{D}$
+\end_inset
+
+ and a row basis of of 
+\begin_inset Formula $\mathbf{U}_{R}$
+\end_inset
+
+.
+ In addition, 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\mathbf{V}_{D}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbf{U}_{L}$
+\end_inset
+
+ are kernel bases of each other, while 
+\begin_inset Formula $\mathbf{V}_{U}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbf{U}_{R}$
+\end_inset
+
+ are kernel bases of each other.
+\end_layout
+
+\begin_layout Proof
+This follows directly from 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "lem:unimodular_kernel_columnBasis"
+
+\end_inset
+
+, by taking 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+ from 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "lem:unimodular_kernel_columnBasis"
+
+\end_inset
+
+ to be 
+\begin_inset Formula $\mathbf{V}_{U}$
+\end_inset
+
+, 
+\begin_inset Formula $\mathbf{V}_{D}$
+\end_inset
+
+, 
+\begin_inset Formula $\mathbf{U}_{L}^{T}$
+\end_inset
+
+, and 
+\begin_inset Formula $\mathbf{U}_{R}^{T}$
+\end_inset
+
+ here.
+\end_layout
+
+\begin_layout Standard
+To compute a column basis of 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+, we use the following procedure.
+ We first compute a right 
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+-minimal
+\end_layout
+
+\end_inset
+
+ kernel basis 
+\begin_inset Formula $\mathbf{N}$
+\end_inset
+
+ of 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+.
+ Then we compute a left 
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Formula $-\vec{s}$
+\end_inset
+
+-minimal
+\end_layout
+
+\end_inset
+
+ kernel basis 
+\begin_inset Formula $\mathbf{G}$
+\end_inset
+
+ of 
+\begin_inset Formula $\mathbf{N}$
+\end_inset
+
+.
+ This matrix 
+\begin_inset Formula $\mathbf{G}$
+\end_inset
+
+ is a right factor of 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+, that is, 
+\begin_inset Formula $\mathbf{F}=\mathbf{T}\mathbf{G}$
+\end_inset
+
+ for some 
+\begin_inset Formula $\mathbf{T}\in\mathbb{K}\left[x\right]^{m\times r}$
+\end_inset
+
+.
+ Then we can compute the left factor 
+\begin_inset Formula $\mathbf{T}$
+\end_inset
+
+, which is in fact a column basis of 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Lemma
+\begin_inset CommandInset label
+LatexCommand label
+name "lem:matrixGCD"
+
+\end_inset
+
+Given 
+\begin_inset Formula $\mathbf{F}\in\mathbb{K}\left[x\right]^{m\times n}$
+\end_inset
+
+
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+ with 
+\begin_inset Formula $n>m$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Note Comment
+status collapsed
+
+\begin_layout Plain Layout
+ and has full row rank
+\end_layout
+
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $\mathbf{N}\in\mathbb{K}\left[x\right]^{n\times(n-r)}$
+\end_inset
+
+ be any right 
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+-minimal kernel
+\end_layout
+
+\end_inset
+
+kernel basis of 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+, and 
+\begin_inset Formula $\mathbf{G}\in\mathbb{K}\left[x\right]^{r\times n}$
+\end_inset
+
+ be any left 
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Formula $-\vec{s}$
+\end_inset
+
+-minimal kernel
+\end_layout
+
+\end_inset
+
+kernel basis of 
+\begin_inset Formula $\mathbf{N}$
+\end_inset
+
+, where 
+\begin_inset Formula $r$
+\end_inset
+
+ is the rank of 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\mathbf{F}=\mathbf{T}\mathbf{G}$
+\end_inset
+
+ for some 
+\begin_inset Formula $\mathbf{T}\in\mathbb{K}\left[x\right]^{m\times r}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbf{T}$
+\end_inset
+
+ is a column basis of 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+Let the matrix 
+\begin_inset Formula $\mathbf{U}=\begin{bmatrix}\mathbf{U}_{L},\mathbf{U}_{R}\end{bmatrix}$
+\end_inset
+
+ from 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "cor:unimodular_kernel_columnBasis2"
+
+\end_inset
+
+ be a unimodular matrix that transforms 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+ to a column basis 
+\begin_inset Formula $\mathbf{B}\in\mathbb{K}\left[x\right]^{m\times r}$
+\end_inset
+
+ of 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+, where 
+\begin_inset Formula $\mathbf{U}_{L}$
+\end_inset
+
+ is any right kernel basis 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+.
+ From 
+\begin_inset Formula $\mathbf{F}\mathbf{U}=\left[0,\mathbf{B}\right]$
+\end_inset
+
+, we get
+\series bold
+ 
+\begin_inset Formula $\mathbf{F}=\left[0,\mathbf{B}\right]\mathbf{U}^{-1}=\mathbf{B}\left[0,I\right]\mathbf{V}=\mathbf{B}\mathbf{V}_{D}$
+\end_inset
+
+
+\series default
+.
+ Since 
+\begin_inset Formula $\mathbf{V}_{D}$
+\end_inset
+
+ is a left kernel basis of
+\series bold
+ 
+\begin_inset Formula $\mathbf{U}_{L}$
+\end_inset
+
+
+\series default
+, any other left kernel basis 
+\begin_inset Formula $\mathbf{G}$
+\end_inset
+
+ of 
+\begin_inset Formula $\mathbf{U}_{L}$
+\end_inset
+
+ is unimodularly equivalent to 
+\begin_inset Formula $\mathbf{V}_{D}$
+\end_inset
+
+, that is, 
+\begin_inset Formula $\mathbf{V}_{D}=\mathbf{W}\mathbf{G}$
+\end_inset
+
+ for some unimodular matrix 
+\begin_inset Formula $\mathbf{W}$
+\end_inset
+
+.
+ Now 
+\begin_inset Formula $\mathbf{F}=\mathbf{B}\mathbf{W}\mathbf{G}$
+\end_inset
+
+, where 
+\begin_inset Formula $\mathbf{BW}=\mathbf{T}$
+\end_inset
+
+ a column basis of 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+ since it is unimodularly equivalent to the column basis 
+\begin_inset Formula $\mathbf{B}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+For simplicity, let us assume 
+\begin_inset Formula $\mathbf{F}\in\mathbb{K}\left[x\right]^{m\times n}$
+\end_inset
+
+ with 
+\begin_inset Formula $n>m$
+\end_inset
+
+ has full row rank, which can be achieved by determining its rank and then
+ use compression
+\begin_inset CommandInset citation
+LatexCommand citep
+key "storjohann-villard:2005"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\end_inset
+
+
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Proof
+Let 
+\begin_inset Formula $\mathbf{U}=\begin{bmatrix}\mathbf{N},\mathbf{U}_{R}\end{bmatrix}$
+\end_inset
+
+ be a unimodular matrix that transforms 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+ to give a column basis as in 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "lem:unimodular_kernel_columnBasis"
+
+\end_inset
+
+.
+ Similarly, let 
+\begin_inset Formula $\mathbf{V}$
+\end_inset
+
+ be a unimodular matrix that transforms 
+\begin_inset Formula $\mathbf{N}$
+\end_inset
+
+ to a row basis 
+\begin_inset Formula $\mathbf{W}$
+\end_inset
+
+ of 
+\begin_inset Formula $\mathbf{N}$
+\end_inset
+
+.
+ That is, 
+\begin_inset Formula $\mathbf{V}\mathbf{N}=\begin{bmatrix}\mathbf{W}\\
+0
+\end{bmatrix}$
+\end_inset
+
+.
+ From 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "lem:unimodular_kernel_columnBasis"
+
+\end_inset
+
+, we know 
+\begin_inset Formula $\mathbf{V}$
+\end_inset
+
+ can be separated to 
+\begin_inset Formula $\begin{bmatrix}\mathbf{V}_{U}\\
+\mathbf{G}
+\end{bmatrix}$
+\end_inset
+
+ where 
+\begin_inset Formula $\mathbf{G}$
+\end_inset
+
+ is any left kernel basis of 
+\begin_inset Formula $\mathbf{U}_{L}$
+\end_inset
+
+.
+ Since the rows of 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+ are in the left kernel of 
+\begin_inset Formula $\mathbf{N}$
+\end_inset
+
+, they are generated by the rows of the left kernel basis 
+\begin_inset Formula $\mathbf{G}$
+\end_inset
+
+.
+ In other words, 
+\begin_inset Formula $\mathbf{F}=\mathbf{T}\mathbf{G}$
+\end_inset
+
+ for some 
+\begin_inset Formula $\mathbf{T}\in\mathbb{K}\left[x\right]^{m\times r}$
+\end_inset
+
+.
+ Therefore, 
+\begin_inset Formula $\mathbf{F}\mathbf{U}=\mathbf{T}\mathbf{G}\mathbf{U}=\left[0,\mathbf{T}\mathbf{G}\mathbf{U}_{R}\right]$
+\end_inset
+
+.
+ To see that Now the product of two unimodular matrices 
+\begin_inset Formula 
+\[
+\mathbf{V}\mathbf{U}=\begin{bmatrix}\mathbf{V}_{U}\\
+\mathbf{G}
+\end{bmatrix}\begin{bmatrix}\mathbf{N},\mathbf{U}_{R}\end{bmatrix}=\begin{bmatrix}\mathbf{V}_{U}\mathbf{N} & \mathbf{V}_{U}\mathbf{U}_{R}\\
+0 & \mathbf{G}\mathbf{U}_{R}
+\end{bmatrix}
+\]
+
+\end_inset
+
+ is again unimodular.
+ Therefore, 
+\begin_inset Formula $\mathbf{F}\mathbf{U}=\mathbf{T}\mathbf{G}\mathbf{U}=\left[0,\mathbf{T}\mathbf{G}\mathbf{U}_{R}\right]$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+\begin_inset Formula $\mathbf{T}=\mathbf{F}\mathbf{U}_{R}=\mathbf{A}\mathbf{G}\mathbf{U}_{R}$
+\end_inset
+
+.
+ 
+\begin_inset Formula 
+\[
+\mathbf{V}\mathbf{U}_{L}=\begin{bmatrix}\mathbf{V}_{U}\\
+\mathbf{V}_{D}
+\end{bmatrix}\mathbf{U}_{L}=\begin{bmatrix}\mathbf{V}_{U}\mathbf{U}_{L}\\
+0
+\end{bmatrix},
+\]
+
+\end_inset
+
+ Where 
+\begin_inset Formula $\mathbf{V}$
+\end_inset
+
+ is separated to 
+\begin_inset Formula $\begin{bmatrix}\mathbf{V}_{U}\\
+\mathbf{V}_{L}
+\end{bmatrix}$
+\end_inset
+
+ and where 
+\end_layout
+
+\begin_layout Proof
+Let its inverse 
+\begin_inset Formula $\mathbf{U}^{-1}=\mathbf{V}$
+\end_inset
+
+ be separated to 
+\begin_inset Formula $\mathbf{V}=\begin{bmatrix}\mathbf{V}_{U}\\
+\mathbf{V}_{D}
+\end{bmatrix}$
+\end_inset
+
+, such that 
+\begin_inset Formula 
+\[
+\mathbf{V}\mathbf{U}=\begin{bmatrix}\mathbf{V}_{U}\\
+\mathbf{V}_{D}
+\end{bmatrix}\begin{bmatrix}\mathbf{U}_{L},\mathbf{U}_{R}\end{bmatrix}=\begin{bmatrix}\mathbf{V}_{U}\mathbf{U}_{L} & \mathbf{V}_{U}\mathbf{U}_{R}\\
+\mathbf{V}_{D}\mathbf{U}_{L} & \mathbf{V}_{D}\mathbf{U}_{R}
+\end{bmatrix}=\begin{bmatrix}\mathbf{V}_{U}\mathbf{U}_{L} & 0\\
+0 & \mathbf{V}_{D}\mathbf{U}_{R}
+\end{bmatrix}=I.
+\]
+
+\end_inset
+
+From 
+\begin_inset Formula $\mathbf{F}\mathbf{U}_{L}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+To see that 
+\begin_inset Formula $\mathbf{G}$
+\end_inset
+
+ is a right factor of 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+, notice that the rows of 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+ are in the left kernel of 
+\begin_inset Formula $\mathbf{N}$
+\end_inset
+
+ and therefore generated by the kernel basis 
+\begin_inset Formula $\mathbf{G}$
+\end_inset
+
+.
+ It remains to show that 
+\begin_inset Formula $\mathbf{T}$
+\end_inset
+
+ is a column basis of 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+From 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "cor:unimodularlyReduceToColumnBasis"
+
+\end_inset
+
+, the unimodular matrix 
+\begin_inset Formula $\mathbf{U}$
+\end_inset
+
+ that transforms 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+ to a column basis of 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+ can be separated to 
+\begin_inset Formula $\mathbf{U}=\left[\mathbf{N},\mathbf{U}_{R}\right]$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula 
+\begin{eqnarray}
+\mathbf{F}\mathbf{U} & = & \mathbf{T}\mathbf{G}\left[\mathbf{N},\mathbf{U}_{R}\right]=\left[0,\mathbf{T}\mathbf{G}\mathbf{U}_{R}\right],\label{eq:columnReduction}
+\end{eqnarray}
+
+\end_inset
+
+where that 
+\begin_inset Formula $\mathbf{TG}\mathbf{U}_{R}$
+\end_inset
+
+ is a column basis of 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+.
+ To show that 
+\begin_inset Formula $\mathbf{T}$
+\end_inset
+
+ is a column basis of 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+, we just need to show that 
+\begin_inset Formula $\mathbf{H}=\mathbf{G}\mathbf{U}_{R}\in\mathbb{K}\left[x\right]^{r\times r}$
+\end_inset
+
+ is unimodular.
+ From Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:columnReduction"
+
+\end_inset
+
+, we get 
+\begin_inset Formula $\mathbf{G}\mathbf{U}=\left[0,\mathbf{H}\right]$
+\end_inset
+
+, or 
+\begin_inset Formula $\mathbf{G}=\mathbf{H}\left[0,I_{r}\right]\mathbf{U}^{-1}=\mathbf{H}\mathbf{V}_{D}$
+\end_inset
+
+ after rearranging, where 
+\begin_inset Formula $\mathbf{V}_{d}=\left[0,I_{r}\right]\mathbf{U}^{-1}$
+\end_inset
+
+ is the submatrix of 
+\begin_inset Formula $\mathbf{U}^{-1}$
+\end_inset
+
+ consists of its 
+\begin_inset Formula $r$
+\end_inset
+
+ bottom rows.
+ Since the kernel basis 
+\begin_inset Formula $\mathbf{G}$
+\end_inset
+
+ of 
+\begin_inset Formula $\mathbf{N}$
+\end_inset
+
+ is unimodularly equivalent to 
+\begin_inset Formula $\mathbf{V}_{D}$
+\end_inset
+
+ if and only if 
+\begin_inset Formula $\mathbf{V}_{D}$
+\end_inset
+
+ is also a left kernel basis of 
+\begin_inset Formula $\mathbf{N}$
+\end_inset
+
+, it only remains to show that 
+\begin_inset Formula $\mathbf{V}_{D}$
+\end_inset
+
+ is also a left kernel basis of 
+\begin_inset Formula $\mathbf{N}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+So it only remains to show that 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\left[0,I\right]\mathbf{U}^{-1}$
+\end_inset
+
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ is a left kernel basis of 
+\begin_inset Formula $\mathbf{N}$
+\end_inset
+
+.
+ Note 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+that 
+\begin_inset Formula $\left[0,I\right]\mathbf{U}^{-1}$
+\end_inset
+
+ consists of the bottom rows of a unimodular matrix and is therefore full-rank.
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ Since the column basis 
+\begin_inset Formula $\mathbf{T}\mathbf{G}\mathbf{U}_{R}=\mathbf{T}\mathbf{H}$
+\end_inset
+
+ is full-rank, 
+\begin_inset Formula $\mathbf{H}$
+\end_inset
+
+ must be nonsingular.
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+Now 
+\begin_inset Formula $\mathbf{G}\mathbf{N}=\mathbf{H}\left[0,I\right]\mathbf{U}^{-1}\mathbf{N}=0$
+\end_inset
+
+ implies 
+\begin_inset Formula $\left[0,I\right]\mathbf{U}^{-1}\mathbf{N}=0$
+\end_inset
+
+, that is, the rows of 
+\begin_inset Formula $\left[0,I\right]\mathbf{U}^{-1}$
+\end_inset
+
+ are in the left kernel of 
+\begin_inset Formula $\mathbf{N}$
+\end_inset
+
+.
+ As a right factor of 
+\begin_inset Formula $\mathbf{G}$
+\end_inset
+
+, 
+\begin_inset Formula $\left[0,I\right]\mathbf{U}^{-1}$
+\end_inset
+
+ generates the rows of the left kernel basis 
+\begin_inset Formula $\mathbf{G}$
+\end_inset
+
+ and therefore generates the left kernel of 
+\begin_inset Formula $\mathbf{N}$
+\end_inset
+
+.
+ Putting these together we have shown that 
+\begin_inset Formula $\left[0,I\right]\mathbf{U}^{-1}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+and the rows of 
+\begin_inset Formula $\mathbf{G}$
+\end_inset
+
+ are generated by the rows of 
+\begin_inset Formula $\left[0,I\right]\mathbf{U}^{-1}$
+\end_inset
+
+.
+ But since 
+\begin_inset Formula $\mathbf{G}$
+\end_inset
+
+ is a left kernel basis of 
+\begin_inset Formula $\mathbf{N}$
+\end_inset
+
+, its full-rank right factor 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\left[0,I\right]\mathbf{U}^{-1}$
+\end_inset
+
+ must also be a left kernel basis of 
+\begin_inset Formula $\mathbf{N}$
+\end_inset
+
+, hence 
+\begin_inset Formula $\mathbf{H}$
+\end_inset
+
+ must be unimodular.
+ 
+\begin_inset Note Comment
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Formula $\mathbf{G}$
+\end_inset
+
+ is a part of a unimodular matrix.
+ Can add rows to 
+\begin_inset Formula $\mathbf{G}$
+\end_inset
+
+ to complete a unimodular matrix.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "lem:matrixGCD"
+
+\end_inset
+
+ outlines a procedure for computing a column basis of 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+ with three main steps.
+ The first step is to compute a 
+\begin_inset Formula $\left(\mathbf{F},\vec{s}\right)$
+\end_inset
+
+-kernel basis 
+\begin_inset Formula $\mathbf{N}$
+\end_inset
+
+, which can be efficiently done using the kernel basis computation algorithm
+ from 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "za2012,zhou:phd2012"
+
+\end_inset
+
+.
+ However, we still need to work on the second step of computing a 
+\begin_inset Formula $\left(\mathbf{N}^{T},-\vec{s}\right)$
+\end_inset
+
+-kernel basis 
+\begin_inset Formula $\mathbf{G}^{T}$
+\end_inset
+
+ and the third step of computing the column basis 
+\begin_inset Formula $\mathbf{T}$
+\end_inset
+
+ from 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbf{G}$
+\end_inset
+
+.
+ Note that while 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "lem:matrixGCD"
+
+\end_inset
+
+ does not require the bases computed to be minimal, working with minimal
+ bases keeps the degrees well-managed and helps to make the computation
+ efficient.
+\end_layout
+
+\begin_layout Section
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:computeRightFactor"
+
+\end_inset
+
+Computing a Right Factor
+\end_layout
+
+\begin_layout Standard
+Let us now look at the computation of a 
+\begin_inset Formula $\left(\mathbf{N}^{T},-\vec{s}\right)$
+\end_inset
+
+-kernel basis 
+\begin_inset Formula $\mathbf{G}^{T}$
+\end_inset
+
+.
+ For this problem, the kernel basis computation algorithm from 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "za2012"
+
+\end_inset
+
+ does not work well directly, since the input matrix 
+\begin_inset Formula $\mathbf{N}^{T}$
+\end_inset
+
+ has nonuniform row degrees and negative shift.
+ Comparing to the earlier problem of computing a 
+\begin_inset Formula $\left(\mathbf{F},\vec{s}\right)$
+\end_inset
+
+-kernel basis 
+\begin_inset Formula $\mathbf{N}$
+\end_inset
+
+, it is interesting to note that the old output 
+\begin_inset Formula $\mathbf{N}$
+\end_inset
+
+ now becomes the new input matrix 
+\begin_inset Formula $\mathbf{N}^{T}$
+\end_inset
+
+, while the new output matrix 
+\begin_inset Formula $\mathbf{G}$
+\end_inset
+
+ has size bounded by 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+.
+ In other words, the new input has degrees that matches the old output,
+ while the new output has degrees bounded by the old input.
+ 
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+Note that in the new problem, the degree structure of the input is more
+ complicated the the output.
+ 
+\end_layout
+
+\end_inset
+
+It is therefore reasonable to expect that the new problem can be computed
+ efficiently.
+ However, we need to find some way to work with the more complicated input
+ degree structure.
+ On the other hand, the simpler output degree structure makes it easier
+ to apply order basis computation to compute a 
+\begin_inset Formula $\left(\mathbf{N}^{T},-\vec{s}\right)$
+\end_inset
+
+-kernel basis.
+ 
+\end_layout
+
+\begin_layout Standard
+To see how order basis computations can be applied here, let us first extend
+ Lemma 3.3 from 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "za2012"
+
+\end_inset
+
+, which provides a relationship between order bases and kernel bases, to
+ accommodate our situation here.
+\end_layout
+
+\begin_layout Lemma
+\begin_inset CommandInset label
+LatexCommand label
+name "lem:orderbasisContainsNullspacebasisGeneralized"
+
+\end_inset
+
+Given a matrix 
+\begin_inset Formula $\mathbf{A}\in\mathbb{K}\left[x\right]^{m\times n}$
+\end_inset
+
+ and a degree shift 
+\begin_inset Formula $\vec{u}$
+\end_inset
+
+ with 
+\begin_inset Formula $\rdeg_{\vec{u}}\mathbf{A}\le\vec{v}$
+\end_inset
+
+, or equivalently, 
+\begin_inset Formula $\cdeg_{-\vec{v}}\mathbf{A}\le-\vec{u}$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $\mathbf{P}=\left[\mathbf{P}_{1},\mathbf{P}_{2}\right]$
+\end_inset
+
+ be any 
+\begin_inset Formula $\left(\mathbf{A},\vec{v}+1,-\vec{u}\right)$
+\end_inset
+
+-basis and 
+\begin_inset Formula $\mathbf{Q}=\left[\mathbf{Q}_{1},\mathbf{Q}_{2}\right]$
+\end_inset
+
+ be any 
+\begin_inset Formula $(\mathbf{A},-\vec{u})$
+\end_inset
+
+-kernel basis, where 
+\begin_inset Formula $\mathbf{P}_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbf{Q}_{1}$
+\end_inset
+
+ contain all columns from 
+\begin_inset Formula $\mathbf{P}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbf{Q}$
+\end_inset
+
+, respectively, whose 
+\begin_inset Formula $-\vec{u}$
+\end_inset
+
+-column degrees are no more than 
+\begin_inset Formula $0$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\left[\mathbf{P}_{1},\mathbf{Q}_{2}\right]$
+\end_inset
+
+ is an 
+\begin_inset Formula $(\mathbf{A},-\vec{u})$
+\end_inset
+
+-kernel basis, and 
+\begin_inset Formula $\left[\mathbf{Q}_{1},\mathbf{P}_{2}\right]$
+\end_inset
+
+ is an 
+\begin_inset Formula $\left(\mathbf{A},\vec{v}+\left[1,\dots,1\right],-\vec{u}\right)$
+\end_inset
+
+-basis.
+\end_layout
+
+\begin_layout Proof
+We know 
+\begin_inset Formula $\cdeg_{-\vec{v}}\mathbf{A}\mathbf{P}_{1}\le\cdeg_{-\vec{u}}\mathbf{P}_{1}\le0$
+\end_inset
+
+, or equivalently, 
+\begin_inset Formula $\rdeg\mathbf{A}\mathbf{P}_{1}\le\vec{v}$
+\end_inset
+
+, but it has order greater than 
+\begin_inset Formula $\vec{v}$
+\end_inset
+
+, hence 
+\begin_inset Formula $\mathbf{A}\mathbf{P}_{1}=0$
+\end_inset
+
+.
+ The result then follows the same reasoning as in the proof of Lemma 3.3
+ from 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "za2012"
+
+\end_inset
+
+.
+\begin_inset Note Comment
+status collapsed
+
+\begin_layout Plain Layout
+We know 
+\begin_inset Formula $\cdeg\mathbf{P}_{1}^{T}\le\vec{u}$
+\end_inset
+
+ from 
+\begin_inset Formula $\cdeg_{-\vec{u}}\mathbf{P}_{1}\le0$
+\end_inset
+
+, hence 
+\begin_inset Formula $\cdeg\mathbf{P}_{1}^{T}\mathbf{A}^{T}\le\cdeg_{\vec{u}}\mathbf{A}^{T}$
+\end_inset
+
+ by 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "lem:boundOnDegreesOfFA"
+
+\end_inset
+
+.
+ Now for each row 
+\begin_inset Formula $\mathbf{a}_{i}$
+\end_inset
+
+ in 
+\begin_inset Formula $\mathbf{A}$
+\end_inset
+
+ and its 
+\begin_inset Formula $\vec{u}$
+\end_inset
+
+-column degree 
+\begin_inset Formula $v_{i}$
+\end_inset
+
+, we have 
+\begin_inset Formula 
+\[
+\rdeg\mathbf{a}_{i}\mathbf{P}_{1}=\cdeg\mathbf{P}_{1}^{T}\mathbf{a}_{i}^{T}\le\cdeg_{\vec{u}}\mathbf{a}_{i}^{T}=v_{i},
+\]
+
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbf{a}_{i}\mathbf{P}_{1}\equiv0\mod x^{v_{i}+1}$
+\end_inset
+
+, hence 
+\begin_inset Formula $\mathbf{A}\mathbf{P}_{1}=0$
+\end_inset
+
+.
+ The result then follows the same reasoning as in the proof of 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "lem:orderBasisContainsNullspaceBasis"
+
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Now with the help of 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "lem:orderbasisContainsNullspacebasisGeneralized"
+
+\end_inset
+
+, let us get back to our problem of computing a 
+\begin_inset Formula $(\mathbf{F},\vec{s})$
+\end_inset
+
+-kernel basis.
+ 
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+embedding the reversed 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+ in an order basis of a kernel basis of 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+ In fact, we just need to use a special case of 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "lem:orderbasisContainsNullspacebasisGeneralized"
+
+\end_inset
+
+, where all the elements of the kernel basis have shifted degrees bounded
+ by 
+\begin_inset Formula $0$
+\end_inset
+
+, making the partial kernel basis a complete kernel basis
+\begin_inset Note Comment
+status collapsed
+
+\begin_layout Plain Layout
+, which follows from our requirement of using a shift 
+\begin_inset Formula $\vec{s}\ge\cdeg\mathbf{F}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Lemma
+\begin_inset CommandInset label
+LatexCommand label
+name "lem:nullspaceBasisInOrderBasis"
+
+\end_inset
+
+Let 
+\begin_inset Formula $\mathbf{N}$
+\end_inset
+
+ be a 
+\begin_inset Formula $(\mathbf{F},\vec{s})$
+\end_inset
+
+-kernel basis with 
+\begin_inset Formula $\cdeg_{\vec{s}}\mathbf{N}=\vec{b}$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $\mathbf{P}=\left[\mathbf{P}_{1},\mathbf{P}_{2}\right]$
+\end_inset
+
+ be a 
+\begin_inset Formula $\left(\mathbf{N}^{T},\vec{b}+1,-\vec{s}\right)$
+\end_inset
+
+-basis, where 
+\begin_inset Formula $\mathbf{P}_{1}$
+\end_inset
+
+ consists of all columns 
+\begin_inset Formula $\mathbf{p}$
+\end_inset
+
+ with 
+\begin_inset Formula $\cdeg_{-\vec{s}}\mathbf{p}\le0$
+\end_inset
+
+.
+ 
+\begin_inset Note Comment
+status collapsed
+
+\begin_layout Plain Layout
+of 
+\begin_inset Formula $\mathbf{P}$
+\end_inset
+
+ satisfying 
+\begin_inset Formula $\mathbf{N}^{T}\mathbf{p}=0$
+\end_inset
+
+.
+ 
+\end_layout
+
+\end_inset
+
+Then 
+\begin_inset Formula $\mathbf{P}_{1}$
+\end_inset
+
+ is a 
+\begin_inset Formula $(\mathbf{N}^{T},-\vec{s})$
+\end_inset
+
+-kernel basis.
+ 
+\end_layout
+
+\begin_layout Proof
+Let the rank of 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+ be 
+\begin_inset Formula $r$
+\end_inset
+
+, which is also the column dimension of any 
+\begin_inset Formula $(\mathbf{N}^{T},-\vec{s})$
+\end_inset
+
+-kernel basis 
+\begin_inset Formula $\mathbf{G}^{T}$
+\end_inset
+
+.
+ Since both 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbf{G}$
+\end_inset
+
+ are in the left kernel of 
+\begin_inset Formula $\mathbf{N}$
+\end_inset
+
+, we know 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+ is generated by 
+\begin_inset Formula $\mathbf{G}$
+\end_inset
+
+, and the 
+\begin_inset Formula $-\vec{s}$
+\end_inset
+
+-row degrees of 
+\begin_inset Formula $\mathbf{G}$
+\end_inset
+
+ are bounded by the corresponding 
+\begin_inset Formula $r$
+\end_inset
+
+ largest 
+\begin_inset Formula $-\vec{s}$
+\end_inset
+
+-row degrees of 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+, which are in turn bounded by 
+\begin_inset Formula $0$
+\end_inset
+
+ since 
+\begin_inset Formula $\cdeg\mathbf{F}\le\vec{s}$
+\end_inset
+
+.
+ Therefore, any 
+\begin_inset Formula $(\mathbf{N}^{T},-\vec{s})$
+\end_inset
+
+-kernel basis 
+\begin_inset Formula $\mathbf{G}^{T}$
+\end_inset
+
+ satisfies 
+\begin_inset Formula $\cdeg_{-\vec{s}}\mathbf{G}^{T}\le0$
+\end_inset
+
+.
+ The result now follows from 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "lem:orderbasisContainsNullspacebasisGeneralized"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+We can use 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "thm:continueComputingNullspaceBasisByRows"
+
+\end_inset
+
+ to compute a 
+\begin_inset Formula $\left(\mathbf{N}^{T},-\vec{s}\right)$
+\end_inset
+
+-kernel basis by rows.
+ If we separate 
+\begin_inset Formula $\mathbf{N}$
+\end_inset
+
+ to 
+\begin_inset Formula $\mathbf{N}=\left[\mathbf{N}_{1},\mathbf{N}_{2}\right]$
+\end_inset
+
+ with 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+-column degrees 
+\begin_inset Formula $\vec{b}_{1}$
+\end_inset
+
+, 
+\begin_inset Formula $\vec{b}_{2}$
+\end_inset
+
+ respectively, and first compute a 
+\begin_inset Formula $\left(\mathbf{N}_{1}^{T},-\vec{s}\right)$
+\end_inset
+
+-kernel basis 
+\begin_inset Formula $\mathbf{Q}_{1}$
+\end_inset
+
+ with 
+\begin_inset Formula $-\vec{s}$
+\end_inset
+
+-column degrees 
+\begin_inset Formula $-\vec{s}_{2}$
+\end_inset
+
+, and then compute a 
+\begin_inset Formula $\left(\mathbf{N}_{2}^{T}\mathbf{Q}_{1},-\vec{s}_{2}\right)$
+\end_inset
+
+-kernel basis 
+\begin_inset Formula $\mathbf{Q}_{2}$
+\end_inset
+
+, then 
+\begin_inset Formula $\mathbf{Q}_{1}\mathbf{Q}_{2}$
+\end_inset
+
+ is a 
+\begin_inset Formula $\left(\mathbf{N}^{T},-\vec{s}\right)$
+\end_inset
+
+-kernel basis.
+ To compute kernel bases 
+\begin_inset Formula $\mathbf{Q}_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbf{Q}_{2}$
+\end_inset
+
+, we can use order basis computation.
+ However, we need to make sure that the order bases we compute do contain
+ these kernel bases.
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+ We can use the 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+-column degrees of 
+\begin_inset Formula $\mathbf{N}_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbf{N}_{2}$
+\end_inset
+
+ for the order in the order computation.
+\end_layout
+
+\end_inset
+
+
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Lemma
+\begin_inset CommandInset label
+LatexCommand label
+name "lem:orderBasisContainsNullspaceBasis-1"
+
+\end_inset
+
+Let 
+\begin_inset Formula $\vec{b}=\cdeg_{\vec{s}}\mathbf{N}$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $\mathbf{P}=\left[\mathbf{P}_{1},\mathbf{P}_{2}\right]$
+\end_inset
+
+ be any 
+\begin_inset Formula $\left(\mathbf{N}^{T},\vec{b}+1,-\vec{s}\right)$
+\end_inset
+
+-basis, where 
+\begin_inset Formula $\mathbf{P}_{1}$
+\end_inset
+
+ contains all columns from 
+\begin_inset Formula $\mathbf{P}$
+\end_inset
+
+ whose 
+\begin_inset Formula $-\vec{s}$
+\end_inset
+
+-column degrees no more than 
+\begin_inset Formula $0$
+\end_inset
+
+
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+and 
+\begin_inset Formula $\mathbf{G}^{T}$
+\end_inset
+
+ be any 
+\begin_inset Formula $\left(\mathbf{N}^{T},-\vec{s}\right)$
+\end_inset
+
+-basis kernel basis
+\end_layout
+
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\mathbf{P}_{1}$
+\end_inset
+
+ is a 
+\begin_inset Formula $\left(\mathbf{N}^{T},-\vec{s}\right)$
+\end_inset
+
+-kernel basis.
+\end_layout
+
+\begin_layout Proof
+Let 
+\begin_inset Formula $\mathbf{G}^{T}$
+\end_inset
+
+ be any 
+\begin_inset Formula $\left(\mathbf{N}^{T},-\vec{s}\right)$
+\end_inset
+
+-kernel basis.
+ First note that 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+ has the same rank as 
+\begin_inset Formula $\mathbf{G}$
+\end_inset
+
+ and is generated by the rows of 
+\begin_inset Formula $\mathbf{G}$
+\end_inset
+
+, which is 
+\begin_inset Formula $-\vec{s}$
+\end_inset
+
+-row reduced, hence 
+\begin_inset Formula $\rdeg_{-\vec{s}}\mathbf{G}\le\rdeg_{-\vec{s}}\mathbf{F}$
+\end_inset
+
+, and 
+\begin_inset Formula $\rdeg_{-\vec{s}}\mathbf{F}\le0$
+\end_inset
+
+ since 
+\begin_inset Formula $\cdeg\mathbf{F}\le\vec{s}$
+\end_inset
+
+.
+ This gives 
+\begin_inset Formula $\rdeg_{-\vec{s}}\mathbf{G}\le0$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Proof
+Now the proof is similar to 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "lem:orderBasisContainsNullspaceBasis"
+
+\end_inset
+
+.
+ Note that 
+\begin_inset Formula $\cdeg_{-\vec{b}}\mathbf{N}^{T}\le-\vec{s}$
+\end_inset
+
+ by 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "lem:columnDegreesRowDegreesSymmetry"
+
+\end_inset
+
+.
+ From 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "lem:productDegreeBound"
+
+\end_inset
+
+, any column 
+\begin_inset Formula $\mathbf{p}$
+\end_inset
+
+ of 
+\begin_inset Formula $\mathbf{P}_{1}$
+\end_inset
+
+ satisfies 
+\begin_inset Formula $\cdeg_{-\vec{b}}\mathbf{N}^{T}\mathbf{p}\le\cdeg_{-\vec{s}}\mathbf{p}\le0$
+\end_inset
+
+, or equivalently, 
+\begin_inset Formula $\rdeg\mathbf{N}^{T}\mathbf{p}\le\vec{b}$
+\end_inset
+
+.
+ Combining this with the fact that 
+\begin_inset Formula $\mathbf{p}$
+\end_inset
+
+ has order 
+\begin_inset Formula $\vec{b}+1$
+\end_inset
+
+ we get 
+\begin_inset Formula $\mathbf{N}^{T}\mathbf{p}=0$
+\end_inset
+
+.
+ Thus 
+\begin_inset Formula $\mathbf{P}_{1}$
+\end_inset
+
+ is generated by 
+\begin_inset Formula $\mathbf{G}^{T}$
+\end_inset
+
+, that is, 
+\begin_inset Formula $\mathbf{P}_{1}=\mathbf{G}^{T}\mathbf{U}$
+\end_inset
+
+ for some polynomial matrix 
+\begin_inset Formula $\mathbf{U}$
+\end_inset
+
+.
+ On the other hand, 
+\begin_inset Formula $\mathbf{G}^{T}$
+\end_inset
+
+ has order 
+\begin_inset Formula $\left(\mathbf{N}^{T},\vec{b}+1\right)$
+\end_inset
+
+ and 
+\begin_inset Note Comment
+status collapsed
+
+\begin_layout Plain Layout
+is therefore generated by 
+\begin_inset Formula $\mathbf{P}_{1}$
+\end_inset
+
+, i.e.
+ 
+\end_layout
+
+\end_inset
+
+ therefore satisfies 
+\begin_inset Formula $\mathbf{G}^{T}=\mathbf{P}_{1}\mathbf{V}$
+\end_inset
+
+ for some polynomial matrix 
+\begin_inset Formula $\mathbf{V}$
+\end_inset
+
+.
+ We now have 
+\begin_inset Formula $\mathbf{P}_{1}=\mathbf{P}_{1}\mathbf{V}\mathbf{U}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbf{G}^{T}=\mathbf{G}^{T}\mathbf{U}\mathbf{V}$
+\end_inset
+
+, implying both 
+\begin_inset Formula $\mathbf{U}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbf{V}$
+\end_inset
+
+ are unimodular.
+ The result then follows from the unimodular equivalence of 
+\begin_inset Formula $\mathbf{P}_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbf{G}^{T}$
+\end_inset
+
+ and the fact that they are 
+\begin_inset Formula $-\vec{s}$
+\end_inset
+
+-column reduced.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%reducedness of .
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Lemma
+\begin_inset CommandInset label
+LatexCommand label
+name "lem:nullspaceBasisOfSubsetOfRowsContainedInOrderBasis"
+
+\end_inset
+
+Let 
+\begin_inset Formula $\mathbf{N}=\left[\mathbf{N}_{1},\mathbf{N}_{2}\right]$
+\end_inset
+
+, with 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+-column degrees 
+\begin_inset Formula $\vec{b}_{1}$
+\end_inset
+
+, 
+\begin_inset Formula $\vec{b}_{2}$
+\end_inset
+
+ respectively.
+ Then a 
+\begin_inset Formula $\left(\mathbf{N}_{1}^{T},\vec{b}_{1}+1,-\vec{s}\right)$
+\end_inset
+
+-basis contains a 
+\begin_inset Formula $\left(\mathbf{N}_{1}^{T},-\vec{s}\right)$
+\end_inset
+
+-kernel basis whose 
+\begin_inset Formula $-\vec{s}$
+\end_inset
+
+-row degrees are bounded by 0.
+ Let 
+\begin_inset Formula $\mathbf{Q}_{1}$
+\end_inset
+
+ be this kernel basis, and 
+\begin_inset Formula $-\vec{s}_{2}=\cdeg_{-\vec{s}}\mathbf{Q}_{1}$
+\end_inset
+
+.
+ Then a 
+\begin_inset Formula $\left(\mathbf{N}_{2}^{T}\mathbf{Q}_{1},\vec{b}_{2}+1,-\vec{s}_{2}\right)$
+\end_inset
+
+-basis contains a 
+\begin_inset Formula $\left(\mathbf{N}_{2}^{T}\mathbf{Q}_{1},-\vec{s}_{2}\right)$
+\end_inset
+
+-kernel basis 
+\begin_inset Formula $\mathbf{Q}_{2}$
+\end_inset
+
+ whose 
+\begin_inset Formula $-\vec{s}$
+\end_inset
+
+-row degrees are bounded by 0.
+ The product 
+\begin_inset Formula $\mathbf{Q}_{1}\mathbf{Q}_{2}$
+\end_inset
+
+ is then a 
+\begin_inset Formula $\left(\mathbf{N}^{T},-\vec{s}\right)$
+\end_inset
+
+-kernel basis.
+\end_layout
+
+\begin_layout Proof
+To see that a 
+\begin_inset Formula $\left(\mathbf{N}_{1}^{T},\vec{b}_{1}+1,-\vec{s}\right)$
+\end_inset
+
+-basis contains a 
+\begin_inset Formula $\left(\mathbf{N}_{1}^{T},-\vec{s}\right)$
+\end_inset
+
+-kernel basis whose 
+\begin_inset Formula $-\vec{s}$
+\end_inset
+
+-row degrees are bounded by 0, we just need to show that 
+\begin_inset Formula $\rdeg_{-\vec{s}}\mathbf{\bar{Q}}_{1}\le0$
+\end_inset
+
+ for any 
+\begin_inset Formula $\left(\mathbf{N}_{1}^{T},-\vec{s}\right)$
+\end_inset
+
+-kernel basis 
+\begin_inset Formula $\mathbf{\bar{Q}}_{1}$
+\end_inset
+
+ and then apply 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "lem:orderbasisContainsNullspacebasisGeneralized"
+
+\end_inset
+
+.
+ Note that there exists a polynomial matrix 
+\begin_inset Formula $\bar{\mathbf{Q}}_{2}$
+\end_inset
+
+ such that 
+\begin_inset Formula $\mathbf{\bar{Q}}_{1}\mathbf{\bar{Q}}_{2}=\bar{\mathbf{G}}$
+\end_inset
+
+ for any 
+\begin_inset Formula $\left(\mathbf{N}^{T},-\vec{s}\right)$
+\end_inset
+
+-kernel basis 
+\begin_inset Formula $\bar{\mathbf{G}}$
+\end_inset
+
+, as 
+\begin_inset Formula $\bar{\mathbf{G}}$
+\end_inset
+
+ satisfies 
+\begin_inset Formula $\mathbf{N}_{1}^{T}\bar{\mathbf{G}}=0$
+\end_inset
+
+ and is therefore generated by the 
+\begin_inset Formula $\left(\mathbf{N}_{1}^{T},-\vec{s}\right)$
+\end_inset
+
+-kernel basis 
+\begin_inset Formula $\bar{\mathbf{Q}}_{1}$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $\rdeg_{-\vec{s}}\mathbf{\bar{Q}}_{1}\nleq0$
+\end_inset
+
+, then 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "lem:predictableDegree"
+
+\end_inset
+
+ forces 
+\begin_inset Formula $\rdeg_{-\vec{s}}\left(\bar{\mathbf{Q}}_{1}\bar{\mathbf{Q}}_{2}\right)=\rdeg_{-\vec{s}}\bar{\mathbf{G}}\nleq0$
+\end_inset
+
+, a contradiction.
+ 
+\end_layout
+
+\begin_layout Proof
+As before, to see that a 
+\begin_inset Formula $\left(\mathbf{N}_{2}^{T}\mathbf{Q}_{1},\vec{b}_{2}+1,-\vec{s}_{2}\right)$
+\end_inset
+
+-basis contains a 
+\begin_inset Formula $\left(\mathbf{N}_{2}^{T}\mathbf{Q}_{1},-\vec{s}_{2}\right)$
+\end_inset
+
+-kernel basis whose 
+\begin_inset Formula $-\vec{s}$
+\end_inset
+
+-row degrees are no more than 0, we can just show 
+\begin_inset Formula $\rdeg_{-\vec{s}_{2}}\hat{\mathbf{Q}}_{2}\le0$
+\end_inset
+
+ for any 
+\begin_inset Formula $\left(\mathbf{N}_{2}^{T}\mathbf{Q}_{1},-\vec{s}_{2}\right)$
+\end_inset
+
+-kernel basis 
+\begin_inset Formula $\hat{\mathbf{Q}}_{2}$
+\end_inset
+
+ and then apply 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "lem:orderbasisContainsNullspacebasisGeneralized"
+
+\end_inset
+
+.
+ Note that 
+\begin_inset Formula $\rdeg_{-\vec{b}_{2}}\mathbf{N}_{2}^{T}\mathbf{Q}_{1}\le-\vec{s}_{2}$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $\hat{\mathbf{G}}=\mathbf{Q}_{1}\hat{\mathbf{Q}}_{2}$
+\end_inset
+
+, a 
+\begin_inset Formula $\left(\mathbf{N}^{T},-\vec{s}\right)$
+\end_inset
+
+-kernel basis.
+ Note that 
+\begin_inset Formula $\rdeg_{-\vec{s}_{2}}\hat{\mathbf{Q}}_{2}=\rdeg_{-\vec{s}}\mathbf{Q}_{1}\hat{\mathbf{Q}}_{2}=\rdeg_{-\vec{s}}\hat{\mathbf{G}}\le0$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Now that we can correctly compute a 
+\begin_inset Formula $\left(\mathbf{N}^{T},-\vec{s}\right)$
+\end_inset
+
+-kernel basis by rows with the help of order basis computation, we need
+ to look at how to do it efficiently.
+ One major difficulty is that the order, or equivalently, the 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+-row degrees are nonuniform and can have degree as large as 
+\begin_inset Formula $\xi=\sum\vec{s}$
+\end_inset
+
+.
+ To overcome this, we separate the rows of 
+\begin_inset Formula $\mathbf{N}^{T}$
+\end_inset
+
+ into blocks according to their 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+-row degrees, and then work with these blocks one by one successively based
+ on 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "thm:continueComputingNullspaceBasisByRows"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand input
+filename "algorithmNullspaceBasisReverse.lyx"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $k$
+\end_inset
+
+ be the column dimension of 
+\begin_inset Formula $\mathbf{N}$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $\sum\cdeg_{\vec{s}}\mathbf{N}=\sum\vec{b}\le\sum\vec{s}\le\xi$
+\end_inset
+
+, at most 
+\begin_inset Formula $k/c$
+\end_inset
+
+ columns of 
+\begin_inset Formula $\mathbf{N}$
+\end_inset
+
+ have 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+-column degrees greater than or equal to 
+\begin_inset Formula $c\xi/k$
+\end_inset
+
+ for any 
+\begin_inset Formula $c\ge1$
+\end_inset
+
+.
+ We assume without loss of generality that the rows of 
+\begin_inset Formula $\mathbf{N}^{T}$
+\end_inset
+
+ are arranged in decreasing 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+-row degrees.
+ We divide 
+\begin_inset Formula $\mathbf{N}^{T}$
+\end_inset
+
+ into 
+\begin_inset Formula $\log k$
+\end_inset
+
+ row blocks according to the 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+-row degrees of its rows, or equivalently, divide 
+\begin_inset Formula $\mathbf{N}$
+\end_inset
+
+ to blocks of columns according to the 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+-column degrees.
+ Let 
+\begin_inset Formula 
+\[
+\mathbf{N}=\left[\mathbf{N}_{1},\mathbf{N}_{2},\cdots,\mathbf{N}_{\log k-1},\mathbf{N}_{\log k}\right]
+\]
+
+\end_inset
+
+with 
+\begin_inset Formula $\mathbf{N}_{\log k},\mathbf{N}_{\log k-1},\dots,\mathbf{N}_{2},\mathbf{N}_{1}$
+\end_inset
+
+ having 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+-column degrees in the range 
+\begin_inset Formula $\left[0,2\xi/k\right]$
+\end_inset
+
+, 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $(2\xi/k,4\xi/k],$
+\end_inset
+
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ 
+\begin_inset Formula $(4\xi/k,8\xi/k],\ ...,$
+\end_inset
+
+ 
+\begin_inset Formula $(\xi/4,\xi/2],$
+\end_inset
+
+ 
+\begin_inset Formula $(\xi/2,\xi].$
+\end_inset
+
+ Let 
+\begin_inset Formula $\vec{\sigma}_{i}=\left[\xi/2^{i-1}+1,\dots,\xi/2^{i-1}+1\right]$
+\end_inset
+
+ with the same dimension as the row dimension of 
+\begin_inset Formula $\mathbf{N}_{i}$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $\vec{\sigma}=\left[\vec{\sigma}_{\log k},\vec{\sigma}_{\log k-1},\dots,\vec{\sigma}_{1}\right]$
+\end_inset
+
+ be the order in the order basis computation.
+\end_layout
+
+\begin_layout Standard
+To further simply our task, we also make the order of our problem in each
+ block uniform.
+ Rather than of using 
+\begin_inset Formula $\mathbf{N}^{T}$
+\end_inset
+
+ as the input matrix, we use 
+\begin_inset Formula 
+\begin{eqnarray*}
+\hat{\mathbf{N}} & =\begin{bmatrix}\hat{\mathbf{N}}_{1}\\
+\vdots\\
+\hat{\mathbf{N}}_{\log k}
+\end{bmatrix}= & x^{\vec{\sigma}-\vec{b}-1}\begin{bmatrix}\mathbf{N}_{1}^{T}\\
+\vdots\\
+\mathbf{N}_{\log k}^{T}
+\end{bmatrix}=x^{\vec{\sigma}-\vec{b}-1}\mathbf{N}^{T}
+\end{eqnarray*}
+
+\end_inset
+
+ instead, so that a 
+\begin_inset Formula $\left(\hat{\mathbf{N}},\vec{\sigma},-\vec{s}\right)$
+\end_inset
+
+-basis is a 
+\begin_inset Formula $\left(\mathbf{N}^{T},\vec{b}+1,-\vec{s}\right)$
+\end_inset
+
+-basis.
+\end_layout
+
+\begin_layout Standard
+We are now ready to compute a 
+\begin_inset Formula $\left(\mathbf{N}^{T},-\vec{s}\right)$
+\end_inset
+
+-kernel basis, which is done by a series of order basis computations that
+ computes a series of kernel bases as follows.
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $\vec{s}_{1}=\vec{s}$
+\end_inset
+
+.
+ First we compute an 
+\begin_inset Formula $\left(\hat{\mathbf{N}}_{1},\vec{\sigma}_{1},-\vec{s}_{1}\right)$
+\end_inset
+
+-basis 
+\begin_inset Formula $\mathbf{P}_{1}=\left[\mathbf{G}_{1},\mathbf{Q}_{1}\right]$
+\end_inset
+
+, where 
+\begin_inset Formula $\mathbf{G}_{1}$
+\end_inset
+
+ is a 
+\begin_inset Formula $\left(\hat{\mathbf{N}}_{1},-\vec{s}_{1}\right)$
+\end_inset
+
+-kernel basis
+\begin_inset Note Comment
+status collapsed
+
+\begin_layout Plain Layout
+ with 
+\begin_inset Formula $\cdeg_{-\vec{s}_{1}}\mathbf{N}_{1}\le0$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+.
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+ This computation can be done using 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "alg:umab"
+
+\end_inset
+
+ with a cost of 
+\begin_inset Formula $O^{\sim}\left(n^{\omega}d\right)$
+\end_inset
+
+, where 
+\begin_inset Formula $d=\xi/n$
+\end_inset
+
+.
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $\tilde{\mathbf{G}}_{1}=\mathbf{G}_{1}$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $\vec{s}_{2}=-\cdeg_{-\vec{s}}\mathbf{G}_{1}$
+\end_inset
+
+.
+ 
+\begin_inset Note Comment
+status collapsed
+
+\begin_layout Plain Layout
+Note that 
+\begin_inset Formula $-\vec{s}_{1}\le-[\vec{s}_{2},\vec{t}_{2}]\le\left[0,\dots,0,1,\dots1\right]$
+\end_inset
+
+ component-wise, since 
+\begin_inset Formula $\mathbf{P}_{1}$
+\end_inset
+
+ has lower order than any 
+\begin_inset Formula $\left(\mathbf{M}^{T},\vec{b}+\left[1,\dots,1\right],-\vec{s}\right)$
+\end_inset
+
+-basis 
+\begin_inset Formula $\mathbf{P}$
+\end_inset
+
+ hence generates 
+\begin_inset Formula $\mathbf{P}$
+\end_inset
+
+.
+ Therefore, 
+\begin_inset Formula $\cdeg_{-\vec{s}}\mathbf{P}_{1}\le\cdeg_{-\vec{s}}\mathbf{P}\le\left[0,\dots,0,1,\dots1\right]$
+\end_inset
+
+.
+ 
+\end_layout
+
+\end_inset
+
+ We then compute an 
+\begin_inset Formula $\left(\hat{\mathbf{N}}_{2}\tilde{\mathbf{G}}_{1},\vec{\sigma}_{2},-\vec{s}_{2}\right)$
+\end_inset
+
+-basis 
+\begin_inset Formula $\mathbf{P}_{2}=\left[\mathbf{G}_{2},\mathbf{Q}_{2}\right]$
+\end_inset
+
+ with 
+\begin_inset Formula $\vec{s}_{3}=-\cdeg_{-\vec{s}_{2}}\mathbf{G}_{2}$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $\tilde{\mathbf{G}}_{2}=\tilde{\mathbf{G}}_{1}\mathbf{G}_{2}$
+\end_inset
+
+.
+ 
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+To compute the product 
+\begin_inset Formula $\hat{\mathbf{M}}_{2}\bar{\mathbf{P}}_{1}$
+\end_inset
+
+, since the 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+-row degrees of 
+\begin_inset Formula $\hat{\mathbf{N}}_{2}$
+\end_inset
+
+ are bounded by 
+\begin_inset Formula $\xi/2$
+\end_inset
+
+ and the 
+\begin_inset Formula $-\vec{s}$
+\end_inset
+
+-column degrees of 
+\begin_inset Formula $\bar{\mathbf{P}}_{1}$
+\end_inset
+
+ are bounded by 
+\begin_inset Formula $\left[1,\dots,1\right]$
+\end_inset
+
+, we can use 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "thm:multiplyUnbalancedMatrices"
+
+\end_inset
+
+ to multiply 
+\begin_inset Formula $\bar{\mathbf{P}}_{1}^{T}$
+\end_inset
+
+, which has column degrees bounded by 
+\begin_inset Formula $\vec{s}+\left[1,\dots,1\right]$
+\end_inset
+
+, and 
+\begin_inset Formula $\hat{\mathbf{N}}_{2}^{T}$
+\end_inset
+
+ with the sum of its 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+-column degrees bounded by 
+\begin_inset Formula $\xi$
+\end_inset
+
+ with a cost of 
+\begin_inset Formula $O^{\sim}\left(n^{\omega-1}\xi\right)$
+\end_inset
+
+.
+ Now we can use 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "alg:umab"
+
+\end_inset
+
+ to compute an 
+\begin_inset Formula $\left(\hat{\mathbf{N}}_{2}\bar{\mathbf{P}}_{1},-\vec{t},\vec{\sigma}_{2}\right)$
+\end_inset
+
+-basis 
+\begin_inset Formula $\bar{\mathbf{P}}_{2}$
+\end_inset
+
+ with a cost of 
+\begin_inset Formula $O^{\sim}\left(n^{\omega-1}\xi\right)$
+\end_inset
+
+
+\begin_inset Note Comment
+status collapsed
+
+\begin_layout Plain Layout
+, since the 
+\begin_inset Formula $-\vec{s}$
+\end_inset
+
+-column degrees of 
+\begin_inset Formula $\bar{\mathbf{P}}_{1}$
+\end_inset
+
+are bounded by that of 
+\begin_inset Formula $\bar{\mathbf{P}}$
+\end_inset
+
+ (since the columns of 
+\begin_inset Formula $\bar{\mathbf{P}}$
+\end_inset
+
+ are generated by 
+\begin_inset Formula $\bar{\mathbf{P}}_{1}$
+\end_inset
+
+), which in turn are bounded by
+\begin_inset Formula $\left[1,\dots,1\right]$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Note Comment
+status collapsed
+
+\begin_layout Plain Layout
+Let 
+\begin_inset Formula $\mathbf{R}_{1}=\left[\mathbf{N}_{1}\mathbf{Q}_{2},\mathbf{Q}_{1}\right]$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbf{R}_{1}^{r}=\revCol\left(\mathbf{R}_{1},-\vec{s},\cdeg_{-\vec{s}}\mathbf{R}_{1}\right)$
+\end_inset
+
+.
+ Then from 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "lem:unimodularComputationByRows"
+
+\end_inset
+
+ we know 
+\begin_inset Formula $\left[\mathbf{F}^{T},\mathbf{R}_{1}^{r}\right]$
+\end_inset
+
+ is a unimodular matrix.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Continuing this process, at step 
+\begin_inset Formula $i$
+\end_inset
+
+ we compute an 
+\begin_inset Formula $\left(\hat{\mathbf{N}}_{i}\tilde{\mathbf{G}}_{i-1},\vec{\sigma}_{i},-\vec{s}_{i}\right)$
+\end_inset
+
+-basis 
+\begin_inset Formula $\mathbf{P}_{i}=\left[\mathbf{G}_{i},\mathbf{Q}_{i}\right]$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $\tilde{\mathbf{G}}_{i}=\prod_{j=1}^{i}\mathbf{G}_{i}=\tilde{\mathbf{G}}_{i-1}\mathbf{G}_{i}$
+\end_inset
+
+.
+ Note that 
+\begin_inset Formula $\tilde{\mathbf{G}}_{\log k}$
+\end_inset
+
+ is a 
+\begin_inset Formula $\left(\mathbf{N}^{T},-\vec{s}\right)$
+\end_inset
+
+-kernel basis.
+ 
+\end_layout
+
+\begin_layout Standard
+This process of computing a 
+\begin_inset Formula $\left(\mathbf{N}^{T},-\vec{s}\right)$
+\end_inset
+
+-kernel basis gives 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "alg:minimalNullspaceBasisReverse"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Now let us check the cost of this algorithm.
+ The cost is dominated by the order basis computation and the multiplications
+ 
+\begin_inset Formula $\hat{\mathbf{N}}_{i}\tilde{\mathbf{G}}_{i-1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\tilde{\mathbf{G}}_{i-1}\mathbf{G}_{i}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Lemma
+An 
+\begin_inset Formula $\left(\hat{\mathbf{N}}_{i}\tilde{\mathbf{G}}_{i-1},\vec{\sigma}_{i},-\vec{s}_{i}\right)$
+\end_inset
+
+-basis can be computed at a cost of 
+\begin_inset Formula $O^{\sim}\left(n^{\omega}d\right)$
+\end_inset
+
+, where 
+\begin_inset Formula $d=\xi/n$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+Note that 
+\begin_inset Formula $\mathbf{N}_{i}$
+\end_inset
+
+ 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+has less than 
+\begin_inset Formula $2^{i}$
+\end_inset
+
+ columns
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+.
+ Otherwise, 
+\begin_inset Formula $\sum\cdeg_{\vec{s}}\mathbf{N}_{i}>2^{i}\xi/2^{i}=\xi$
+\end_inset
+
+, contradicting with 
+\begin_inset Formula $\sum\cdeg_{\vec{s}}\mathbf{N}=\sum\vec{b}\le\sum\vec{s}\le\xi$
+\end_inset
+
+.
+ It follows that 
+\begin_inset Formula $\hat{\mathbf{N}}_{i}$
+\end_inset
+
+, and therefore 
+\begin_inset Formula $\hat{\mathbf{N}}_{i}\tilde{\mathbf{G}}_{i-1}$
+\end_inset
+
+, also have less than 
+\begin_inset Formula $2^{i}$
+\end_inset
+
+ rows.
+ We also have 
+\begin_inset Formula $\vec{\sigma}_{i}=\left[\xi/2^{i-1}+1,\dots,\xi/2^{i-1}+1\right]=\Theta\left(\xi/2^{i}\right)$
+\end_inset
+
+.
+ Therefore, Algorithm 2 from 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "za2012"
+
+\end_inset
+
+ for order basis computation with unbalanced shift can be used with a cost
+ of 
+\begin_inset Formula $O^{\sim}\left(n^{\omega}d\right)$
+\end_inset
+
+
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+ by 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "thm:unbalancedOrderBasisCost"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Lemma
+The multiplications 
+\begin_inset Formula $\hat{\mathbf{N}}_{i}\tilde{\mathbf{G}}_{i-1}$
+\end_inset
+
+ can be done with a cost of 
+\begin_inset Formula $O^{\sim}\left(n^{\omega}d\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+The dimension of 
+\begin_inset Formula $\hat{\mathbf{N}}_{i}$
+\end_inset
+
+ is bounded by 
+\begin_inset Formula $2^{i-1}\times n$
+\end_inset
+
+ and 
+\begin_inset Formula $\sum\rdeg_{\vec{s}}\hat{\mathbf{N}}_{i}\le2^{i-1}\cdot\xi/2^{i-1}=\xi$
+\end_inset
+
+.
+ We also have 
+\begin_inset Formula $\cdeg_{-\vec{s}}\tilde{\mathbf{G}}_{i-1}\le0$
+\end_inset
+
+, or equivalently, 
+\begin_inset Formula $\rdeg\tilde{\mathbf{G}}_{i-1}\le\vec{s}$
+\end_inset
+
+.
+ We can now use 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "thm:multiplyUnbalancedMatrices"
+
+\end_inset
+
+ to multiply 
+\begin_inset Formula $\tilde{\mathbf{G}}_{i-1}^{T}$
+\end_inset
+
+ and 
+\begin_inset Formula $\hat{\mathbf{N}}_{i}^{T}$
+\end_inset
+
+ with a cost of 
+\begin_inset Formula $O^{\sim}\left(n^{\omega-1}\xi\right)=O^{\sim}\left(n^{\omega}d\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Lemma
+The multiplication 
+\begin_inset Formula $\tilde{\mathbf{G}}_{i-1}\mathbf{G}_{i}$
+\end_inset
+
+ can be done with a cost of 
+\begin_inset Formula $O^{\sim}\left(n^{\omega}d\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+We know 
+\begin_inset Formula $\cdeg_{-\vec{s}}\tilde{\mathbf{G}}_{i-1}=-\vec{s}_{i}$
+\end_inset
+
+, and 
+\begin_inset Formula $\cdeg_{-\vec{s}_{i}}\mathbf{G}_{i}=-\vec{s}_{i+1}\le0.$
+\end_inset
+
+ In other words, 
+\begin_inset Formula $\rdeg\mathbf{G}_{i}\le\vec{s}_{i}$
+\end_inset
+
+, and 
+\begin_inset Formula $\rdeg_{\vec{s}_{i}}\tilde{\mathbf{G}}_{i-1}\le\vec{s}$
+\end_inset
+
+, hence we can again use 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "thm:multiplyUnbalancedMatrices"
+
+\end_inset
+
+ to multiply 
+\begin_inset Formula $\mathbf{G}_{i}^{T}$
+\end_inset
+
+ and 
+\begin_inset Formula $\tilde{\mathbf{G}}_{i-1}^{T}$
+\end_inset
+
+ with a cost of 
+\begin_inset Formula $O^{\sim}\left(n^{\omega}d\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Theorem
+A right factor 
+\begin_inset Formula $\mathbf{G}$
+\end_inset
+
+ satisfying 
+\begin_inset Formula $\mathbf{TG}=\mathbf{F}$
+\end_inset
+
+ for a column basis 
+\begin_inset Formula $\mathbf{T}$
+\end_inset
+
+ can be computed with a cost of 
+\begin_inset Formula $O^{\sim}\left(n^{\omega-1}\xi\right)=O^{\sim}\left(n^{\omega}d\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section
+Computing a Column Basis
+\end_layout
+
+\begin_layout Standard
+With a right factor 
+\begin_inset Formula $\mathbf{G}$
+\end_inset
+
+ of 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+ computed, we are now ready to compute a column basis 
+\begin_inset Formula $\mathbf{T}$
+\end_inset
+
+, where 
+\begin_inset Formula $\mathbf{F}=\mathbf{T}\mathbf{G}$
+\end_inset
+
+.
+ To do so efficiently, the degree of 
+\begin_inset Formula $\mathbf{T}$
+\end_inset
+
+ cannot be too big, which is indeed the case as shown by the following lemmas.
+\end_layout
+
+\begin_layout Lemma
+\begin_inset CommandInset label
+LatexCommand label
+name "lem:colBasisdegreeBoundByRdegOfRightFactor"
+
+\end_inset
+
+The column degrees of 
+\begin_inset Formula $\mathbf{T}$
+\end_inset
+
+ are bounded by the corresponding entries of 
+\begin_inset Formula $\vec{t}=-\rdeg_{-\vec{s}}\mathbf{G}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+Since 
+\begin_inset Formula $\mathbf{G}$
+\end_inset
+
+ is 
+\begin_inset Formula $-\vec{s}$
+\end_inset
+
+-row reduced, and 
+\begin_inset Formula $\rdeg_{-\vec{s}}\mathbf{F}\le0$
+\end_inset
+
+, by 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "lem:predictableDegree"
+
+\end_inset
+
+ 
+\begin_inset Formula $\rdeg_{-\vec{t}}\mathbf{T}\le0$
+\end_inset
+
+, or equivalently, 
+\begin_inset Formula $\mathbf{T}$
+\end_inset
+
+ has column degrees bounded by 
+\begin_inset Formula $\vec{t}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Lemma
+\begin_inset CommandInset label
+LatexCommand label
+name "lem:colBasisDegreeBoundByInputDegrees"
+
+\end_inset
+
+Let 
+\begin_inset Formula $\vec{t}=-\rdeg_{-\vec{s}}\mathbf{G}$
+\end_inset
+
+, a vector with 
+\begin_inset Formula $r$
+\end_inset
+
+ entries and bounds 
+\begin_inset Formula $\cdeg\mathbf{T}$
+\end_inset
+
+ from 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "lem:colBasisdegreeBoundByRdegOfRightFactor"
+
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $\vec{s}'$
+\end_inset
+
+ be the list of the 
+\begin_inset Formula $r$
+\end_inset
+
+ largest entries of 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\vec{t}\le\vec{s}'$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+Let 
+\begin_inset Formula $\mathbf{G}'$
+\end_inset
+
+ be the 
+\begin_inset Formula $-\vec{s}$
+\end_inset
+
+-row Popov form of 
+\begin_inset Formula $\mathbf{G}$
+\end_inset
+
+, and the square matrix 
+\begin_inset Formula $\mathbf{G}"$
+\end_inset
+
+ consists of only the columns of 
+\begin_inset Formula $\mathbf{G}'$
+\end_inset
+
+ that contains pivot entries, and has the rows permuted so the pivots are
+ in the diagonal.
+ Let 
+\begin_inset Formula $\vec{s}"$
+\end_inset
+
+ be the list of the entries in 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+ that correspond to the columns of 
+\begin_inset Formula $\mathbf{G}"$
+\end_inset
+
+ in 
+\begin_inset Formula $\mathbf{G}'$
+\end_inset
+
+.
+ Note that 
+\begin_inset Formula $\rdeg_{-\vec{s}"}\mathbf{G}"=-\vec{t}"$
+\end_inset
+
+ is just a permutation of 
+\begin_inset Formula $-\vec{t}$
+\end_inset
+
+ with the same entries.
+ By the definition of shifted row degree, 
+\begin_inset Formula $-\vec{t}"$
+\end_inset
+
+ is the sum of 
+\begin_inset Formula $-\vec{s}"$
+\end_inset
+
+ and the list of the diagonal pivot degrees, which are nonnegative.
+ Therefore, 
+\begin_inset Formula $-\vec{t}"\ge-\vec{s}"$
+\end_inset
+
+.
+ The result then follows as 
+\begin_inset Formula $\vec{t}$
+\end_inset
+
+ is a permutation of 
+\begin_inset Formula $\vec{t}"$
+\end_inset
+
+ and 
+\begin_inset Formula $\vec{s}'$
+\end_inset
+
+ has the largest entries of 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+With the bound on the column degrees of 
+\begin_inset Formula $\mathbf{T}$
+\end_inset
+
+ determined, we are now ready to compute 
+\begin_inset Formula $\mathbf{T}$
+\end_inset
+
+.
+ This is done again using an order basis computation.
+\end_layout
+
+\begin_layout Lemma
+Let 
+\begin_inset Formula $\vec{t}'=\left[0,\dots,0,\vec{t}\right]\in\mathbb{Z}^{m+r}$
+\end_inset
+
+.
+ Any 
+\begin_inset Formula $\left(\left[\mathbf{F}^{T},\mathbf{G}^{T}\right],-\vec{t}'\right)$
+\end_inset
+
+-kernel basis has the form 
+\begin_inset Formula $\begin{bmatrix}V\\
+\bar{\mathbf{T}}
+\end{bmatrix}$
+\end_inset
+
+, where 
+\begin_inset Formula $V\in\mathbb{K}^{m\times m}$
+\end_inset
+
+ is a unimodular matrix and 
+\begin_inset Formula $\left(\bar{\mathbf{T}}V^{-1}\right)^{T}$
+\end_inset
+
+ is a column basis of 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+First, the matrix 
+\begin_inset Formula $\begin{bmatrix}I\\
+\mathbf{T}^{T}
+\end{bmatrix}$
+\end_inset
+
+ is a kernel basis of 
+\begin_inset Formula $\left[\mathbf{F}^{T},\mathbf{G}^{T}\right]$
+\end_inset
+
+ and is unimodularly equivalent to any other kernel basis.
+ Hence we must have 
+\begin_inset Formula $\begin{bmatrix}V\\
+\bar{\mathbf{T}}
+\end{bmatrix}=\begin{bmatrix}I\\
+\mathbf{T}^{T}
+\end{bmatrix}V$
+\end_inset
+
+, which gives 
+\begin_inset Formula $\mathbf{T}=\left(\bar{\mathbf{T}}V^{-1}\right)^{T}$
+\end_inset
+
+.
+ Also note that the 
+\begin_inset Formula $-\vec{t}'$
+\end_inset
+
+-minimality forces the unimodular matrix 
+\begin_inset Formula $V$
+\end_inset
+
+ in any 
+\begin_inset Formula $\left(\left[\mathbf{F}^{T},\mathbf{G}^{T}\right],-\vec{t}'\right)$
+\end_inset
+
+-kernel basis to be the same degree as 
+\begin_inset Formula $I$
+\end_inset
+
+.
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+Finally, a 
+\begin_inset Formula $\left(\left[\mathbf{F}^{T},\mathbf{G}^{T}\right],\vec{s}+\left[1,\dots,1\right],-\vec{t}'\right)$
+\end_inset
+
+-basis contain a 
+\begin_inset Formula $\left(\left[\mathbf{F}^{T},\mathbf{G}^{T}\right],-\vec{t}'\right)$
+\end_inset
+
+-kernel basis because both 
+\begin_inset Formula $\mathbf{F}^{T}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbf{G}^{T}\mathbf{T}^{T}$
+\end_inset
+
+ have row degrees bounded by 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+To compute a 
+\begin_inset Formula $\left(\left[\mathbf{F}^{T},\mathbf{G}^{T}\right],-\vec{t}'\right)$
+\end_inset
+
+-kernel basis, we can again use order basis computation.
+\end_layout
+
+\begin_layout Lemma
+Any 
+\begin_inset Formula $\left(\left[\mathbf{F}^{T},\mathbf{G}^{T}\right],\vec{s}+\left[1,\dots,1\right],-\vec{t}'\right)$
+\end_inset
+
+-basis contain a 
+\begin_inset Formula $\left(\left[\mathbf{F}^{T},\mathbf{G}^{T}\right],-\vec{t}'\right)$
+\end_inset
+
+-kernel basis whose 
+\begin_inset Formula $-\vec{t}'$
+\end_inset
+
+-row degrees are bounded by 0.
+\end_layout
+
+\begin_layout Proof
+As before, 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "lem:orderbasisContainsNullspacebasisGeneralized"
+
+\end_inset
+
+ can be used here.
+ We just need to show that a 
+\begin_inset Formula $\left(\left[\mathbf{F}^{T},\mathbf{G}^{T}\right],-\vec{t}'\right)$
+\end_inset
+
+-kernel basis has 
+\begin_inset Formula $-\vec{t}'$
+\end_inset
+
+-row degrees no more than 0, which is true since 
+\begin_inset Formula $\rdeg_{-\vec{t}'}\begin{bmatrix}I\\
+\mathbf{T}^{T}
+\end{bmatrix}\le0$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Now to compute 
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Formula $\left(\left[\mathbf{F}^{T},\mathbf{G}^{T}\right],\vec{s}+\left[1,\dots,1\right],-\vec{t}'\right)$
+\end_inset
+
+-basis
+\end_layout
+
+\end_inset
+
+a 
+\begin_inset Formula $\left(\left[\mathbf{F}^{T},\mathbf{G}^{T}\right],-\vec{t}'\right)$
+\end_inset
+
+-kernel basis efficiently, notice we have the same type of problem as in
+ 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "sec:computeRightFactor"
+
+\end_inset
+
+, and so 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "alg:minimalNullspaceBasisReverse"
+
+\end_inset
+
+ works here as well.
+ With a 
+\begin_inset Formula $\left(\left[\mathbf{F}^{T},\mathbf{G}^{T}\right],-\vec{t}'\right)$
+\end_inset
+
+-kernel basis 
+\begin_inset Formula $\begin{bmatrix}V\\
+\bar{\mathbf{T}}
+\end{bmatrix}$
+\end_inset
+
+ computed, a column basis can now be easily computed by 
+\begin_inset Formula $\mathbf{T}=\left(\bar{\mathbf{T}}V^{-1}\right)^{T}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+We now have a complete algorithm for computing a column basis, given in
+ 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "alg:colBasis"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand input
+preview true
+filename "algorithmColumnBasis.lyx"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Theorem
+\begin_inset CommandInset label
+LatexCommand label
+name "thm:columnBasisCost1"
+
+\end_inset
+
+A column basis 
+\begin_inset Formula $\mathbf{T}$
+\end_inset
+
+ of 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+ can be computed with a cost of 
+\begin_inset Formula $O^{\sim}\left(n^{\omega-1}\xi\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Comment
+status collapsed
+
+\begin_layout Plain Layout
+This can be done by computing a left 
+\begin_inset Formula $\left[0,\dots,0,d,\dots,d\right]$
+\end_inset
+
+-minimal kernel basis 
+\begin_inset Formula $\left[\mathbf{T}',V\right]$
+\end_inset
+
+ of 
+\begin_inset Formula $\left[\mathbf{G}^{T},\mathbf{F}^{T}\right]^{T}$
+\end_inset
+
+, where 
+\begin_inset Formula $d$
+\end_inset
+
+ is the degree of 
+\begin_inset Formula $\mathbf{F},$
+\end_inset
+
+ 
+\begin_inset Formula $V$
+\end_inset
+
+ is a unimodular matrix and 
+\begin_inset Formula $\mathbf{T}'$
+\end_inset
+
+ is a 
+\begin_inset Formula $m\times m$
+\end_inset
+
+ matrix.
+ Note that 
+\begin_inset Formula $\left[\mathbf{T}',V\right]$
+\end_inset
+
+ has 
+\begin_inset Formula $m$
+\end_inset
+
+ rows since the rank of 
+\begin_inset Formula $\left[\mathbf{G}^{T},\mathbf{F}^{T}\right]^{T}$
+\end_inset
+
+ is 
+\begin_inset Formula $m$
+\end_inset
+
+.
+ Also note that since 
+\begin_inset Formula $\left[\mathbf{T},I\right]$
+\end_inset
+
+ is a left kernel basis with 
+\begin_inset Formula $\left[0,\dots,0,d,\dots,d\right]$
+\end_inset
+
+-row degrees bounded by 
+\begin_inset Formula $d$
+\end_inset
+
+, the 
+\begin_inset Formula $\left[0,\dots,0,d,\dots,d\right]$
+\end_inset
+
+-minimal kernel basis 
+\begin_inset Formula $\left[\mathbf{T}',V\right]$
+\end_inset
+
+ must also has its 
+\begin_inset Formula $\left[0,\dots,0,d,\dots,d\right]$
+\end_inset
+
+-row degrees bounded by 
+\begin_inset Formula $d$
+\end_inset
+
+, hence the degree of 
+\begin_inset Formula $V$
+\end_inset
+
+ must be 0.
+ We can then easily compute 
+\begin_inset Formula $\mathbf{T}=\mathbf{T}'V^{-1}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:successiveColBasisComputation"
+
+\end_inset
+
+A Simple Improvement
+\end_layout
+
+\begin_layout Standard
+When the input matrix 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+ has column dimension much larger 
+\begin_inset Formula $n$
+\end_inset
+
+ than the row dimension 
+\begin_inset Formula $m$
+\end_inset
+
+, we can separate 
+\begin_inset Formula $\mathbf{F}=\left[\mathbf{F}_{1},\mathbf{F}_{2},\dots,\mathbf{F}_{n/m}\right]$
+\end_inset
+
+ to 
+\begin_inset Formula $n/m$
+\end_inset
+
+ blocks, each with dimension 
+\begin_inset Formula $m\times m$
+\end_inset
+
+, assuming without loss of generality 
+\begin_inset Formula $n$
+\end_inset
+
+ is a multiple of 
+\begin_inset Formula $m$
+\end_inset
+
+, and the columns are arranged in increasing degrees.
+ We then do a series of column basis computations.
+ First we compute a column basis 
+\begin_inset Formula $\mathbf{T}_{1}$
+\end_inset
+
+ of 
+\begin_inset Formula $\left[\mathbf{F}_{1},\mathbf{F}_{2}\right]$
+\end_inset
+
+.
+ Then compute a column basis 
+\begin_inset Formula $\mathbf{T}_{2}$
+\end_inset
+
+ of 
+\begin_inset Formula $\left[\mathbf{T}_{1},\mathbf{F}_{3}\right]$
+\end_inset
+
+.
+ Repeating this process, at step 
+\begin_inset Formula $i$
+\end_inset
+
+, we compute a column basis 
+\begin_inset Formula $\mathbf{T}_{i}$
+\end_inset
+
+ of 
+\begin_inset Formula $\left[\mathbf{T}_{i-1},\mathbf{F}_{i+1}\right]$
+\end_inset
+
+, until 
+\begin_inset Formula $i=n/m-1$
+\end_inset
+
+, when a column basis of 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+ is computed.
+\end_layout
+
+\begin_layout Lemma
+At step 
+\begin_inset Formula $i$
+\end_inset
+
+, computing a column basis 
+\begin_inset Formula $\mathbf{T}_{i}$
+\end_inset
+
+ of 
+\begin_inset Formula $\left[\mathbf{T}_{i-1},\mathbf{F}_{i+1}\right]$
+\end_inset
+
+ can be done with a cost of 
+\begin_inset Formula $O^{\sim}\left(m^{\omega-1}\left(\sum\cdeg\mathbf{F}_{i}+\sum\cdeg\mathbf{F}_{i+1}\right)\right)$
+\end_inset
+
+ field operations.
+\end_layout
+
+\begin_layout Proof
+From 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "lem:colBasisDegreeBoundByInputDegrees"
+
+\end_inset
+
+, the column basis 
+\begin_inset Formula $\mathbf{T}_{i-1}$
+\end_inset
+
+ of 
+\begin_inset Formula $\left[\mathbf{F}_{1},\dots,\mathbf{F}_{i}\right]$
+\end_inset
+
+ has column degrees bounded by the largest column degrees of 
+\begin_inset Formula $\mathbf{F}_{i}$
+\end_inset
+
+, hence 
+\begin_inset Formula $\sum\cdeg\mathbf{T}_{i-1}\le\sum\cdeg\mathbf{F}_{i}$
+\end_inset
+
+.
+ The lemma then follows by combining this with the result that a column
+ basis 
+\begin_inset Formula $\mathbf{T}_{i}$
+\end_inset
+
+ of 
+\begin_inset Formula $\left[\mathbf{T}_{i-1},\mathbf{F}_{i+1}\right]$
+\end_inset
+
+ can be computed with a cost of 
+\begin_inset Formula $O^{\sim}\left(m^{\omega-1}\left(\sum\cdeg\mathbf{T}_{i-1}+\sum\cdeg\mathbf{F}_{i+1}\right)\right)$
+\end_inset
+
+ from 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "thm:columnBasisCost1"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Theorem
+\begin_inset CommandInset label
+LatexCommand label
+name "thm:finalCollBasisCost"
+
+\end_inset
+
+A column basis of 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+ can be computed with a cost of 
+\begin_inset Formula $O^{\sim}\left(m^{\omega-1}\xi\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+Summing up the cost of all the column basis computations, 
+\begin_inset Formula 
+\begin{eqnarray*}
+ &  & \sum_{i=1}^{n/m-1}O^{\sim}\left(m^{\omega-1}\left(\sum\cdeg\mathbf{F}_{i}+\sum\cdeg\mathbf{F}_{i+1}\right)\right)\\
+ & \subset & O^{\sim}\left(m^{\omega-1}\left(2\sum\cdeg\mathbf{F}\right)\right)\\
+ & = & O^{\sim}\left(m^{\omega-1}\xi\right)
+\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Remark
+In this section, the computational efficiency is improved by reducing the
+ original problem to about 
+\begin_inset Formula $n/m$
+\end_inset
+
+ subproblems whose column dimensions are close to the row dimension 
+\begin_inset Formula $m$
+\end_inset
+
+.
+ This is done by successive column basis computations.
+ Note that we can also reduce the column dimension by using successive order
+ basis computations, and only do a column basis computation at the very
+ last step.
+ The computational complexity of using order basis computation to reduce
+ the column dimension would remain the same, but in practice it maybe more
+ efficient since order basis computations are simpler.
+\end_layout
+
+\begin_layout Section
+Conclusion
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Future-Research"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In this paper we have presented a fast, deterministic procedure for computing
+ a column basis of a polynomial matrix.
+ 
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+For a number of extensions and applications of this work, and for other
+ related results, 
+\begin_inset Note Comment
+status collapsed
+
+\begin_layout Plain Layout
+including the removal of the ceiling function in the cost, rank sensitive
+ computation, computing determinant, matrix inverse, matrix GCD/column reduced
+ form/Popov normal form/Hermite normal form, unimodular completion) 
+\end_layout
+
+\end_inset
+
+we refer the readers to the upcoming PhD thesis of the first author.
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+bibfiles "paper"
+options "plainnat"
+
+\end_inset
+
+
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+
+\size scriptsize
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{thebibliography}{19}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+providecommand{
+\backslash
+natexlab}[1]{#1}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+providecommand{
+\backslash
+url}[1]{
+\backslash
+texttt{#1}}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+expandafter
+\backslash
+ifx
+\backslash
+csname urlstyle
+\backslash
+endcsname
+\backslash
+relax
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+providecommand{
+\backslash
+doi}[1]{doi: #1}
+\backslash
+else
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+providecommand{
+\backslash
+doi}{doi: 
+\backslash
+begingroup 
+\backslash
+urlstyle{rm}
+\backslash
+Url}
+\backslash
+fi
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+bibitem[Beckermann and Labahn(1994)]{BeLa94}
+\end_layout
+
+\begin_layout Plain Layout
+
+B.~Beckermann and G.~Labahn.
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+newblock A uniform approach for the fast computation of matrix-type {Pad{
+\backslash
+'e}}
+\end_layout
+
+\begin_layout Plain Layout
+
+  approximants.
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+newblock 
+\backslash
+emph{SIAM Journal on Matrix Analysis and Applications}, 15
+\backslash
+penalty0
+\end_layout
+
+\begin_layout Plain Layout
+
+  (3):
+\backslash
+penalty0 804--823, 1994.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+bibitem[Beckermann and Labahn(1997)]{BL1997}
+\end_layout
+
+\begin_layout Plain Layout
+
+B.~Beckermann and G.~Labahn.
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+newblock Recursiveness in matrix rational interpolation problems.
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+newblock 
+\backslash
+emph{Journal of Computational and Applied Math}, 5-34, 1997.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+bibitem[Beckermann et~al.(1999)Beckermann, Labahn, and Villard]{BLV:1999}
+\end_layout
+
+\begin_layout Plain Layout
+
+B.~Beckermann, G.~Labahn, and G.~Villard.
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+newblock Shifted normal forms of polynomial matrices.
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+newblock In 
+\backslash
+emph{Proceedings of the International Symposium on Symbolic and
+\end_layout
+
+\begin_layout Plain Layout
+
+  Algebraic Computation}, ISSAC'99, pages 189--196, 1999.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+bibitem[Beckermann et~al.(2006)Beckermann, Labahn, and Villard]{BLV:jsc06}
+\end_layout
+
+\begin_layout Plain Layout
+
+B.~Beckermann, G.~Labahn, and G.~Villard.
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+newblock Normal forms for general polynomial matrices.
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+newblock 
+\backslash
+emph{Journal of Symbolic Computation}, 41
+\backslash
+penalty0 (6):
+\backslash
+penalty0
+\end_layout
+
+\begin_layout Plain Layout
+
+  708--737, 2006.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+bibitem[Beelen and Dooren(1988)]{beelen:1988}
+\end_layout
+
+\begin_layout Plain Layout
+
+Th.
+ G.~J.
+ Beelen and P.M.~Van Dooren.
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+newblock An improved algorithm for the computation of kronecker's canonical
+\end_layout
+
+\begin_layout Plain Layout
+
+  form of a singular pencil.
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+newblock 
+\backslash
+emph{Linear Algebra and its Applications}, 105:
+\backslash
+penalty0 9--65,
+\end_layout
+
+\begin_layout Plain Layout
+
+  1988.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+bibitem[Beelen et~al.(1988)Beelen, van~den Hurk, and Praagman]{BVP:1988}
+\end_layout
+
+\begin_layout Plain Layout
+
+Th.
+ G.~J.
+ Beelen, G.~J.
+ van~den Hurk, and C.~Praagman.
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+newblock A new method for computing a column reduced polynomial matrix.
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+newblock 
+\backslash
+emph{System Control Letters}, 10
+\backslash
+penalty0 (4):
+\backslash
+penalty0 217--224,
+\end_layout
+
+\begin_layout Plain Layout
+
+  1988.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+bibitem[Forney(1975)]{forney:1975}
+\end_layout
+
+\begin_layout Plain Layout
+
+G.D.
+ Forney.
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+newblock Minimal bases of rational vector spaces, with applications to
+\end_layout
+
+\begin_layout Plain Layout
+
+  multivariable linear systems.
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+newblock 
+\backslash
+emph{SIAM Journal of Control}, 13:
+\backslash
+penalty0 493--520, 1975.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+bibitem[Frisk(2001)]{frisk:phd}
+\end_layout
+
+\begin_layout Plain Layout
+
+E~Frisk.
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+newblock 
+\backslash
+emph{Residual Generation for Fault Diagnostics}.
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+newblock PhD thesis, Link
+\backslash
+"oping, University, Sweden, 2001.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+bibitem[Giorgi et~al.(2003)Giorgi, Jeannerod, and Villard]{Giorgi2003}
+\end_layout
+
+\begin_layout Plain Layout
+
+P.~Giorgi, C.-P.
+ Jeannerod, and G.~Villard.
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+newblock On the complexity of polynomial matrix computations.
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+newblock In 
+\backslash
+emph{{Proceedings of the International Symposium on Symbolic and
+\end_layout
+
+\begin_layout Plain Layout
+
+  Algebraic Computation, Philadelphia, Pennsylvania, USA}}, pages 135--142.
+ ACM
+\end_layout
+
+\begin_layout Plain Layout
+
+  Press, 2003.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+bibitem[Jeannerod and Villard(2005)]{jeannerod-villard:05}
+\end_layout
+
+\begin_layout Plain Layout
+
+C.~P.
+ Jeannerod and G.~Villard.
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+newblock Essentially optimal computation of the inverse of generic polynomial
+\end_layout
+
+\begin_layout Plain Layout
+
+  matrices.
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+newblock 
+\backslash
+emph{Journal of Complexity}, 21
+\backslash
+penalty0 (1):
+\backslash
+penalty0 72--86, 2005.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+bibitem[Jeannerod and Villard(2006)]{JV2006}
+\end_layout
+
+\begin_layout Plain Layout
+
+C.-P.
+ Jeannerod and G.~Villard.
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+newblock Asymptotically fast polynomial matrix algorithms for multivariable
+\end_layout
+
+\begin_layout Plain Layout
+
+  systems.
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+newblock 
+\backslash
+emph{Int.
+ J.
+ Control}, 79(11):
+\backslash
+penalty0 1359-- 1367, 2006.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+bibitem[Kailath(1980)]{kailath:1980}
+\end_layout
+
+\begin_layout Plain Layout
+
+T.~Kailath.
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+newblock 
+\backslash
+emph{Linear Systems}.
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+newblock Prentice-Hall, 1980.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+bibitem[Kucera(1979)]{kucera:1979}
+\end_layout
+
+\begin_layout Plain Layout
+
+V~Kucera.
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+newblock 
+\backslash
+emph{Discrete Linear Control : The Polynomial Equation Approach}.
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+newblock John Wiley and Sons, 1979.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+bibitem[Misra et~al.(1994)Misra, Dooren, and Varga]{varga:1994}
+\end_layout
+
+\begin_layout Plain Layout
+
+P.~Misra, P.~Van Dooren, and A.~Varga.
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+newblock Computation of structural invariants of generalized state-space
+\end_layout
+
+\begin_layout Plain Layout
+
+  systems.
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+newblock 
+\backslash
+emph{Automatica}, 30:
+\backslash
+penalty0 1921--1936, 1994.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+bibitem[Oara and Dooren(1997)]{Oara:1997}
+\end_layout
+
+\begin_layout Plain Layout
+
+C.~Oara and P.~Van Dooren.
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+newblock An improved algorithm for the computation of structural invariants
+ of
+\end_layout
+
+\begin_layout Plain Layout
+
+  a system pencil and related geometric aspects.
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+newblock 
+\backslash
+emph{Systems and Control Letters}, 30:
+\backslash
+penalty0 38--48, 1997.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+bibitem[Storjohann and Villard(2005)]{storjohann-villard:2005}
+\end_layout
+
+\begin_layout Plain Layout
+
+A.~Storjohann and G.~Villard.
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+newblock Computing the rank and a small nullspace basis of a polynomial
+\end_layout
+
+\begin_layout Plain Layout
+
+  matrix.
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+newblock In 
+\backslash
+emph{Proceedings of the International Symposium on Symbolic and
+\end_layout
+
+\begin_layout Plain Layout
+
+  Algebraic Computation}, ISSAC'05, pages 309--316, 2005.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+bibitem[von~zur Gathen and Gerhard(2003)]{vonzurgathen}
+\end_layout
+
+\begin_layout Plain Layout
+
+J.~von~zur Gathen and J~Gerhard.
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+newblock 
+\backslash
+emph{Modern Computer Algebra}.
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+newblock Cambridge University Press, 2nd edition, 2003.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+bibitem[Zhou and Labahn(2009)]{za2009}
+\end_layout
+
+\begin_layout Plain Layout
+
+W.~Zhou and G.~Labahn.
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+newblock Efficient computation of order bases.
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+newblock In 
+\backslash
+emph{Proceedings of the International Symposium on Symbolic and
+\end_layout
+
+\begin_layout Plain Layout
+
+  Algebraic Computation}, ISSAC'09, pages 375--382.
+ ACM, 2009.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+bibitem[Zhou and Labahn(2012)]{ZL2012}
+\end_layout
+
+\begin_layout Plain Layout
+
+W.~Zhou and G.~Labahn.
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+newblock Efficient algorithms for order basis computation.
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+newblock 
+\backslash
+emph{Journal of Symbolic Computation}, 47:
+\backslash
+penalty0 793--819, 2012.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{thebibliography}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document
