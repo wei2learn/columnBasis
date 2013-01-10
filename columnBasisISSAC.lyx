@@ -584,17 +584,61 @@ forms a
 \end_inset
 
 .
- When the row dimension 
-\begin_inset Formula $m=1$
-\end_inset
-
-, a column basis becomes the standard polynomial GCD.
  We represent column bases using matrices, with columns being the basis
  elements.
 \end_layout
 
+\begin_layout Example
+\begin_inset CommandInset label
+LatexCommand label
+name "exm:columnBasis"
+
+\end_inset
+
+Let 
+\begin_inset Formula $\mathbb{K}=\mathbb{Z}_{2}$
+\end_inset
+
+ and 
+\begin_inset Formula 
+\[
+\mathbf{F}=\left[\begin{array}{cccc}
+x^{2} & x^{2} & x+x^{2} & 1+x^{2}\\
+1+x+x^{2} & x^{2} & 1+x^{2} & 1+x^{2}
+\end{array}\right].
+\]
+
+\end_inset
+
+ Then the matrix 
+\begin_inset Formula 
+\[
+\left[\begin{array}{cc}
+x+x^{2} & 1\\
+1+x^{2} & 1
+\end{array}\right]
+\]
+
+\end_inset
+
+ is a column basis of 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+ that generates the same module as the columns of 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+.
+\end_layout
+
 \begin_layout Standard
-GCD is one of the most fundamental subject in algebra and computer algebra
+When the row dimension 
+\begin_inset Formula $m=1$
+\end_inset
+
+, a column basis becomes the standard polynomial GCD.
+ GCD is one of the most fundamental subject in algebra and computer algebra
  and has been extensively studied.
  As a generalization of polynomial GCD and matrix GCD, column bases are
  also fundamental in polynomial matrix computations.
@@ -632,7 +676,65 @@ Note that column bases are not unique.
  constraints.
  A column reduced form gives a special column basis whose column degrees
  are the smallest possible.
- The Popov form is a special unique column reduced form satisfying additional
+ In 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "exm:columnBasis"
+
+\end_inset
+
+, the matrix 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula 
+\[
+\left[\begin{array}{cccc}
+x & 1 & 0 & 0\\
+1 & 1 & 0 & 0
+\end{array}\right]
+\]
+
+\end_inset
+
+ is a column reduced form of 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+, and its submatrix 
+\begin_inset Formula 
+\[
+\begin{bmatrix}x & 1\\
+1 & 1
+\end{bmatrix}
+\]
+
+\end_inset
+
+ consists of its nonzero columns is a column basis with the smallest possible
+ column degrees.
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+The Popov form is a special unique column reduced form satisfying additional
  conditions.
  The Hermite normal form provides another special unique column basis that
  is triangular and has a different type of minimal column degrees.
@@ -2254,7 +2356,7 @@ Let
 \end_layout
 
 \begin_layout Section
-Computing Column Bases
+From Kernel Basis to Column Basis
 \end_layout
 
 \begin_layout Standard
@@ -2947,7 +3049,7 @@ reference "cor:unimodular_kernel_columnBasis2"
 \begin_inset Formula $\mathbf{U}_{L}$
 \end_inset
 
- is any right kernel basis 
+ is any right kernel basis of 
 \begin_inset Formula $\mathbf{F}$
 \end_inset
 
@@ -2977,6 +3079,13 @@ reference "cor:unimodular_kernel_columnBasis2"
 
 
 \series default
+ by 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "cor:unimodular_kernel_columnBasis2"
+
+\end_inset
+
 , any other left kernel basis 
 \begin_inset Formula $\mathbf{G}$
 \end_inset
@@ -3637,6 +3746,79 @@ reference "lem:matrixGCD"
  does not require the bases computed to be minimal, working with minimal
  bases keeps the degrees well-managed and helps to make the computation
  efficient.
+\end_layout
+
+\begin_layout Example
+Let 
+\begin_inset Formula 
+\[
+\mathbf{F}=\left[\begin{array}{cccc}
+x^{2} & x^{2} & x+x^{2} & 1+x^{2}\\
+1+x+x^{2} & x^{2} & 1+x^{2} & 1+x^{2}
+\end{array}\right]
+\]
+
+\end_inset
+
+ as before.
+ The matrix 
+\begin_inset Formula 
+\[
+\mathbf{N}=\left[\begin{array}{cc}
+x & 1\\
+1 & x\\
+x & 1\\
+0 & x
+\end{array}\right]
+\]
+
+\end_inset
+
+ is a right kernel basis of 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+.
+ The matrix 
+\begin_inset Formula 
+\[
+\mathbf{G}=\left[\begin{array}{cccc}
+1 & 0 & 1 & 0\\
+\noalign{\medskip}x & {x}^{2} & 0 & 1+{x}^{2}
+\end{array}\right]
+\]
+
+\end_inset
+
+ is a left kernel basis of 
+\begin_inset Formula $\mathbf{N}$
+\end_inset
+
+.
+ Then the matrix 
+\begin_inset Formula 
+\[
+\mathbf{T}=\left[\begin{array}{cc}
+x+x^{2} & 1\\
+1+x^{2} & 1
+\end{array}\right]
+\]
+
+\end_inset
+
+
+\size tiny
+ 
+\size default
+satisfies 
+\begin_inset Formula $\mathbf{F}=\mathbf{T}\mathbf{G}$
+\end_inset
+
+, and is a column basis of 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Section
@@ -5864,6 +6046,87 @@ Finally, a
 \end_inset
 
 
+\end_layout
+
+\begin_layout Example
+Let 
+\begin_inset Formula 
+\[
+\mathbf{F}=\left[\begin{array}{cccc}
+x^{2} & x^{2} & x+x^{2} & 1+x^{2}\\
+1+x+x^{2} & x^{2} & 1+x^{2} & 1+x^{2}
+\end{array}\right].
+\]
+
+\end_inset
+
+ Let 
+\begin_inset Formula 
+\[
+\mathbf{G}=\left[\begin{array}{cccc}
+1 & 0 & 1 & 0\\
+\noalign{\medskip}x & {x}^{2} & 0 & 1+{x}^{2}
+\end{array}\right]
+\]
+
+\end_inset
+
+be a left kernel basis of a right kernel basis of 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+.
+ To compute the column basis 
+\begin_inset Formula $\mathbf{T}$
+\end_inset
+
+ satisfying 
+\begin_inset Formula $\mathbf{F}=\mathbf{T}\mathbf{G}$
+\end_inset
+
+, first we can determine 
+\begin_inset Formula $\cdeg\mathbf{T}\le\vec{t}=\left[2,0\right]$
+\end_inset
+
+ from 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "lem:colBasisdegreeBoundByRdegOfRightFactor"
+
+\end_inset
+
+.
+ Then we can compute a 
+\begin_inset Formula $\left[0,0,-\vec{t}\right]$
+\end_inset
+
+-minimal left kernel basis of 
+\begin_inset Formula $\begin{bmatrix}\mathbf{F}\\
+\mathbf{G}
+\end{bmatrix}$
+\end_inset
+
+.
+ The matrix 
+\begin_inset Formula 
+\[
+\left[V,\bar{\mathbf{T}}\right]=\left[\begin{array}{cccc}
+\noalign{\medskip}1 & 0 & x+{x}^{2} & 1\\
+1 & 1 & 1+x & 0
+\end{array}\right]
+\]
+
+\end_inset
+
+ is such a left kernel basis.
+ Then a column basis can be computed by 
+\begin_inset Formula $\mathbf{T}=V^{-1}\bar{\mathbf{T}}=\left[\begin{array}{cc}
+x+x^{2} & 1\\
+1+{x}^{2} & 1
+\end{array}\right]$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard

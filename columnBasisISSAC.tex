@@ -32,6 +32,7 @@
 \renewcommand{\algorithmicensure}{\textbf{Output:}}
 
  \newtheorem{thm}{Theorem}[section]
+ \newtheorem{exmp}[thm]{Example}
  \newtheorem{lem}[thm]{Lemma}
  \newtheorem{defn}[thm]{Definition}
  \newtheorem{cor}[thm]{Corollary}
@@ -124,15 +125,32 @@ of polynomials over a field $\mathbb{K}$. The set
 \left\{ \mathbf{p}\in\mathbb{K}\left[x\right]^{n}~|~\mathbf{F}\mathbf{p}=0\right\} 
 \]
 forms a $\mathbb{K}[x]$-module. We call any basis of this module
-a column basis of $\mathbf{F}$. When the row dimension $m=1$, a
-column basis becomes the standard polynomial GCD. We represent column
-bases using matrices, with columns being the basis elements.
-
-GCD is one of the most fundamental subject in algebra and computer
-algebra and has been extensively studied. As a generalization of polynomial
-GCD and matrix GCD, column bases are also fundamental in polynomial
-matrix computations. Column basis computation provides a deterministic
-alternative to randomized lattice compression \citep{li:2006,storjohann-villard:2005}.
+a column basis of $\mathbf{F}$. We represent column bases using matrices,
+with columns being the basis elements.
+\begin{exmp}
+\label{exm:columnBasis}Let $\mathbb{K}=\mathbb{Z}_{2}$ and 
+\[
+\mathbf{F}=\left[\begin{array}{cccc}
+x^{2} & x^{2} & x+x^{2} & 1+x^{2}\\
+1+x+x^{2} & x^{2} & 1+x^{2} & 1+x^{2}
+\end{array}\right].
+\]
+ Then the matrix 
+\[
+\left[\begin{array}{cc}
+x+x^{2} & 1\\
+1+x^{2} & 1
+\end{array}\right]
+\]
+ is a column basis of $\mathbf{F}$ that generates the same module
+as the columns of $\mathbf{F}$.
+\end{exmp}
+When the row dimension $m=1$, a column basis becomes the standard
+polynomial GCD. GCD is one of the most fundamental subject in algebra
+and computer algebra and has been extensively studied. As a generalization
+of polynomial GCD and matrix GCD, column bases are also fundamental
+in polynomial matrix computations. Column basis computation provides
+a deterministic alternative to randomized lattice compression \citep{li:2006,storjohann-villard:2005}.
 It also helps us to deterministically compute matrix determinants
 and Hermite normal forms, and to deterministically compute column
 reduced forms and Popov normal forms for matrices of any dimension
@@ -146,10 +164,24 @@ of the input matrix. In fact, the nonzero columns of column reduced
 forms, Popov normal forms, and Hermite normal forms are all column
 bases satisfying additional degree constraints. A column reduced form
 gives a special column basis whose column degrees are the smallest
-possible. The Popov form is a special unique column reduced form satisfying
-additional conditions. The Hermite normal form provides another special
-unique column basis that is triangular and has a different type of
-minimal column degrees.
+possible. In \prettyref{exm:columnBasis}, the matrix 
+\[
+\left[\begin{array}{cccc}
+x & 1 & 0 & 0\\
+1 & 1 & 0 & 0
+\end{array}\right]
+\]
+ is a column reduced form of $\mathbf{F}$, and its submatrix 
+\[
+\begin{bmatrix}x & 1\\
+1 & 1
+\end{bmatrix}
+\]
+ consists of its nonzero columns is a column basis with the smallest
+possible column degrees. The Popov form is a special unique column
+reduced form satisfying additional conditions. The Hermite normal
+form provides another special unique column basis that is triangular
+and has a different type of minimal column degrees.
 
 
 \section{Preliminaries}
@@ -385,7 +417,7 @@ is a $\left(\mathbf{G},\vec{t}\right)$-kernel basis $\vec{t}$-column
 degrees $\vec{v}$.
 \end{thm}
 
-\section{Computing Column Bases}
+\section{From Kernel Basis to Column Basis}
 
 Before discussing the efficient computation of column basis, it is
 useful to look at following relationship between column basis, kernel
@@ -478,11 +510,12 @@ Let the matrix $\mathbf{U}=\begin{bmatrix}\mathbf{U}_{L},\mathbf{U}_{R}\end{bmat
 from \prettyref{cor:unimodular_kernel_columnBasis2} be a unimodular
 matrix that transforms $\mathbf{F}$ to a column basis $\mathbf{B}\in\mathbb{K}\left[x\right]^{m\times r}$
 of $\mathbf{F}$, where $\mathbf{U}_{L}$ is any right kernel basis
-$\mathbf{F}$. From $\mathbf{F}\mathbf{U}=\left[0,\mathbf{B}\right]$,
+of $\mathbf{F}$. From $\mathbf{F}\mathbf{U}=\left[0,\mathbf{B}\right]$,
 we get\textbf{ $\mathbf{F}=\left[0,\mathbf{B}\right]\mathbf{U}^{-1}=\mathbf{B}\left[0,I\right]\mathbf{V}=\mathbf{B}\mathbf{V}_{D}$}.
-Since $\mathbf{V}_{D}$ is a left kernel basis of\textbf{ $\mathbf{U}_{L}$},
-any other left kernel basis $\mathbf{G}$ of $\mathbf{U}_{L}$ is
-unimodularly equivalent to $\mathbf{V}_{D}$, that is, $\mathbf{V}_{D}=\mathbf{W}\mathbf{G}$
+Since $\mathbf{V}_{D}$ is a left kernel basis of\textbf{ $\mathbf{U}_{L}$}
+by \prettyref{cor:unimodular_kernel_columnBasis2}, any other left
+kernel basis $\mathbf{G}$ of $\mathbf{U}_{L}$ is unimodularly equivalent
+to $\mathbf{V}_{D}$, that is, $\mathbf{V}_{D}=\mathbf{W}\mathbf{G}$
 for some unimodular matrix $\mathbf{W}$. Now $\mathbf{F}=\mathbf{B}\mathbf{W}\mathbf{G}$,
 where $\mathbf{BW}=\mathbf{T}$ a column basis of $\mathbf{F}$ since
 it is unimodularly equivalent to the column basis $\mathbf{B}$.
@@ -500,7 +533,40 @@ basis $\mathbf{T}$ from $\mathbf{F}$ and $\mathbf{G}$. Note that
 while \prettyref{lem:matrixGCD} does not require the bases computed
 to be minimal, working with minimal bases keeps the degrees well-managed
 and helps to make the computation efficient.
-
+\begin{exmp}
+Let 
+\[
+\mathbf{F}=\left[\begin{array}{cccc}
+x^{2} & x^{2} & x+x^{2} & 1+x^{2}\\
+1+x+x^{2} & x^{2} & 1+x^{2} & 1+x^{2}
+\end{array}\right]
+\]
+ as before. The matrix 
+\[
+\mathbf{N}=\left[\begin{array}{cc}
+x & 1\\
+1 & x\\
+x & 1\\
+0 & x
+\end{array}\right]
+\]
+ is a right kernel basis of $\mathbf{F}$. The matrix 
+\[
+\mathbf{G}=\left[\begin{array}{cccc}
+1 & 0 & 1 & 0\\
+\noalign{\medskip}x & {x}^{2} & 0 & 1+{x}^{2}
+\end{array}\right]
+\]
+ is a left kernel basis of $\mathbf{N}$. Then the matrix 
+\[
+\mathbf{T}=\left[\begin{array}{cc}
+x+x^{2} & 1\\
+1+x^{2} & 1
+\end{array}\right]
+\]
+{\tiny{} }satisfies $\mathbf{F}=\mathbf{T}\mathbf{G}$, and is a column
+basis of $\mathbf{F}$.
+\end{exmp}
 
 \section{\label{sec:computeRightFactor}Computing a Right Factor}
 
@@ -812,8 +878,42 @@ must have $\begin{bmatrix}V\\
 \end{bmatrix}V$, which gives $\mathbf{T}=\left(\bar{\mathbf{T}}V^{-1}\right)^{T}$.
 Also note that the $-\vec{t}'$-minimality forces the unimodular matrix
 $V$ in any $\left(\left[\mathbf{F}^{T},\mathbf{G}^{T}\right],-\vec{t}'\right)$-kernel
-basis to be the same degree as $I$.
-\end{proof}
+basis to be the same degree as $I$.\end{proof}
+\begin{exmp}
+Let 
+\[
+\mathbf{F}=\left[\begin{array}{cccc}
+x^{2} & x^{2} & x+x^{2} & 1+x^{2}\\
+1+x+x^{2} & x^{2} & 1+x^{2} & 1+x^{2}
+\end{array}\right].
+\]
+ Let 
+\[
+\mathbf{G}=\left[\begin{array}{cccc}
+1 & 0 & 1 & 0\\
+\noalign{\medskip}x & {x}^{2} & 0 & 1+{x}^{2}
+\end{array}\right]
+\]
+be a left kernel basis of a right kernel basis of $\mathbf{F}$. To
+compute the column basis $\mathbf{T}$ satisfying $\mathbf{F}=\mathbf{T}\mathbf{G}$,
+first we can determine $\cdeg\mathbf{T}\le\vec{t}=\left[2,0\right]$
+from \prettyref{lem:colBasisdegreeBoundByRdegOfRightFactor}. Then
+we can compute a $\left[0,0,-\vec{t}\right]$-minimal left kernel
+basis of $\begin{bmatrix}\mathbf{F}\\
+\mathbf{G}
+\end{bmatrix}$. The matrix 
+\[
+\left[V,\bar{\mathbf{T}}\right]=\left[\begin{array}{cccc}
+\noalign{\medskip}1 & 0 & x+{x}^{2} & 1\\
+1 & 1 & 1+x & 0
+\end{array}\right]
+\]
+ is such a left kernel basis. Then a column basis can be computed
+by $\mathbf{T}=V^{-1}\bar{\mathbf{T}}=\left[\begin{array}{cc}
+x+x^{2} & 1\\
+1+{x}^{2} & 1
+\end{array}\right]$.
+\end{exmp}
 To compute a $\left(\left[\mathbf{F}^{T},\mathbf{G}^{T}\right],-\vec{t}'\right)$-kernel
 basis, we can again use order basis computation.
 \begin{lem}
