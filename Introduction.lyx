@@ -239,7 +239,7 @@ In this paper we give a fast, deterministic algorithm for the computation
 \end_inset
 
  having complexity 
-\begin_inset Formula $O^{\sim}\left(n^{\omega}s\right)$
+\begin_inset Formula $O^{\sim}\left(nm^{\omega-1}s\right)$
 \end_inset
 
  field operations in 

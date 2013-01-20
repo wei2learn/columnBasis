@@ -114,6 +114,19 @@ key "za2012"
 \end_layout
 
 \begin_layout Standard
+For a number of applications of column basis computation, including efficient
+ deterministic computations of column reduced form, Popov normal form, Hermite
+ normal form, and determinant, we refer the readers to the thesis 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "zhou:phd2012"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
 \begin_inset ERT
 status collapsed
 

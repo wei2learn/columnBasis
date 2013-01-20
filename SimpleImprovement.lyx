@@ -148,7 +148,12 @@ When the input matrix
 \end_layout
 
 \begin_layout Lemma
-At step 
+Let 
+\begin_inset Formula $\bar{s}_{i}=\left(\sum\cdeg\mathbf{F}_{i}\right)/m$
+\end_inset
+
+.
+ Then at step 
 \begin_inset Formula $i$
 \end_inset
 
@@ -161,14 +166,10 @@ At step
 \end_inset
 
  can be done with a cost of 
-\begin_inset Formula $O^{\sim}\left(m^{\omega}(s_{i}+s_{i+1})/2\right)$
+\begin_inset Formula $O^{\sim}\left(m^{\omega}(\bar{s}_{i}+\bar{s}_{i+1})/2\right)$
 \end_inset
 
- field operations, where 
-\begin_inset Formula $s_{i}=\left(\sum\cdeg\mathbf{F}_{i}\right)/m$
-\end_inset
-
-.
+ field operations.
 \end_layout
 
 \begin_layout Proof
@@ -212,13 +213,13 @@ reference "thm:columnBasisCost1"
 \end_inset
 
  can be computed with a cost of 
-\begin_inset Formula $O^{\sim}\left(m^{\omega}\bar{s}\right)$
+\begin_inset Formula $O^{\sim}\left(m^{\omega}\hat{s}_{i}\right)$
 \end_inset
 
 , where 
 \begin_inset Formula 
 \[
-\bar{s}=\left(\sum\cdeg\mathbf{T}_{i-1}+\sum\cdeg\mathbf{F}_{i+1}\right)/2m\le\left(s_{i}+s_{i+1}\right)/2.
+\hat{s}_{i}=\left(\sum\cdeg\mathbf{T}_{i-1}+\sum\cdeg\mathbf{F}_{i+1}\right)/2m\le\left(\bar{s}_{i}+\bar{s}_{i+1}\right)/2.
 \]
 
 \end_inset
@@ -227,6 +228,11 @@ reference "thm:columnBasisCost1"
 \end_layout
 
 \begin_layout Theorem
+If 
+\begin_inset Formula $s=\left(\sum\cdeg\mathbf{F}\right)/n$
+\end_inset
+
+, then 
 \begin_inset CommandInset label
 LatexCommand label
 name "thm:finalCollBasisCost"
@@ -241,22 +247,23 @@ A column basis of
 \begin_inset Formula $O^{\sim}\left(m^{\omega}s\right)$
 \end_inset
 
-, where 
-\begin_inset Formula $s=\left(\sum\cdeg\mathbf{F}\right)/n$
-\end_inset
-
 .
+ 
 \end_layout
 
 \begin_layout Proof
 Summing up the cost of all the column basis computations, 
 \begin_inset Formula 
 \begin{eqnarray*}
- &  & \sum_{i=1}^{n/m-1}O^{\sim}\left(m^{\omega}\left(s_{i}+s_{i+1}\right)/2\right)\\
- &  & ~~~~~~~~~~~~~\subset O^{\sim}\left(m^{\omega}\left(\sum_{i=1}^{n/m}s_{i}\right)/(n/m)\right)\\
- &  & ~~~~~~~~~~~~~=O^{\sim}\left(m^{\omega}s\right).
+ &  & \sum_{i=1}^{n/m-1}O^{\sim}\left(m^{\omega}\left(\bar{s}_{i}+\bar{s}_{i+1}\right)/2\right)\\
+ &  & ~~~~~~~~~~~~~\subset O^{\sim}\left(m^{\omega}\left(\sum_{i=1}^{n/m}\bar{s}_{i}\right)\right)\\
+ &  & ~~~~~~~~~~~~~=O^{\sim}\left(nm^{\omega-1}s\right),
 \end{eqnarray*}
 
+\end_inset
+
+ since 
+\begin_inset Formula $\sum\cdeg\mathbf{F}=\sum_{i=1}^{n/m}\left(m\bar{s}_{i}\right)=ns.$
 \end_inset
 
 
