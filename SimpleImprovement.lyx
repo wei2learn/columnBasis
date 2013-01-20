@@ -252,12 +252,30 @@ A column basis of
 \end_layout
 
 \begin_layout Proof
-Summing up the cost of all the column basis computations, 
+Summing up the cost of all the column basis computations,
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
 \begin_inset Formula 
 \begin{eqnarray*}
  &  & \sum_{i=1}^{n/m-1}O^{\sim}\left(m^{\omega}\left(\bar{s}_{i}+\bar{s}_{i+1}\right)/2\right)\\
  &  & ~~~~~~~~~~~~~\subset O^{\sim}\left(m^{\omega}\left(\sum_{i=1}^{n/m}\bar{s}_{i}\right)\right)\\
  &  & ~~~~~~~~~~~~~=O^{\sim}\left(nm^{\omega-1}s\right),
+\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Formula 
+\begin{eqnarray*}
+ &  & \sum_{i=1}^{n/m-1}O^{\sim}\left(m^{\omega}\left(\bar{s}_{i}+\bar{s}_{i+1}\right)/2\right)\\
+ & \subset & O^{\sim}\left(m^{\omega}\left(\sum_{i=1}^{n/m}\bar{s}_{i}\right)\right)=O^{\sim}\left(nm^{\omega-1}s\right),
 \end{eqnarray*}
 
 \end_inset

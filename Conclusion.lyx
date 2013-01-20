@@ -114,9 +114,10 @@ key "za2012"
 \end_layout
 
 \begin_layout Standard
-For a number of applications of column basis computation, including efficient
- deterministic computations of column reduced form, Popov normal form, Hermite
- normal form, and determinant, we refer the readers to the thesis 
+For some applications of column basis computation, including efficient determini
+stic computations of matrix determinant, Hermite form, and computations
+ of column reduced form and Popov form for matrices of any rank and any
+ dimension, we refer the readers to the thesis 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "zhou:phd2012"
