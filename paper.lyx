@@ -1,0 +1,717 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass sig-alternate
+\begin_preamble
+%\usepackage{yjsco}\journal{JournalofSymbolicComputation}
+
+\renewcommand{\algorithmicrequire}{\textbf{Input:}}\renewcommand{\algorithmicensure}{\textbf{Output:}}
+%\renewcommand{\algorithmicensure}{\textbf{if}}\renewcommand{\algorithmicensure}{\textbf{Uses:}}
+
+%\def\diag{\mbox{diag}}\def\cdeg{\qopname\relax n{cdeg}}
+\def\MM{\qopname\relax n{MM}}\def\M{\qopname\relax n{M}}
+%\def\ord{\qopname\relax n{ord}}
+
+\def\StorjohannTransform{\qopname\relax n{StorjohannTransform}}\def\TransformUnbalanced{\qopname\relax n{TransformUnbalanced}}\def\rowDimension{\qopname\relax n{rowDimension}}\def\columnDimension{\qopname\relax n{columnDimension}}\DeclareMathOperator{\re}{rem}\DeclareMathOperator{\coeff}{coeff}\DeclareMathOperator{\lcoeff}{lcoeff}\def\mab{\qopname\relax n{orderBasis}}\def\mmab{\qopname\relax n{FastBasis}}\def\umab{\qopname\relax n{UnbalancedFastBasis}}\newcommand{\bb}{\\}
+\def\mnb{\qopname\relax n{MinimalNullspaceBasis ~ }}
+\DeclareMathOperator{\mnbr}{minimaKernelBasisReversed}
+%\def\rdeg{\qopname\relax n{rdeg}}
+\DeclareMathOperator{\colBasis}{colBasis}
+
+
+\makeatother
+\newcommand{\arne}[1]{{\color{blue}\it {\bf Arne:} #1 }}
+\newcommand{\wei}[1]{{\color{red}\it {\bf Wei:} #1}}
+\newcommand{\george}[1]{{\color{green}\it {\bf George:} #1}}
+\def\newblock{\hskip .11em plus .33em minus .07em}
+
+
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\K}{ {\rm K}}
+\newcommand{\revCol}{ {\rm revCol}}
+\newcommand{\bigO}{\mathcal{O}}
+\newcommand{\tbigO}{\widetilde{\mathcal{O}}}
+\newcommand{\cL}{\mathcal{L}}
+\newcommand{\ocL}{\overline{\mathcal{L}}}
+\newcommand{\tcL}{\widetilde{\mathcal{L}}}
+\newcommand{\cA}{\mathcal{A}}
+\newcommand{\oA}{\overline{A}}
+\newcommand{\GL}{{\rm GL}\,}
+\newcommand{\rank}{{\rm rank}\,}
+\newcommand{\cdeg}{{\rm cdeg}\,}
+\newcommand{\rdeg}{{\rm rdeg}\,}
+\newcommand{\diag}{{\rm diag}\,}
+\newcommand{\val}{{\rm val}\,}
+\newcommand{\ord}{{\rm ord}\,}
+\newcommand{\abs}[1]{\lvert#1\rvert}
+
+
+\newrefformat{eq}{\textup{(\ref{#1})}}
+\newrefformat{lem}{Lemma \ref{#1}}
+\newrefformat{cla}{Claim \ref{#1}}
+\newrefformat{thm}{Theorem \ref{#1}}
+\newrefformat{cha}{Chapter \ref{#1}}
+\newrefformat{sec}{Section \ref{#1}}
+\newrefformat{rem}{Remark \ref{#1}}
+\newrefformat{fac}{Fact \ref{#1}}
+\newrefformat{sub}{Subsection \ref{#1}}
+\newrefformat{cor}{Corollary \ref{#1}}
+\newrefformat{cond}{Condition \ref{#1}}
+\newrefformat{con}{Conjecture \ref{#1}}
+\newrefformat{def}{Definition \ref{#1}}
+\newrefformat{pro}{Proposition \ref{#1}}
+\newrefformat{alg}{Algorithm \ref{#1}}
+\newrefformat{exm}{Example \ref{#1}}
+\newrefformat{line}{line \ref{#1}}
+\newrefformat{tab}{Table \ref{#1} on page \pageref{#1}}
+\newrefformat{fig}{Figure \ref{#1} on page \pageref{#1}}
+\end_preamble
+\use_default_options false
+\begin_modules
+algorithmics
+\end_modules
+\maintain_unincluded_children false
+\language english
+\language_package none
+\inputencoding latin9
+\fontencoding T1
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 2
+\use_esint 1
+\use_mhchem 0
+\use_mathdots 0
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date true
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 2
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+% --- Author Metadata here ---
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%
+\backslash
+conferenceinfo{ISSAC'09,} {July 28--31, 2009, Seoul, Republic of Korea.}
+ 
+\end_layout
+
+\begin_layout Plain Layout
+
+%
+\backslash
+CopyrightYear{2009}
+\end_layout
+
+\begin_layout Plain Layout
+
+%
+\backslash
+crdata{978-1-60558-609-0/09/07} 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+numberofauthors
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\end_inset
+
+1
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Author
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+alignauthor
+\end_layout
+
+\end_inset
+
+ Wei Zhou and George Labahn
+\begin_inset Newline newline
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+affaddr
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\end_inset
+
+Cheriton School of Computer Science
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+affaddr
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\end_inset
+
+University of Waterloo
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset Newline newline
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+affaddr
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\end_inset
+
+Waterloo, Ontario, Canada
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+email
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\end_inset
+
+{w2zhou,glabahn}@uwaterloo.ca
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Date
+
+\size normal
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+today
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset space \quad{}
+\end_inset
+
+:: 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+timeofday
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Title
+Computing Column Bases
+\end_layout
+
+\begin_layout Abstract
+Given a matrix of univariate polynomials over a field 
+\begin_inset Formula $\mathbb{K}$
+\end_inset
+
+, its columns generate a 
+\begin_inset Formula $\mathbb{K}\left[x\right]$
+\end_inset
+
+-module consisting of all 
+\begin_inset Formula $\mathbb{K}\left[x\right]$
+\end_inset
+
+-linear combination of these columns.
+ We call any basis of this module a column basis of the given matrix.
+ In this paper we present a deterministic algorithm for the computation
+ of a column basis of an 
+\begin_inset Formula $m\times n$
+\end_inset
+
+ input matrix with 
+\begin_inset Formula $m\le n$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $s$
+\end_inset
+
+ is the average column degree of the input matrix, this algorithm computes
+ a column basis with a cost of 
+\begin_inset Formula $O^{\sim}\left(nm^{\omega-1}s\right)$
+\end_inset
+
+ field operations in 
+\begin_inset Formula $\mathbb{K}$
+\end_inset
+
+.
+ Here the soft-
+\begin_inset Formula $O$
+\end_inset
+
+ notation is Big-
+\begin_inset Formula $O$
+\end_inset
+
+ with log factors removed while 
+\begin_inset Formula $\omega$
+\end_inset
+
+ is the exponent of matrix multiplication.
+ Note that the average column degree 
+\begin_inset Formula $s$
+\end_inset
+
+ is bounded by the commonly used matrix degree that is also the maximum
+ column degree of the input matrix.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+% A category with the (minimum) three required fields
+\end_layout
+
+\begin_layout Plain Layout
+
+%
+\backslash
+category{I.1.2}{Symbolic and Algebraic Manipulation}{Algorithms}%[Algebraic
+ algorithms]
+\end_layout
+
+\begin_layout Plain Layout
+
+%A category including the fourth, optional field follows...
+\end_layout
+
+\begin_layout Plain Layout
+
+%
+\backslash
+category{F.2.2}{Analysis of Algorithms and }{Nonnumerical Algorithms and Problems}
+%[Computations on discrete structures]
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+%
+\backslash
+terms{Algorithms, Theory}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+%
+\backslash
+keywords{Order basis, Complexity}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{1mm} 
+\backslash
+noindent {
+\backslash
+bf Categories and Subject Descriptors:} I.1.2 {[{Symbolic and Algebraic Manipulati
+on}]}: {Algorithms}; F.2.2 {[{Analysis of Algorithms and Problem Complexity}]}:
+ {Nonnumerical Algorithms and Problems}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{1mm} 
+\backslash
+noindent {
+\backslash
+bf General Terms:} Algorithms, Theory
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{1mm} 
+\backslash
+noindent {
+\backslash
+bf Keywords:} Nullspace basis, Complexity
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand input
+filename "Introduction.lyx"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand input
+filename "Preliminaries.lyx"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand input
+filename "BasisViaFactorization.lyx"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand input
+filename "LeftNullspace.lyx"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand input
+filename "ColumnBasis.lyx"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand input
+filename "SimpleImprovement.lyx"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset CommandInset include
+LatexCommand input
+filename "Popov.lyx"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand input
+filename "Conclusion.lyx"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+%
+\backslash
+bibliographystyle{plainnat}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+bibfiles "paper"
+options "plain"
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

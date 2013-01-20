@@ -1,0 +1,181 @@
+%% LyX 2.0.5.1 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[twoside]{sig-alternate}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage{color}
+\usepackage{verbatim}
+\usepackage{prettyref}
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\makeatletter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
+\floatstyle{ruled}
+\newfloat{algorithm}{tbp}{loa}
+\providecommand{\algorithmname}{Algorithm}
+\floatname{algorithm}{\protect\algorithmname}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Textclass specific LaTeX commands.
+\floatstyle{ruled}
+\newfloat{algorithm}{tbp}{loa}
+\floatname{algorithm}{Algorithm}
+\usepackage{algorithmic}
+\newcommand{\forbody}[1]{ #1 \ENDFOR }
+\newcommand{\ifbody}[1]{ #1  \ENDIF}
+\newcommand{\whilebody}[1]{ #1  \ENDWHILE}
+\renewcommand{\algorithmicprint}{\textbf{draw}}
+\renewcommand{\algorithmicrequire}{\textbf{Input:}}
+\renewcommand{\algorithmicensure}{\textbf{Output:}}
+
+ \newtheorem{thm}{Theorem}[section]
+ \newtheorem{lem}[thm]{Lemma}
+ \newtheorem{defn}[thm]{Definition}
+ \newtheorem{rem}[thm]{Remark}
+ \newtheorem{exmp}[thm]{Example}
+
+\@ifundefined{date}{}{\date{}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+%\usepackage{yjsco}\journal{JournalofSymbolicComputation}
+
+\renewcommand{\algorithmicrequire}{\textbf{Input:}}\renewcommand{\algorithmicensure}{\textbf{Output:}}
+%\renewcommand{\algorithmicensure}{\textbf{if}}\renewcommand{\algorithmicensure}{\textbf{Uses:}}
+
+%\def\diag{\mbox{diag}}\def\cdeg{\qopname\relax n{cdeg}}
+\def\MM{\qopname\relax n{MM}}\def\M{\qopname\relax n{M}}
+%\def\ord{\qopname\relax n{ord}}
+
+\def\StorjohannTransform{\qopname\relax n{StorjohannTransform}}\def\TransformUnbalanced{\qopname\relax n{TransformUnbalanced}}\def\rowDimension{\qopname\relax n{rowDimension}}\def\columnDimension{\qopname\relax n{columnDimension}}\DeclareMathOperator{\re}{rem}\DeclareMathOperator{\coeff}{coeff}\DeclareMathOperator{\lcoeff}{lcoeff}\def\mab{\qopname\relax n{orderBasis}}\def\mmab{\qopname\relax n{FastBasis}}\def\umab{\qopname\relax n{UnbalancedFastBasis}}\newcommand{\bb}{\\}
+\def\mnb{\qopname\relax n{MinimalNullspaceBasis ~ }}
+\DeclareMathOperator{\mnbr}{minimaKernelBasisReversed}
+%\def\rdeg{\qopname\relax n{rdeg}}
+\DeclareMathOperator{\colBasis}{colBasis}
+
+
+\makeatother
+\newcommand{\arne}[1]{{\color{blue}\it {\bf Arne:} #1 }}
+\newcommand{\wei}[1]{{\color{red}\it {\bf Wei:} #1}}
+\newcommand{\george}[1]{{\color{green}\it {\bf George:} #1}}
+\def\newblock{\hskip .11em plus .33em minus .07em}
+
+
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\K}{ {\rm K}}
+\newcommand{\revCol}{ {\rm revCol}}
+\newcommand{\bigO}{\mathcal{O}}
+\newcommand{\tbigO}{\widetilde{\mathcal{O}}}
+\newcommand{\cL}{\mathcal{L}}
+\newcommand{\ocL}{\overline{\mathcal{L}}}
+\newcommand{\tcL}{\widetilde{\mathcal{L}}}
+\newcommand{\cA}{\mathcal{A}}
+\newcommand{\oA}{\overline{A}}
+\newcommand{\GL}{{\rm GL}\,}
+\newcommand{\rank}{{\rm rank}\,}
+\newcommand{\cdeg}{{\rm cdeg}\,}
+\newcommand{\rdeg}{{\rm rdeg}\,}
+\newcommand{\diag}{{\rm diag}\,}
+\newcommand{\val}{{\rm val}\,}
+\newcommand{\ord}{{\rm ord}\,}
+\newcommand{\abs}[1]{\lvert#1\rvert}
+
+
+\newrefformat{eq}{\textup{(\ref{#1})}}
+\newrefformat{lem}{Lemma \ref{#1}}
+\newrefformat{cla}{Claim \ref{#1}}
+\newrefformat{thm}{Theorem \ref{#1}}
+\newrefformat{cha}{Chapter \ref{#1}}
+\newrefformat{sec}{Section \ref{#1}}
+\newrefformat{rem}{Remark \ref{#1}}
+\newrefformat{fac}{Fact \ref{#1}}
+\newrefformat{sub}{Subsection \ref{#1}}
+\newrefformat{cor}{Corollary \ref{#1}}
+\newrefformat{cond}{Condition \ref{#1}}
+\newrefformat{con}{Conjecture \ref{#1}}
+\newrefformat{def}{Definition \ref{#1}}
+\newrefformat{pro}{Proposition \ref{#1}}
+\newrefformat{alg}{Algorithm \ref{#1}}
+\newrefformat{exm}{Example \ref{#1}}
+\newrefformat{line}{line \ref{#1}}
+\newrefformat{tab}{Table \ref{#1} on page \pageref{#1}}
+\newrefformat{fig}{Figure \ref{#1} on page \pageref{#1}}
+
+\makeatother
+
+\begin{document}
+% --- Author Metadata here ---
+
+
+%\conferenceinfo{ISSAC'09,} {July 28--31, 2009, Seoul, Republic of Korea.} 
+%\CopyrightYear{2009}
+%\crdata{978-1-60558-609-0/09/07} 
+
+\numberofauthors{1}
+
+
+\author{\alignauthor Wei Zhou and George Labahn\\
+ \affaddr{Cheriton School of Computer Science}\\
+ \affaddr{University of Waterloo}, \\
+ \affaddr{Waterloo, Ontario, Canada}\\
+ \email{\{w2zhou,glabahn\}@uwaterloo.ca} }
+
+
+\date{{\normalsize{\today \quad{}:: \timeofday}}}
+
+
+\title{Computing Column Bases}
+\maketitle
+\begin{abstract}
+Given a matrix of univariate polynomials over a field $\mathbb{K}$,
+its columns generate a $\mathbb{K}\left[x\right]$-module consisting
+of all $\mathbb{K}\left[x\right]$-linear combination of these columns.
+We call any basis of this module a column basis of the given matrix.
+In this paper we present a deterministic algorithm for the computation
+of a column basis of an $m\times n$ input matrix with $m\le n$.
+If $s$ is the average column degree of the input matrix, this algorithm
+computes a column basis with a cost of $O^{\sim}\left(nm^{\omega-1}s\right)$
+field operations in $\mathbb{K}$. Here the soft-$O$ notation is
+Big-$O$ with log factors removed while $\omega$ is the exponent
+of matrix multiplication. Note that the average column degree $s$
+is bounded by the commonly used matrix degree that is also the maximum
+column degree of the input matrix.
+\end{abstract}
+% A category with the (minimum) three required fields
+%\category{I.1.2}{Symbolic and Algebraic Manipulation}{Algorithms}%[Algebraic algorithms]
+%A category including the fourth, optional field follows...
+%\category{F.2.2}{Analysis of Algorithms and }{Nonnumerical Algorithms and Problems}%[Computations on discrete structures]
+
+%\terms{Algorithms, Theory}
+
+%\keywords{Order basis, Complexity}
+
+\vspace{1mm} \noindent {\bf Categories and Subject Descriptors:} I.1.2 {[{Symbolic and Algebraic Manipulation}]}: {Algorithms}; F.2.2 {[{Analysis of Algorithms and Problem Complexity}]}: {Nonnumerical Algorithms and Problems}
+
+\vspace{1mm} \noindent {\bf General Terms:} Algorithms, Theory
+
+\vspace{1mm} \noindent {\bf Keywords:} Nullspace basis, Complexity
+
+\input{Introduction.tex}
+
+\input{Preliminaries.tex}
+
+\input{BasisViaFactorization.tex}
+
+\input{LeftNullspace.tex}
+
+\input{ColumnBasis.tex}
+
+\input{SimpleImprovement.tex}
+
+
+
+\input{Conclusion.tex}
+
+%\bibliographystyle{plainnat}
+\bibliographystyle{plain}
+\bibliography{paper}
+
+\end{document}

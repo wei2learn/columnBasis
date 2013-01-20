@@ -1,0 +1,822 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass sig-alternate
+\use_default_options false
+\maintain_unincluded_children false
+\language english
+\language_package none
+\inputencoding latin9
+\fontencoding T1
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 2
+\use_esint 1
+\use_mhchem 0
+\use_mathdots 0
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date true
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 2
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Section
+Computing a Column Basis
+\end_layout
+
+\begin_layout Standard
+Once a right factor 
+\begin_inset Formula $\mathbf{G}$
+\end_inset
+
+ of 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+ has been computed, we are in a position to determine a column basis 
+\begin_inset Formula $\mathbf{T}$
+\end_inset
+
+ using the equation 
+\begin_inset Formula $\mathbf{F}=\mathbf{T}\mathbf{G}$
+\end_inset
+
+.
+ In order to do so efficiently, however, the degree of 
+\begin_inset Formula $\mathbf{T}$
+\end_inset
+
+ cannot be too large.
+ We see that this is the case from the following lemma.
+ 
+\end_layout
+
+\begin_layout Lemma
+\begin_inset CommandInset label
+LatexCommand label
+name "lem:colBasisdegreeBoundByRdegOfRightFactor"
+
+\end_inset
+
+ Let 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbf{G}$
+\end_inset
+
+ be as before and 
+\begin_inset Formula $\vec{t}=-\rdeg_{-\vec{s}}\mathbf{G}$
+\end_inset
+
+.
+ Then 
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+the column degrees of 
+\begin_inset Formula $\mathbf{T}$
+\end_inset
+
+ are bounded by the corresponding entries of 
+\begin_inset Formula $\vec{t}$
+\end_inset
+
+; 
+\end_layout
+
+\begin_layout Itemize
+if 
+\begin_inset Formula $\vec{t}$
+\end_inset
+
+ has 
+\begin_inset Formula $r$
+\end_inset
+
+ entries and 
+\begin_inset Formula $\vec{s}^{~\prime}$
+\end_inset
+
+ is the list of the 
+\begin_inset Formula $r$
+\end_inset
+
+ largest entries of 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+, then 
+\begin_inset Formula $\vec{t}\le\vec{s}^{~\prime}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\end_deeper
+\begin_layout Proof
+Since 
+\begin_inset Formula $\mathbf{G}$
+\end_inset
+
+ is 
+\begin_inset Formula $-\vec{s}$
+\end_inset
+
+-row reduced, and 
+\begin_inset Formula $\rdeg_{-\vec{s}}\mathbf{F}\le0$
+\end_inset
+
+, by Lemma 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "lem:predictableDegree"
+
+\end_inset
+
+ 
+\begin_inset Formula $\rdeg_{-\vec{t}}\mathbf{T}\le0$
+\end_inset
+
+, or equivalently, 
+\begin_inset Formula $\mathbf{T}$
+\end_inset
+
+ has column degrees bounded by 
+\begin_inset Formula $\vec{t}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+Let 
+\begin_inset Formula $\mathbf{G}^{\prime}$
+\end_inset
+
+ be the 
+\begin_inset Formula $-\vec{s}$
+\end_inset
+
+-row Popov form of 
+\begin_inset Formula $\mathbf{G}$
+\end_inset
+
+ and the square matrix 
+\begin_inset Formula $\mathbf{G}^{\prime\prime}$
+\end_inset
+
+ consist of only the columns of 
+\begin_inset Formula $\mathbf{G}^{\prime}$
+\end_inset
+
+ that contains pivot entries, and has the rows permuted so the pivots are
+ in the diagonal.
+ Let 
+\begin_inset Formula $\vec{s}^{~\prime\prime}$
+\end_inset
+
+ be the list of the entries in 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+ that correspond to the columns of 
+\begin_inset Formula $\mathbf{G}^{\prime\prime}$
+\end_inset
+
+ in 
+\begin_inset Formula $\mathbf{G}^{\prime}$
+\end_inset
+
+.
+ Note that 
+\begin_inset Formula $\rdeg_{-\vec{s}^{~\prime\prime}}\mathbf{G}^{\prime\prime}=-\vec{t}^{~\prime\prime}$
+\end_inset
+
+ is just a permutation of 
+\begin_inset Formula $-\vec{t}$
+\end_inset
+
+ with the same entries.
+ By the definition of shifted row degree, 
+\begin_inset Formula $-\vec{t}^{~\prime\prime}$
+\end_inset
+
+ is the sum of 
+\begin_inset Formula $-\vec{s}^{~\prime\prime}$
+\end_inset
+
+ and the list of the diagonal pivot degrees, which are nonnegative.
+ Therefore, 
+\begin_inset Formula $-\vec{t}^{~\prime\prime}\ge-\vec{s}^{~\prime\prime}$
+\end_inset
+
+.
+ The result then follows as 
+\begin_inset Formula $\vec{t}$
+\end_inset
+
+ is a permutation of 
+\begin_inset Formula $\vec{t}^{~\prime\prime}$
+\end_inset
+
+ and 
+\begin_inset Formula $\vec{s}^{\ \prime}$
+\end_inset
+
+ consists of the largest entries of 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Having a bound on the column degrees of 
+\begin_inset Formula $\mathbf{T}$
+\end_inset
+
+ determined, we are now ready to compute 
+\begin_inset Formula $\mathbf{T}$
+\end_inset
+
+.
+ This is done again by computing a kernel basis using an order basis computation
+ as before.
+ 
+\end_layout
+
+\begin_layout Lemma
+Let 
+\begin_inset Formula $\vec{t}^{*}=\left[0,\dots,0,\vec{t}\right]\in\mathbb{Z}^{m+r}$
+\end_inset
+
+.
+ Then any 
+\begin_inset Formula $\left(\left[\mathbf{F}^{T},\mathbf{G}^{T}\right],-\vec{t}^{*}\right)$
+\end_inset
+
+-kernel basis has the form 
+\begin_inset Formula $\begin{bmatrix}V\\
+\bar{\mathbf{T}}
+\end{bmatrix}$
+\end_inset
+
+, where 
+\begin_inset Formula $V\in\mathbb{K}^{m\times m}$
+\end_inset
+
+ is a unimodular matrix and 
+\begin_inset Formula $\left(\bar{\mathbf{T}}V^{-1}\right)^{T}$
+\end_inset
+
+ is a column basis of 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Proof
+Note first that the matrix 
+\begin_inset Formula $\begin{bmatrix}-I\\
+\mathbf{T}^{T}
+\end{bmatrix}$
+\end_inset
+
+ is a kernel basis of 
+\begin_inset Formula $\left[\mathbf{F}^{T},\mathbf{G}^{T}\right]$
+\end_inset
+
+ and is therefore unimodularly equivalent to any other kernel basis.
+ Hence any other kernel basis has the form 
+\begin_inset Formula $\begin{bmatrix}-I\\
+\mathbf{T}^{T}
+\end{bmatrix}U=\begin{bmatrix}V\\
+\bar{\mathbf{T}}
+\end{bmatrix}$
+\end_inset
+
+, with 
+\begin_inset Formula $U$
+\end_inset
+
+ and 
+\begin_inset Formula $V=-U$
+\end_inset
+
+ unimodular.
+ Thus 
+\begin_inset Formula $\mathbf{T}=\left(\bar{\mathbf{T}}V^{-1}\right)^{T}$
+\end_inset
+
+.
+ Also note that the 
+\begin_inset Formula $-\vec{t}^{*}$
+\end_inset
+
+ minimality forces the unimodular matrix 
+\begin_inset Formula $V$
+\end_inset
+
+ in any 
+\begin_inset Formula $\left(\left[\mathbf{F}^{T},\mathbf{G}^{T}\right],-\vec{t}^{*}\right)$
+\end_inset
+
+-kernel basis to be degree 0, the same degree as 
+\begin_inset Formula $I$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Example
+Let 
+\begin_inset Formula 
+\[
+\mathbf{F}=\left[\begin{array}{cccc}
+x^{2} & x^{2} & x+x^{2} & 1+x^{2}\\
+1+x+x^{2} & x^{2} & 1+x^{2} & 1+x^{2}
+\end{array}\right]
+\]
+
+\end_inset
+
+with 
+\begin_inset Formula 
+\[
+\mathbf{G}=\left[\begin{array}{cccc}
+1 & 0 & 1 & 0\\
+\noalign{\medskip}x & {x}^{2} & 0 & 1+{x}^{2}
+\end{array}\right]
+\]
+
+\end_inset
+
+being a minimal left kernel basis of a right kernel basis of 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+.
+ In order to compute the column basis 
+\begin_inset Formula $\mathbf{T}$
+\end_inset
+
+ satisfying 
+\begin_inset Formula $\mathbf{F}=\mathbf{T}\mathbf{G}$
+\end_inset
+
+, first we can determine 
+\begin_inset Formula $\cdeg\mathbf{T}\le\vec{t}=\left[2,0\right]$
+\end_inset
+
+ from Lemma 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "lem:colBasisdegreeBoundByRdegOfRightFactor"
+
+\end_inset
+
+.
+ Then we can compute a 
+\begin_inset Formula $\left[0,0,-\vec{t}\right]$
+\end_inset
+
+-minimal left kernel basis of 
+\begin_inset Formula $\begin{bmatrix}\mathbf{F}\\
+\mathbf{G}
+\end{bmatrix}$
+\end_inset
+
+.
+ The matrix 
+\begin_inset Formula 
+\[
+\left[V,\bar{\mathbf{T}}\right]=\left[\begin{array}{cccc}
+\noalign{\medskip}1 & 0 & x+{x}^{2} & 1\\
+1 & 1 & 1+x & 0
+\end{array}\right]
+\]
+
+\end_inset
+
+is such a left kernel basis.
+ A column basis can then be computed as by 
+\begin_inset Formula 
+\[
+\mathbf{T}=V^{-1}\bar{\mathbf{T}}=\left[\begin{array}{cc}
+x+x^{2} & 1\\
+1+{x}^{2} & 1
+\end{array}\right].
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In order to compute a 
+\begin_inset Formula $\left(\left[\mathbf{F}^{T},\mathbf{G}^{T}\right],-\vec{t}^{*}\right)$
+\end_inset
+
+-kernel basis, we can again use order basis computation as before, as we
+ again have an order basis that contains a 
+\begin_inset Formula $\left(\left[\mathbf{F}^{T},\mathbf{G}^{T}\right],-\vec{t}^{*}\right)$
+\end_inset
+
+-kernel basis.
+\end_layout
+
+\begin_layout Lemma
+Any 
+\begin_inset Formula $\left(\left[\mathbf{F}^{T},\mathbf{G}^{T}\right],\vec{s}+\vec{e},-\vec{t}^{*}\right)$
+\end_inset
+
+ order basis contains a 
+\begin_inset Formula $\left(\left[\mathbf{F}^{T},\mathbf{G}^{T}\right],-\vec{t}^{*}\right)$
+\end_inset
+
+-kernel basis whose 
+\begin_inset Formula $-\vec{t}^{*}$
+\end_inset
+
+-row degrees are bounded by 0.
+ 
+\end_layout
+
+\begin_layout Proof
+As before, Lemma 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "lem:orderbasisContainsKernelbasisGeneralized"
+
+\end_inset
+
+ can be used here.
+ We just need to show that a 
+\begin_inset Formula $\left(\left[\mathbf{F}^{T},\mathbf{G}^{T}\right],-\vec{t}^{*}\right)$
+\end_inset
+
+-kernel basis has 
+\begin_inset Formula $-\vec{t}^{*}$
+\end_inset
+
+-row degrees no more than 
+\begin_inset Formula $0$
+\end_inset
+
+.
+ This follows since 
+\begin_inset Formula $\rdeg_{-\vec{t}^{*}}\begin{bmatrix}I\\
+\mathbf{T}^{T}
+\end{bmatrix}\le0$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+In order to compute a 
+\begin_inset Formula $\left(\left[\mathbf{F}^{T},\mathbf{G}^{T}\right],-\vec{t}^{*}\right)$
+\end_inset
+
+ kernel basis efficiently, we notice that we have the same type of problem
+ as in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:kernelBasisViaOrderBasisByRows"
+
+\end_inset
+
+ and hence we can again use Algorithm 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "alg:minimalNullspaceBasisReverse"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Lemma
+\begin_inset CommandInset label
+LatexCommand label
+name "lem:costOfKernelBasisReversedForLeftFactor"
+
+\end_inset
+
+A 
+\begin_inset Formula $\left(\left[\mathbf{F}^{T},\mathbf{G}^{T}\right],-\vec{t}^{*}\right)$
+\end_inset
+
+-kernel basis can be computed using 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "alg:minimalNullspaceBasisReverse"
+
+\end_inset
+
+ with a cost of 
+\begin_inset Formula $O^{\sim}\left(n^{\omega}s\right)$
+\end_inset
+
+, where 
+\begin_inset Formula $s=\xi/n$
+\end_inset
+
+ is the average column degree of 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+ as before.
+ 
+\end_layout
+
+\begin_layout Proof
+Just use the algorithm with input 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\left(\left[\mathbf{F}^{T},\mathbf{G}^{T}\right],\vec{t}^{*},\xi\right)$
+\end_inset
+
+.
+ We can verify the conditions on the input are satisfied.
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+To see that 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+
+\begin_inset Formula $\sum\rdeg_{\vec{t}^{*}}\left[\mathbf{F}^{T},\mathbf{G}^{T}\right]\le\xi$
+\end_inset
+
+, note that from 
+\begin_inset Formula $\vec{t}=-\rdeg_{-\vec{s}}\mathbf{G}$
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "lem:columnDegreesRowDegreesSymmetry"
+
+\end_inset
+
+ 
+\begin_inset Formula $\cdeg_{\vec{t}}\mathbf{G}\le\vec{s}$
+\end_inset
+
+, or equivalently, 
+\begin_inset Formula $\rdeg_{\vec{t}}\mathbf{G}^{T}\le\vec{s}$
+\end_inset
+
+.
+ Since we also have 
+\begin_inset Formula $\rdeg\mathbf{F}^{T}\le\vec{s}$
+\end_inset
+
+, it follows that 
+\begin_inset Formula $\rdeg_{\vec{t}^{*}}\left[\mathbf{F}^{T},\mathbf{G}^{T}\right]\le\vec{s}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Itemize
+The second condition 
+\begin_inset Formula $\sum\vec{t}^{*}\le\xi$
+\end_inset
+
+ follows from 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "lem:colBasisdegreeBoundByRdegOfRightFactor"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+The third condition holds since 
+\begin_inset Formula $\begin{bmatrix}-I\\
+\mathbf{T}^{T}
+\end{bmatrix}$
+\end_inset
+
+ is a kernel basis with row degrees bounded by 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\vec{t}^{*}$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+With a 
+\begin_inset Formula $\left(\left[\mathbf{F}^{T},\mathbf{G}^{T}\right],-\vec{t}^{*}\right)$
+\end_inset
+
+-kernel basis 
+\begin_inset Formula $\begin{bmatrix}V\\
+\bar{\mathbf{T}}
+\end{bmatrix}$
+\end_inset
+
+ computed, a column basis is then given by 
+\begin_inset Formula $\mathbf{T}~=~\left(\bar{\mathbf{T}}V^{-1}\right)^{T}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The complete algorithm for computing a column basis is then given in Algorithm
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "alg:colBasis"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand input
+filename "AlgorithmColumnBasis.lyx"
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Theorem
+\begin_inset CommandInset label
+LatexCommand label
+name "thm:columnBasisCost1"
+
+\end_inset
+
+A column basis 
+\begin_inset Formula $\mathbf{T}$
+\end_inset
+
+ of 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+ can be computed with a cost of 
+\begin_inset Formula $O^{\sim}\left(n^{\omega}s\right)$
+\end_inset
+
+, where 
+\begin_inset Formula $s=\xi/n$
+\end_inset
+
+ is the average column degree of 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+ as before.
+ 
+\end_layout
+
+\begin_layout Proof
+The cost is dominated by the cost of the three kernel basis computations
+ in the algorithm.
+ The first one is handled by the algorithm from 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "za2012"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "thm:costGeneral"
+
+\end_inset
+
+, while the remaining two are handled by 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "alg:minimalNullspaceBasisReverse"
+
+\end_inset
+
+, 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "lem:costKernelBasisReverse"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "lem:costOfKernelBasisReversedForLeftFactor"
+
+\end_inset
+
+.
+\end_layout
+
+\end_body
+\end_document

@@ -1,0 +1,54 @@
+
+\section{\label{sec:successiveColBasisComputation}A Simple Improvement}
+
+When the input matrix $\mathbf{F}$ has column dimension much larger
+$n$ than the row dimension $m$, we can separate $\mathbf{F}=\left[\mathbf{F}_{1},\mathbf{F}_{2},\dots,\mathbf{F}_{n/m}\right]$
+to $n/m$ blocks, each with dimension $m\times m$, assuming without
+loss of generality $n$ is a multiple of $m$, and the columns are
+arranged in increasing degrees. We then do a series of column basis
+computations. First we compute a column basis $\mathbf{T}_{1}$ of
+$\left[\mathbf{F}_{1},\mathbf{F}_{2}\right]$. Then compute a column
+basis $\mathbf{T}_{2}$ of $\left[\mathbf{T}_{1},\mathbf{F}_{3}\right]$.
+Repeating this process, at step $i$, we compute a column basis $\mathbf{T}_{i}$
+of $\left[\mathbf{T}_{i-1},\mathbf{F}_{i+1}\right]$, until $i=n/m-1$,
+when a column basis of $\mathbf{F}$ is computed. 
+\begin{lem}
+At step $i$, computing a column basis $\mathbf{T}_{i}$ of $\left[\mathbf{T}_{i-1},\mathbf{F}_{i+1}\right]$
+can be done with a cost of $O^{\sim}\left(m^{\omega}(s_{i}+s_{i+1})/2\right)$
+field operations, where $s_{i}=\left(\sum\cdeg\mathbf{F}_{i}\right)/m$.\end{lem}
+\begin{proof}
+From Lemma \ref{lem:colBasisdegreeBoundByRdegOfRightFactor}, the
+column basis $\mathbf{T}_{i-1}$ of $\left[\mathbf{F}_{1},\dots,\mathbf{F}_{i}\right]$
+has column degrees bounded by the largest column degrees of $\mathbf{F}_{i}$,
+hence $\sum\cdeg\mathbf{T}_{i-1}\le\sum\cdeg\mathbf{F}_{i}$. The
+lemma then follows by combining this with the result from Theorem
+\ref{thm:columnBasisCost1} that a column basis $\mathbf{T}_{i}$
+of $\left[\mathbf{T}_{i-1},\mathbf{F}_{i+1}\right]$ can be computed
+with a cost of $O^{\sim}\left(m^{\omega}\bar{s}\right)$, where 
+\[
+\bar{s}=\left(\sum\cdeg\mathbf{T}_{i-1}+\sum\cdeg\mathbf{F}_{i+1}\right)/2m\le\left(s_{i}+s_{i+1}\right)/2.
+\]
+ \end{proof}
+\begin{thm}
+\label{thm:finalCollBasisCost}A column basis of $\mathbf{F}$ can
+be computed with a cost of $O^{\sim}\left(m^{\omega}s\right)$, where
+$s=\left(\sum\cdeg\mathbf{F}\right)/n$.\end{thm}
+\begin{proof}
+Summing up the cost of all the column basis computations, 
+\begin{eqnarray*}
+ &  & \sum_{i=1}^{n/m-1}O^{\sim}\left(m^{\omega}\left(s_{i}+s_{i+1}\right)/2\right)\\
+ &  & ~~~~~~~~~~~~~\subset O^{\sim}\left(m^{\omega}\left(\sum_{i=1}^{n/m}s_{i}\right)/(n/m)\right)\\
+ &  & ~~~~~~~~~~~~~=O^{\sim}\left(m^{\omega}s\right).
+\end{eqnarray*}
+\end{proof}
+\begin{rem}
+In this section, the computational efficiency is improved by reducing
+the original problem to about $n/m$ subproblems whose column dimensions
+are close to the row dimension $m$. This is done by successive column
+basis computations. Note that we can also reduce the column dimension
+by using successive order basis computations, and only do a column
+basis computation at the very last step. The computational complexity
+of using order basis computation to reduce the column dimension would
+remain the same, but in practice it maybe more efficient since order
+basis computations are simpler. \end{rem}
+

@@ -1,0 +1,1651 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass sig-alternate
+\use_default_options false
+\maintain_unincluded_children false
+\language english
+\language_package none
+\inputencoding latin9
+\fontencoding T1
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 2
+\use_esint 1
+\use_mhchem 0
+\use_mathdots 0
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date true
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 2
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Section
+Preliminaries
+\end_layout
+
+\begin_layout Standard
+In this paper computational cost is analyzed by bounding the number of arithmeti
+c operations in the coefficient field 
+\begin_inset Formula $\mathbb{K}$
+\end_inset
+
+ on an algebraic random access machine.
+ We assume the cost of multiplying two polynomial matrices with dimension
+ 
+\begin_inset Formula $n$
+\end_inset
+
+ and degree 
+\begin_inset Formula $d$
+\end_inset
+
+ is 
+\begin_inset Formula $O^{\sim}(n^{\omega}d)$
+\end_inset
+
+ field operations, where the multiplication exponent 
+\begin_inset Formula $\omega$
+\end_inset
+
+ is assumed to satisfy 
+\begin_inset Formula $2<\omega\le3$
+\end_inset
+
+.
+ We refer to the book by 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "vonzurgathen"
+
+\end_inset
+
+ for more details and references about the cost of polynomial multiplication
+ and matrix multiplication.
+\end_layout
+
+\begin_layout Standard
+In this section we first describe the notations used in this paper, and
+ then give the basic definitions and properties of 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+em
+\end_layout
+
+\end_inset
+
+ shifted degree
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+em
+\end_layout
+
+\end_inset
+
+ order basis
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+ and 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+em
+\end_layout
+
+\end_inset
+
+ kernel basis
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+ for a matrix of polynomials.
+ These will be the building blocks used in our
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+ fast
+\end_layout
+
+\end_inset
+
+ algorithm.
+\end_layout
+
+\begin_layout Subsection
+Notations
+\end_layout
+
+\begin_layout Standard
+For convenience we adopt the following notations in this paper.
+ 
+\end_layout
+
+\begin_layout Description
+Comparing
+\begin_inset space ~
+\end_inset
+
+Unordered
+\begin_inset space ~
+\end_inset
+
+Lists For two lists 
+\begin_inset Formula $\vec{a}\in\mathbb{Z}^{n}$
+\end_inset
+
+ and 
+\begin_inset Formula $\vec{b}\in\mathbb{Z}^{n}$
+\end_inset
+
+, let 
+\begin_inset Formula $\bar{a}=\left[\bar{a}_{1},\dots,\bar{a}_{n}\right]\in\mathbb{Z}^{n}$
+\end_inset
+
+ and 
+\begin_inset Formula $\bar{b}=\left[\bar{b}_{1},\dots,\bar{b}_{n}\right]\in\mathbb{Z}^{n}$
+\end_inset
+
+ be the lists consists of the entries of 
+\begin_inset Formula $\vec{a}$
+\end_inset
+
+ and 
+\begin_inset Formula $\vec{b}$
+\end_inset
+
+ but sorted in increasing order.
+ 
+\begin_inset Formula 
+\[
+\begin{cases}
+\vec{a}\ge\vec{b} & \mbox{if }\bar{a}_{i}\ge\bar{b}_{i}\mbox{ for all }i\in\left[1,\dots n\right]\\
+\vec{a}\le\vec{b} & \mbox{if }\bar{a}_{i}\le\bar{b}_{i}\mbox{ for all }i\in\left[1,\dots n\right]\\
+\vec{a}>\vec{b} & \mbox{if }\vec{a}\ge\vec{b}\mbox{ and }\bar{a}_{j}>\bar{b}_{j}\mbox{ for at least one }j\in\left[1,\dots n\right]\\
+\vec{a}<\vec{b} & \mbox{if }\vec{a}\le\vec{b}\mbox{ and }\bar{a}_{j}<\bar{b}_{j}\mbox{ for at least one }j\in\left[1,\dots n\right].
+\end{cases}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Description
+Summation
+\begin_inset space ~
+\end_inset
+
+Notation For a list 
+\begin_inset Formula $\vec{a}=\left[a_{1},\dots,a_{n}\right]\in\mathbb{Z}^{n}$
+\end_inset
+
+, we write 
+\begin_inset Formula $\sum\vec{a}$
+\end_inset
+
+ without index to denote the summation of all entries in 
+\begin_inset Formula $\vec{a}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Description
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+List
+\begin_inset space ~
+\end_inset
+
+of
+\begin_inset space ~
+\end_inset
+
+a
+\begin_inset space ~
+\end_inset
+
+Constant For a list 
+\begin_inset Formula $\vec{a}=\left[a_{1},\dots,a_{n}\right]\in\mathbb{Z}^{n}$
+\end_inset
+
+ and 
+\begin_inset Formula $c\in\mathbb{Z}$
+\end_inset
+
+, we write 
+\begin_inset Formula $\vec{a}+c$
+\end_inset
+
+ to denote 
+\begin_inset Formula $\vec{a}+\left[c,\dots,c\right]=\left[a_{1}+c,\dots,a_{n}+c\right]$
+\end_inset
+
+, and similarly for 
+\begin_inset Formula $-$
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Description
+Uniformly
+\begin_inset space ~
+\end_inset
+
+Shift
+\begin_inset space ~
+\end_inset
+
+a
+\begin_inset space ~
+\end_inset
+
+List For a list 
+\begin_inset Formula $\vec{a}=\left[a_{1},\dots,a_{n}\right]\in\mathbb{Z}^{n}$
+\end_inset
+
+ and 
+\begin_inset Formula $c\in\mathbb{Z}$
+\end_inset
+
+, we write 
+\begin_inset Formula $\vec{a}+c$
+\end_inset
+
+ to denote 
+\begin_inset Formula $\vec{a}+\left[c,\dots,c\right]=\left[a_{1}+c,\dots,a_{n}+c\right]$
+\end_inset
+
+, and similarly for 
+\begin_inset Formula $-$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Description
+Compare
+\begin_inset space ~
+\end_inset
+
+a
+\begin_inset space ~
+\end_inset
+
+List
+\begin_inset space ~
+\end_inset
+
+with
+\begin_inset space ~
+\end_inset
+
+a
+\begin_inset space ~
+\end_inset
+
+Integer For a list 
+\begin_inset Formula $\vec{a}=\left[a_{1},\dots,a_{n}\right]\in\mathbb{Z}^{n}$
+\end_inset
+
+ and 
+\begin_inset Formula $c\in\mathbb{Z}$
+\end_inset
+
+, we write 
+\begin_inset Formula $\vec{a}<c$
+\end_inset
+
+ to denote 
+\begin_inset Formula $\vec{a}<\left[c,\dots,c\right]$
+\end_inset
+
+, and similarly for 
+\begin_inset Formula $>,\le,\ge,=$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Shifted Degrees
+\end_layout
+
+\begin_layout Standard
+Our
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+ fast
+\end_layout
+
+\end_inset
+
+ methods depend extensively on the concept of 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+em
+\end_layout
+
+\end_inset
+
+ shifted
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+ degrees of polynomial matrices 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "BLV:1999"
+
+\end_inset
+
+.
+ For a column vector 
+\begin_inset Formula $\mathbf{p}=\left[p_{1},\dots,p_{n}\right]^{T}$
+\end_inset
+
+ of univariate polynomials over a field 
+\begin_inset Formula $\mathbb{K}$
+\end_inset
+
+, its column degree, denoted by 
+\begin_inset Formula $\cdeg\mathbf{p}$
+\end_inset
+
+, is the maximum of the degrees of the entries of 
+\begin_inset Formula $\mathbf{p}$
+\end_inset
+
+, that is, 
+\begin_inset Formula 
+\[
+\cdeg\mathbf{p}=\max_{1\le i\le n}\deg p_{i}.
+\]
+
+\end_inset
+
+The 
+\emph on
+shifted column degree
+\emph default
+ generalizes this standard column degree by taking the maximum after shifting
+ the degrees by a given integer vector that is known as a 
+\emph on
+shift
+\emph default
+.
+ More specifically, the shifted column degree of 
+\begin_inset Formula $\mathbf{p}$
+\end_inset
+
+ with respect to a shift 
+\begin_inset Formula $\vec{s}=\left[s_{1},\dots,s_{n}\right]\in\mathbb{Z}^{n}$
+\end_inset
+
+, or the 
+\emph on
+
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+-column degree
+\emph default
+ of 
+\begin_inset Formula $\mathbf{p}$
+\end_inset
+
+ is 
+\begin_inset Formula 
+\[
+\cdeg_{\vec{s}}\mathbf{p}=\max_{1\le i\le n}[\deg p_{i}+s_{i}]=\deg(x^{\vec{s}}\cdot\mathbf{p}),
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula 
+\[
+x^{\vec{s}}=\diag\left(x^{s_{1}},x^{s_{2}},\dots,x^{s_{n}}\right)
+\]
+
+\end_inset
+
+For a matrix 
+\begin_inset Formula $\mathbf{P}$
+\end_inset
+
+, we use 
+\begin_inset Formula $\cdeg\mathbf{P}$
+\end_inset
+
+ and 
+\begin_inset Formula $\cdeg_{\vec{s}}\mathbf{P}$
+\end_inset
+
+ to denote respectively the list of its column degrees and the list of its
+ shifted 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+-column degrees.
+ When 
+\begin_inset Formula $\vec{s}=\left[0,\dots,0\right]$
+\end_inset
+
+, the shifted column degree specializes to the standard column degree.
+ The shifted row degree of a row vector 
+\series bold
+
+\begin_inset Formula $\mathbf{q}=\left[q_{1},\dots,q_{n}\right]$
+\end_inset
+
+
+\series default
+ is defined similarly as 
+\begin_inset Formula 
+\[
+\rdeg_{\vec{s}}\mathbf{q}=\max_{1\le i\le n}[\deg q_{i}+s_{i}]=\deg(\mathbf{q}\cdot x^{\vec{s}}).
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The shifted degrees have been used previously in polynomial matrix computations
+ and to generalize matrix normal forms 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "BLV:jsc06"
+
+\end_inset
+
+.
+ The shifted column degree is equivalent to the notion of 
+\emph on
+defect
+\emph default
+ commonly used in the literature.
+\end_layout
+
+\begin_layout Standard
+The usefulness of the shifted degrees can be seen from their applications
+ in polynomial matrix computation problems 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ZL2012,za2012"
+
+\end_inset
+
+.
+ One of its uses is illustrated by the following lemma from 
+\begin_inset CommandInset citation
+LatexCommand cite
+after "Chapter 2"
+key "zhou:phd2012"
+
+\end_inset
+
+, which can be viewed as a stronger version of the predictable-degree property
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "kailath:1980"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Lemma
+\begin_inset CommandInset label
+LatexCommand label
+name "lem:predictableDegree"
+
+\end_inset
+
+Let 
+\begin_inset Formula $\mathbf{A}\in\mathbb{K}\left[x\right]^{m\times n}$
+\end_inset
+
+ be a 
+\begin_inset Formula $\vec{u}$
+\end_inset
+
+-column reduced matrix with no zero columns and with 
+\begin_inset Formula $\cdeg_{\vec{u}}\mathbf{A}=\vec{v}$
+\end_inset
+
+.
+ Then a matrix 
+\begin_inset Formula $\mathbf{B}\in\mathbb{K}\left[x\right]^{n\times k}$
+\end_inset
+
+ has 
+\begin_inset Formula $\vec{v}$
+\end_inset
+
+-column degrees 
+\begin_inset Formula $\cdeg_{\vec{v}}\mathbf{B}=\vec{w}$
+\end_inset
+
+ if and only if 
+\begin_inset Formula $\cdeg_{\vec{u}}\left(\mathbf{A}\mathbf{B}\right)=\vec{w}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+The following lemma from 
+\begin_inset CommandInset citation
+LatexCommand cite
+after "Chapter 2"
+key "zhou:phd2012"
+
+\end_inset
+
+ describes a relationship between shifted column degrees and shifted row
+ degrees.
+\end_layout
+
+\begin_layout Lemma
+\begin_inset CommandInset label
+LatexCommand label
+name "lem:columnDegreesRowDegreesSymmetry"
+
+\end_inset
+
+A matrix 
+\begin_inset Formula $\mathbf{A}\in\mathbb{K}\left[x\right]^{m\times n}$
+\end_inset
+
+ has 
+\begin_inset Formula $\vec{u}$
+\end_inset
+
+-column degrees bounded by 
+\begin_inset Formula $\vec{v}$
+\end_inset
+
+ if and only if its 
+\begin_inset Formula $-\vec{v}$
+\end_inset
+
+-row degrees are bounded by 
+\begin_inset Formula $-\vec{u}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Another essential tool needed in our computation, also based on the use
+ of the shifted degrees, is the efficient multiplication of matrices with
+ unbalanced degrees 
+\begin_inset CommandInset citation
+LatexCommand cite
+after "Theorem 3.7"
+key "za2012"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Theorem
+\begin_inset CommandInset label
+LatexCommand label
+name "thm:multiplyUnbalancedMatrices"
+
+\end_inset
+
+ Let 
+\begin_inset Formula $\mathbf{A}\in\mathbb{K}\left[x\right]^{m\times n}$
+\end_inset
+
+ with 
+\begin_inset Formula $m\le n$
+\end_inset
+
+, 
+\begin_inset Formula $\vec{s}\in\mathbb{Z}^{n}$
+\end_inset
+
+ a shift with entries bounding the column degrees of 
+\begin_inset Formula $\mathbf{A}$
+\end_inset
+
+ and 
+\begin_inset Formula $\xi$
+\end_inset
+
+, a bound on the sum of the entries of 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $\mathbf{B}\in\mathbb{K}\left[x\right]^{n\times k}$
+\end_inset
+
+ with 
+\begin_inset Formula $k\in O\left(m\right)$
+\end_inset
+
+ and the sum 
+\begin_inset Formula $\theta$
+\end_inset
+
+ of its 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+-column degrees satisfying 
+\begin_inset Formula $\theta\in O\left(\xi\right)$
+\end_inset
+
+.
+ Then we can multiply 
+\begin_inset Formula $\mathbf{A}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbf{B}$
+\end_inset
+
+ with a cost of 
+\begin_inset Formula $O^{\sim}(n^{2}m^{\omega-2}s)\subset O^{\sim}(n^{\omega}s)$
+\end_inset
+
+, where 
+\begin_inset Formula $s=\xi/n$
+\end_inset
+
+ is the average of the entries of 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Subsection
+Order Basis
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $\mathbb{K}$
+\end_inset
+
+ be a field, 
+\begin_inset Formula $\mathbf{F}\in\mathbb{K}\left[\left[x\right]\right]^{m\times n}$
+\end_inset
+
+ a matrix of power series and 
+\begin_inset Formula $\vec{\sigma}=\left[\sigma_{1},\dots,\sigma_{m}\right]$
+\end_inset
+
+ a vector of non-negative integers.
+ 
+\end_layout
+
+\begin_layout Definition
+We say a vector of polynomials 
+\begin_inset Formula $\mathbf{p}\in\mathbb{K}\left[x\right]^{n\times1}$
+\end_inset
+
+ has 
+\emph on
+order
+\emph default
+ 
+\begin_inset Formula $\left(\mathbf{F},\vec{\sigma}\right)$
+\end_inset
+
+ (or 
+\emph on
+order
+\emph default
+ 
+\begin_inset Formula $\vec{\sigma}$
+\end_inset
+
+ with respect to 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+) if 
+\begin_inset Formula $\mathbf{F}\cdot\mathbf{p}\equiv\mathbf{0}\mod x^{\vec{\sigma}}$
+\end_inset
+
+, that is, 
+\begin_inset Formula 
+\[
+\mathbf{F}\cdot\mathbf{p}=x^{\vec{\sigma}}\mathbf{r}
+\]
+
+\end_inset
+
+for some 
+\begin_inset Formula $\mathbf{r}\in\mathbb{K}\left[\left[x\right]\right]^{m\times1}$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $\vec{\sigma}=\left[\sigma,\dots,\sigma\right]$
+\end_inset
+
+ has entries uniformly equal to 
+\begin_inset Formula $\sigma$
+\end_inset
+
+, then we say that 
+\begin_inset Formula $\mathbf{p}$
+\end_inset
+
+ has order 
+\begin_inset Formula $\left(\mathbf{F},\sigma\right).$
+\end_inset
+
+ The set of all order 
+\begin_inset Formula $\left(\mathbf{F},\vec{\sigma}\right)$
+\end_inset
+
+ vectors is a free 
+\begin_inset Formula $\mathbb{K}\left[x\right]$
+\end_inset
+
+-module denoted by 
+\begin_inset Formula $\left\langle \left(\mathbf{F},\vec{\sigma}\right)\right\rangle $
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+An order basis for 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+ and 
+\begin_inset Formula $\vec{\sigma}$
+\end_inset
+
+ is simply a basis for the 
+\begin_inset Formula $\mathbb{K}\left[x\right]$
+\end_inset
+
+-module 
+\begin_inset Formula $\left\langle \left(\mathbf{F},\vec{\sigma}\right)\right\rangle $
+\end_inset
+
+.
+ We again represent order bases using matrices, whose columns are the basis
+ elements.
+ We only work with those order bases having minimal or shifted minimal degrees
+ (also referred to as a reduced order basis in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "BL1997"
+
+\end_inset
+
+), that is, their column degrees or shifted column degrees are the smallest
+ possible among all bases of the module.
+ A discussion on such minimality and its existence can be found in 
+\begin_inset CommandInset citation
+LatexCommand cite
+after "Chapter 2"
+key "zhou:phd2012"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+An order basis 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "BeLa94,BL1997"
+
+\end_inset
+
+ 
+\begin_inset Formula $\mathbf{P}$
+\end_inset
+
+ of 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+ with order 
+\begin_inset Formula $\vec{\sigma}$
+\end_inset
+
+ and shift 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+, or simply an 
+\begin_inset Formula $\left(\mathbf{F},\vec{\sigma},\vec{s}\right)$
+\end_inset
+
+-basis, is a basis for the module 
+\begin_inset Formula $\left\langle \left(\mathbf{F},\vec{\sigma}\right)\right\rangle $
+\end_inset
+
+ having minimal 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+-column degrees.
+ If 
+\begin_inset Formula $\vec{\sigma}=\left[\sigma,\dots,\sigma\right]$
+\end_inset
+
+ is uinform then we simply write 
+\begin_inset Formula $\left(\mathbf{F},\sigma,\vec{s}\right)$
+\end_inset
+
+-basis.
+ The precise definition of an 
+\begin_inset Formula $\left(\mathbf{F},\vec{\sigma},\vec{s}\right)$
+\end_inset
+
+-basis is as follows.
+ 
+\end_layout
+
+\begin_layout Definition
+\begin_inset CommandInset label
+LatexCommand label
+name "def:orderBasis"
+
+\end_inset
+
+A polynomial matrix 
+\begin_inset Formula $\mathbf{P}$
+\end_inset
+
+ is an order basis of 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+ of order 
+\begin_inset Formula $\vec{\sigma}$
+\end_inset
+
+ and shift 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+, denoted by 
+\begin_inset Formula $\left(\mathbf{F},\vec{\sigma},\vec{s}\right)$
+\end_inset
+
+-basis, if the following properties hold: 
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+\begin_inset Formula $\mathbf{P}$
+\end_inset
+
+ is a nonsingular matrix of dimension 
+\begin_inset Formula $n$
+\end_inset
+
+ and is 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+-column reduced.
+ 
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\mathbf{P}$
+\end_inset
+
+ has order 
+\begin_inset Formula $\left(\mathbf{F},\vec{\sigma}\right)$
+\end_inset
+
+ (or equivalently, each column of 
+\begin_inset Formula $\mathbf{P}$
+\end_inset
+
+ is in 
+\begin_inset Formula $\left\langle (\mathbf{F},\vec{\sigma})\right\rangle $
+\end_inset
+
+).
+ 
+\end_layout
+
+\begin_layout Enumerate
+Any 
+\begin_inset Formula $\mathbf{q}\in\left\langle \left(\mathbf{F},\vec{\sigma}\right)\right\rangle $
+\end_inset
+
+ can be expressed as a linear combination of the columns of 
+\begin_inset Formula $\mathbf{P}$
+\end_inset
+
+, given by 
+\begin_inset Formula $\mathbf{P}^{-1}\mathbf{q}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+%
+\backslash
+begin{comment}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+%Note that the module $
+\backslash
+left
+\backslash
+langle 
+\backslash
+left(
+\backslash
+mathbf{F},
+\backslash
+vec{
+\backslash
+sigma}
+\backslash
+right)
+\backslash
+right
+\backslash
+rangle $
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+%does not depend on the shift $
+\backslash
+vec{s}$.
+ 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+%
+\backslash
+end{comment}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Note that any pair of 
+\begin_inset Formula $\left(\mathbf{F},\vec{\sigma},\vec{s}\right)$
+\end_inset
+
+-bases 
+\begin_inset Formula $\mathbf{P}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbf{Q}$
+\end_inset
+
+ are column bases of each other and are unimodularly equivalent.
+\end_layout
+
+\begin_layout Standard
+We will need to compute order bases with unbalanced shifts using Algorithm
+ 2 from 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "za2009"
+
+\end_inset
+
+.
+ This computation can be done efficiently as given by the following result
+ from 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "za2009"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Theorem
+\begin_inset CommandInset label
+LatexCommand label
+name "thm:unbalancedOrderBasisCost"
+
+\end_inset
+
+If the shift 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+ satisfies 
+\begin_inset Formula $\vec{s}\le0$
+\end_inset
+
+ and 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $-\sum\vec{s}\le m\sigma$
+\end_inset
+
+,
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ then a 
+\begin_inset Formula $\left(\mathbf{F},\sigma,\vec{s}\right)$
+\end_inset
+
+-basis can be computed with cost of 
+\begin_inset Formula $O^{\sim}(n^{\omega}d)$
+\end_inset
+
+ field operations, where 
+\begin_inset Formula $d=m\sigma/n$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Subsection
+Kernel Bases
+\end_layout
+
+\begin_layout Standard
+The kernel of 
+\begin_inset Formula $\mathbf{F}\in\mathbb{K}\left[x\right]^{m\times n}$
+\end_inset
+
+ is the 
+\begin_inset Formula $\mathbb{F}\left[x\right]$
+\end_inset
+
+-module 
+\begin_inset Formula 
+\[
+\left\{ \mathbf{p}\in\mathbb{K}\left[x\right]^{n}~|~\mathbf{F}\mathbf{p}=0\right\} 
+\]
+
+\end_inset
+
+with a kernel basis of 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+ being a basis of this module.
+ Kernel bases are closely related to order bases, as can be seen from the
+ following definitions.
+ 
+\end_layout
+
+\begin_layout Definition
+\begin_inset CommandInset label
+LatexCommand label
+name "def:kernelBasis"
+
+\end_inset
+
+Given 
+\begin_inset Formula $\mathbf{F}\in\mathbb{K}\left[x\right]^{m\times n}$
+\end_inset
+
+, a polynomial matrix 
+\begin_inset Formula $\mathbf{N}\in\mathbb{K}\left[x\right]^{n\times*}$
+\end_inset
+
+ is a (right) kernel basis of 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+ if the following properties hold: 
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+\begin_inset Formula $\mathbf{N}$
+\end_inset
+
+ is full-rank.
+ 
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\mathbf{N}$
+\end_inset
+
+ satisfies 
+\begin_inset Formula $\mathbf{F}\cdot\mathbf{N}=0$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Any 
+\begin_inset Formula $\mathbf{q}\in\mathbb{K}\left[x\right]^{n}$
+\end_inset
+
+ satisfying 
+\begin_inset Formula $\mathbf{F}\mathbf{q}=0$
+\end_inset
+
+ can be expressed as a linear combination of the columns of 
+\begin_inset Formula $\mathbf{N}$
+\end_inset
+
+, that is, there exists some polynomial vector 
+\begin_inset Formula $\mathbf{p}$
+\end_inset
+
+ such that 
+\begin_inset Formula $\mathbf{q}=\mathbf{N}\mathbf{p}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+Any pair of kernel bases 
+\begin_inset Formula $\mathbf{N}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbf{M}$
+\end_inset
+
+ of 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+ are column bases of each other and are unimodularly equivalent.
+\end_layout
+
+\begin_layout Standard
+A 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+-minimal kernel basis of 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+ is just a kernel basis that is 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+-column reduced.
+ 
+\end_layout
+
+\begin_layout Definition
+Given 
+\begin_inset Formula $\mathbf{F}\in\mathbb{K}\left[x\right]^{m\times n}$
+\end_inset
+
+, a polynomial matrix 
+\begin_inset Formula $\mathbf{N}\in\mathbb{K}\left[x\right]^{n\times*}$
+\end_inset
+
+ is a 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+-minimal (right) kernel basis of 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+ if
+\series bold
+ 
+\begin_inset Formula $\mathbf{N}$
+\end_inset
+
+
+\series default
+ is a kernel basis of 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbf{N}$
+\end_inset
+
+ is 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+-column reduced.
+ We also call a 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+-minimal (right) kernel basis of 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+ a 
+\begin_inset Formula $\left(\mathbf{F},\vec{s}\right)$
+\end_inset
+
+-kernel basis.
+ 
+\end_layout
+
+\begin_layout Definition
+We will need to use the following bound on the sizes of kernel bases from
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "za2012"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Theorem
+\begin_inset CommandInset label
+LatexCommand label
+name "thm:boundOfSumOfShiftedDegreesOfKernelBasis"
+
+\end_inset
+
+Suppose 
+\begin_inset Formula $\mathbf{F}\in\mathbb{K}\left[x\right]^{m\times n}$
+\end_inset
+
+ and 
+\begin_inset Formula $\vec{s}\in\mathbb{Z}_{\ge0}^{n}$
+\end_inset
+
+ is a shift with entries bounding the corresponding column degrees of 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+.
+ Then the sum of the 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+-column degrees of any 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+-minimal kernel basis of 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+ is bounded by 
+\begin_inset Formula $\sum\vec{s}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+We will also need the following result from 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "za2012"
+
+\end_inset
+
+ to compute kernel bases by rows.
+ 
+\end_layout
+
+\begin_layout Theorem
+\begin_inset CommandInset label
+LatexCommand label
+name "thm:continueComputingKernelBasisByRows"
+
+\end_inset
+
+Let 
+\begin_inset Formula $\mathbf{G}=\left[\mathbf{G}_{1}^{T},\mathbf{G}_{2}^{T}\right]^{T}\in\mathbb{K}\left[x\right]^{m\times n}$
+\end_inset
+
+ and 
+\begin_inset Formula $\vec{t}\in\mathbb{Z}^{n}$
+\end_inset
+
+ a shift vector.
+ If 
+\begin_inset Formula $\mathbf{N}_{1}$
+\end_inset
+
+ is a 
+\begin_inset Formula $\left(\mathbf{G}_{1},\vec{t}\right)$
+\end_inset
+
+-kernel basis with 
+\begin_inset Formula $\vec{t}$
+\end_inset
+
+-column degrees 
+\begin_inset Formula $\vec{u}$
+\end_inset
+
+, and 
+\begin_inset Formula $\mathbf{N}_{2}$
+\end_inset
+
+ is a 
+\begin_inset Formula $\left(\mathbf{G}_{2}\mathbf{N}_{1},\vec{u}\right)$
+\end_inset
+
+-kernel basis with 
+\begin_inset Formula $\vec{u}$
+\end_inset
+
+-column degrees 
+\begin_inset Formula $\vec{v}$
+\end_inset
+
+, then 
+\begin_inset Formula $\mathbf{N}_{1}\mathbf{N}_{2}$
+\end_inset
+
+ is a 
+\begin_inset Formula $\left(\mathbf{G},\vec{t}\right)$
+\end_inset
+
+-kernel basis 
+\begin_inset Formula $\vec{t}$
+\end_inset
+
+-column degrees 
+\begin_inset Formula $\vec{v}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Also recall the cost of kernel basis computation from 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "za2012"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Theorem
+\begin_inset CommandInset label
+LatexCommand label
+name "thm:costGeneral"
+
+\end_inset
+
+ Given an input matrix 
+\begin_inset Formula $\mathbf{F}\in\mathbb{K}\left[x\right]^{m\times n}$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $\vec{s}=\cdeg\mathbf{F}$
+\end_inset
+
+ and 
+\begin_inset Formula $s=\sum\vec{s}/n$
+\end_inset
+
+ be the average column degree of 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+.
+ Then a 
+\begin_inset Formula $\left(\mathbf{F},\vec{s}\right)$
+\end_inset
+
+-kernel basis can be computed with a cost of 
+\begin_inset Formula $O^{\sim}\left(n^{\omega}s\right)$
+\end_inset
+
+ field operations.
+\end_layout
+
+\end_body
+\end_document

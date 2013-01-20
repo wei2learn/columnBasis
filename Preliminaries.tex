@@ -1,0 +1,256 @@
+
+\section{Preliminaries}
+
+In this paper computational cost is analyzed by bounding the number
+of arithmetic operations in the coefficient field $\mathbb{K}$ on
+an algebraic random access machine. We assume the cost of multiplying
+two polynomial matrices with dimension $n$ and degree $d$ is $O^{\sim}(n^{\omega}d)$
+field operations, where the multiplication exponent $\omega$ is assumed
+to satisfy $2<\omega\le3$. We refer to the book by \cite{vonzurgathen}
+for more details and references about the cost of polynomial multiplication
+and matrix multiplication.
+
+In this section we first describe the notations used in this paper,
+and then give the basic definitions and properties of {\em shifted
+degree}, {\em order basis} and {\em kernel basis} for a matrix
+of polynomials. These will be the building blocks used in our algorithm.
+
+
+\subsection{Notations}
+
+For convenience we adopt the following notations in this paper. 
+\begin{description}
+\item [{Comparing~Unordered~Lists}] For two lists $\vec{a}\in\mathbb{Z}^{n}$
+and $\vec{b}\in\mathbb{Z}^{n}$, let $\bar{a}=\left[\bar{a}_{1},\dots,\bar{a}_{n}\right]\in\mathbb{Z}^{n}$
+and $\bar{b}=\left[\bar{b}_{1},\dots,\bar{b}_{n}\right]\in\mathbb{Z}^{n}$
+be the lists consists of the entries of $\vec{a}$ and $\vec{b}$
+but sorted in increasing order. 
+\[
+\begin{cases}
+\vec{a}\ge\vec{b} & \mbox{if }\bar{a}_{i}\ge\bar{b}_{i}\mbox{ for all }i\in\left[1,\dots n\right]\\
+\vec{a}\le\vec{b} & \mbox{if }\bar{a}_{i}\le\bar{b}_{i}\mbox{ for all }i\in\left[1,\dots n\right]\\
+\vec{a}>\vec{b} & \mbox{if }\vec{a}\ge\vec{b}\mbox{ and }\bar{a}_{j}>\bar{b}_{j}\mbox{ for at least one }j\in\left[1,\dots n\right]\\
+\vec{a}<\vec{b} & \mbox{if }\vec{a}\le\vec{b}\mbox{ and }\bar{a}_{j}<\bar{b}_{j}\mbox{ for at least one }j\in\left[1,\dots n\right].
+\end{cases}
+\]
+
+\item [{Summation~Notation}] For a list $\vec{a}=\left[a_{1},\dots,a_{n}\right]\in\mathbb{Z}^{n}$,
+we write $\sum\vec{a}$ without index to denote the summation of all
+entries in $\vec{a}$. 
+\item [{}]~
+\item [{Uniformly~Shift~a~List}] For a list $\vec{a}=\left[a_{1},\dots,a_{n}\right]\in\mathbb{Z}^{n}$
+and $c\in\mathbb{Z}$, we write $\vec{a}+c$ to denote $\vec{a}+\left[c,\dots,c\right]=\left[a_{1}+c,\dots,a_{n}+c\right]$,
+and similarly for $-$.
+\item [{Compare~a~List~with~a~Integer}] For a list $\vec{a}=\left[a_{1},\dots,a_{n}\right]\in\mathbb{Z}^{n}$
+and $c\in\mathbb{Z}$, we write $\vec{a}<c$ to denote $\vec{a}<\left[c,\dots,c\right]$,
+and similarly for $>,\le,\ge,=$.
+\end{description}
+
+\subsection{Shifted Degrees}
+
+Our methods depend extensively on the concept of {\em shifted}
+degrees of polynomial matrices \cite{BLV:1999}. For a column vector
+$\mathbf{p}=\left[p_{1},\dots,p_{n}\right]^{T}$ of univariate polynomials
+over a field $\mathbb{K}$, its column degree, denoted by $\cdeg\mathbf{p}$,
+is the maximum of the degrees of the entries of $\mathbf{p}$, that
+is, 
+\[
+\cdeg\mathbf{p}=\max_{1\le i\le n}\deg p_{i}.
+\]
+The \emph{shifted column degree} generalizes this standard column
+degree by taking the maximum after shifting the degrees by a given
+integer vector that is known as a \emph{shift}. More specifically,
+the shifted column degree of $\mathbf{p}$ with respect to a shift
+$\vec{s}=\left[s_{1},\dots,s_{n}\right]\in\mathbb{Z}^{n}$, or the
+\emph{$\vec{s}$-column degree} of $\mathbf{p}$ is 
+\[
+\cdeg_{\vec{s}}\mathbf{p}=\max_{1\le i\le n}[\deg p_{i}+s_{i}]=\deg(x^{\vec{s}}\cdot\mathbf{p}),
+\]
+where 
+\[
+x^{\vec{s}}=\diag\left(x^{s_{1}},x^{s_{2}},\dots,x^{s_{n}}\right)
+\]
+For a matrix $\mathbf{P}$, we use $\cdeg\mathbf{P}$ and $\cdeg_{\vec{s}}\mathbf{P}$
+to denote respectively the list of its column degrees and the list
+of its shifted $\vec{s}$-column degrees. When $\vec{s}=\left[0,\dots,0\right]$,
+the shifted column degree specializes to the standard column degree.
+The shifted row degree of a row vector \textbf{$\mathbf{q}=\left[q_{1},\dots,q_{n}\right]$}
+is defined similarly as 
+\[
+\rdeg_{\vec{s}}\mathbf{q}=\max_{1\le i\le n}[\deg q_{i}+s_{i}]=\deg(\mathbf{q}\cdot x^{\vec{s}}).
+\]
+
+
+The shifted degrees have been used previously in polynomial matrix
+computations and to generalize matrix normal forms \cite{BLV:jsc06}.
+The shifted column degree is equivalent to the notion of \emph{defect}
+commonly used in the literature.
+
+The usefulness of the shifted degrees can be seen from their applications
+in polynomial matrix computation problems \cite{ZL2012,za2012}. One
+of its uses is illustrated by the following lemma from \cite[Chapter 2]{zhou:phd2012},
+which can be viewed as a stronger version of the predictable-degree
+property \cite{kailath:1980}. 
+\begin{lem}
+\label{lem:predictableDegree}Let $\mathbf{A}\in\mathbb{K}\left[x\right]^{m\times n}$
+be a $\vec{u}$-column reduced matrix with no zero columns and with
+$\cdeg_{\vec{u}}\mathbf{A}=\vec{v}$. Then a matrix $\mathbf{B}\in\mathbb{K}\left[x\right]^{n\times k}$
+has $\vec{v}$-column degrees $\cdeg_{\vec{v}}\mathbf{B}=\vec{w}$
+if and only if $\cdeg_{\vec{u}}\left(\mathbf{A}\mathbf{B}\right)=\vec{w}$. 
+\end{lem}
+The following lemma from \cite[Chapter 2]{zhou:phd2012} describes
+a relationship between shifted column degrees and shifted row degrees.
+\begin{lem}
+\label{lem:columnDegreesRowDegreesSymmetry}A matrix $\mathbf{A}\in\mathbb{K}\left[x\right]^{m\times n}$
+has $\vec{u}$-column degrees bounded by $\vec{v}$ if and only if
+its $-\vec{v}$-row degrees are bounded by $-\vec{u}$. 
+\end{lem}
+Another essential tool needed in our computation, also based on the
+use of the shifted degrees, is the efficient multiplication of matrices
+with unbalanced degrees \cite[Theorem 3.7]{za2012}. 
+\begin{thm}
+\label{thm:multiplyUnbalancedMatrices} Let $\mathbf{A}\in\mathbb{K}\left[x\right]^{m\times n}$
+with $m\le n$, $\vec{s}\in\mathbb{Z}^{n}$ a shift with entries bounding
+the column degrees of $\mathbf{A}$ and $\xi$, a bound on the sum
+of the entries of $\vec{s}$. Let $\mathbf{B}\in\mathbb{K}\left[x\right]^{n\times k}$
+with $k\in O\left(m\right)$ and the sum $\theta$ of its $\vec{s}$-column
+degrees satisfying $\theta\in O\left(\xi\right)$. Then we can multiply
+$\mathbf{A}$ and $\mathbf{B}$ with a cost of $O^{\sim}(n^{2}m^{\omega-2}s)\subset O^{\sim}(n^{\omega}s)$,
+where $s=\xi/n$ is the average of the entries of $\vec{s}$. 
+\end{thm}
+
+\subsection{Order Basis}
+
+Let $\mathbb{K}$ be a field, $\mathbf{F}\in\mathbb{K}\left[\left[x\right]\right]^{m\times n}$
+a matrix of power series and $\vec{\sigma}=\left[\sigma_{1},\dots,\sigma_{m}\right]$
+a vector of non-negative integers. 
+\begin{defn}
+We say a vector of polynomials $\mathbf{p}\in\mathbb{K}\left[x\right]^{n\times1}$
+has \emph{order} $\left(\mathbf{F},\vec{\sigma}\right)$ (or \emph{order}
+$\vec{\sigma}$ with respect to $\mathbf{F}$) if $\mathbf{F}\cdot\mathbf{p}\equiv\mathbf{0}\mod x^{\vec{\sigma}}$,
+that is, 
+\[
+\mathbf{F}\cdot\mathbf{p}=x^{\vec{\sigma}}\mathbf{r}
+\]
+for some $\mathbf{r}\in\mathbb{K}\left[\left[x\right]\right]^{m\times1}$.
+If $\vec{\sigma}=\left[\sigma,\dots,\sigma\right]$ has entries uniformly
+equal to $\sigma$, then we say that $\mathbf{p}$ has order $\left(\mathbf{F},\sigma\right).$
+The set of all order $\left(\mathbf{F},\vec{\sigma}\right)$ vectors
+is a free $\mathbb{K}\left[x\right]$-module denoted by $\left\langle \left(\mathbf{F},\vec{\sigma}\right)\right\rangle $. 
+\end{defn}
+An order basis for $\mathbf{F}$ and $\vec{\sigma}$ is simply a basis
+for the $\mathbb{K}\left[x\right]$-module $\left\langle \left(\mathbf{F},\vec{\sigma}\right)\right\rangle $.
+We again represent order bases using matrices, whose columns are the
+basis elements. We only work with those order bases having minimal
+or shifted minimal degrees (also referred to as a reduced order basis
+in \cite{BL1997}), that is, their column degrees or shifted column
+degrees are the smallest possible among all bases of the module. A
+discussion on such minimality and its existence can be found in \cite[Chapter 2]{zhou:phd2012}.
+
+An order basis \cite{BeLa94,BL1997} $\mathbf{P}$ of $\mathbf{F}$
+with order $\vec{\sigma}$ and shift $\vec{s}$, or simply an $\left(\mathbf{F},\vec{\sigma},\vec{s}\right)$-basis,
+is a basis for the module $\left\langle \left(\mathbf{F},\vec{\sigma}\right)\right\rangle $
+having minimal $\vec{s}$-column degrees. If $\vec{\sigma}=\left[\sigma,\dots,\sigma\right]$
+is uinform then we simply write $\left(\mathbf{F},\sigma,\vec{s}\right)$-basis.
+The precise definition of an $\left(\mathbf{F},\vec{\sigma},\vec{s}\right)$-basis
+is as follows. 
+\begin{defn}
+\label{def:orderBasis}A polynomial matrix $\mathbf{P}$ is an order
+basis of $\mathbf{F}$ of order $\vec{\sigma}$ and shift $\vec{s}$,
+denoted by $\left(\mathbf{F},\vec{\sigma},\vec{s}\right)$-basis,
+if the following properties hold: 
+\begin{enumerate}
+\item $\mathbf{P}$ is a nonsingular matrix of dimension $n$ and is $\vec{s}$-column
+reduced. 
+\item $\mathbf{P}$ has order $\left(\mathbf{F},\vec{\sigma}\right)$ (or
+equivalently, each column of $\mathbf{P}$ is in $\left\langle (\mathbf{F},\vec{\sigma})\right\rangle $). 
+\item Any $\mathbf{q}\in\left\langle \left(\mathbf{F},\vec{\sigma}\right)\right\rangle $
+can be expressed as a linear combination of the columns of $\mathbf{P}$,
+given by $\mathbf{P}^{-1}\mathbf{q}$. 
+\end{enumerate}
+\end{defn}
+%\begin{comment}
+%Note that the module $\left\langle \left(\mathbf{F},\vec{\sigma}\right)\right\rangle $
+%does not depend on the shift $\vec{s}$. 
+%\end{comment}
+
+
+Note that any pair of $\left(\mathbf{F},\vec{\sigma},\vec{s}\right)$-bases
+$\mathbf{P}$ and $\mathbf{Q}$ are column bases of each other and
+are unimodularly equivalent.
+
+We will need to compute order bases with unbalanced shifts using Algorithm
+2 from \cite{za2009}. This computation can be done efficiently as
+given by the following result from \cite{za2009}.
+\begin{thm}
+\label{thm:unbalancedOrderBasisCost}If the shift $\vec{s}$ satisfies
+$\vec{s}\le0$ and $-\sum\vec{s}\le m\sigma$, then a $\left(\mathbf{F},\sigma,\vec{s}\right)$-basis
+can be computed with cost of $O^{\sim}(n^{\omega}d)$ field operations,
+where $d=m\sigma/n$. 
+\end{thm}
+
+\subsection{Kernel Bases}
+
+The kernel of $\mathbf{F}\in\mathbb{K}\left[x\right]^{m\times n}$
+is the $\mathbb{F}\left[x\right]$-module 
+\[
+\left\{ \mathbf{p}\in\mathbb{K}\left[x\right]^{n}~|~\mathbf{F}\mathbf{p}=0\right\} 
+\]
+with a kernel basis of $\mathbf{F}$ being a basis of this module.
+Kernel bases are closely related to order bases, as can be seen from
+the following definitions. 
+\begin{defn}
+\label{def:kernelBasis}Given $\mathbf{F}\in\mathbb{K}\left[x\right]^{m\times n}$,
+a polynomial matrix $\mathbf{N}\in\mathbb{K}\left[x\right]^{n\times*}$
+is a (right) kernel basis of $\mathbf{F}$ if the following properties
+hold: 
+\begin{enumerate}
+\item $\mathbf{N}$ is full-rank. 
+\item $\mathbf{N}$ satisfies $\mathbf{F}\cdot\mathbf{N}=0$. 
+\item Any $\mathbf{q}\in\mathbb{K}\left[x\right]^{n}$ satisfying $\mathbf{F}\mathbf{q}=0$
+can be expressed as a linear combination of the columns of $\mathbf{N}$,
+that is, there exists some polynomial vector $\mathbf{p}$ such that
+$\mathbf{q}=\mathbf{N}\mathbf{p}$. 
+\end{enumerate}
+\end{defn}
+Any pair of kernel bases $\mathbf{N}$ and $\mathbf{M}$ of $\mathbf{F}$
+are column bases of each other and are unimodularly equivalent.
+
+A $\vec{s}$-minimal kernel basis of $\mathbf{F}$ is just a kernel
+basis that is $\vec{s}$-column reduced. 
+\begin{defn}
+Given $\mathbf{F}\in\mathbb{K}\left[x\right]^{m\times n}$, a polynomial
+matrix $\mathbf{N}\in\mathbb{K}\left[x\right]^{n\times*}$ is a $\vec{s}$-minimal
+(right) kernel basis of $\mathbf{F}$ if\textbf{ $\mathbf{N}$} is
+a kernel basis of $\mathbf{F}$ and $\mathbf{N}$ is $\vec{s}$-column
+reduced. We also call a $\vec{s}$-minimal (right) kernel basis of
+$\mathbf{F}$ a $\left(\mathbf{F},\vec{s}\right)$-kernel basis. 
+
+We will need to use the following bound on the sizes of kernel bases
+from \cite{za2012}.\end{defn}
+\begin{thm}
+\label{thm:boundOfSumOfShiftedDegreesOfKernelBasis}Suppose $\mathbf{F}\in\mathbb{K}\left[x\right]^{m\times n}$
+and $\vec{s}\in\mathbb{Z}_{\ge0}^{n}$ is a shift with entries bounding
+the corresponding column degrees of $\mathbf{F}$. Then the sum of
+the $\vec{s}$-column degrees of any $\vec{s}$-minimal kernel basis
+of $\mathbf{F}$ is bounded by $\sum\vec{s}$.
+\end{thm}
+We will also need the following result from \cite{za2012} to compute
+kernel bases by rows. 
+\begin{thm}
+\label{thm:continueComputingKernelBasisByRows}Let $\mathbf{G}=\left[\mathbf{G}_{1}^{T},\mathbf{G}_{2}^{T}\right]^{T}\in\mathbb{K}\left[x\right]^{m\times n}$
+and $\vec{t}\in\mathbb{Z}^{n}$ a shift vector. If $\mathbf{N}_{1}$
+is a $\left(\mathbf{G}_{1},\vec{t}\right)$-kernel basis with $\vec{t}$-column
+degrees $\vec{u}$, and $\mathbf{N}_{2}$ is a $\left(\mathbf{G}_{2}\mathbf{N}_{1},\vec{u}\right)$-kernel
+basis with $\vec{u}$-column degrees $\vec{v}$, then $\mathbf{N}_{1}\mathbf{N}_{2}$
+is a $\left(\mathbf{G},\vec{t}\right)$-kernel basis $\vec{t}$-column
+degrees $\vec{v}$. 
+\end{thm}
+Also recall the cost of kernel basis computation from \cite{za2012}.
+\begin{thm}
+\label{thm:costGeneral} Given an input matrix $\mathbf{F}\in\mathbb{K}\left[x\right]^{m\times n}$.
+Let $\vec{s}=\cdeg\mathbf{F}$ and $s=\sum\vec{s}/n$ be the average
+column degree of $\mathbf{F}$. Then a $\left(\mathbf{F},\vec{s}\right)$-kernel
+basis can be computed with a cost of $O^{\sim}\left(n^{\omega}s\right)$
+field operations.\end{thm}
+

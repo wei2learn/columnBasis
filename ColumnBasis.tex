@@ -1,0 +1,161 @@
+
+\section{Computing a Column Basis}
+
+Once a right factor $\mathbf{G}$ of $\mathbf{F}$ has been computed,
+we are in a position to determine a column basis $\mathbf{T}$ using
+the equation $\mathbf{F}=\mathbf{T}\mathbf{G}$. In order to do so
+efficiently, however, the degree of $\mathbf{T}$ cannot be too large.
+We see that this is the case from the following lemma. 
+\begin{lem}
+\label{lem:colBasisdegreeBoundByRdegOfRightFactor} Let $\mathbf{F}$
+and $\mathbf{G}$ be as before and $\vec{t}=-\rdeg_{-\vec{s}}\mathbf{G}$.
+Then 
+\begin{itemize}
+\item the column degrees of $\mathbf{T}$ are bounded by the corresponding
+entries of $\vec{t}$; 
+\item if $\vec{t}$ has $r$ entries and $\vec{s}^{~\prime}$ is the list
+of the $r$ largest entries of $\vec{s}$, then $\vec{t}\le\vec{s}^{~\prime}$. 
+\end{itemize}
+\end{lem}
+\begin{proof}
+Since $\mathbf{G}$ is $-\vec{s}$-row reduced, and $\rdeg_{-\vec{s}}\mathbf{F}\le0$,
+by Lemma \ref{lem:predictableDegree} $\rdeg_{-\vec{t}}\mathbf{T}\le0$,
+or equivalently, $\mathbf{T}$ has column degrees bounded by $\vec{t}$.
+
+Let $\mathbf{G}^{\prime}$ be the $-\vec{s}$-row Popov form of $\mathbf{G}$
+and the square matrix $\mathbf{G}^{\prime\prime}$ consist of only
+the columns of $\mathbf{G}^{\prime}$ that contains pivot entries,
+and has the rows permuted so the pivots are in the diagonal. Let $\vec{s}^{~\prime\prime}$
+be the list of the entries in $\vec{s}$ that correspond to the columns
+of $\mathbf{G}^{\prime\prime}$ in $\mathbf{G}^{\prime}$. Note that
+$\rdeg_{-\vec{s}^{~\prime\prime}}\mathbf{G}^{\prime\prime}=-\vec{t}^{~\prime\prime}$
+is just a permutation of $-\vec{t}$ with the same entries. By the
+definition of shifted row degree, $-\vec{t}^{~\prime\prime}$ is the
+sum of $-\vec{s}^{~\prime\prime}$ and the list of the diagonal pivot
+degrees, which are nonnegative. Therefore, $-\vec{t}^{~\prime\prime}\ge-\vec{s}^{~\prime\prime}$.
+The result then follows as $\vec{t}$ is a permutation of $\vec{t}^{~\prime\prime}$
+and $\vec{s}^{\ \prime}$ consists of the largest entries of $\vec{s}$. 
+\end{proof}
+Having a bound on the column degrees of $\mathbf{T}$ determined,
+we are now ready to compute $\mathbf{T}$. This is done again by computing
+a kernel basis using an order basis computation as before. 
+\begin{lem}
+Let $\vec{t}^{*}=\left[0,\dots,0,\vec{t}\right]\in\mathbb{Z}^{m+r}$.
+Then any $\left(\left[\mathbf{F}^{T},\mathbf{G}^{T}\right],-\vec{t}^{*}\right)$-kernel
+basis has the form $\begin{bmatrix}V\\
+\bar{\mathbf{T}}
+\end{bmatrix}$, where $V\in\mathbb{K}^{m\times m}$ is a unimodular matrix and $\left(\bar{\mathbf{T}}V^{-1}\right)^{T}$
+is a column basis of $\mathbf{F}$. \end{lem}
+\begin{proof}
+Note first that the matrix $\begin{bmatrix}-I\\
+\mathbf{T}^{T}
+\end{bmatrix}$ is a kernel basis of $\left[\mathbf{F}^{T},\mathbf{G}^{T}\right]$
+and is therefore unimodularly equivalent to any other kernel basis.
+Hence any other kernel basis has the form $\begin{bmatrix}-I\\
+\mathbf{T}^{T}
+\end{bmatrix}U=\begin{bmatrix}V\\
+\bar{\mathbf{T}}
+\end{bmatrix}$, with $U$ and $V=-U$ unimodular. Thus $\mathbf{T}=\left(\bar{\mathbf{T}}V^{-1}\right)^{T}$.
+Also note that the $-\vec{t}^{*}$ minimality forces the unimodular
+matrix $V$ in any $\left(\left[\mathbf{F}^{T},\mathbf{G}^{T}\right],-\vec{t}^{*}\right)$-kernel
+basis to be degree 0, the same degree as $I$. \end{proof}
+\begin{exmp}
+Let 
+\[
+\mathbf{F}=\left[\begin{array}{cccc}
+x^{2} & x^{2} & x+x^{2} & 1+x^{2}\\
+1+x+x^{2} & x^{2} & 1+x^{2} & 1+x^{2}
+\end{array}\right]
+\]
+with 
+\[
+\mathbf{G}=\left[\begin{array}{cccc}
+1 & 0 & 1 & 0\\
+\noalign{\medskip}x & {x}^{2} & 0 & 1+{x}^{2}
+\end{array}\right]
+\]
+being a minimal left kernel basis of a right kernel basis of $\mathbf{F}$.
+In order to compute the column basis $\mathbf{T}$ satisfying $\mathbf{F}=\mathbf{T}\mathbf{G}$,
+first we can determine $\cdeg\mathbf{T}\le\vec{t}=\left[2,0\right]$
+from Lemma \ref{lem:colBasisdegreeBoundByRdegOfRightFactor}. Then
+we can compute a $\left[0,0,-\vec{t}\right]$-minimal left kernel
+basis of $\begin{bmatrix}\mathbf{F}\\
+\mathbf{G}
+\end{bmatrix}$. The matrix 
+\[
+\left[V,\bar{\mathbf{T}}\right]=\left[\begin{array}{cccc}
+\noalign{\medskip}1 & 0 & x+{x}^{2} & 1\\
+1 & 1 & 1+x & 0
+\end{array}\right]
+\]
+is such a left kernel basis. A column basis can then be computed as
+by 
+\[
+\mathbf{T}=V^{-1}\bar{\mathbf{T}}=\left[\begin{array}{cc}
+x+x^{2} & 1\\
+1+{x}^{2} & 1
+\end{array}\right].
+\]
+
+\end{exmp}
+In order to compute a $\left(\left[\mathbf{F}^{T},\mathbf{G}^{T}\right],-\vec{t}^{*}\right)$-kernel
+basis, we can again use order basis computation as before, as we again
+have an order basis that contains a $\left(\left[\mathbf{F}^{T},\mathbf{G}^{T}\right],-\vec{t}^{*}\right)$-kernel
+basis.
+\begin{lem}
+Any $\left(\left[\mathbf{F}^{T},\mathbf{G}^{T}\right],\vec{s}+\vec{e},-\vec{t}^{*}\right)$
+order basis contains a $\left(\left[\mathbf{F}^{T},\mathbf{G}^{T}\right],-\vec{t}^{*}\right)$-kernel
+basis whose $-\vec{t}^{*}$-row degrees are bounded by 0. \end{lem}
+\begin{proof}
+As before, Lemma \ref{lem:orderbasisContainsKernelbasisGeneralized}
+can be used here. We just need to show that a $\left(\left[\mathbf{F}^{T},\mathbf{G}^{T}\right],-\vec{t}^{*}\right)$-kernel
+basis has $-\vec{t}^{*}$-row degrees no more than $0$. This follows
+since $\rdeg_{-\vec{t}^{*}}\begin{bmatrix}I\\
+\mathbf{T}^{T}
+\end{bmatrix}\le0$. 
+\end{proof}
+In order to compute a $\left(\left[\mathbf{F}^{T},\mathbf{G}^{T}\right],-\vec{t}^{*}\right)$
+kernel basis efficiently, we notice that we have the same type of
+problem as in Section \ref{sub:kernelBasisViaOrderBasisByRows} and
+hence we can again use Algorithm \ref{alg:minimalNullspaceBasisReverse}. 
+\begin{lem}
+\label{lem:costOfKernelBasisReversedForLeftFactor}A $\left(\left[\mathbf{F}^{T},\mathbf{G}^{T}\right],-\vec{t}^{*}\right)$-kernel
+basis can be computed using \prettyref{alg:minimalNullspaceBasisReverse}
+with a cost of $O^{\sim}\left(n^{\omega}s\right)$, where $s=\xi/n$
+is the average column degree of $\mathbf{F}$ as before. \end{lem}
+\begin{proof}
+Just use the algorithm with input $\left(\left[\mathbf{F}^{T},\mathbf{G}^{T}\right],\vec{t}^{*},\xi\right)$.
+We can verify the conditions on the input are satisfied.
+\begin{itemize}
+\item To see that $\sum\rdeg_{\vec{t}^{*}}\left[\mathbf{F}^{T},\mathbf{G}^{T}\right]\le\xi$,
+note that from $\vec{t}=-\rdeg_{-\vec{s}}\mathbf{G}$ and \prettyref{lem:columnDegreesRowDegreesSymmetry}
+$\cdeg_{\vec{t}}\mathbf{G}\le\vec{s}$, or equivalently, $\rdeg_{\vec{t}}\mathbf{G}^{T}\le\vec{s}$.
+Since we also have $\rdeg\mathbf{F}^{T}\le\vec{s}$, it follows that
+$\rdeg_{\vec{t}^{*}}\left[\mathbf{F}^{T},\mathbf{G}^{T}\right]\le\vec{s}$. 
+\item The second condition $\sum\vec{t}^{*}\le\xi$ follows from \prettyref{lem:colBasisdegreeBoundByRdegOfRightFactor}.
+\item The third condition holds since $\begin{bmatrix}-I\\
+\mathbf{T}^{T}
+\end{bmatrix}$ is a kernel basis with row degrees bounded by $\vec{t}^{*}$.
+\end{itemize}
+\end{proof}
+With a $\left(\left[\mathbf{F}^{T},\mathbf{G}^{T}\right],-\vec{t}^{*}\right)$-kernel
+basis $\begin{bmatrix}V\\
+\bar{\mathbf{T}}
+\end{bmatrix}$ computed, a column basis is then given by $\mathbf{T}~=~\left(\bar{\mathbf{T}}V^{-1}\right)^{T}$.
+
+The complete algorithm for computing a column basis is then given
+in Algorithm \ref{alg:colBasis}.
+
+\input{AlgorithmColumnBasis.tex} 
+\begin{thm}
+\label{thm:columnBasisCost1}A column basis $\mathbf{T}$ of $\mathbf{F}$
+can be computed with a cost of $O^{\sim}\left(n^{\omega}s\right)$,
+where $s=\xi/n$ is the average column degree of $\mathbf{F}$ as
+before. \end{thm}
+\begin{proof}
+The cost is dominated by the cost of the three kernel basis computations
+in the algorithm. The first one is handled by the algorithm from \cite{za2012}
+and \prettyref{thm:costGeneral}, while the remaining two are handled
+by \prettyref{alg:minimalNullspaceBasisReverse}, \prettyref{lem:costKernelBasisReverse}
+and \prettyref{lem:costOfKernelBasisReversedForLeftFactor}.\end{proof}
+

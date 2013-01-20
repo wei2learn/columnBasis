@@ -8,7 +8,7 @@
 \end_preamble
 \options amsthm
 \use_default_options false
-\master columnBasisISSAC.lyx
+\master ColumnBasis.lyx
 \begin_modules
 algorithmics
 \end_modules
