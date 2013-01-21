@@ -476,7 +476,7 @@ In order to compute a
 
 \begin_layout Lemma
 Any 
-\begin_inset Formula $\left(\left[\mathbf{F}^{T},\mathbf{G}^{T}\right],\vec{s}+\vec{e},-\vec{t}^{*}\right)$
+\begin_inset Formula $\left(\left[\mathbf{F}^{T},\mathbf{G}^{T}\right],\vec{s}+1,-\vec{t}^{*}\right)$
 \end_inset
 
  order basis contains a 
