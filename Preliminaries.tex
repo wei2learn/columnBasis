@@ -37,11 +37,12 @@ but sorted in increasing order.
 \item [{Summation~Notation}] For a list $\vec{a}=\left[a_{1},\dots,a_{n}\right]\in\mathbb{Z}^{n}$,
 we write $\sum\vec{a}$ without index to denote the summation of all
 entries in $\vec{a}$. 
-\item [{}]~
-\item [{Uniformly~Shift~a~List}] For a list $\vec{a}=\left[a_{1},\dots,a_{n}\right]\in\mathbb{Z}^{n}$
-and $c\in\mathbb{Z}$, we write $\vec{a}+c$ to denote $\vec{a}+\left[c,\dots,c\right]=\left[a_{1}+c,\dots,a_{n}+c\right]$,
-and similarly for $-$.
-\item [{Compare~a~List~with~a~Integer}] For a list $\vec{a}=\left[a_{1},\dots,a_{n}\right]\in\mathbb{Z}^{n}$
+%\item [{}]~
+\item [{Uniformly~Shift~a~List}] For a list 
+$\vec{a}=\left[a_{1},\dots,a_{n}\right]\in\mathbb{Z}^{n}$
+and $c\in\mathbb{Z}$, we write $\vec{a}+c$ to denote $\vec{a}+\left[c,\dots,c\right]=\left[a_{1}+c,\dots,a_{n}+c\right]$, with subtraction handled similarly.
+\item [{Compare~a~List~with~a~Integer}] For %a list 
+$\vec{a}=\left[a_{1},\dots,a_{n}\right]\in\mathbb{Z}^{n}$
 and $c\in\mathbb{Z}$, we write $\vec{a}<c$ to denote $\vec{a}<\left[c,\dots,c\right]$,
 and similarly for $>,\le,\ge,=$.
 \end{description}
@@ -55,7 +56,7 @@ over a field $\mathbb{K}$, its column degree, denoted by $\cdeg\mathbf{p}$,
 is the maximum of the degrees of the entries of $\mathbf{p}$, that
 is, 
 \[
-\cdeg\mathbf{p}=\max_{1\le i\le n}\deg p_{i}.
+\cdeg~\mathbf{p}=\max_{1\le i\le n}\deg p_{i}.
 \]
 The \emph{shifted column degree} generalizes this standard column
 degree by taking the maximum after shifting the degrees by a given
@@ -64,11 +65,11 @@ the shifted column degree of $\mathbf{p}$ with respect to a shift
 $\vec{s}=\left[s_{1},\dots,s_{n}\right]\in\mathbb{Z}^{n}$, or the
 \emph{$\vec{s}$-column degree} of $\mathbf{p}$ is 
 \[
-\cdeg_{\vec{s}}\mathbf{p}=\max_{1\le i\le n}[\deg p_{i}+s_{i}]=\deg(x^{\vec{s}}\cdot\mathbf{p}),
+\cdeg_{\vec{s}}~\mathbf{p}=\max_{1\le i\le n}[\deg p_{i}+s_{i}]=\deg(x^{\vec{s}}\cdot\mathbf{p}),
 \]
 where 
 \[
-x^{\vec{s}}=\diag\left(x^{s_{1}},x^{s_{2}},\dots,x^{s_{n}}\right)
+x^{\vec{s}}=\diag\left(x^{s_{1}},x^{s_{2}},\dots,x^{s_{n}}\right) ~.
 \]
 For a matrix $\mathbf{P}$, we use $\cdeg\mathbf{P}$ and $\cdeg_{\vec{s}}\mathbf{P}$
 to denote respectively the list of its column degrees and the list
@@ -81,8 +82,8 @@ is defined similarly as
 \]
 
 
-The shifted degrees have been used previously in polynomial matrix
-computations and to generalize matrix normal forms \cite{BLV:jsc06}.
+Shifted degrees have been used previously in polynomial matrix
+computations and in generalizations of some matrix normal forms \cite{BLV:jsc06}.
 The shifted column degree is equivalent to the notion of \emph{defect}
 commonly used in the literature.
 
@@ -105,7 +106,7 @@ a relationship between shifted column degrees and shifted row degrees.
 has $\vec{u}$-column degrees bounded by $\vec{v}$ if and only if
 its $-\vec{v}$-row degrees are bounded by $-\vec{u}$. 
 \end{lem}
-Another essential tool needed in our computation, also based on the
+Another essential fact needed in our algorithm, also based on the
 use of the shifted degrees, is the efficient multiplication of matrices
 with unbalanced degrees \cite[Theorem 3.7]{za2012}. 
 \begin{thm}
@@ -125,7 +126,7 @@ Let $\mathbb{K}$ be a field, $\mathbf{F}\in\mathbb{K}\left[\left[x\right]\right]
 a matrix of power series and $\vec{\sigma}=\left[\sigma_{1},\dots,\sigma_{m}\right]$
 a vector of non-negative integers. 
 \begin{defn}
-We say a vector of polynomials $\mathbf{p}\in\mathbb{K}\left[x\right]^{n\times1}$
+A vector of polynomials $\mathbf{p}\in\mathbb{K}\left[x\right]^{n\times1}$
 has \emph{order} $\left(\mathbf{F},\vec{\sigma}\right)$ (or \emph{order}
 $\vec{\sigma}$ with respect to $\mathbf{F}$) if $\mathbf{F}\cdot\mathbf{p}\equiv\mathbf{0}\mod x^{\vec{\sigma}}$,
 that is, 
@@ -144,14 +145,14 @@ We again represent order bases using matrices, whose columns are the
 basis elements. We only work with those order bases having minimal
 or shifted minimal degrees (also referred to as a reduced order basis
 in \cite{BL1997}), that is, their column degrees or shifted column
-degrees are the smallest possible among all bases of the module. A
-discussion on such minimality and its existence can be found in \cite[Chapter 2]{zhou:phd2012}.
+degrees are the smallest possible among all bases of the module. 
+%A discussion on such minimality and its existence can be found in \cite[Chapter 2]{zhou:phd2012}.
 
 An order basis \cite{BeLa94,BL1997} $\mathbf{P}$ of $\mathbf{F}$
 with order $\vec{\sigma}$ and shift $\vec{s}$, or simply an $\left(\mathbf{F},\vec{\sigma},\vec{s}\right)$-basis,
 is a basis for the module $\left\langle \left(\mathbf{F},\vec{\sigma}\right)\right\rangle $
 having minimal $\vec{s}$-column degrees. If $\vec{\sigma}=\left[\sigma,\dots,\sigma\right]$
-is uinform then we simply write $\left(\mathbf{F},\sigma,\vec{s}\right)$-basis.
+is uniform then we simply write $\left(\mathbf{F},\sigma,\vec{s}\right)$-basis.
 The precise definition of an $\left(\mathbf{F},\vec{\sigma},\vec{s}\right)$-basis
 is as follows. 
 \begin{defn}
@@ -183,9 +184,10 @@ We will need to compute order bases with unbalanced shifts using Algorithm
 2 from \cite{za2009}. This computation can be done efficiently as
 given by the following result from \cite{za2009}.
 \begin{thm}
-\label{thm:unbalancedOrderBasisCost}If the shift $\vec{s}$ satisfies
+\label{thm:unbalancedOrderBasisCost}If %the shift 
+$\vec{s}$ satisfies
 $\vec{s}\le0$ and $-\sum\vec{s}\le m\sigma$, then a $\left(\mathbf{F},\sigma,\vec{s}\right)$-basis
-can be computed with cost of $O^{\sim}(n^{\omega}d)$ field operations,
+can be computed with a cost of $O^{\sim}(n^{\omega}d)$ field operations,
 where $d=m\sigma/n$. 
 \end{thm}
 

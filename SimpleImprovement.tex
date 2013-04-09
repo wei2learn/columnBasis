@@ -1,9 +1,9 @@
 
 \section{\label{sec:successiveColBasisComputation}A Simple Improvement}
 
-When the input matrix $\mathbf{F}$ has column dimension much larger
-$n$ than the row dimension $m$, we can separate $\mathbf{F}=\left[\mathbf{F}_{1},\mathbf{F}_{2},\dots,\mathbf{F}_{n/m}\right]$
-to $n/m$ blocks, each with dimension $m\times m$, assuming without
+When the input matrix $\mathbf{F}$ has column dimension $n$ much larger
+than the row dimension $m$, then we can separate $\mathbf{F}=\left[\mathbf{F}_{1},\mathbf{F}_{2},\dots,\mathbf{F}_{n/m}\right]$
+into $n/m$ blocks, each with dimension $m\times m$, assuming without
 loss of generality $n$ is a multiple of $m$, and the columns are
 arranged in increasing degrees. We then do a series of column basis
 computations. First we compute a column basis $\mathbf{T}_{1}$ of
@@ -19,7 +19,7 @@ can be done with a cost of $O^{\sim}\left(m^{\omega}(\bar{s}_{i}+\bar{s}_{i+1})/
 field operations.\end{lem}
 \begin{proof}
 From Lemma \ref{lem:colBasisdegreeBoundByRdegOfRightFactor}, the
-column basis $\mathbf{T}_{i-1}$ of $\left[\mathbf{F}_{1},\dots,\mathbf{F}_{i}\right]$
+column basis $\mathbf{T}_{i-1}$ of \\$\left[\mathbf{F}_{1},\dots,\mathbf{F}_{i}\right]$
 has column degrees bounded by the largest column degrees of $\mathbf{F}_{i}$,
 hence $\sum\cdeg\mathbf{T}_{i-1}\le\sum\cdeg\mathbf{F}_{i}$. The
 lemma then follows by combining this with the result from Theorem
@@ -31,7 +31,7 @@ with a cost of $O^{\sim}\left(m^{\omega}\hat{s}_{i}\right)$, where
 \]
  \end{proof}
 \begin{thm}
-If $s=\left(\sum\cdeg\mathbf{F}\right)/n$, then \label{thm:finalCollBasisCost}A
+If $s=\left(\sum\cdeg\mathbf{F}\right)/n$, then \label{thm:finalCollBasisCost} a
 column basis of $\mathbf{F}$ can be computed with a cost of $O^{\sim}\left(m^{\omega}s\right)$. \end{thm}
 \begin{proof}
 Summing up the cost of all the column basis computations, 

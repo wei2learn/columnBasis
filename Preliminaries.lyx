@@ -306,51 +306,6 @@ Notation For a list
 \end_layout
 
 \begin_layout Description
-\begin_inset Note Note
-status collapsed
-
-\begin_layout Plain Layout
-List
-\begin_inset space ~
-\end_inset
-
-of
-\begin_inset space ~
-\end_inset
-
-a
-\begin_inset space ~
-\end_inset
-
-Constant For a list 
-\begin_inset Formula $\vec{a}=\left[a_{1},\dots,a_{n}\right]\in\mathbb{Z}^{n}$
-\end_inset
-
- and 
-\begin_inset Formula $c\in\mathbb{Z}$
-\end_inset
-
-, we write 
-\begin_inset Formula $\vec{a}+c$
-\end_inset
-
- to denote 
-\begin_inset Formula $\vec{a}+\left[c,\dots,c\right]=\left[a_{1}+c,\dots,a_{n}+c\right]$
-\end_inset
-
-, and similarly for 
-\begin_inset Formula $-$
-\end_inset
-
-.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Description
 Uniformly
 \begin_inset space ~
 \end_inset
