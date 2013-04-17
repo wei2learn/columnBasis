@@ -1,0 +1,1960 @@
+#LyX file created by tex2lyx 2.0.5.1
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass article
+\use_default_options false
+\language english
+\language_package none
+\inputencoding auto
+\fontencoding default
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\paperfontsize default
+\spacing single
+\use_hyperref 0
+\papersize default
+\use_geometry false
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 0
+\use_mathdots 0
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 0
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Bibliography
+
+
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label ""
+key "bcl:2006"
+
+\end_inset
+
+ B.
+\begin_inset space ~
+
+\end_inset
+
+Beckermann, H.
+\begin_inset space ~
+
+\end_inset
+
+Cheng, and G.
+\begin_inset space ~
+
+\end_inset
+
+Labahn. 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+newblock
+\end_layout
+
+\end_inset
+
+ Fraction-free row reduction of matrices of 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+O
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+re polynomials. 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+newblock
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+em
+\end_layout
+
+\end_inset
+
+ Journal of Symbolic Computation
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+, 41(1):513--543, 2006.
+\end_layout
+
+\begin_layout Bibliography
+
+
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label ""
+key "BeLa94"
+
+\end_inset
+
+ B.
+\begin_inset space ~
+
+\end_inset
+
+Beckermann and G.
+\begin_inset space ~
+
+\end_inset
+
+Labahn. 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+newblock
+\end_layout
+
+\end_inset
+
+ A uniform approach for the fast computation of matrix-type 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+Pad
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+é
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+ approximants. 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+newblock
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+em
+\end_layout
+
+\end_inset
+
+ SIAM Journal on Matrix Analysis and Applications
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+, 15(3):804--823, 1994.
+\end_layout
+
+\begin_layout Bibliography
+
+
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label ""
+key "BL1997"
+
+\end_inset
+
+ B.
+\begin_inset space ~
+
+\end_inset
+
+Beckermann and G.
+\begin_inset space ~
+
+\end_inset
+
+Labahn. 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+newblock
+\end_layout
+
+\end_inset
+
+ Recursiveness in matrix rational interpolation problems. 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+newblock
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+em
+\end_layout
+
+\end_inset
+
+ Journal of Computational and Applied Math
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+, 5-34, 1997.
+\end_layout
+
+\begin_layout Bibliography
+
+
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label ""
+key "BL2000"
+
+\end_inset
+
+ B.
+\begin_inset space ~
+
+\end_inset
+
+Beckermann and G.
+\begin_inset space ~
+
+\end_inset
+
+Labahn. 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+newblock
+\end_layout
+
+\end_inset
+
+ Fraction-free computation of matrix rational interpolants and matrix 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+G
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+C
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+D
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+s. 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+newblock
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+em
+\end_layout
+
+\end_inset
+
+ SIAM Journal on Matrix Analysis and Applications
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+, 22(1):114--144, 2000.
+\end_layout
+
+\begin_layout Bibliography
+
+
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label ""
+key "BLV:1999"
+
+\end_inset
+
+ B.
+\begin_inset space ~
+
+\end_inset
+
+Beckermann, G.
+\begin_inset space ~
+
+\end_inset
+
+Labahn, and G.
+\begin_inset space ~
+
+\end_inset
+
+Villard. 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+newblock
+\end_layout
+
+\end_inset
+
+ Shifted normal forms of polynomial matrices. 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+newblock
+\end_layout
+
+\end_inset
+
+ In 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+em
+\end_layout
+
+\end_inset
+
+ Proceedings of the International Symposium on Symbolic and Algebraic Computation
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+, ISSAC'99, pages 189--196, 1999.
+\end_layout
+
+\begin_layout Bibliography
+
+
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label ""
+key "BLV:jsc06"
+
+\end_inset
+
+ B.
+\begin_inset space ~
+
+\end_inset
+
+Beckermann, G.
+\begin_inset space ~
+
+\end_inset
+
+Labahn, and G.
+\begin_inset space ~
+
+\end_inset
+
+Villard. 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+newblock
+\end_layout
+
+\end_inset
+
+ Normal forms for general polynomial matrices. 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+newblock
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+em
+\end_layout
+
+\end_inset
+
+ Journal of Symbolic Computation
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+, 41(6):708--737, 2006.
+\end_layout
+
+\begin_layout Bibliography
+
+
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label ""
+key "beelen:1988"
+
+\end_inset
+
+ Th. G.
+\begin_inset space ~
+
+\end_inset
+
+J. Beelen and P.M.
+\begin_inset space ~
+
+\end_inset
+
+Van Dooren. 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+newblock
+\end_layout
+
+\end_inset
+
+ An improved algorithm for the computation of 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+K
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+ronecker's canonical form of a singular pencil. 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+newblock
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+em
+\end_layout
+
+\end_inset
+
+ Linear Algebra and its Applications
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+, 105:9--65, 1988.
+\end_layout
+
+\begin_layout Bibliography
+
+
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label ""
+key "BVP:1988"
+
+\end_inset
+
+ Th. G.
+\begin_inset space ~
+
+\end_inset
+
+J. Beelen, G.
+\begin_inset space ~
+
+\end_inset
+
+J. van
+\begin_inset space ~
+
+\end_inset
+
+den Hurk, and C.
+\begin_inset space ~
+
+\end_inset
+
+Praagman. 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+newblock
+\end_layout
+
+\end_inset
+
+ A new method for computing a column reduced polynomial matrix. 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+newblock
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+em
+\end_layout
+
+\end_inset
+
+ Syst. Control Lett.
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+, 10(4):217--224, 1988.
+\end_layout
+
+\begin_layout Bibliography
+
+
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label ""
+key "Giorgi2003"
+
+\end_inset
+
+ P.
+\begin_inset space ~
+
+\end_inset
+
+Giorgi, C.-P. Jeannerod, and G.
+\begin_inset space ~
+
+\end_inset
+
+Villard. 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+newblock
+\end_layout
+
+\end_inset
+
+ On the complexity of polynomial matrix computations. 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+newblock
+\end_layout
+
+\end_inset
+
+ In 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+em
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+Proceedings of the International Symposium on Symbolic and Algebraic Computation, Philadelphia, Pennsylvania, USA
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+, pages 135--142. ACM Press, 2003.
+\end_layout
+
+\begin_layout Bibliography
+
+
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label ""
+key "GSSV2012"
+
+\end_inset
+
+ S.
+\begin_inset space ~
+
+\end_inset
+
+Gupta, S.
+\begin_inset space ~
+
+\end_inset
+
+Sarkar, A.
+\begin_inset space ~
+
+\end_inset
+
+Storjohann, and J.
+\begin_inset space ~
+
+\end_inset
+
+Valeriote. 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+newblock
+\end_layout
+
+\end_inset
+
+ Triangular x-basis decompositions and derandomization of linear algebra algorithms over 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+K
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+[x]. 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+newblock
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+em
+\end_layout
+
+\end_inset
+
+ Journal of Symbolic Computation: Special issue in honour of the research and influence of Joachim von zur Gathen at 60
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+, 47(4):422--453, 2012.
+\end_layout
+
+\begin_layout Bibliography
+
+
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label ""
+key "kailath:1980"
+
+\end_inset
+
+ T.
+\begin_inset space ~
+
+\end_inset
+
+Kailath. 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+newblock
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+em
+\end_layout
+
+\end_inset
+
+ Linear Systems
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+. 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+newblock
+\end_layout
+
+\end_inset
+
+ Prentice-Hall, 1980.
+\end_layout
+
+\begin_layout Bibliography
+
+
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label ""
+key "li:2006"
+
+\end_inset
+
+ Chao Li. 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+newblock
+\end_layout
+
+\end_inset
+
+ Lattice compression of polynomial matrices. 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+newblock
+\end_layout
+
+\end_inset
+
+ Master's thesis, School of Computer Science, University of Waterloo, 2006.
+\end_layout
+
+\begin_layout Bibliography
+
+
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label ""
+key "sarkar2011"
+
+\end_inset
+
+ S.
+\begin_inset space ~
+
+\end_inset
+
+Sarkar. 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+newblock
+\end_layout
+
+\end_inset
+
+ Computing 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+P
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+opov forms of polynomial matrices. 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+newblock
+\end_layout
+
+\end_inset
+
+ Master's thesis, University of Waterloo, 2011.
+\end_layout
+
+\begin_layout Bibliography
+
+
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label ""
+key "SS2011"
+
+\end_inset
+
+ S.
+\begin_inset space ~
+
+\end_inset
+
+Sarkar and A.
+\begin_inset space ~
+
+\end_inset
+
+Storjohann. 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+newblock
+\end_layout
+
+\end_inset
+
+ Normalization of row reduced matrices. 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+newblock
+\end_layout
+
+\end_inset
+
+ In 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+em
+\end_layout
+
+\end_inset
+
+ Proceedings of the International Symposium on Symbolic and Algebraic Computation
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+, pages 297--304, 2011.
+\end_layout
+
+\begin_layout Bibliography
+
+
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label ""
+key "storjohann-villard:2005"
+
+\end_inset
+
+ A.
+\begin_inset space ~
+
+\end_inset
+
+Storjohann and G.
+\begin_inset space ~
+
+\end_inset
+
+Villard. 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+newblock
+\end_layout
+
+\end_inset
+
+ Computing the rank and a small nullspace basis of a polynomial matrix. 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+newblock
+\end_layout
+
+\end_inset
+
+ In 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+em
+\end_layout
+
+\end_inset
+
+ Proceedings of the International Symposium on Symbolic and Algebraic Computation
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+, ISSAC'05, pages 309--316, 2005.
+\end_layout
+
+\begin_layout Bibliography
+
+
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label ""
+key "villard96"
+
+\end_inset
+
+ G.
+\begin_inset space ~
+
+\end_inset
+
+Villard. 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+newblock
+\end_layout
+
+\end_inset
+
+ Computing popov and hermite forms of polynomial matrices. 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+newblock
+\end_layout
+
+\end_inset
+
+ In 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+em
+\end_layout
+
+\end_inset
+
+ International Symposium on Symbolic and Algebraic Computation
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+, 1996.
+\end_layout
+
+\begin_layout Bibliography
+
+
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label ""
+key "vonzurgathen"
+
+\end_inset
+
+ J.
+\begin_inset space ~
+
+\end_inset
+
+von
+\begin_inset space ~
+
+\end_inset
+
+zur Gathen and J
+\begin_inset space ~
+
+\end_inset
+
+Gerhard. 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+newblock
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+em
+\end_layout
+
+\end_inset
+
+ Modern Computer Algebra
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+. 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+newblock
+\end_layout
+
+\end_inset
+
+ Cambridge University Press, 2nd edition edition, 2003.
+\end_layout
+
+\begin_layout Bibliography
+
+
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label ""
+key "zhou:phd2012"
+
+\end_inset
+
+ W.
+\begin_inset space ~
+
+\end_inset
+
+Zhou. 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+newblock
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+em
+\end_layout
+
+\end_inset
+
+ Fast Order Basis and Kernel Basis Computation and Related Problems
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+. 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+newblock
+\end_layout
+
+\end_inset
+
+ PhD thesis, University of Waterloo, 2012.
+\end_layout
+
+\begin_layout Bibliography
+
+
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label ""
+key "ZL2012"
+
+\end_inset
+
+ W.
+\begin_inset space ~
+
+\end_inset
+
+Zhou and G.
+\begin_inset space ~
+
+\end_inset
+
+Labahn. 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+newblock
+\end_layout
+
+\end_inset
+
+ Efficient algorithms for order basis computation. 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+newblock
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+em
+\end_layout
+
+\end_inset
+
+ Journal of Symbolic Computation
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+, 47:793--819, 2012.
+\end_layout
+
+\begin_layout Bibliography
+
+
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label ""
+key "za2009"
+
+\end_inset
+
+ Wei Zhou and George Labahn. 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+newblock
+\end_layout
+
+\end_inset
+
+ Efficient computation of order bases. 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+newblock
+\end_layout
+
+\end_inset
+
+ In 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+em
+\end_layout
+
+\end_inset
+
+ Proceedings of the International Symposium on Symbolic and Algebraic Computation
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+, ISSAC'09, pages 375--382. ACM, 2009.
+\end_layout
+
+\begin_layout Bibliography
+
+
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label ""
+key "za2012"
+
+\end_inset
+
+ Wei Zhou, George Labahn, and Arne Storjohann. 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+newblock
+\end_layout
+
+\end_inset
+
+ Computing minimal nullspace bases. 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+newblock
+\end_layout
+
+\end_inset
+
+ In 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+em
+\end_layout
+
+\end_inset
+
+ Proceedings of the International Symposium on Symbolic and Algebraic Computation
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+, ISSAC'12, pages 375--382. ACM, 2012.
+\end_layout
+
+\end_body
+\end_document

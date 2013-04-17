@@ -14,11 +14,12 @@
 %\def\ord{\qopname\relax n{ord}}
 
 \def\StorjohannTransform{\qopname\relax n{StorjohannTransform}}\def\TransformUnbalanced{\qopname\relax n{TransformUnbalanced}}\def\rowDimension{\qopname\relax n{rowDimension}}\def\columnDimension{\qopname\relax n{columnDimension}}\DeclareMathOperator{\re}{rem}\DeclareMathOperator{\coeff}{coeff}\DeclareMathOperator{\lcoeff}{lcoeff}\def\mab{\qopname\relax n{orderBasis}}\def\mmab{\qopname\relax n{FastBasis}}\def\umab{\qopname\relax n{UnbalancedFastBasis}}\newcommand{\bb}{\\}
-\def\mnb{\qopname\relax n{MinimalNullspaceBasis ~ }}
 \DeclareMathOperator{\mnbr}{MinimaKernelBasisReversed}
 %\def\rdeg{\qopname\relax n{rdeg}}
-\DeclareMathOperator{\colBasis}{colBasis}
-
+%\DeclareMathOperator{\colBasis}{colBasis}
+\DeclareMathOperator{\colBasis}{ColumnBasis}
+\def\mnb{\qopname\relax n{MinimalKernelBasis ~ }}
+%\DeclareMathOperator{\mnbr}{DualMinimaKernelBasis}
 
 
 \newcommand{\arne}[1]{{\color{blue}\it {\bf Arne:} #1 }}
@@ -482,12 +483,47 @@ Given a matrix of univariate polynomials over a field
 \begin_inset Formula $\mathbb{K}\left[x\right]$
 \end_inset
 
--module consisting of all 
-\begin_inset Formula $\mathbb{K}\left[x\right]$
+-module.
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+% consisting of all $
+\backslash
+mathbb{K}
+\backslash
+left[x
+\backslash
+right]$-linear combination of these columns.
+ 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
 \end_inset
 
--linear combination of these columns.
- We call any basis of this module a column basis of the given matrix.
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+%This module is used for such important computations as matrix GCDs and
+ matrix normal forms for %polynomial matrices.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+We call any basis of this module a column basis of the given matrix.
+ Matrix gcds and matrix normal forms are examples of such module bases.
  In this paper we present a deterministic algorithm for the computation
  of a column basis of an 
 \begin_inset Formula $m\times n$
@@ -807,7 +843,7 @@ General Terms:
 \series bold
 Keywords:
 \series default
- Nullspace basis, Complexity
+ Kernel basis, Nullspace basis, Column Basis, Complexity
 \end_layout
 
 \begin_layout Section
@@ -930,9 +966,8 @@ key "li:2006,storjohann-villard:2005"
 \end_layout
 
 \begin_layout Standard
-While column bases are produced by column reduced, Popov and Hermite forms
- and considerable work has been done on computing such forms, for example
- 
+Column bases are produced by column reduced, Popov and Hermite forms and
+ considerable work has been done on computing such forms, for example 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "bcl:2006,beelen:1988,Giorgi2003,GSSV2012,sarkar2011,SS2011"
@@ -975,7 +1010,8 @@ key "BL1997"
 \begin_inset Formula $\sum\vec{s}$
 \end_inset
 
- polynomial matrix multiplications.
+ polynomial matrix multiplications, where a sum without index denotes the
+ sum of all entries.
 \end_layout
 
 \begin_layout Standard
@@ -996,7 +1032,7 @@ In this paper we give a fast, deterministic algorithm for the computation
 \begin_inset Formula $s$
 \end_inset
 
- being the average average column degree of 
+ being the average column degree of 
 \begin_inset Formula $\mathbf{F}$
 \end_inset
 
@@ -1015,14 +1051,18 @@ In this paper we give a fast, deterministic algorithm for the computation
 
  is the exponent of matrix multiplication.
  Our algorithm works for both rectangular and non-full column rank matrices.
- Our method depends on kernel computation of 
+ Our method depends on kernel basis computation of 
 \begin_inset Formula $\mathbf{F}$
 \end_inset
 
  along with finding a factorization of the input matrix polynomial into
- a column basis and a left kernel of the right kernel.
- Finding the right and left kernel then makes use of the fast kernel and
- order basis algorithms from 
+ a column basis and a left kernel basis of a right kernel basis of 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+.
+ Finding the right and left kernel basis then makes use of the fast kernel
+ basis and order basis algorithms from 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "za2012"
@@ -1032,11 +1072,12 @@ key "za2012"
  and 
 \begin_inset CommandInset citation
 LatexCommand cite
-key "za2009"
+key "za2009,ZL2012"
 
 \end_inset
 
 , respectively.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -1047,8 +1088,8 @@ The remainder of this paper is as follows.
  matrix that forms the core of our procedure, with a column basis being
  the left factor, and the right factor is a left kernel basis of a right
  kernel basis of the input matrix.
- Section 4 provides an algorithm for fast computation of a left kernel making
- use of order bases computation with unbalanced shift.
+ Section 4 provides an algorithm for fast computation of a left kernel basis
+ making use of order bases computation with unbalanced shift.
  The column basis algorithm is given in Section 5 with the following section
  giving details on how the methods can be improved when the number of columns
  is significantly larger than the number of rows.
@@ -1267,9 +1308,10 @@ Lists For two lists
 \end_inset
 
 
-\end_layout
+\begin_inset Note Comment
+status collapsed
 
-\begin_layout Description
+\begin_layout Plain Layout
 Summation
 \begin_inset space ~
 \end_inset
@@ -1288,6 +1330,11 @@ Notation For a list
 
 .
  
+\end_layout
+
+\end_inset
+
+
 \begin_inset ERT
 status collapsed
 
@@ -2157,11 +2204,25 @@ end{comment}
 \end_layout
 
 \begin_layout Standard
+In this paper, a 
+\begin_inset Formula $\left(\mathbf{F},\vec{\sigma},\vec{s}\right)$
+\end_inset
+
+-basis is also called a 
+\begin_inset Formula $\left(\mathbf{F},\vec{\sigma},\vec{s}\right)$
+\end_inset
+
+-order basis to further distinguish it from the kernel basis notation given
+ in the following subsection.
+ 
+\end_layout
+
+\begin_layout Standard
 Note that any pair of 
 \begin_inset Formula $\left(\mathbf{F},\vec{\sigma},\vec{s}\right)$
 \end_inset
 
--bases 
+-order bases 
 \begin_inset Formula $\mathbf{P}$
 \end_inset
 
@@ -2186,7 +2247,7 @@ key "za2009"
  from 
 \begin_inset CommandInset citation
 LatexCommand cite
-key "za2009"
+key "za2012"
 
 \end_inset
 
@@ -2430,6 +2491,35 @@ Given
 -kernel basis.
 \end_layout
 
+\begin_layout Standard
+In our earlier paper 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "za2012"
+
+\end_inset
+
+, a minimal kernel basis is called a minimal nullspace basis.
+ In this paper, the term kernel basis is now used to emphasize the fact
+ that we compute a basis for a 
+\begin_inset Formula $\mathbb{F}\left[x\right]$
+\end_inset
+
+-module instead of a basis for a 
+\begin_inset Formula $\mathbb{F}\left(x\right)$
+\end_inset
+
+-vector space, since the term nullspace basis usually refers to a basis
+ of some vector space as in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "storjohann-villard:2005"
+
+\end_inset
+
+.
+\end_layout
+
 \begin_layout Definition
 We will need to use the following bound on the sizes of kernel bases from
  
@@ -2550,7 +2640,7 @@ Let
 \begin_inset Formula $\left(\mathbf{G},\vec{t}\right)$
 \end_inset
 
--kernel basis 
+-kernel basis with 
 \begin_inset Formula $\vec{t}$
 \end_inset
 
@@ -2690,7 +2780,11 @@ name "lem:unimodular_kernel_columnBasis"
 \begin_inset Formula $\mathbf{T}$
 \end_inset
 
- is a column basis of 
+ is a column basis of
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset Formula $\mathbf{F}$
 \end_inset
 
@@ -2734,7 +2828,7 @@ Since
 \end_inset
 
  are unimodularly equivalent with 
-\begin_inset Formula $\mathbf{F}$
+\begin_inset Formula $\mathbf{T}$
 \end_inset
 
  having full column rank we have that 
@@ -2919,15 +3013,15 @@ reference "lem:unimodular_kernel_columnBasis"
 \begin_inset Formula $\mathbf{V}$
 \end_inset
 
- are inverses of each other we have the indentities 
+ are inverses of each other we have the identities 
 \begin_inset Formula 
 \begin{equation}
 \mathbf{V}\mathbf{U}=\begin{bmatrix}\mathbf{V}_{U}\\
 \mathbf{V}_{D}
 \end{bmatrix}\begin{bmatrix}\mathbf{U}_{L},\mathbf{U}_{R}\end{bmatrix}=\begin{bmatrix}\mathbf{V}_{U}\mathbf{U}_{L} & \mathbf{V}_{U}\mathbf{U}_{R}\\
 \mathbf{V}_{D}\mathbf{U}_{L} & \mathbf{V}_{D}\mathbf{U}_{R}
-\end{bmatrix}=\begin{bmatrix}I & 0\\
-0 & I
+\end{bmatrix}=\begin{bmatrix}I_{k} & 0\\
+0 & I_{n-k}
 \end{bmatrix}.\label{inverse}
 \end{equation}
 
@@ -2945,7 +3039,7 @@ reference "lem:unimodular_kernel_columnBasis"
 
 \begin_deeper
 \begin_layout Enumerate
-\begin_inset Formula $I_{r}$
+\begin_inset Formula $I_{k}$
 \end_inset
 
  is a column basis of 
@@ -2960,7 +3054,7 @@ reference "lem:unimodular_kernel_columnBasis"
 \end_layout
 
 \begin_layout Enumerate
-\begin_inset Formula $I_{n-r}$
+\begin_inset Formula $I_{n-k}$
 \end_inset
 
  is a column basis of 
@@ -3133,7 +3227,7 @@ reference "inverse"
 
 \end_inset
 
-) and satisfies 
+) and satisfying 
 \begin_inset Formula $\mathbf{F}\cdot\mathbf{U}=\left[0,\mathbf{B}\right]$
 \end_inset
 
@@ -3261,7 +3355,7 @@ reference "lem:matrixGCD"
 \begin_inset Formula $\mathbf{F}$
 \end_inset
 
-, something which can be efficiently done using the fast kernel algorithm
+, something which can be efficiently done using the kernel basis algorithm
  of 
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -3311,12 +3405,17 @@ Let
 \mathbf{F}=\left[\begin{array}{cccc}
 x^{2} & x^{2} & x+x^{2} & 1+x^{2}\\
 1+x+x^{2} & x^{2} & 1+x^{2} & 1+x^{2}
-\end{array}\right]~.
+\end{array}\right]~
 \]
 
 \end_inset
 
-Then the matrix 
+be a matrix over 
+\begin_inset Formula $\mathbb{Z}_{2}[x]$
+\end_inset
+
+.
+ Then the matrix 
 \begin_inset Formula 
 \[
 \mathbf{N}=\left[\begin{array}{cc}
@@ -3344,7 +3443,7 @@ is a right kernel basis of
 
 \end_inset
 
-is a left nulllspace basis of 
+is a left kernel basis of 
 \begin_inset Formula $\mathbf{N}$
 \end_inset
 
@@ -3370,6 +3469,19 @@ satisfies
 
 .
  
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+qed
+\end_layout
+
+\end_inset
+
+ 
 \end_layout
 
 \begin_layout Section
@@ -3379,7 +3491,7 @@ name "sec:computeRightFactor"
 
 \end_inset
 
-Computing the Right Factor
+Computing a Right Factor
 \end_layout
 
 \begin_layout Standard
@@ -3411,7 +3523,7 @@ key "za2012"
 \begin_inset Formula $\mathbf{N}$
 \end_inset
 
-, or equivalently, a 
+, or equivalently, a right 
 \begin_inset Formula $\left(\mathbf{N}^{T},-\vec{s}\right)$
 \end_inset
 
@@ -3420,7 +3532,7 @@ key "za2012"
 \end_inset
 
 .
- For this problem, the fast kernel algorithm of 
+ For this problem, the kernel basis algorithm of 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "za2012"
@@ -3456,7 +3568,7 @@ key "za2012"
 \begin_inset Formula $\mathbf{G}$
 \end_inset
 
- has size bounded by 
+ has size bounded by the size of 
 \begin_inset Formula $\mathbf{F}$
 \end_inset
 
@@ -3507,7 +3619,7 @@ Let
 \begin_inset Formula $\left(\mathbf{F},\sigma,\vec{s}\right)$
 \end_inset
 
--basis and 
+-order basis and 
 \begin_inset Formula $\mathbf{N}=\left[\mathbf{N}_{L},\mathbf{N}_{R}\right]$
 \end_inset
 
@@ -3564,7 +3676,7 @@ Let
 \begin_inset Formula $\left(\mathbf{F},\sigma,\vec{s}\right)$
 \end_inset
 
--basis.
+-order basis.
  
 \end_layout
 
@@ -3572,7 +3684,7 @@ Let
 It is not difficult to extend this result to the following lemma to accommodate
  our situation here.
 \begin_inset Note Comment
-status open
+status collapsed
 
 \begin_layout Plain Layout
 For the remainder of this paper an integer vector of ones is denoted by
@@ -3625,7 +3737,7 @@ name "lem:orderbasisContainsKernelbasisGeneralized"
 \begin_inset Formula $\left(\mathbf{A},\vec{v}+1,-\vec{u}\right)$
 \end_inset
 
- order basis and 
+-order basis and 
 \begin_inset Formula $\mathbf{Q}$
 \end_inset
 
@@ -3672,7 +3784,17 @@ name "lem:orderbasisContainsKernelbasisGeneralized"
 
 \begin_deeper
 \begin_layout Itemize
-(i) 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[(i)]
+\end_layout
+
+\end_inset
+
+ 
 \begin_inset Formula $\left[\mathbf{P}_{L},\mathbf{Q}_{R}\right]$
 \end_inset
 
@@ -3684,7 +3806,17 @@ name "lem:orderbasisContainsKernelbasisGeneralized"
 \end_layout
 
 \begin_layout Itemize
-(ii) 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[(ii)]
+\end_layout
+
+\end_inset
+
+ 
 \begin_inset Formula $\left[\mathbf{Q}_{L},\mathbf{P}_{R}\right]$
 \end_inset
 
@@ -3692,7 +3824,7 @@ name "lem:orderbasisContainsKernelbasisGeneralized"
 \begin_inset Formula $\left(\mathbf{A},\vec{v}+1,-\vec{u}\right)$
 \end_inset
 
- order basis.
+-order basis.
  
 \end_layout
 
@@ -3804,10 +3936,10 @@ reference "lem:orderbasisContainsKernelbasisGeneralized"
 \end_inset
 
  we can return to the problem of efficiently computing a 
-\begin_inset Formula $(\mathbf{F},\vec{s})$
+\begin_inset Formula $(\mathbf{N}^{T},-\vec{s})$
 \end_inset
 
- kernel basis.
+-kernel basis.
  In fact, we just need to use a special case of Lemma 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -3839,8 +3971,21 @@ name "lem:kernelBasisInOrderBasis"
 \begin_inset Formula $(\mathbf{F},\vec{s})$
 \end_inset
 
- kernel basis with 
+-kernel basis with 
 \begin_inset Formula $\cdeg_{\vec{s}}~\mathbf{N}=\vec{b}$
+\end_inset
+
+.
+ Then any 
+\begin_inset Formula $(\mathbf{N}^{T},-\vec{s})$
+\end_inset
+
+-kernel basis 
+\begin_inset Formula $\mathbf{G}^{T}$
+\end_inset
+
+ satisfies 
+\begin_inset Formula $\cdeg_{-\vec{s}}\mathbf{G}^{T}\le0$
 \end_inset
 
 .
@@ -3852,7 +3997,7 @@ name "lem:kernelBasisInOrderBasis"
 \begin_inset Formula $\left(\mathbf{N}^{T},\vec{b}+1,-\vec{s}\right)$
 \end_inset
 
- order basis, where 
+-order basis, where 
 \begin_inset Formula $\mathbf{P}_{L}$
 \end_inset
 
@@ -3878,20 +4023,20 @@ name "lem:kernelBasisInOrderBasis"
 \end_layout
 
 \begin_layout Proof
-Let the rank of 
-\begin_inset Formula $\mathbf{F}$
-\end_inset
-
- be 
-\begin_inset Formula $r$
-\end_inset
-
-, which is also the column dimension of any 
+The column dimension of any 
 \begin_inset Formula $(\mathbf{N}^{T},-\vec{s})$
 \end_inset
 
 -kernel basis 
 \begin_inset Formula $\mathbf{G}^{T}$
+\end_inset
+
+ equals the rank 
+\begin_inset Formula $r$
+\end_inset
+
+ of 
+\begin_inset Formula $\mathbf{F}$
 \end_inset
 
 .
@@ -3966,7 +4111,7 @@ Let the rank of
 \end_inset
 
 .
- The result now follows from Lemma 
+ The result follows from Lemma 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "lem:orderbasisContainsKernelbasisGeneralized"
@@ -3978,7 +4123,23 @@ reference "lem:orderbasisContainsKernelbasisGeneralized"
 \end_layout
 
 \begin_layout Standard
-We can use Theorem 
+While 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "lem:kernelBasisInOrderBasis"
+
+\end_inset
+
+ shows that a complete 
+\begin_inset Formula $(\mathbf{N}^{T},-\vec{s})$
+\end_inset
+
+-kernel basis can be computed by computing a 
+\begin_inset Formula $\left(\mathbf{N}^{T},\vec{b}+1,-\vec{s}\right)$
+\end_inset
+
+-order basis, in fact we do not compute such a order basis, as the computational
+ efficiency can be improved by using Theorem 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "thm:continueComputingKernelBasisByRows"
@@ -4052,9 +4213,14 @@ reference "thm:continueComputingKernelBasisByRows"
 \begin_inset Formula $\mathbf{Q}_{2}$
 \end_inset
 
-, we can use order basis computation.
- However, we need to make sure that the order bases we compute contain these
- kernel bases.
+, we still use order basis computations but work with subsets of rows rather
+ than the whole matrix 
+\begin_inset Formula $\mathbf{N}^{T}$
+\end_inset
+
+.
+ We now need to make sure that the order bases computed from subsets of
+ rows contain these kernel bases.
  
 \end_layout
 
@@ -4095,7 +4261,7 @@ A
 \begin_inset Formula $\left(\mathbf{N}_{1}^{T},\vec{b}_{1}+1,-\vec{s}\right)$
 \end_inset
 
- order basis contains a 
+-order basis contains a 
 \begin_inset Formula $\left(\mathbf{N}_{1}^{T},-\vec{s}\right)$
 \end_inset
 
@@ -4157,7 +4323,7 @@ The product
 \begin_inset Formula $\left(\mathbf{N}^{T},-\vec{s}\right)$
 \end_inset
 
- kernel basis.
+-kernel basis.
  
 \end_layout
 
@@ -4247,7 +4413,7 @@ reference "lem:predictableDegree"
 
 \end_inset
 
-a contradiction since we know from the proof of 
+a contradiction since we know from 
 \begin_inset CommandInset ref
 LatexCommand formatted
 reference "lem:kernelBasisInOrderBasis"
@@ -4255,7 +4421,7 @@ reference "lem:kernelBasisInOrderBasis"
 \end_inset
 
  that 
-\begin_inset Formula $\cdeg_{-\vec{s}}\mathbf{G}^{T}\le0$
+\begin_inset Formula $\cdeg_{-\vec{s}}\bar{\mathbf{G}}\le0$
 \end_inset
 
 .
@@ -4367,7 +4533,7 @@ reference "lem:kernelBasisOfSubsetOfRowsContainedInOrderBasis"
 
 \end_inset
 
-, we need to look at how to do it efficiently.
+, we need to look at how to do this efficiently.
  One major difficulty is that the order 
 \begin_inset Formula $\vec{b}+1$
 \end_inset
@@ -4377,15 +4543,52 @@ reference "lem:kernelBasisOfSubsetOfRowsContainedInOrderBasis"
 \end_inset
 
 -row degrees of 
-\begin_inset Formula $\mathbf{N}_{1}^{T}$
+\begin_inset Formula $\mathbf{N}^{T}$
 \end_inset
 
- are nonuniform and can have degree as large as 
+ may be unbalanced and can have degree as large as 
 \begin_inset Formula $\sum\vec{s}$
 \end_inset
 
 .
- To overcome this, we separate the rows of 
+ Note that the existing kernel basis algorithm from 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "za2012"
+
+\end_inset
+
+ handles input matrices with unbalanced column degrees, but not unbalanced
+ row degrees.
+ For example, in the simpler special case of 
+\begin_inset Formula $\vec{s}=\left[s,\dots,s\right]$
+\end_inset
+
+ having uniformly equal entries, the sum of the row degrees is 
+\begin_inset Formula $O(ns)$
+\end_inset
+
+, but the sum of column degrees can be 
+\begin_inset Formula $\Theta\left(n^{2}s\right)$
+\end_inset
+
+, which puts an extra factor 
+\begin_inset Formula $n$
+\end_inset
+
+ to the cost if the algorithm from 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "za2012"
+
+\end_inset
+
+ is used.
+ To overcome this problem with unbalanced 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+-row degrees, we separate the rows of 
 \begin_inset Formula $\mathbf{N}^{T}$
 \end_inset
 
@@ -4397,7 +4600,7 @@ reference "lem:kernelBasisOfSubsetOfRowsContainedInOrderBasis"
  
 \begin_inset CommandInset ref
 LatexCommand formatted
-reference "thm:continueComputingKernelBasisByRows"
+reference "lem:kernelBasisOfSubsetOfRowsContainedInOrderBasis"
 
 \end_inset
 
@@ -4427,6 +4630,10 @@ status open
 \end_layout
 
 \begin_layout Plain Layout
+(Kernel basis computation with reversed degree structure)
+\end_layout
+
+\begin_layout Plain Layout
 \begin_inset CommandInset label
 LatexCommand label
 name "alg:minimalKernelBasisReverse"
@@ -4437,12 +4644,12 @@ name "alg:minimalKernelBasisReverse"
 \end_layout
 
 \begin_layout Plain Layout
-\begin_inset VSpace bigskip
+\begin_inset VSpace smallskip
 \end_inset
 
 
 \begin_inset Flex ALGORITHMIC
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Flex INPUT
@@ -4485,7 +4692,16 @@ status open
 \end_layout
 
 \begin_layout Plain Layout
+\begin_inset Note Comment
+status collapsed
+
+\begin_layout Plain Layout
 \begin_inset VSpace bigskip
+\end_inset
+
+
+\end_layout
+
 \end_inset
 
 
@@ -4512,7 +4728,7 @@ status open
 \end_layout
 
 \begin_layout Plain Layout
-\begin_inset VSpace bigskip
+\begin_inset VSpace smallskip
 \end_inset
 
 
@@ -4525,13 +4741,13 @@ status open
 \begin_layout Plain Layout
 
 \series bold
-\begin_inset Formula $\left[\mathbf{M}_{1}^{T},\mathbf{M}_{2}^{T},\cdots,\mathbf{M}_{\log k-1}^{T},\mathbf{M}_{\log k}^{T}\right]:=\mathbf{M}^{T}$
+\begin_inset Formula $\left[\mathbf{M}_{1}^{T},\mathbf{M}_{2}^{T},\cdots,\mathbf{M}_{\left\lceil \log k\right\rceil -1}^{T},\mathbf{M}_{\left\lceil \log k\right\rceil }^{T}\right]:=\mathbf{M}^{T}$
 \end_inset
 
 
 \series default
 , with 
-\begin_inset Formula $\mathbf{M}_{\log k},\mathbf{M}_{\log k-1},\cdots,\mathbf{M}_{2},\mathbf{M}_{1}$
+\begin_inset Formula $\mathbf{M}_{\left\lceil \log k\right\rceil },\mathbf{M}_{\left\lceil \log k\right\rceil -1},\cdots,\mathbf{M}_{2},\mathbf{M}_{1}$
 \end_inset
 
  having 
@@ -4567,7 +4783,7 @@ from
 \end_inset
 
  to 
-\begin_inset Formula $\log k$
+\begin_inset Formula $\left\lceil \log k\right\rceil $
 \end_inset
 
  
@@ -4587,7 +4803,11 @@ status open
 status open
 
 \begin_layout Plain Layout
-\begin_inset Formula $\vec{\sigma}_{i}:=\left[\frac{\xi}{2^{i-1}}+1,\dots,\frac{\xi}{2^{i-1}}+1\right]$
+\begin_inset Formula $\sigma_{i}:=\left\lceil \frac{\xi}{2^{i-1}}\right\rceil +1$
+\end_inset
+
+;
+\begin_inset Formula $\vec{\sigma}_{i}:=\left[\sigma_{i},\dots,\sigma_{i}\right]$
 \end_inset
 
 , number of entries matching the row dimension of 
@@ -4612,7 +4832,7 @@ status open
 status open
 
 \begin_layout Plain Layout
-\begin_inset Formula $\vec{\sigma}:=\left[\vec{\sigma}_{1},\vec{\sigma}_{2},\dots,\vec{\sigma}_{\log k}\right]$
+\begin_inset Formula $\vec{\sigma}:=\left[\vec{\sigma}_{1},\vec{\sigma}_{2},\dots,\vec{\sigma}_{\left\lceil \log k\right\rceil }\right]$
 \end_inset
 
 ;
@@ -4674,7 +4894,7 @@ from
 \end_inset
 
  to 
-\begin_inset Formula $\log k$
+\begin_inset Formula $\left\lceil \log k\right\rceil $
 \end_inset
 
  
@@ -4714,7 +4934,7 @@ status open
 status open
 
 \begin_layout Plain Layout
-\begin_inset Formula $\mathbf{P}_{i}:=\umab\left(\hat{\mathbf{N}}_{i}\tilde{\mathbf{G}}_{i-1},\vec{\sigma}_{i},-\vec{s}_{i}\right)$
+\begin_inset Formula $\mathbf{P}_{i}:=\umab\left(\hat{\mathbf{N}}_{i}\tilde{\mathbf{G}}_{i-1},\sigma_{i},-\vec{s}_{i}\right)$
 \end_inset
 
 ; 
@@ -4918,7 +5138,7 @@ reference "thm:boundOfSumOfShiftedDegreesOfKernelBasis"
 \end_inset
 
  into 
-\begin_inset Formula $\log k$
+\begin_inset Formula $\left\lceil \log k\right\rceil $
 \end_inset
 
  row blocks according to the 
@@ -4937,13 +5157,13 @@ reference "thm:boundOfSumOfShiftedDegreesOfKernelBasis"
  Let 
 \begin_inset Formula 
 \[
-\mathbf{N}=\left[\mathbf{N}_{1},\mathbf{N}_{2},\cdots,\mathbf{N}_{\log k-1},\mathbf{N}_{\log k}\right]
+\mathbf{N}=\left[\mathbf{N}_{1},\mathbf{N}_{2},\cdots,\mathbf{N}_{\left\lceil \log k\right\rceil -1},\mathbf{N}_{\left\lceil \log k\right\rceil }\right]
 \]
 
 \end_inset
 
 with 
-\begin_inset Formula $\mathbf{N}_{\log k},\mathbf{N}_{\log k-1},\dots,\mathbf{N}_{2},\mathbf{N}_{1}$
+\begin_inset Formula $\mathbf{N}_{\left\lceil \log k\right\rceil },\mathbf{N}_{\left\lceil \log k\right\rceil -1},\dots,\mathbf{N}_{2},\mathbf{N}_{1}$
 \end_inset
 
  having 
@@ -4972,7 +5192,11 @@ with
 
 , respectively.
  Let 
-\begin_inset Formula $\vec{\sigma}_{i}=\left[\xi/2^{i-1}+1,\dots,\xi/2^{i-1}+1\right]$
+\begin_inset Formula $\sigma_{i}=\left\lceil \xi/2^{i-1}\right\rceil +1$
+\end_inset
+
+ and 
+\begin_inset Formula $\vec{\sigma}_{i}=\left[\sigma_{i},\dots,\sigma_{i}\right]$
 \end_inset
 
  with the same dimension as the row dimension of 
@@ -4982,7 +5206,7 @@ with
  and 
 \begin_inset Formula 
 \[
-\vec{\sigma}=\left[\vec{\sigma}_{\log k},\vec{\sigma}_{\log k-1},\dots,\vec{\sigma}_{1}\right]
+\vec{\sigma}=\left[\vec{\sigma}_{\left\lceil \log k\right\rceil },\vec{\sigma}_{\left\lceil \log k\right\rceil -1},\dots,\vec{\sigma}_{1}\right]
 \]
 
 \end_inset
@@ -4991,7 +5215,7 @@ be the orders in the order basis computation.
 \end_layout
 
 \begin_layout Standard
-To further simply our task, we also make the order of our problem in each
+To further simplify our task, we also make the order of our problem in each
  block uniform.
  Rather than of using 
 \begin_inset Formula $\mathbf{N}^{T}$
@@ -5002,10 +5226,10 @@ To further simply our task, we also make the order of our problem in each
 \begin{eqnarray*}
 \hat{\mathbf{N}} & =\begin{bmatrix}\hat{\mathbf{N}}_{1}\\
 \vdots\\
-\hat{\mathbf{N}}_{\log k}
+\hat{\mathbf{N}}_{\left\lceil \log k\right\rceil }
 \end{bmatrix}= & x^{\vec{\sigma}-\vec{b}-1}\begin{bmatrix}\mathbf{N}_{1}^{T}\\
 \vdots\\
-\mathbf{N}_{\log k}^{T}
+\mathbf{N}_{\left\lceil \log k\right\rceil }^{T}
 \end{bmatrix}=x^{\vec{\sigma}-\vec{b}-1}\mathbf{N}^{T}
 \end{eqnarray*}
 
@@ -5015,11 +5239,11 @@ so that a
 \begin_inset Formula $\left(\hat{\mathbf{N}},\vec{\sigma},-\vec{s}\right)$
 \end_inset
 
- order basis is a 
+-order basis is a 
 \begin_inset Formula $\left(\mathbf{N}^{T},\vec{b}+1,-\vec{s}\right)$
 \end_inset
 
- order basis.
+-order basis.
 \end_layout
 
 \begin_layout Standard
@@ -5041,19 +5265,32 @@ Let
 \begin_inset Formula $\left(\hat{\mathbf{N}}_{1},\vec{\sigma}_{1},-\vec{s}_{1}\right)$
 \end_inset
 
- order basis 
+-order basis 
 \begin_inset Formula $\mathbf{P}_{1}$
 \end_inset
 
  using Algorithm 2 from 
 \begin_inset CommandInset citation
 LatexCommand cite
-key "za2009"
+key "ZL2012"
 
 \end_inset
 
  for order basis computation with unbalanced shift.
- Partitioned 
+ Note that here the order 
+\begin_inset Formula $\vec{\sigma}_{1}=\left[\sigma_{1},\dots,\sigma_{1}\right]$
+\end_inset
+
+ is uniform, an 
+\begin_inset Formula $\left(\hat{\mathbf{N}}_{1},\vec{\sigma}_{1},-\vec{s}_{1}\right)$
+\end_inset
+
+ order basis is also 
+\begin_inset Formula $\left(\hat{\mathbf{N}}_{1},\sigma_{1},-\vec{s}_{1}\right)$
+\end_inset
+
+-order basis.
+ Partition 
 \begin_inset Formula $\mathbf{P}_{1}$
 \end_inset
 
@@ -5091,10 +5328,10 @@ reference "lem:kernelBasisOfSubsetOfRowsContainedInOrderBasis"
 
 \begin_layout Enumerate
 Compute an 
-\begin_inset Formula $\left(\hat{\mathbf{N}}_{2}\tilde{\mathbf{G}}_{1},\vec{\sigma}_{2},-\vec{s}_{2}\right)$
+\begin_inset Formula $\left(\hat{\mathbf{N}}_{2}\tilde{\mathbf{G}}_{1},\sigma_{2},-\vec{s}_{2}\right)$
 \end_inset
 
- order basis 
+-order basis 
 \begin_inset Formula $\mathbf{P}_{2}$
 \end_inset
 
@@ -5110,7 +5347,7 @@ Compute an
 \begin_inset Formula $\left(\hat{\mathbf{N}}_{2},-\vec{s}_{2}\right)$
 \end_inset
 
- kernel basis.
+-kernel basis.
  Set 
 \begin_inset Formula $\vec{s}_{3}=-\cdeg_{-\vec{s}_{2}}\mathbf{G}_{2}$
 \end_inset
@@ -5129,10 +5366,10 @@ Continuing this process, at each step
 \end_inset
 
  we compute a 
-\begin_inset Formula $\left(\hat{\mathbf{N}}_{i}\tilde{\mathbf{G}}_{i-1},\vec{\sigma}_{i},-\vec{s}_{i}\right)$
+\begin_inset Formula $\left(\hat{\mathbf{N}}_{i}\tilde{\mathbf{G}}_{i-1},\sigma_{i},-\vec{s}_{i}\right)$
 \end_inset
 
- order basis 
+-order basis 
 \begin_inset Formula $\mathbf{P}_{i}$
 \end_inset
 
@@ -5148,7 +5385,7 @@ Continuing this process, at each step
 \begin_inset Formula $\left(\hat{\mathbf{N}}_{i}\tilde{\mathbf{G}}_{i-1},-\vec{s}_{i}\right)$
 \end_inset
 
- kernel basis.
+-kernel basis.
  Let 
 \begin_inset Formula $\tilde{\mathbf{G}}_{i}=\prod_{j=1}^{i}\mathbf{G}_{i}=\tilde{\mathbf{G}}_{i-1}\mathbf{G}_{i}$
 \end_inset
@@ -5159,7 +5396,7 @@ Continuing this process, at each step
 
 \begin_layout Enumerate
 Return 
-\begin_inset Formula $\tilde{\mathbf{G}}_{\log k}$
+\begin_inset Formula $\tilde{\mathbf{G}}_{\left\lceil \log k\right\rceil }$
 \end_inset
 
 , a 
@@ -5186,7 +5423,7 @@ reference "alg:minimalKernelBasisReverse"
 \end_layout
 
 \begin_layout Subsection
-Complexity of Left Kernel Computation
+Complexity of Left Kernel Basis Computation
 \end_layout
 
 \begin_layout Standard
@@ -5216,10 +5453,10 @@ reference "alg:minimalKernelBasisReverse"
 
 \begin_layout Lemma
 An 
-\begin_inset Formula $\left(\hat{\mathbf{N}}_{i}\tilde{\mathbf{G}}_{i-1},\vec{\sigma}_{i},-\vec{s}_{i}\right)$
+\begin_inset Formula $\left(\hat{\mathbf{N}}_{i}\tilde{\mathbf{G}}_{i-1},\sigma_{i},-\vec{s}_{i}\right)$
 \end_inset
 
- order basis can be computed with a cost of 
+-order basis can be computed with a cost of 
 \begin_inset Formula $O^{\sim}\left(n^{\omega}s\right)$
 \end_inset
 
@@ -5237,7 +5474,35 @@ Note that
 \end_inset
 
  columns.
- Otherwise, 
+ Otherwise, since 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\cdeg_{\vec{s}}\mathbf{N}_{i}>\xi/2^{i}$
+\end_inset
+
+, we have
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ 
 \begin_inset Formula 
 \[
 \sum\cdeg_{\vec{s}}\mathbf{N}_{i}>2^{i}\xi/2^{i}=\xi,
@@ -5267,18 +5532,14 @@ It follows that
 
  rows.
  We also have 
-\begin_inset Formula $\vec{\sigma}_{i}=\left[\xi/2^{i-1}+1,\dots,\xi/2^{i-1}+1\right]$
-\end_inset
-
- with entries in 
-\begin_inset Formula $\Theta\left(\xi/2^{i}\right)$
+\begin_inset Formula $\sigma_{i}=\left\lceil \xi/2^{i-1}\right\rceil +1\in\Theta\left(\xi/2^{i}\right)$
 \end_inset
 
 .
  Therefore, Algorithm 2 from 
 \begin_inset CommandInset citation
 LatexCommand cite
-key "za2009"
+key "ZL2012"
 
 \end_inset
 
@@ -5309,11 +5570,11 @@ The dimension of
 \end_inset
 
  is bounded by 
-\begin_inset Formula $2^{i-1}\times n$
+\begin_inset Formula $2^{i}\times n$
 \end_inset
 
  and 
-\begin_inset Formula $\sum\rdeg_{\vec{s}}\hat{\mathbf{N}}_{i}\le2^{i-1}\cdot\xi/2^{i-1}=\xi$
+\begin_inset Formula $\sum\rdeg_{\vec{s}}\hat{\mathbf{N}}_{i}\le2^{i}\cdot\xi/2^{i-1}\in O\left(\xi\right)$
 \end_inset
 
 .
@@ -5425,7 +5686,17 @@ Given an input matrix
 
 \begin_deeper
 \begin_layout Itemize
-(i) 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[(i)]
+\end_layout
+
+\end_inset
+
+ 
 \begin_inset Formula $\sum\rdeg_{\vec{s}}\mathbf{M}\le\xi$
 \end_inset
 
@@ -5433,7 +5704,17 @@ Given an input matrix
 \end_layout
 
 \begin_layout Itemize
-(ii) 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[(ii)]
+\end_layout
+
+\end_inset
+
+ 
 \begin_inset Formula $\sum\vec{s}\le\xi$
 \end_inset
 
@@ -5441,7 +5722,17 @@ Given an input matrix
 \end_layout
 
 \begin_layout Itemize
-(iii) any 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[(iii)]
+\end_layout
+
+\end_inset
+
+ any 
 \begin_inset Formula $\left(\mathbf{M},-\vec{s}\right)$
 \end_inset
 
@@ -5479,11 +5770,11 @@ reference "alg:minimalKernelBasisReverse"
 \end_layout
 
 \begin_layout Standard
-Note that 
+Note that while the upper bound 
 \begin_inset Formula $\xi$
 \end_inset
 
- can be simply set to 
+ can be simply replaced by 
 \begin_inset Formula $\sum\vec{s}$
 \end_inset
 
@@ -5494,8 +5785,35 @@ reference "lem:costKernelBasisReverse"
 
 \end_inset
 
-.
+ and 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "alg:minimalKernelBasisReverse"
+
+\end_inset
+
+ for computing a right factor in this section, keeping it separate makes
+ the algorithm more general and allows it to be reused in the next section.
  
+\end_layout
+
+\begin_layout Standard
+It may also be informative to note again the correspondence between 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "lem:costKernelBasisReverse"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "thm:costGeneral"
+
+\end_inset
+
+, on the reversal of the degree structures of the input matrices and the
+ output kernel bases.
 \end_layout
 
 \begin_layout Theorem
@@ -5575,7 +5893,17 @@ name "lem:colBasisdegreeBoundByRdegOfRightFactor"
 
 \begin_deeper
 \begin_layout Itemize
-(i) the column degrees of 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[(i)]
+\end_layout
+
+\end_inset
+
+ the column degrees of 
 \begin_inset Formula $\mathbf{T}$
 \end_inset
 
@@ -5587,7 +5915,17 @@ name "lem:colBasisdegreeBoundByRdegOfRightFactor"
 \end_layout
 
 \begin_layout Itemize
-(ii) if 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[(ii)]
+\end_layout
+
+\end_inset
+
+ if 
 \begin_inset Formula $\vec{t}$
 \end_inset
 
@@ -5827,7 +6165,7 @@ Note first that the matrix
 \begin_inset Formula $\left(\left[\mathbf{F}^{T},\mathbf{G}^{T}\right],-\vec{t}^{*}\right)$
 \end_inset
 
--kernel basis to be degree 0, the same degree as 
+-kernel basis to be of degree 0, the same degree as 
 \begin_inset Formula $I$
 \end_inset
 
@@ -5842,23 +6180,27 @@ Let
 \mathbf{F}=\left[\begin{array}{cccc}
 x^{2} & x^{2} & x+x^{2} & 1+x^{2}\\
 1+x+x^{2} & x^{2} & 1+x^{2} & 1+x^{2}
-\end{array}\right]
+\end{array}\right],
 \]
 
 \end_inset
 
-with 
+a matrix over 
+\begin_inset Formula $\mathbb{Z}_{2}[x]$
+\end_inset
+
+, and 
 \begin_inset Formula 
 \[
 \mathbf{G}=\left[\begin{array}{cccc}
 1 & 0 & 1 & 0\\
 \noalign{\medskip}x & {x}^{2} & 0 & 1+{x}^{2}
-\end{array}\right]
+\end{array}\right],
 \]
 
 \end_inset
 
-being a minimal left kernel basis of a right kernel basis of 
+a minimal left kernel basis of a right kernel basis of 
 \begin_inset Formula $\mathbf{F}$
 \end_inset
 
@@ -5906,7 +6248,7 @@ reference "lem:colBasisdegreeBoundByRdegOfRightFactor"
 \end_inset
 
 is such a left kernel basis.
- A column basis can then be computed as by 
+ A column basis can then be computed as 
 \begin_inset Formula 
 \[
 \mathbf{T}=V^{-1}\bar{\mathbf{T}}=\left[\begin{array}{cc}
@@ -5918,6 +6260,19 @@ x+x^{2} & 1\\
 \end_inset
 
 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+qed
+\end_layout
+
+\end_inset
+
+ 
 \end_layout
 
 \begin_layout Standard
@@ -5939,7 +6294,7 @@ Any
 \begin_inset Formula $\left(\left[\mathbf{F}^{T},\mathbf{G}^{T}\right],\vec{s}+1,-\vec{t}^{*}\right)$
 \end_inset
 
- order basis contains a 
+-order basis contains a 
 \begin_inset Formula $\left(\left[\mathbf{F}^{T},\mathbf{G}^{T}\right],-\vec{t}^{*}\right)$
 \end_inset
 
@@ -5988,7 +6343,7 @@ In order to compute a
 \begin_inset Formula $\left(\left[\mathbf{F}^{T},\mathbf{G}^{T}\right],-\vec{t}^{*}\right)$
 \end_inset
 
- kernel basis efficiently, we notice that we have the same type of problem
+-kernel basis efficiently, we notice that we have the same type of problem
  as in Section 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -6184,8 +6539,15 @@ name "alg:colBasis"
 \end_layout
 
 \begin_layout Plain Layout
+\begin_inset VSpace smallskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
 \begin_inset Flex ALGORITHMIC
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Flex INPUT
@@ -6221,11 +6583,18 @@ a column basis of
 \end_layout
 
 \begin_layout Plain Layout
+\begin_inset VSpace smallskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
 \begin_inset Flex STATE
 status open
 
 \begin_layout Plain Layout
-\begin_inset Formula $\vec{s}:=\cdeg\mathbf{F}$
+\begin_inset Formula $\vec{s}~~~:=\cdeg\mathbf{F}$
 \end_inset
 
 ;
@@ -6241,7 +6610,7 @@ status open
 status open
 
 \begin_layout Plain Layout
-\begin_inset Formula $\mathbf{N}:=\mnb(\mathbf{F},\vec{s})$
+\begin_inset Formula $\mathbf{N}~~:=\mnb(\mathbf{F},\vec{s})$
 \end_inset
 
 ;
@@ -6257,7 +6626,7 @@ status open
 status open
 
 \begin_layout Plain Layout
-\begin_inset Formula $\mathbf{G}:=\left(\mnbr(\mathbf{N}^{T},\vec{s})\right)^{T}$
+\begin_inset Formula $\mathbf{G}:=\left(\mnbr(\mathbf{N}^{T},\vec{s},\sum\vec{s})\right)^{T}$
 \end_inset
 
 ; 
@@ -6273,11 +6642,15 @@ status open
 status open
 
 \begin_layout Plain Layout
-\begin_inset Formula $\vec{t}':=\left[0,\dots,0,-\rdeg_{-\vec{s}}\mathbf{G}\right]$
+\begin_inset Formula $\vec{t}^{*}:=\left[0,\dots,0,-\rdeg_{-\vec{s}}\mathbf{G}\right]$
 \end_inset
 
 , with 
 \begin_inset Formula $\rowDimension(\mathbf{G})$
+\end_inset
+
+ 
+\begin_inset Formula $~~~~~~~~~~~$
 \end_inset
 
  number of 0's ; 
@@ -6293,7 +6666,14 @@ status open
 status open
 
 \begin_layout Plain Layout
-\begin_inset Formula $\left[V^{T},\bar{\mathbf{T}}^{T}\right]^{T}:=\mnbr(\left[\mathbf{F}^{T},\mathbf{G}^{T}\right],\vec{t}')$
+\begin_inset Formula $\left[\begin{array}{c}
+V\\
+\bar{\mathbf{T}}
+\end{array}\right]:=\mnbr(\left[\mathbf{F}^{T},\mathbf{G}^{T}\right],\vec{t}^{*},\sum\vec{s})$
+\end_inset
+
+ 
+\begin_inset Formula $~~~~~~~~~~~~~~~~$
 \end_inset
 
  with a square 
@@ -6315,7 +6695,7 @@ status open
 \begin_layout Plain Layout
 
 \series bold
-\begin_inset Formula $\mathbf{T}=\left(\bar{\mathbf{T}}V^{-1}\right)^{T}$
+\begin_inset Formula $\mathbf{T}~~=\left(\bar{\mathbf{T}}V^{-1}\right)^{T}$
 \end_inset
 
 
@@ -6593,7 +6973,7 @@ reference "thm:columnBasisCost1"
 , where 
 \begin_inset Formula 
 \[
-\hat{s}_{i}=\left(\sum\cdeg\mathbf{T}_{i-1}+\sum\cdeg\mathbf{F}_{i+1}\right)/2m\le\left(\bar{s}_{i}+\bar{s}_{i+1}\right)/2.
+\hat{s}_{i}=\left(\sum\cdeg\mathbf{T}_{i-1}+\sum\cdeg\mathbf{F}_{i+1}\right)/2m\le\frac{\left(\bar{s}_{i}+\bar{s}_{i+1}\right)}{2}.
 \]
 
 \end_inset
@@ -6685,7 +7065,7 @@ In this paper we have given a fast, deterministic algorithm for the computation
 \begin_inset Formula $s$
 \end_inset
 
- an upper bound for the average average column degree of 
+ an upper bound for the average column degree of 
 \begin_inset Formula $\mathbf{F}$
 \end_inset
 
@@ -6694,8 +7074,8 @@ In this paper we have given a fast, deterministic algorithm for the computation
 \begin_inset Formula $\mathbf{F}$
 \end_inset
 
- into a left kernel and a right column basis.
- These in turn are computed via fast kernel and fast order basis algorithm
+ into a column basis and a kernel basis.
+ These in turn are computed via fast kernel basis and fast order basis algorithm
  of 
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -6705,8 +7085,8 @@ key "za2012,ZL2012"
 
 .
  When these computations involve the multiplication of polynomial matrices
- with unbalanced degrees then they use the fast algorithms for unbalanced
- multiplication given in 
+ with unbalanced degrees then they use the fast method for such multiplications
+ given in 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "za2012"
@@ -6799,7 +7179,7 @@ status collapsed
 In a later publication we will show how to use our column basis algorithm
  for efficient deterministic computations of matrix determinant, Hermite
  form, and computations of column reduced form and Popov form for matrices
- of any rank and any dimension
+ of any rank and any dimension.
 \end_layout
 
 \begin_layout Standard
