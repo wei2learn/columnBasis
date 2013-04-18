@@ -1,0 +1,196 @@
+
+----------------------- REVIEW 1 ---------------------
+PAPER: 66
+TITLE: Computing Column Bases
+AUTHORS: Wei Zhou and George Labahn
+
+
+----------- REVIEW -----------
+This paper presents a very interesting result for the computation of a column basis of univariate polynomial matrices.
+The authors provide a fast and deterministic algorithm with a complexity catching up with the one of polynomial matrix multiplication.
+The algorithm is based on the shifted degree concept which captures more than the classical degree approach and is a very useful tool for polynomial linear algebra.
+The results of this paper heavily relies on fast kernel basis algorithm presented at ISSAC 2012 and order basis algorithm presented at ISSAC 2009.
+
+The main idea of the paper is that a column basis of a polynomial matrix F can be determined from a polynomial matrix G being a left 
+kernel basis of a right kernel basis of F. The author show that one can easily recover the column basis of F by computing a left kernel basis of the matrix  [F^T G^T]^T.
+The main difficulty addressed in this paper is to bound the degree of each kernel basis and to provide a fast kernel basis algorithm with negative degree shift and with unbalanced degree input.
+
+The paper is quite technical and not easy to read, but the results and the proofs are complete and correct.
+I am wondering weather the results and the presentation of this paper would not benefit from presenting first a generalization 
+of the kernel basis computation with negative shift and unbalanced degree structure and then apply this result 
+to the specific case of column basis calculation through the given factorization. 
+
+WEI  I did not do this simply because it could take a bit of time to do this carefully. But what do you think?
+
+GEORGE: I think this is fine. If we talk about kernel basis computation with reversed degree structure first, then there is a big chunk of quite technical and quite specialized unmotivated material in the beginning that's not so easy for the reader.
+
+I list below some remarks that need to be clarified in the paper :
+
+1) The proof of Lemma 4.4 sounds quite complicated while it is almost straightforward from lemma 4.3 and theorem 2.10. This must be shorten.
+
+WEI
+
+GEORGE: I don't know how this is straightfoward from lemma 4.3 and theorem 2.10. I think we can only leave it the way it is for now. I think its necessity can be seen from the proof of lemma 4.4. I have reworded the preceding paragraph slightly to make the objective of the lemmas 4.3 and 4.4 slightly more clear.
+
+2) In the first paragraph of section 4.2, the authors say that the major difficulty is the non-uniformity of the $\vec{s}$-row degree of$N1^T. 
+   The notion of uniformity has not been clearly defined. It seems to me that the situation is almost identical as the for the original matrix $F$, i.e. the sum of the $\vec{s}$-row degree is bounded by $\xi$.
+   Could you explain more on this and why this is a different situation.
+
+WEI
+
+GEORGE: OK, added more explanations here. The reviewer got mixed up about the row degrees and column degrees. It might be more clear to illustrate with an example, but we do not have the space.
+
+3) In section 4.2, you refer to Algorithm 2 from [20] for order basis computation with unbalanced shift. The reference is incorrect since there isn't any Algorithm 2 in [20],  
+   you may think of reference [19]. The same error is done above Theorem 2.6.
+DONE
+
+   It sounds odd to use order basis with unbalanced shift while you modified the calculation in order to get a uniform degree shift. 
+   Note that the use of $\vec{\sigma_i}$ as order for the order basis computations is not needed and must be simplify to the integer $\sigma_i=\xi/2^{i-1}+1$. 
+   This makes the use of Algorithm 2 (or Algorithm 1) from [19] correct since their order parameter must be an integer.
+
+WEI
+
+GEORGE: Degree shift is not made uniform, only the order is made uniform. I replaced  $\vec{\sigma_i}$ by  $\sigma_i=\xi/2^{i-1}+1$ as suggested in the unbalanced shift order basis computation.
+
+4) In the proof of Lemma 4.5, the first sentence must be corrected to: "Note that $N_i$ has no more than $2^i$ columns."
+DONE
+
+GEORGE: What we had was actually right so I changed it back. To make it more clear, I have added the statement
+ "since \cdeg_{\vec{s}}\mathbf{N}_{i}>\xi/2^{i} , we have"
+
+
+5) In the proof of lemma 4.6,  the number of rows of $\hat{N}_i$ is bounded by $2^i$ and not $2^{i-1}$. The remaining proof must be modified to take this into account.
+DONE
+
+
+6) The examples 3.4 and 5.3 seems to be over $F_2[x]$, but this has not been clearly said. 
+DONE
+
+7) The notations for kernel basis and order basis are not consistent through the paper.
+   - lemma 4.3 : "... a $(F,\vec{s}$ kernel basis ..."
+   - lemma 4.2 : "... $(A,-\vec{u})$-kernel basis ..."
+   - lemma 4.1 : "... a $\vec{s}$-minimal kernel basis ..."
+   + lemma 4.1 : "... any $(F,\sigma,\vec{s})$-basis ..."
+   + lemma 4.2 : "... is an $(A,\vec{v}+1,-\vec{u})$ order basis ..."
+DONE
+
+GEORGE: For order basis, I changed to consistent use of the notation (F,order,shift)-order basis. For kernel basis, I use the notation (F,shift)-kernel basis. The work minimal is implied by this notation. The shift in the notation only makes sense if the basis is minimal.
+
+Please find below other remarks and typos:
+
+* Kernel bases have been preferred to nullspace bases, but this choice is not consistent through the paper (some nullspaces still appear). 
+DONE
+
+* Why are you switching your notation from nullspace (ISSAC 2012  paper) to kernel, is there any clues ?
+
+WEI  
+
+GEORGE: Added a short paragraph to explain this: 
+Definition #: In our earlier paper [za2012], a minimal kernel basis is called a minimal nullspace basis. In this paper, the term kernel basis is now used to emphasize the fact that we compute a basis for a \mathbb{F}\left[x\right]-module instead of a basis for a \mathbb{F}\left(x\right)-vector space, since the term nullspace basis usually refers to a basis of some vector space as in [storjohann-villard:2005].
+
+(FROM George : note this is the big problem with switching nullspace to kernel. It may be better but everyone else in the polynomial matrix community and issac community seems to use nullspace. Hence we have created lots of confusion. I would still prefer to return to nullspace simply to avoid this confusion)
+
+GEORGE: Actually, in CP and Gilles' paper on inverse computation, they use the term kernel basis. In Arne and Gilles' paper on nullspace basis computation, they mentioned that the bases they compute are for vector spaces, not modules.
+
+* First page, right column, penultimate paragraph: "...order basis algorithms from [21] and ^^[19]^^ ...". This must corrected according to my remark 3) above.
+DONE
+* In Theorem 2.10: "... then $N_1N2$ is a $(G,\vec{t})$-kernel basis ^^ with ^^ $\vec{t}$-column degree $\vec{u}$.
+DONE
+* Just before lemma 3.1 : $I_r$ and $I_{n-r}$ must be replaced with $I_k$ and $I_{n-k}$. You may also give the dimension of $I$ in equation (1).
+DONE
+* In Lemma 3.4: "nulllspace" must be replaced with kernel.
+DONE
+* In section 4: the sentence "... the new output matrix G has size bounded by $F$." is incorrect.
+
+DONE - see what you think
+GEORGE: I'm not sure what the reviewer meant it's incorrect. I just changed to 
+... the new output matrix \mathbf{G} has size bounded by the size of \mathbf{F}
+ 
+
+
+* In section 4.2, first paragraph, last sentence: "one by one successively using " Lemma 4.4 (not Theorem 2.10)
+DONE
+* Page 6, first sentence: "To further ^^ simplify ^^ ..."
+DONE
+* Proof of lemma 5.2, last sentence : "to be ^^ of ^^ degree 0 ..."
+DONE
+* In the References: citations [20] and [21] are using plain first name instead of initials for all the other citations.
+DONE
+
+Considering all my remarks and according to the importance of the result presented in this paper, I recommend the acceptance of this paper for ISSAC 2013.
+
+
+----------------------- REVIEW 2 ---------------------
+PAPER: 66
+TITLE: Computing Column Bases
+AUTHORS: Wei Zhou and George Labahn
+
+
+----------- REVIEW -----------
+The algorithm computes a column basis of polynomial matrices in three
+steps: 
+a right nullspace basis using [21] an two calls to a variant of order
+bases minimal left kernel computation, from [19], applied to an input
+with nonuniform row degrees.
+The point is to sharply bound the degrees occurring during the
+computation so that the overall computation can remain within the
+complexity bound of matrix multiplication. This is achieved via
+shifted degrees and computing kernel bases by blocks of rows.
+
+Overall the authors manage to constrain the complexity bound within
+that of polynomial matrix multiplication.
+
+The presentation is clear, the new algorithm reduces column bases
+computation to matrix multiplication up to logarithmic factors. 
+Some experimental results could be added, e.g. in order to compare the
+algorithm to the variant explained in remark 6.3.
+
+I recommend acceptation.
+
+
+Details:
+p1,\S2: first sentence "While [...]" has no verb.
+DONE
+p1,\S3: the notation \sum \overrightarrow{s} is defined only in p2
+DONE
+p1,\S4: "average average"?
+DONE
+
+Proof of lemma 3.1: "with F having full rank" --> "with T having full
+rank"
+DONE
+
+Proof of lemma 3.3: "satisfies" --> "satisfying"
+DONE
+
+Top of p6: "simply" --> "simplify"
+DONE
+
+Conclusion: "average average".
+DONE
+
+
+----------------------- REVIEW 3 ---------------------
+PAPER: 66
+TITLE: Computing Column Bases
+AUTHORS: Wei Zhou and George Labahn
+
+
+----------- REVIEW -----------
+This very technical paper builds on the authors' ISSAC 2012 paper with Storjahan
+to provide an asymptotically very efficient method for computing a "column basis" of 
+a matrix of polynomials. This can be seen as a very generalised version of a GCD computation. The authors promise to use 
+this in a later paper to address better known problems. 
+
+The algorithm is novel, although it draws very heavily on the kernel algorithm from the 2012 paper
+and the concepts developed for that. This is extended by a fundamental new idea in section 3, as well as some technical 
+extensions to the proofs of 21.
+
+Given the amount of technical detail to be conveyed in a limited number of pages, 
+the paper is well written, although extremely short of examples.
+
+I have give my review a relatively low confidence because I have not been able to follow or check
+all the technical details in the available time, but as far as I can see it is an important result and 
+should be accepted.
+
+
