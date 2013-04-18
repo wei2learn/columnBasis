@@ -7158,10 +7158,10 @@ status collapsed
 
 \end_inset
 
-In a later publication we will show how to use our column basis algorithm
- for efficient deterministic computations of matrix determinant, Hermite
- form, and computations of column reduced form and Popov form for matrices
- of any rank and any dimension.
+In a later publication we will show how this column basis algorithm can
+ be used in efficient deterministic computations of matrix determinant,
+ Hermite form, and computations of column reduced form and Popov form for
+ matrices of any rank and any dimension.
 \end_layout
 
 \begin_layout Standard
