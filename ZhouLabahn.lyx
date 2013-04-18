@@ -5190,14 +5190,10 @@ with
 \end_inset
 
  and 
-\begin_inset Formula 
-\[
-\vec{\sigma}=\left[\vec{\sigma}_{\left\lceil \log k\right\rceil },\vec{\sigma}_{\left\lceil \log k\right\rceil -1},\dots,\vec{\sigma}_{1}\right]
-\]
-
+\begin_inset Formula $\vec{\sigma}=\left[\vec{\sigma}_{\left\lceil \log k\right\rceil },\vec{\sigma}_{\left\lceil \log k\right\rceil -1},\dots,\vec{\sigma}_{1}\right]$
 \end_inset
 
-be the orders in the order basis computation.
+ be the orders in the order basis computation.
 \end_layout
 
 \begin_layout Standard
@@ -6957,7 +6953,11 @@ reference "thm:columnBasisCost1"
 \end_inset
 
 , where 
-\begin_inset Formula $\hat{s}_{i}=\left(\sum\cdeg\mathbf{T}_{i-1}+\sum\cdeg\mathbf{F}_{i+1}\right)/2m\le\frac{\left(\bar{s}_{i}+\bar{s}_{i+1}\right)}{2}.$
+\begin_inset Formula 
+\[
+\hat{s}_{i}=\left(\sum\cdeg\mathbf{T}_{i-1}+\sum\cdeg\mathbf{F}_{i+1}\right)/2m\le\frac{\left(\bar{s}_{i}+\bar{s}_{i+1}\right)}{2}.
+\]
+
 \end_inset
 
 
