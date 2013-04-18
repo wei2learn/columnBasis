@@ -1558,14 +1558,10 @@ shift
 \end_inset
 
 where 
-\begin_inset Formula 
-\[
-x^{\vec{s}}=\diag\left(x^{s_{1}},x^{s_{2}},\dots,x^{s_{n}}\right)~.
-\]
-
+\begin_inset Formula $x^{\vec{s}}=\diag\left(x^{s_{1}},x^{s_{2}},\dots,x^{s_{n}}\right).$
 \end_inset
 
-For a matrix 
+ For a matrix 
 \begin_inset Formula $\mathbf{P}$
 \end_inset
 
@@ -3016,9 +3012,7 @@ reference "lem:unimodular_kernel_columnBasis"
  are inverses of each other we have the identities 
 \begin_inset Formula 
 \begin{equation}
-\mathbf{V}\mathbf{U}=\begin{bmatrix}\mathbf{V}_{U}\\
-\mathbf{V}_{D}
-\end{bmatrix}\begin{bmatrix}\mathbf{U}_{L},\mathbf{U}_{R}\end{bmatrix}=\begin{bmatrix}\mathbf{V}_{U}\mathbf{U}_{L} & \mathbf{V}_{U}\mathbf{U}_{R}\\
+\mathbf{V}\mathbf{U}=\begin{bmatrix}\mathbf{V}_{U}\mathbf{U}_{L} & \mathbf{V}_{U}\mathbf{U}_{R}\\
 \mathbf{V}_{D}\mathbf{U}_{L} & \mathbf{V}_{D}\mathbf{U}_{R}
 \end{bmatrix}=\begin{bmatrix}I_{k} & 0\\
 0 & I_{n-k}
@@ -3258,14 +3252,10 @@ textbf{
 \end_inset
 
 
-\begin_inset Formula 
-\[
-\mathbf{F}=\left[0,\mathbf{B}\right]\mathbf{U}^{-1}=\mathbf{B}\left[0,I\right]\mathbf{V}=\mathbf{B}\mathbf{V}_{D}.
-\]
-
+\begin_inset Formula $\mathbf{F}=\left[0,\mathbf{B}\right]\mathbf{U}^{-1}=\mathbf{B}\left[0,I\right]\mathbf{V}=\mathbf{B}\mathbf{V}_{D}.$
 \end_inset
 
-
+ 
 \begin_inset ERT
 status collapsed
 
@@ -3280,7 +3270,7 @@ status collapsed
 
 \end_inset
 
-Since 
+ Since 
 \begin_inset Formula $\mathbf{V}_{D}$
 \end_inset
 
@@ -4406,11 +4396,7 @@ reference "lem:predictableDegree"
 \end_inset
 
  forces 
-\begin_inset Formula 
-\[
-\cdeg_{-\vec{s}}\left(\bar{\mathbf{Q}}_{1}\bar{\mathbf{Q}}_{2}\right)=\cdeg_{-\vec{s}}\bar{\mathbf{G}}\nleq0,
-\]
-
+\begin_inset Formula $\cdeg_{-\vec{s}}\left(\bar{\mathbf{Q}}_{1}\bar{\mathbf{Q}}_{2}\right)=\cdeg_{-\vec{s}}\bar{\mathbf{G}}\nleq0,$
 \end_inset
 
 a contradiction since we know from 
@@ -6971,11 +6957,7 @@ reference "thm:columnBasisCost1"
 \end_inset
 
 , where 
-\begin_inset Formula 
-\[
-\hat{s}_{i}=\left(\sum\cdeg\mathbf{T}_{i-1}+\sum\cdeg\mathbf{F}_{i+1}\right)/2m\le\frac{\left(\bar{s}_{i}+\bar{s}_{i+1}\right)}{2}.
-\]
-
+\begin_inset Formula $\hat{s}_{i}=\left(\sum\cdeg\mathbf{T}_{i-1}+\sum\cdeg\mathbf{F}_{i+1}\right)/2m\le\frac{\left(\bar{s}_{i}+\bar{s}_{i+1}\right)}{2}.$
 \end_inset
 
 
@@ -7200,6 +7182,8 @@ bibliographystyle{plainnat}
 \end_inset
 
  
+\size scriptsize
+
 \begin_inset CommandInset bibtex
 LatexCommand bibtex
 bibfiles "paper"
