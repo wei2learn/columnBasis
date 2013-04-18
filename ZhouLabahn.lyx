@@ -4141,7 +4141,7 @@ reference "thm:continueComputingKernelBasisByRows"
 \end_inset
 
 -kernel basis by rows.
- We partition 
+ More specifically, we can partition 
 \begin_inset Formula $\mathbf{N}$
 \end_inset
 
@@ -4161,8 +4161,7 @@ reference "thm:continueComputingKernelBasisByRows"
 \begin_inset Formula $\vec{b}_{2}$
 \end_inset
 
- respectively.
- We first compute a 
+ respectively, first compute a 
 \begin_inset Formula $\left(\mathbf{N}_{1}^{T},-\vec{s}\right)$
 \end_inset
 
@@ -4186,7 +4185,7 @@ reference "thm:continueComputingKernelBasisByRows"
 \begin_inset Formula $\mathbf{Q}_{2}$
 \end_inset
 
- implying that 
+, then 
 \begin_inset Formula $\mathbf{Q}_{1}\mathbf{Q}_{2}$
 \end_inset
 

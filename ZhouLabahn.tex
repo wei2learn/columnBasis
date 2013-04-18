@@ -774,14 +774,14 @@ a $\left(\mathbf{N}^{T},\vec{b}+1,-\vec{s}\right)$-order basis, in
 fact we do not compute such a order basis, as the computational efficiency
 can be improved by using Theorem \ref{thm:continueComputingKernelBasisByRows}
 to compute a $\left(\mathbf{N}^{T},-\vec{s}\right)$-kernel basis
-by rows. We partition $\mathbf{N}$ into $\left[\mathbf{N}_{1},\mathbf{N}_{2}\right]$
-with $\vec{s}$-column degrees $\vec{b}_{1}$, $\vec{b}_{2}$ respectively.
-We first compute a $\left(\mathbf{N}_{1}^{T},-\vec{s}\right)$-kernel
+by rows. More specifically, we can partition $\mathbf{N}$ into $\left[\mathbf{N}_{1},\mathbf{N}_{2}\right]$
+with $\vec{s}$-column degrees $\vec{b}_{1}$, $\vec{b}_{2}$ respectively,
+first compute a $\left(\mathbf{N}_{1}^{T},-\vec{s}\right)$-kernel
 basis $\mathbf{Q}_{1}$ with $-\vec{s}$-column degrees $-\vec{s}_{2}$,
 and then compute a $\left(\mathbf{N}_{2}^{T}\mathbf{Q}_{1},-\vec{s}_{2}\right)$-kernel
-basis $\mathbf{Q}_{2}$ implying that $\mathbf{Q}_{1}\mathbf{Q}_{2}$
-is a $\left(\mathbf{N}^{T},-\vec{s}\right)$-kernel basis. In order
-to compute the kernel bases $\mathbf{Q}_{1}$ and $\mathbf{Q}_{2}$,
+basis $\mathbf{Q}_{2}$, then $\mathbf{Q}_{1}\mathbf{Q}_{2}$ is a
+$\left(\mathbf{N}^{T},-\vec{s}\right)$-kernel basis. In order to
+compute the kernel bases $\mathbf{Q}_{1}$ and $\mathbf{Q}_{2}$,
 we still use order basis computations but work with subsets of rows
 rather than the whole matrix $\mathbf{N}^{T}$. We now need to make
 sure that the order bases computed from subsets of rows contain these
