@@ -5405,7 +5405,7 @@ reference "alg:minimalKernelBasisReverse"
 \end_layout
 
 \begin_layout Subsection
-Complexity of Left Kernel Basis Computation
+Cost of Kernel Basis Computation
 \end_layout
 
 \begin_layout Standard
