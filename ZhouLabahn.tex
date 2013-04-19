@@ -920,8 +920,11 @@ basis;}
 
 
 Let $k$ be the column dimension of $\mathbf{N}$ and $\xi$ be an
-upper bound of $\sum\vec{s}$. Since $\sum\cdeg_{\vec{s}}\mathbf{N}=\sum\vec{b}\le\sum\vec{s}\le\xi$
-by \prettyref{thm:boundOfSumOfShiftedDegreesOfKernelBasis}, at most
+upper bound of $\sum\vec{s}$. Since 
+\[
+\sum\cdeg_{\vec{s}}\mathbf{N}=\sum\vec{b}\le\sum\vec{s}\le\xi
+\]
+ by \prettyref{thm:boundOfSumOfShiftedDegreesOfKernelBasis}, at most
 $\frac{k}{c}$ columns of $\mathbf{N}$ have $\vec{s}$-column degrees
 greater than or equal to $\frac{c~\xi}{k}$ for any $c\ge1$. Without
 loss of generality we can assume that the rows of $\mathbf{N}^{T}$
@@ -929,13 +932,16 @@ are arranged in decreasing $\vec{s}$-row degrees. We divide $\mathbf{N}^{T}$
 into $\left\lceil \log k\right\rceil $ row blocks according to the
 $\vec{s}$-row degrees of its rows, or equivalently, divide $\mathbf{N}$
 into blocks of columns according to the $\vec{s}$-column degrees.
-Let $\mathbf{N}=\left[\mathbf{N}_{1},\mathbf{N}_{2},\cdots,\mathbf{N}_{\left\lceil \log k\right\rceil -1},\mathbf{N}_{\left\lceil \log k\right\rceil }\right]$
-with $\mathbf{N}_{\left\lceil \log k\right\rceil },\mathbf{N}_{\left\lceil \log k\right\rceil -1},\dots,\mathbf{N}_{2},\mathbf{N}_{1}$
+Let 
+\[
+\mathbf{N}=\left[\mathbf{N}_{1},\mathbf{N}_{2},\cdots,\mathbf{N}_{\left\lceil \log k\right\rceil -1},\mathbf{N}_{\left\lceil \log k\right\rceil }\right]
+\]
+ with $\mathbf{N}_{\left\lceil \log k\right\rceil },\mathbf{N}_{\left\lceil \log k\right\rceil -1},\dots,\mathbf{N}_{2},\mathbf{N}_{1}$
 having $\vec{s}$-column degrees in the range $\left[0,2\xi/k\right]$,
 $(2\xi/k,4\xi/k],$ $(4\xi/k,8\xi/k],\ ...,$ $(\xi/4,\xi/2],$ $(\xi/2,\xi]$,
 respectively. Let $\sigma_{i}=\left\lceil \xi/2^{i-1}\right\rceil +1$
 and $\vec{\sigma}_{i}=\left[\sigma_{i},\dots,\sigma_{i}\right]$ with
-the same dimension as the row dimension of $\mathbf{N}_{i}$ and $\vec{\sigma}=\left[\vec{\sigma}_{\left\lceil \log k\right\rceil },\vec{\sigma}_{\left\lceil \log k\right\rceil -1},\dots,\vec{\sigma}_{1}\right]$
+the same dimension as the row dimension of $\mathbf{N}_{i}$ and $\vec{\sigma}=\left[\vec{\sigma}_{1},\vec{\sigma}_{2},\dots,\vec{\sigma}_{\left\lceil \log k\right\rceil }\right]$
 be the orders in the order basis computation.
 
 To further simplify our task, we also make the order of our problem
@@ -984,7 +990,7 @@ This process of computing a $\left(\mathbf{N}^{T},-\vec{s}\right)$-kernel
 basis is formally given in Algorithm \ref{alg:minimalKernelBasisReverse}.
 
 
-\subsection{Cost of Kernel Basis Computation}
+\subsection{Cost of Left Kernel Basis Computation}
 
 The cost of Algorithm \ref{alg:minimalKernelBasisReverse} is dominated
 by the order basis computations and the multiplications $\hat{\mathbf{N}}_{i}\tilde{\mathbf{G}}_{i-1}$
@@ -1134,14 +1140,16 @@ basis of $\begin{bmatrix}\mathbf{F}\\
 \mathbf{G}
 \end{bmatrix}$. The matrix 
 \[
-\left[V,\bar{\mathbf{T}}\right]=\left[\begin{array}{cccc}
+\left[V^{T},\bar{\mathbf{T}}^{T}\right]=\begin{bmatrix}V\\
+\bar{\mathbf{T}}
+\end{bmatrix}^{T}=\left[\begin{array}{cccc}
 \noalign{\medskip}1 & 0 & x+{x}^{2} & 1\\
 1 & 1 & 1+x & 0
 \end{array}\right]
 \]
 is such a left kernel basis. A column basis can then be computed as
 \[
-\mathbf{T}=V^{-1}\bar{\mathbf{T}}=\left[\begin{array}{cc}
+\mathbf{T}=\left(V^{T}\right)^{-1}\bar{\mathbf{T}}^{T}=\left[\begin{array}{cc}
 x+x^{2} & 1\\
 1+{x}^{2} & 1
 \end{array}\right].
@@ -1182,16 +1190,15 @@ note that from $\vec{t}=-\rdeg_{-\vec{s}}\mathbf{G}$ and \prettyref{lem:columnDe
 that $\cdeg_{\vec{t}}\mathbf{G}\le\vec{s}$, or equivalently, $\rdeg_{\vec{t}}\mathbf{G}^{T}\le\vec{s}$.
 Since we also have $\rdeg\mathbf{F}^{T}\le\vec{s}$, it follows that
 $\rdeg_{\vec{t}^{*}}\left[\mathbf{F}^{T},\mathbf{G}^{T}\right]\le\vec{s}$. 
-\item The second condition $\sum\vec{t}^{*}\le\xi$ follows from \prettyref{lem:colBasisdegreeBoundByRdegOfRightFactor}. 
+\item The condition $\sum\vec{t}^{*}\le\xi$ follows from \prettyref{lem:colBasisdegreeBoundByRdegOfRightFactor}. 
 \item The third condition holds since $\begin{bmatrix}-I~\\
 ~\mathbf{T}^{T}
 \end{bmatrix}$ is a kernel basis with row degrees bounded by $\vec{t}^{*}$. 
 \end{itemize}
 \end{proof}
 With a $\left(\left[\mathbf{F}^{T},\mathbf{G}^{T}\right],-\vec{t}^{*}\right)$-kernel
-basis $\begin{bmatrix}V\\
-\bar{\mathbf{T}}
-\end{bmatrix}$ computed, a column basis is then given by $\mathbf{T}~=~\left(\bar{\mathbf{T}}V^{-1}\right)^{T}$.
+basis $\begin{bmatrix}V^{T},\bar{\mathbf{T}}^{T}\end{bmatrix}^{T}$
+computed, a column basis is then given by $\mathbf{T}~=~\left(\bar{\mathbf{T}}V^{-1}\right)^{T}$.
 
 The complete algorithm for computing a column basis is then given
 in Algorithm \ref{alg:colBasis}.

@@ -5083,7 +5083,11 @@ Let
 
 .
  Since 
-\begin_inset Formula $\sum\cdeg_{\vec{s}}\mathbf{N}=\sum\vec{b}\le\sum\vec{s}\le\xi$
+\begin_inset Formula 
+\[
+\sum\cdeg_{\vec{s}}\mathbf{N}=\sum\vec{b}\le\sum\vec{s}\le\xi
+\]
+
 \end_inset
 
  by 
@@ -5145,7 +5149,11 @@ reference "thm:boundOfSumOfShiftedDegreesOfKernelBasis"
 
 -column degrees.
  Let 
-\begin_inset Formula $\mathbf{N}=\left[\mathbf{N}_{1},\mathbf{N}_{2},\cdots,\mathbf{N}_{\left\lceil \log k\right\rceil -1},\mathbf{N}_{\left\lceil \log k\right\rceil }\right]$
+\begin_inset Formula 
+\[
+\mathbf{N}=\left[\mathbf{N}_{1},\mathbf{N}_{2},\cdots,\mathbf{N}_{\left\lceil \log k\right\rceil -1},\mathbf{N}_{\left\lceil \log k\right\rceil }\right]
+\]
+
 \end_inset
 
  with 
@@ -5190,7 +5198,7 @@ reference "thm:boundOfSumOfShiftedDegreesOfKernelBasis"
 \end_inset
 
  and 
-\begin_inset Formula $\vec{\sigma}=\left[\vec{\sigma}_{\left\lceil \log k\right\rceil },\vec{\sigma}_{\left\lceil \log k\right\rceil -1},\dots,\vec{\sigma}_{1}\right]$
+\begin_inset Formula $\vec{\sigma}=\left[\vec{\sigma}_{1},\vec{\sigma}_{2},\dots,\vec{\sigma}_{\left\lceil \log k\right\rceil }\right]$
 \end_inset
 
  be the orders in the order basis computation.
@@ -5405,7 +5413,7 @@ reference "alg:minimalKernelBasisReverse"
 \end_layout
 
 \begin_layout Subsection
-Cost of Kernel Basis Computation
+Cost of Left Kernel Basis Computation
 \end_layout
 
 \begin_layout Standard
@@ -6213,7 +6221,9 @@ reference "lem:colBasisdegreeBoundByRdegOfRightFactor"
  The matrix 
 \begin_inset Formula 
 \[
-\left[V,\bar{\mathbf{T}}\right]=\left[\begin{array}{cccc}
+\left[V^{T},\bar{\mathbf{T}}^{T}\right]=\begin{bmatrix}V\\
+\bar{\mathbf{T}}
+\end{bmatrix}^{T}=\left[\begin{array}{cccc}
 \noalign{\medskip}1 & 0 & x+{x}^{2} & 1\\
 1 & 1 & 1+x & 0
 \end{array}\right]
@@ -6225,7 +6235,7 @@ is such a left kernel basis.
  A column basis can then be computed as 
 \begin_inset Formula 
 \[
-\mathbf{T}=V^{-1}\bar{\mathbf{T}}=\left[\begin{array}{cc}
+\mathbf{T}=\left(V^{T}\right)^{-1}\bar{\mathbf{T}}^{T}=\left[\begin{array}{cc}
 x+x^{2} & 1\\
 1+{x}^{2} & 1
 \end{array}\right].
@@ -6419,7 +6429,7 @@ reference "lem:columnDegreesRowDegreesSymmetry"
 \end_layout
 
 \begin_layout Itemize
-The second condition 
+The condition 
 \begin_inset Formula $\sum\vec{t}^{*}\le\xi$
 \end_inset
 
@@ -6456,9 +6466,7 @@ With a
 \end_inset
 
 -kernel basis 
-\begin_inset Formula $\begin{bmatrix}V\\
-\bar{\mathbf{T}}
-\end{bmatrix}$
+\begin_inset Formula $\begin{bmatrix}V^{T},\bar{\mathbf{T}}^{T}\end{bmatrix}^{T}$
 \end_inset
 
  computed, a column basis is then given by 
