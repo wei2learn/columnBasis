@@ -46,8 +46,8 @@
 \def\MM{\qopname\relax n{MM}}\def\M{\qopname\relax n{M}}
 %\def\ord{\qopname\relax n{ord}}
 
-\def\StorjohannTransform{\qopname\relax n{StorjohannTransform}}\def\TransformUnbalanced{\qopname\relax n{TransformUnbalanced}}\def\rowDimension{\qopname\relax n{rowDimension}}\def\columnDimension{\qopname\relax n{columnDimension}}\DeclareMathOperator{\re}{rem}\DeclareMathOperator{\coeff}{coeff}\DeclareMathOperator{\lcoeff}{lcoeff}\def\mab{\qopname\relax n{orderBasis}}\def\mmab{\qopname\relax n{FastBasis}}\def\umab{\qopname\relax n{UnbalancedFastBasis}}\newcommand{\bb}{\\}
-\DeclareMathOperator{\mnbr}{MinimaKernelBasisReversed}
+\def\StorjohannTransform{\qopname\relax n{StorjohannTransform}}\def\TransformUnbalanced{\qopname\relax n{TransformUnbalanced}}\def\rowDimension{\qopname\relax n{rowDimension}}\def\columnDimension{\qopname\relax n{columnDimension}}\DeclareMathOperator{\re}{rem}\DeclareMathOperator{\coeff}{coeff}\DeclareMathOperator{\lcoeff}{lcoeff}\def\mab{\qopname\relax n{orderBasis}}\def\mmab{\qopname\relax n{FastBasis}}\def\umab{\qopname\relax n{UnbalancedFastOrderBasis}}\newcommand{\bb}{\\}
+\DeclareMathOperator{\mnbr}{MinimalKernelBasisReversed}
 %\def\rdeg{\qopname\relax n{rdeg}}
 %\DeclareMathOperator{\colBasis}{colBasis}
 \DeclareMathOperator{\colBasis}{ColumnBasis}
@@ -127,7 +127,7 @@
 \date{{\normalsize{{\today \quad{}:: \timeofday}}}}
 
 
-\title{Computing Column Bases}
+\title{Computation of Column Bases of Polynomial Matrices}
 \maketitle
 \begin{abstract}
 Given a matrix of univariate polynomials over a field $\mathbb{K}$,
@@ -167,7 +167,8 @@ and Problems}
  \textbf{General Terms:} Algorithms, Theory
 
 \noindent \vspace{1mm}
- \textbf{Keywords:} Kernel basis, Nullspace basis, Column Basis, Complexity
+ \textbf{Keywords:} Order Basis, Kernel basis, Nullspace basis, Column
+Basis
 
 
 \section{\label{sec:Matrix-GCD}Introduction}
@@ -206,11 +207,11 @@ also provides a deterministic alternative to randomized lattice compression
 
 Column bases are produced by column reduced, Popov and Hermite forms
 and considerable work has been done on computing such forms, for example
-\cite{bcl:2006,beelen:1988,Giorgi2003,GSSV2012,sarkar2011,SS2011}.
-However most of these existing algorithms require that the input matrices
-be square nonsingular and so start with existing column bases. It
-is however pointed out in \cite{sarkar2011,SS2011} that randomization
-can be used to relax the square nonsingular requirement.
+\cite{bcl:2006,Giorgi2003,GSSV2012,sarkar2011,SS2011}. However most
+of these existing algorithms require that the input matrices be square
+nonsingular and so start with existing column bases. It is however
+pointed out in \cite{sarkar2011,SS2011} that randomization can be
+used to relax the square nonsingular requirement.
 
 To compute a column basis, we know from \cite{BL1997} that any matrix
 polynomial $\mathbf{F}\in\mathbb{K}\left[x\right]^{m\times n}$ can
@@ -332,8 +333,7 @@ is defined similarly as
 
 Shifted degrees have been used previously in polynomial matrix computations
 and in generalizations of some matrix normal forms \cite{BLV:jsc06}.
-The shifted column degree is equivalent to the notion of \emph{defect}
-commonly used in the literature.
+
 
 The usefulness of the shifted degrees can be seen from their applications
 in polynomial matrix computation problems \cite{ZL2012,za2012}. One
@@ -486,9 +486,9 @@ now used to emphasize the fact that we compute a basis for a $\mathbb{F}\left[x\
 instead of a basis for a $\mathbb{F}\left(x\right)$-vector space,
 since the term nullspace basis usually refers to a basis of some vector
 space as in \cite{storjohann-villard:2005}.
-\begin{defn}
-We will need to use the following bound on the sizes of kernel bases
-from \cite{za2012}.\end{defn}
+
+We will need to the following result from \cite{za2012} to bound
+the sizes of kernel bases.
 \begin{thm}
 \label{thm:boundOfSumOfShiftedDegreesOfKernelBasis}Suppose $\mathbf{F}\in\mathbb{K}\left[x\right]^{m\times n}$
 and $\vec{s}\in\mathbb{Z}_{\ge0}^{n}$ is a shift with entries bounding
@@ -776,8 +776,8 @@ can be improved by using Theorem \ref{thm:continueComputingKernelBasisByRows}
 to compute a $\left(\mathbf{N}^{T},-\vec{s}\right)$-kernel basis
 by rows. More specifically, we can partition $\mathbf{N}$ into $\left[\mathbf{N}_{1},\mathbf{N}_{2}\right]$
 with $\vec{s}$-column degrees $\vec{b}_{1}$, $\vec{b}_{2}$ respectively,
-first compute a $\left(\mathbf{N}_{1}^{T},-\vec{s}\right)$-kernel
-basis $\mathbf{Q}_{1}$ with $-\vec{s}$-column degrees $-\vec{s}_{2}$,
+compute a $\left(\mathbf{N}_{1}^{T},-\vec{s}\right)$-kernel basis
+$\mathbf{Q}_{1}$ with $-\vec{s}$-column degrees $-\vec{s}_{2}$,
 and then compute a $\left(\mathbf{N}_{2}^{T}\mathbf{Q}_{1},-\vec{s}_{2}\right)$-kernel
 basis $\mathbf{Q}_{2}$, then $\mathbf{Q}_{1}\mathbf{Q}_{2}$ is a
 $\left(\mathbf{N}^{T},-\vec{s}\right)$-kernel basis. In order to
@@ -920,10 +920,7 @@ basis;}
 
 
 Let $k$ be the column dimension of $\mathbf{N}$ and $\xi$ be an
-upper bound of $\sum\vec{s}$. Since 
-\[
-\sum\cdeg_{\vec{s}}\mathbf{N}=\sum\vec{b}\le\sum\vec{s}\le\xi
-\]
+upper bound of $\sum\vec{s}$. Since $\sum\cdeg_{\vec{s}}\mathbf{N}=\sum\vec{b}\le\sum\vec{s}\le\xi$
 by \prettyref{thm:boundOfSumOfShiftedDegreesOfKernelBasis}, at most
 $\frac{k}{c}$ columns of $\mathbf{N}$ have $\vec{s}$-column degrees
 greater than or equal to $\frac{c~\xi}{k}$ for any $c\ge1$. Without
@@ -932,10 +929,7 @@ are arranged in decreasing $\vec{s}$-row degrees. We divide $\mathbf{N}^{T}$
 into $\left\lceil \log k\right\rceil $ row blocks according to the
 $\vec{s}$-row degrees of its rows, or equivalently, divide $\mathbf{N}$
 into blocks of columns according to the $\vec{s}$-column degrees.
-Let 
-\[
-\mathbf{N}=\left[\mathbf{N}_{1},\mathbf{N}_{2},\cdots,\mathbf{N}_{\left\lceil \log k\right\rceil -1},\mathbf{N}_{\left\lceil \log k\right\rceil }\right]
-\]
+Let $\mathbf{N}=\left[\mathbf{N}_{1},\mathbf{N}_{2},\cdots,\mathbf{N}_{\left\lceil \log k\right\rceil -1},\mathbf{N}_{\left\lceil \log k\right\rceil }\right]$
 with $\mathbf{N}_{\left\lceil \log k\right\rceil },\mathbf{N}_{\left\lceil \log k\right\rceil -1},\dots,\mathbf{N}_{2},\mathbf{N}_{1}$
 having $\vec{s}$-column degrees in the range $\left[0,2\xi/k\right]$,
 $(2\xi/k,4\xi/k],$ $(4\xi/k,8\xi/k],\ ...,$ $(\xi/4,\xi/2],$ $(\xi/2,\xi]$,
@@ -1000,14 +994,8 @@ An $\left(\hat{\mathbf{N}}_{i}\tilde{\mathbf{G}}_{i-1},\sigma_{i},-\vec{s}_{i}\r
 basis can be computed with a cost of $O^{\sim}\left(n^{\omega}s\right)$. \end{lem}
 \begin{proof}
 Note that $\mathbf{N}_{i}$ has less than $2^{i}$ columns. Otherwise,
-since $\cdeg_{\vec{s}}\mathbf{N}_{i}>\xi/2^{i}$, we have 
-\[
-\sum\cdeg_{\vec{s}}\mathbf{N}_{i}>2^{i}\xi/2^{i}=\xi,
-\]
-contradicting with 
-\[
-\sum\cdeg_{\vec{s}}\mathbf{N}=\sum\vec{b}\le\sum\vec{s}\le\xi.
-\]
+since $\cdeg_{\vec{s}}\mathbf{N}_{i}>\xi/2^{i}$, we have $\sum\cdeg_{\vec{s}}\mathbf{N}_{i}>2^{i}\xi/2^{i}=\xi,$
+contradicting with $\sum\cdeg_{\vec{s}}\mathbf{N}=\sum\vec{b}\le\sum\vec{s}\le\xi.$
 It follows that $\hat{\mathbf{N}}_{i}$, and therefore $\hat{\mathbf{N}}_{i}\tilde{\mathbf{G}}_{i-1}$,
 also have less than $2^{i}$ rows. We also have $\sigma_{i}=\left\lceil \xi/2^{i-1}\right\rceil +1\in\Theta\left(\xi/2^{i}\right)$.
 Therefore, Algorithm 2 from \cite{ZL2012} for order basis computation
@@ -1040,7 +1028,7 @@ such that
 \item [(i)] $\sum\rdeg_{\vec{s}}\mathbf{M}\le\xi$, 
 \item [(ii)] $\sum\vec{s}\le\xi$, 
 \item [(iii)] any $\left(\mathbf{M},-\vec{s}\right)$-kernel basis having
-row degrees bounded by $\vec{s}$, or equivalently, having $-\vec{s}$-column
+row degrees bounded by $\vec{s}$, or equivalently, $-\vec{s}$-column
 degrees bounded by 0. 
 \end{itemize}
 Then \prettyref{alg:minimalKernelBasisReverse} costs $O^{\sim}\left(n^{\omega}s\right)$
@@ -1297,7 +1285,7 @@ a column basis of $\mathbf{F}$ can be computed with a cost of $O^{\sim}\left(m^{
 Summing up the cost of all the column basis computations, 
 \begin{eqnarray*}
  &  & \sum_{i=1}^{n/m-1}O^{\sim}\left(m^{\omega}\left(\bar{s}_{i}+\bar{s}_{i+1}\right)/2\right)\\
- & \subset & O^{\sim}\left(m^{\omega}\left(\sum_{i=1}^{n/m}\bar{s}_{i}\right)\right)=O^{\sim}\left(nm^{\omega-1}s\right),
+ &  & ~~~\subset O^{\sim}\left(m^{\omega}\left(\sum_{i=1}^{n/m}\bar{s}_{i}\right)\right)=O^{\sim}\left(nm^{\omega-1}s\right),
 \end{eqnarray*}
 since $\sum\cdeg\mathbf{F}=\sum_{i=1}^{n/m}\left(m\bar{s}_{i}\right)=ns.$\end{proof}
 \begin{rem}
@@ -1338,7 +1326,7 @@ Hermite form, and computations of column reduced form and Popov form
 for matrices of any rank and any dimension.
 
 %\bibliographystyle{plainnat}
- {\scriptsize{\bibliographystyle{plain}
+ \bibliographystyle{plain}
 \bibliography{paper}
-}}
+
 \end{document}
