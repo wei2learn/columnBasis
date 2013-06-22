@@ -1702,6 +1702,24 @@ e.g.
 \end_inset
 
 
+\begin_inset Formula $\left[x^{2}+x,\ x^{3}\right]$
+\end_inset
+
+
+\begin_inset Formula $=\left[x\right]\cdot\left[x+1,\ x^{2}\right]$
+\end_inset
+
+
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+e.g.
+ 
+\begin_inset Formula $\mathbf{F}=$
+\end_inset
+
+
 \size tiny
 
 \begin_inset Formula $\left[\begin{array}{cccc}
@@ -1714,6 +1732,11 @@ x^{2} & x^{2} & x+x^{2} & 1+x^{2}\\
 \size default
 
 \begin_inset Formula $=\mathbf{T}\mathbf{G}$
+\end_inset
+
+
+\end_layout
+
 \end_inset
 
 
@@ -1734,6 +1757,30 @@ The right factor
 
 \begin_deeper
 \begin_layout ItemizeIncremental
+e.g.
+ 
+\begin_inset Formula $\mathbf{N}=\begin{bmatrix}x^{2}\\
+x+1
+\end{bmatrix}$
+\end_inset
+
+ is a right kernel basis of 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+, 
+\begin_inset Formula $\mathbf{G}=\begin{bmatrix}x+1 & x^{2}\end{bmatrix}$
+\end_inset
+
+ is a left kernel basis of 
+\begin_inset Formula $\mathbf{N}$
+\end_inset
+
+
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
 e.g.
  
 \begin_inset Formula $\mathbf{N}=$
@@ -1778,6 +1825,11 @@ x & 1\\
 
 \end_layout
 
+\end_inset
+
+
+\end_layout
+
 \end_deeper
 \begin_layout ItemizeIncremental
 Can obtained a column basis 
@@ -1802,6 +1854,22 @@ Can obtained a column basis
 \begin_layout ItemizeIncremental
 e.g.
  
+\begin_inset Formula $\begin{bmatrix}1 & x\end{bmatrix}$
+\end_inset
+
+ is a left kernel basis of 
+\begin_inset Formula $\begin{bmatrix}x^{2}+x & x^{3}\\
+x+1 & x^{2}
+\end{bmatrix}$
+\end_inset
+
+ 
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+e.g.
+ 
 \size tiny
 
 \begin_inset Formula $\left[\begin{array}{cccc}
@@ -1820,6 +1888,11 @@ e.g.
 
 .
  
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_deeper
@@ -2283,7 +2356,7 @@ With
 
 \begin_layout ItemizeIncremental
 Equivalently, find 
-\begin_inset Formula $\left[I,\mathbf{T}\right]$
+\begin_inset Formula $\left[-I,\mathbf{T}\right]$
 \end_inset
 
  that is a left kernel basis of 
