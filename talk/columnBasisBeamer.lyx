@@ -197,29 +197,28 @@ Higher dimension
 \begin_deeper
 \begin_layout ItemizeIncremental
 column vectors in 
-\begin_inset Formula $\mathbf{F}=\left[\begin{array}{cccc}
+\begin_inset Formula $\mathbf{F}=$
+\end_inset
+
+
+\size tiny
+
+\begin_inset Formula $\left[\begin{array}{cccc}
 x^{2} & x^{2} & x+x^{2} & 1+x^{2}\\
 1+x+x^{2} & x^{2} & 1+x^{2} & 1+x^{2}
 \end{array}\right]$
 \end_inset
 
 
+\size default
+ 
 \end_layout
 
 \begin_deeper
 \begin_layout ItemizeIncremental
 and a basis 
 \family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
+\size tiny
 
 \begin_inset Formula $\left[\begin{array}{cc}
 x+x^{2} & 1\\
@@ -229,16 +228,7 @@ x+x^{2} & 1\\
 
 
 \family default
-\series default
-\shape default
 \size default
-\emph default
-\bar default
-\strikeout default
-\uuline default
-\uwave default
-\noun default
-\color inherit
  generate the same column vectors
 \end_layout
 
@@ -253,17 +243,58 @@ Goal is to compute such a column basis given
 \end_layout
 
 \begin_layout ItemizeIncremental
+Another way to state the problem:
+\end_layout
+
+\begin_deeper
+\begin_layout ItemizeIncremental
+Unimodularly transform 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+ to 
+\size tiny
+
+\begin_inset Formula $\left[\begin{array}{cccc}
+x+x^{2} & 1 & 0 & 0\\
+1+x^{2} & 1 & 0 & 0
+\end{array}\right]$
+\end_inset
+
+
+\size default
+.
+\end_layout
+
+\begin_layout ItemizeIncremental
+Do column operations on 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+ 
+\begin_inset Newline newline
+\end_inset
+
+to get a matrix with linearly independent nonzero columns
+\end_layout
+
+\end_deeper
+\begin_layout ItemizeIncremental
 Not unique
 \end_layout
 
 \begin_deeper
 \begin_layout ItemizeIncremental
+
+\size tiny
 \begin_inset Formula $\left[\begin{array}{cc}
 x & 1\\
 1 & 1
 \end{array}\right]$
 \end_inset
 
+
+\size default
  is another column basis of 
 \begin_inset Formula $\mathbf{F}$
 \end_inset
@@ -274,22 +305,28 @@ x & 1\\
 \begin_deeper
 \begin_layout ItemizeIncremental
 a minimal column basis
-\end_layout
+\begin_inset Note Note
+status collapsed
 
-\end_deeper
-\end_deeper
-\begin_layout ItemizeIncremental
+\begin_layout Plain Layout
 Minimality not required
 \end_layout
+
+\end_inset
+
+
+\begin_inset Note Note
+status collapsed
 
 \begin_layout BeginFrame
 The Problem
 \end_layout
 
-\begin_layout Standard
+\begin_layout ItemizeIncremental
 Another way to state the problem:
 \end_layout
 
+\begin_deeper
 \begin_layout ItemizeIncremental
 Do column operations on 
 \begin_inset Formula $\mathbf{F}$
@@ -307,7 +344,11 @@ to get a matrix with linearly independent nonzero columns
 \begin_layout ItemizeIncremental
 e.g.
  unimodularly transform 
-\begin_inset Formula $\mathbf{F}=\left[\begin{array}{cccc}
+\begin_inset Formula $\mathbf{F}=$
+\end_inset
+
+
+\begin_inset Formula $\left[\begin{array}{cccc}
 x^{2} & x^{2} & x+x^{2} & 1+x^{2}\\
 1+x+x^{2} & x^{2} & 1+x^{2} & 1+x^{2}
 \end{array}\right]$
@@ -323,30 +364,16 @@ x+x^{2} & 1 & 0 & 0\\
 .
 \end_layout
 
-\begin_layout ItemizeIncremental
-Can use 
-\begin_inset Quotes eld
-\end_inset
-
-Euclidean algorithm
-\begin_inset Quotes erd
+\end_deeper
 \end_inset
 
 
-\end_layout
-
-\begin_deeper
-\begin_layout ItemizeIncremental
-reduce high degree columns against lower degree columns each time
-\end_layout
-
-\begin_layout ItemizeIncremental
-works, but too much work
 \end_layout
 
 \end_deeper
+\end_deeper
 \begin_layout BeginFrame
-Related Problems and Work
+Related Work
 \end_layout
 
 \begin_layout ItemizeIncremental
@@ -359,30 +386,52 @@ Column reduced form is a special column basis
 
 \begin_deeper
 \begin_layout ItemizeIncremental
-Giorgi, Jeannerod, and Villard 2003: cost 
-\begin_inset Formula $O^{\sim}\left(n^{\omega}d\right)$
-\end_inset
-
-
+Most existing fast methods require matrix to be square nonsingular
 \end_layout
 
 \begin_deeper
 \begin_layout ItemizeIncremental
+Giorgi, Jeannerod, and Villard 2003, Randomized
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+: cost 
+\begin_inset Formula $O^{\sim}\left(n^{\omega}d\right)$
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
 Randomized Las Vegas algorithm for square nonsingular matrix
 \end_layout
 
-\end_deeper
-\begin_layout ItemizeIncremental
-Gupta, Sarkar, Storjohann, and Valeriote 2012: cost 
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Gupta, Sarkar, Storjohann, and Valeriote 2012, deterministic
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+: cost 
 \begin_inset Formula $O^{\sim}\left(n^{\omega}d\right)$
 \end_inset
 
 
+\begin_inset Newline newline
+\end_inset
+
+Deterministic algorithm for square nonsingular input matrix
 \end_layout
 
-\begin_deeper
-\begin_layout ItemizeIncremental
-Deterministic algorithm for square nonsingular input matrix
+\end_inset
+
+
 \end_layout
 
 \end_deeper
@@ -393,7 +442,13 @@ Lattice compression (Chao 2006; Storjohann and Villard 2005)
 
 \begin_deeper
 \begin_layout ItemizeIncremental
-Reduce column dimension by multiplying the input matrix by a random matrix
+Reduce column dimension by multiplying by a random matrix
+\end_layout
+
+\begin_layout ItemizeIncremental
+Lattice compression and determinant reduction (Storjohann 2002) gives a
+ randomized way to compute column basis (Sarkar and Storjohann 2011; Chao
+ 2006)
 \end_layout
 
 \end_deeper
@@ -403,12 +458,12 @@ Order basis computation
 
 \begin_deeper
 \begin_layout ItemizeIncremental
-Beckermann and Labahn 1994, Giorgi, Jeannerod, and Villard 2003, Zhou and
- Labahn 2009, 2012, Zhou 2012
+Beckermann and Labahn 1994; Giorgi, Jeannerod, and Villard 2003; Zhou and
+ Labahn 2009, 2012; Zhou 2012
 \end_layout
 
 \begin_layout ItemizeIncremental
-Reverse the degrees of the input matrix
+Similar to GCD computation with degrees reversed
 \end_layout
 
 \end_deeper
@@ -427,10 +482,6 @@ Deterministic with cost
 \end_inset
 
  is the average column degree of the input matrix.
-\end_layout
-
-\begin_layout ItemizeIncremental
-Works for matrix of any dimension or rank.
 \end_layout
 
 \end_deeper
@@ -1090,11 +1141,11 @@ matrix
 \begin_inset Formula $\cdeg\mathbf{A}=\vec{v}$
 \end_inset
 
-, then any matrix 
+, then for any matrix 
 \begin_inset Formula $\mathbf{B}$
 \end_inset
 
- satisfies 
+ we have 
 \begin_inset Formula $\cdeg_{\vec{v}}\mathbf{B}=\cdeg\mathbf{AB}$
 \end_inset
 
@@ -1543,11 +1594,23 @@ x+x^{2}+x^{3} & 1+x & 0 & 1+x\\
 \begin_inset Formula $\mathbf{N}$
 \end_inset
 
- is full-rank, satisfies
+ is full-rank, 
+\end_layout
+
+\begin_layout ItemizeIncremental
+column reduced, 
+\end_layout
+
+\begin_layout ItemizeIncremental
+satisfies 
 \begin_inset Formula $\mathbf{F}\mathbf{N}=0$
 \end_inset
 
-, and generates all Vectors 
+, 
+\end_layout
+
+\begin_layout ItemizeIncremental
+and generates all Vectors 
 \begin_inset Formula $\mathbf{q}\in\mathbb{K}\left[x\right]^{n}$
 \end_inset
 
@@ -1556,10 +1619,6 @@ x+x^{2}+x^{3} & 1+x & 0 & 1+x\\
 \end_inset
 
 
-\end_layout
-
-\begin_layout ItemizeIncremental
-A minimal kernel basis is also column reduced.
 \end_layout
 
 \begin_layout BeginFrame
@@ -1653,7 +1712,76 @@ Computation of Column Basis
 \end_layout
 
 \begin_layout BeginFrame
-Outline and Key ideas
+Column Basis via Order Basis
+\end_layout
+
+\begin_layout ItemizeIncremental
+Iterative order basis computation, generalizes Euclidean algorithm
+\end_layout
+
+\begin_deeper
+\begin_layout ItemizeIncremental
+reduce high degree columns against lower degree columns each time
+\end_layout
+
+\begin_layout ItemizeIncremental
+works, but expensive
+\end_layout
+
+\begin_layout ItemizeIncremental
+For a matrix with dimension about 
+\begin_inset Formula $n$
+\end_inset
+
+ and degree 
+\begin_inset Formula $d$
+\end_inset
+
+ , need to do this up to about 
+\begin_inset Formula $nd$
+\end_inset
+
+ times, each time costs 
+\begin_inset Formula $O^{\sim}\left(n^{\omega}d\right)$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout ItemizeIncremental
+Fast divide and conquer order basis computation, generalizes fast GCD computatio
+n
+\end_layout
+
+\begin_deeper
+\begin_layout ItemizeIncremental
+cost improves to 
+\begin_inset Formula $O^{\sim}\left(n^{\omega+1}d\right)$
+\end_inset
+
+, order basis computation with order 
+\begin_inset Formula $nd$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout ItemizeIncremental
+We get a cost of 
+\begin_inset Formula $O^{\sim}\left(n^{\omega}s\right)$
+\end_inset
+
+, where 
+\begin_inset Formula $s$
+\end_inset
+
+ is the average column degree of the input matrix.
+\end_layout
+
+\begin_layout BeginFrame
+Outline and Key Ideas
 \end_layout
 
 \begin_layout Standard
@@ -1858,6 +1986,12 @@ e.g.
 \end_inset
 
  is a left kernel basis of 
+\begin_inset Formula $\begin{bmatrix}\mathbf{F}\\
+\mathbf{G}
+\end{bmatrix}=$
+\end_inset
+
+
 \begin_inset Formula $\begin{bmatrix}x^{2}+x & x^{3}\\
 x+1 & x^{2}
 \end{bmatrix}$
@@ -2369,27 +2503,7 @@ Equivalently, find
 \end_layout
 
 \begin_layout ItemizeIncremental
-(shifted) row reducedness of 
-\begin_inset Formula $\mathbf{G}$
-\end_inset
-
- let us determine a bound 
-\begin_inset Formula $\vec{t}$
-\end_inset
-
- on the column degrees of 
-\begin_inset Formula $\mathbf{T}$
-\end_inset
-
-
-\end_layout
-
-\begin_layout ItemizeIncremental
-Compute a 
-\begin_inset Formula $\left[0,\dots,0,-\vec{t}\right]$
-\end_inset
-
--minimal left kernel basis 
+Compute a shifted minimal left kernel basis 
 \begin_inset Formula $\left[V,\bar{\mathbf{T}}\right]$
 \end_inset
 
@@ -2402,13 +2516,38 @@ Compute a
  
 \end_layout
 
+\begin_layout ItemizeIncremental
+Then 
+\begin_inset Formula $\mathbf{T}=V^{-1}\bar{\mathbf{T}}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout ItemizeIncremental
+use a shift 
+\begin_inset Formula $\left[0,\dots,0,-\vec{t}\right]$
+\end_inset
+
+, with 
+\begin_inset Formula $\vec{t}$
+\end_inset
+
+ a bound on 
+\begin_inset Formula $\cdeg\mathbf{T}$
+\end_inset
+
+
+\end_layout
+
 \begin_deeper
 \begin_layout ItemizeIncremental
-The shift forces the matrix 
+forces the matrix 
 \begin_inset Formula $V$
 \end_inset
 
- to be degree 0.
+ to be degree 0
 \begin_inset Note Note
 status collapsed
 
@@ -2434,27 +2573,32 @@ If
 
 \end_layout
 
-\end_deeper
 \begin_layout ItemizeIncremental
-Then 
-\begin_inset Formula $\mathbf{T}=V^{-1}\bar{\mathbf{T}}$
+(shifted) row reducedness of 
+\begin_inset Formula $\mathbf{G}$
 \end_inset
 
-.
- 
+ let us determine such a bound
 \end_layout
 
+\end_deeper
 \begin_layout ItemizeIncremental
-To compute 
-\begin_inset Formula $\left[V,\bar{\mathbf{T}}\right]$
+To compute a 
+\begin_inset Formula $\left[0,\dots,0,-\vec{t}\right]$
 \end_inset
 
+-minimal left kernel basis of 
+\begin_inset Formula $\begin{bmatrix}\mathbf{F}\\
+\mathbf{G}
+\end{bmatrix}$
+\end_inset
 
+ 
 \end_layout
 
 \begin_deeper
 \begin_layout ItemizeIncremental
-As before, the shift and the column degrees can be unbalanced in general.
+As before, the shift and the column degrees can be unbalanced.
  
 \end_layout
 
@@ -3214,11 +3358,25 @@ Conclusion
 \end_layout
 
 \begin_layout BeginFrame
-Summary
+Conclusion
 \end_layout
 
 \begin_layout ItemizeIncremental
-Column basis can be computed efficiently by factoring the input matrix 
+Column basis can be computed deterministically and efficiently with a cost
+ 
+\begin_inset Formula $O^{\sim}\left(nm^{\omega-1}s\right)$
+\end_inset
+
+, where 
+\begin_inset Formula $s$
+\end_inset
+
+ is the average column degree of the input matrix
+\end_layout
+
+\begin_deeper
+\begin_layout ItemizeIncremental
+by factoring the input matrix 
 \begin_inset Formula $\mathbf{F}$
 \end_inset
 
@@ -3234,12 +3392,28 @@ Column basis can be computed efficiently by factoring the input matrix
 \begin_inset Formula $\mathbf{F}$
 \end_inset
 
+, 
+\end_layout
+
+\begin_layout ItemizeIncremental
+and then compute 
+\begin_inset Formula $\mathbf{T}$
+\end_inset
+
+ from 
+\begin_inset Formula $\mathbf{F}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbf{G}$
+\end_inset
+
 .
 \end_layout
 
-\begin_deeper
 \begin_layout ItemizeIncremental
-kernel basis computations and order basis computations are used
+shifted degrees, kernel basis computations and order basis computations
+ are used
 \end_layout
 
 \end_deeper
